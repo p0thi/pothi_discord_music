@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+pothi_discord_music.Main-Class: pothi_discord_music.Main
+

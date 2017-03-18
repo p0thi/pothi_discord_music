@@ -1,0 +1,74 @@
+[02:19:08] [ INFO ] [JDA] Login Successful!
+[02:19:08] [ INFO ] [JDA] Connected to WebSocket
+[02:19:09] [ INFO ] [JDA] Finished Loading!
+[02:19:10] [ INFO ] [Main] All 1 shards are ready.
+[02:19:10] [ INFO ] [Main] Connecting to 2 guilds...
+[02:19:11] [ INFO ] [GuildData] Test Custom Playlist loaded with 221 entries.
+[02:19:11] [ INFO ] [GuildReceiveHandler] Instance created
+[02:19:12] [ INFO ] [JDA] Audio System successfully setup!
+[02:19:12] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=Em_B1AcfJL0
+[02:19:13] [ INFO ] [Main] Joining guild. (Test)
+[02:19:13] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[02:19:13] [ INFO ] [GuildReceiveHandler] Instance created
+[02:19:13] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=US7wauHA8MI
+[02:19:14] [ INFO ] [Main] Joining guild. (Test2)
+[02:19:14] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 2)
+[02:19:14] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[02:19:14] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[02:19:20] [ INFO ] [MessageListener] Message received. (!s)
+[02:19:20] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289930266611286017) ("!s")
+[02:19:20] [ INFO ] [MessageListener] Command detected: s
+[02:19:21] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[02:19:21] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289930266611286017) ("!s")
+[02:19:21] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[02:19:24] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[02:20:06] [ INFO ] [JDA] Login Successful!
+[02:20:07] [ INFO ] [JDA] Connected to WebSocket
+[02:20:07] [ INFO ] [JDA] Finished Loading!
+[02:20:07] [ INFO ] [Main] All 1 shards are ready.
+[02:20:07] [ INFO ] [Main] Connecting to 2 guilds...
+[02:20:08] [ INFO ] [GuildData] Test Custom Playlist loaded with 221 entries.
+[02:20:08] [ INFO ] [GuildReceiveHandler] Instance created
+[02:20:08] [ INFO ] [JDA] Audio System successfully setup!
+[02:20:08] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=MqUCDzom5Xw
+[02:20:09] [ INFO ] [Main] Joining guild. (Test)
+[02:20:09] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[02:20:09] [ INFO ] [GuildReceiveHandler] Instance created
+[02:20:10] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=Fq3QmtV8vT0
+[02:20:10] [ ERROR] [TrackScheduler] FriendlyException while loading. 
+com.sedmelluq.discord.lavaplayer.tools.FriendlyException: "Disturbed-Down w..."
+This video is no longer available due to a copyright claim by Warner Music Group.
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.determineFailureReasonFromStatus(YoutubeAudioSourceManager.java:298)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.determineFailureReason(YoutubeAudioSourceManager.java:289)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.getTrackInfoFromMainPage(YoutubeAudioSourceManager.java:272)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadTrackWithVideoId(YoutubeAudioSourceManager.java:190)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadTrack(YoutubeAudioSourceManager.java:239)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:174)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:118)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:429)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:415)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:219)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+[02:20:10] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=Zpu861-LpCE
+[02:20:10] [ INFO ] [Main] Joining guild. (Test2)
+[02:20:10] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 2)
+[02:20:11] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[02:20:11] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[02:20:13] [ INFO ] [MessageListener] Message received. (!id)
+[02:20:13] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289930486028173323) ("!id")
+[02:20:13] [ INFO ] [MessageListener] Command detected: id
+[02:20:13] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289930488271994880) ("")
+[02:20:13] [ INFO ] [MessageListener] Message received. ()
+[02:20:13] [ INFO ] [MessageListener] Test2 	 Test 	 
+[02:20:23] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289930486028173323) ("!id")
+[02:22:13] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289930488271994880) ("")
+[02:22:41] [ INFO ] [MessageListener] Message received. (!s)
+[02:22:41] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289931109096095745) ("!s")
+[02:22:41] [ INFO ] [MessageListener] Command detected: s
+[02:22:42] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[02:22:42] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289931109096095745) ("!s")
+[02:22:42] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[02:22:45] [ INFO ] [StaticSchedulePool] Executing SchedulePool

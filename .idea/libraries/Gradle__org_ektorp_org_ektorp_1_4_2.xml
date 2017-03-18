@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.ektorp:org.ektorp:1.4.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ektorp/org.ektorp/1.4.2/65b72cade95ace1ecfe3430bc5d57db50153ff32/org.ektorp-1.4.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ektorp/org.ektorp/1.4.2/5db66f8b223af0dc10c2799c6a7eac7de6671358/org.ektorp-1.4.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

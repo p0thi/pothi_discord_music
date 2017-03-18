@@ -1,0 +1,516 @@
+[15:30:04] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[15:30:05] [ INFO ] [JDA] Login Successful!
+[15:30:05] [ INFO ] [JDA] Connected to WebSocket
+[15:30:05] [ INFO ] [JDA] Finished Loading!
+[15:30:05] [ INFO ] [Main] All 1 shards are ready.
+[15:30:05] [ INFO ] [Main] Connecting to 2 guilds...
+[15:30:05] [ INFO ] [GuildReceiveHandler] Instance created
+[15:30:05] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[15:30:06] [ INFO ] [JDA] Audio System successfully setup!
+[15:30:06] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=nedAfpJV53w
+[15:30:07] [ INFO ] [GuildReceiveHandler] Instance created
+[15:30:07] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[15:30:07] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=BPwZaQfoIbU
+[15:30:08] [ INFO ] [MessageListener] Message received. (links auf den General klicken)
+[15:30:08] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 0)
+[15:30:08] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[15:30:08] [ INFO ] [GuildMusicManager] Pausing player in Test (Empty Channel).
+[15:30:08] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 1)
+[15:30:14] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 2)
+[15:30:44] [ INFO ] [MessageListener] Message received. (!play genre all)
+[15:30:44] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331215975219200) ("!play genre all")
+[15:30:44] [ INFO ] [MessageListener] Command detected: play
+[15:30:44] [ INFO ] [YoutubeMusicGenre] DANCEHALL: 90
+[15:30:44] [ INFO ] [YoutubeMusicGenre] BALLAD: 90
+[15:30:44] [ INFO ] [YoutubeMusicGenre] [HIP_HOP, POP, ROCK, LATIN, ELECTRONIC, COUNTRY, ALTERNATIVE_ROCK, RNB, TRAP, CHRISTIAN, HEAVY_METAL, SOUL, MEXICAN, HOUSE, ASIAN, REGGAE, POP_ROCK, RYTHM_AND_BLUES, CLASSICAL, HARD_ROCK, MEDITATION, EDM, INDIE, NEW_AGE, DANCEHALL, K_POP, JAZZ, BANDA, WEST_COAST_HIP_HOP, GOSPEL, FREESTYLE_RAP, CUMBIA, PUNK_ROCK, BATTLE_RAP, CONTEMPORARY_CHRISTIAN, REGGAETON, COUNTRY_POP, BACHATA, INDIE_ROCK, FUNK, SYNTHPOP, ELECTRO_POP, INDIAN, LATIN_POP, SOFT_ROCK, CORRIDO, THEME, DUBSTEP, SOUTHERN_HIP_HOP, CONTEMPORARY_WORSHIP, FOLK_ROCK, ALTERNATIVE_COUNTRY, GANGSTA_RAP, ELECTRO_HOUSE, COUNTRY_ROCK, INDIE_POP, NORTENO, CHILL_OUT, HINDU, BHAJAN, ALTERNATIVE_METAL, RAP_ROCK, AMBIENT, DEEP_HOUSE, POP_RAP, VOCAL, POST_GRUNGE, ACOUSTIC, DISCO, SALSA, ELECTRO, EAST_COST_HIP_HOP, NU_METAL, NEW_WAVE, PROGRESSIVE_ROCK, TRANCE, ALTERNATIVE_HIP_HOP, BACKGROUND, POWER_POP, BLUES, AFRICAN, FOLK, THRASH_METAL, POP_PUNK, BLUE_EYED_SOUL, VOCALOID, FILMI, OPERA, PROGRESSIVE_HOUSE, BALLAD, GRUNGE, ELECTRONIC_ROCK, BRAZILIAN, HYMN, SMOOTH_JAZZ, SOUTHERN_ROCK, DOWNTEMPO, ROMANTIC_MUSIC, PSYCHEDELIC_ROCK, RIDDIM]
+[15:30:44] [ INFO ] [MessageListener] Message received. (Folgende Genres wurden gefunden:
+**Hip Hop         **Number: 1
+**Pop         **Number: 2
+**Rock         **Number: 3
+**Latin         **Number: 4
+**Electronic         **Number: 5
+**Country         **Number: 6
+**Alternative Rock         **Number: 7
+**Modern R & B         **Number: 8
+**Trap         **Number: 9
+**Christian         **Number: 10
+**Heavy Metal         **Number: 11
+**Soul         **Number: 12
+**Mexican         **Number: 13
+**House         **Number: 14
+**Asian         **Number: 15
+**Reggae         **Number: 16
+**Pop-Rock         **Number: 17
+**Rythm and Blues         **Number: 18
+**Classic         **Number: 19
+**Hard Rock         **Number: 20
+**Meditation         **Number: 21
+**Electronic Dance         **Number: 22
+**Indie         **Number: 23
+**New Age         **Number: 24
+**Dancehall         **Number: 25
+**K-Pop         **Number: 26
+**Jazz         **Number: 27
+**Banda         **Number: 28
+**Westcoast-Hip-Hop         **Number: 29
+**Gospel         **Number: 30
+**Freestyle Rap         **Number: 31
+**Cumbia         **Number: 32
+**Punk Rock         **Number: 33
+**Battle-Rap         **Number: 34
+**Contemporary Cristian         **Number: 35
+**Reggaeton         **Number: 36
+**Country Pop         **Number: 37
+**Bachata         **Number: 38
+**Indie Rock         **Number: 39
+**Funk         **Number: 40
+**Synthpop         **Number: 41
+**Elektro Pop         **Number: 42
+**Indian         **Number: 43
+**Latin Pop         **Number: 44
+**Soft Rock         **Number: 45
+**Corrido         **Number: 46
+**Theme         **Number: 47
+**Dubstep         **Number: 48
+**Southern Hip Hop         **Number: 49
+**Church         **Number: 50
+**Folk Rock         **Number: 51
+**Alternative Country         **Number: 52
+**Gangsta Rap         **Number: 53
+**Electro House         **Number: 54
+**Country Rock         **Number: 55
+**Indie Pop         **Number: 56
+**Norteño         **Number: 57
+**Chillout         **Number: 58
+**Hindu         **Number: 59
+**Bhajan         **Number: 60)
+[15:30:44] [ INFO ] [MessageListener] Test2 	 Test 	 Folgende Genres wurden gefunden:
+**Hip Hop         **Number: 1
+**Pop         **Number: 2
+**Rock         **Number: 3
+**Latin         **Number: 4
+**Electronic         **Number: 5
+**Country         **Number: 6
+**Alternative Rock         **Number: 7
+**Modern R & B         **Number: 8
+**Trap         **Number: 9
+**Christian         **Number: 10
+**Heavy Metal         **Number: 11
+**Soul         **Number: 12
+**Mexican         **Number: 13
+**House         **Number: 14
+**Asian         **Number: 15
+**Reggae         **Number: 16
+**Pop-Rock         **Number: 17
+**Rythm and Blues         **Number: 18
+**Classic         **Number: 19
+**Hard Rock         **Number: 20
+**Meditation         **Number: 21
+**Electronic Dance         **Number: 22
+**Indie         **Number: 23
+**New Age         **Number: 24
+**Dancehall         **Number: 25
+**K-Pop         **Number: 26
+**Jazz         **Number: 27
+**Banda         **Number: 28
+**Westcoast-Hip-Hop         **Number: 29
+**Gospel         **Number: 30
+**Freestyle Rap         **Number: 31
+**Cumbia         **Number: 32
+**Punk Rock         **Number: 33
+**Battle-Rap         **Number: 34
+**Contemporary Cristian         **Number: 35
+**Reggaeton         **Number: 36
+**Country Pop         **Number: 37
+**Bachata         **Number: 38
+**Indie Rock         **Number: 39
+**Funk         **Number: 40
+**Synthpop         **Number: 41
+**Elektro Pop         **Number: 42
+**Indian         **Number: 43
+**Latin Pop         **Number: 44
+**Soft Rock         **Number: 45
+**Corrido         **Number: 46
+**Theme         **Number: 47
+**Dubstep         **Number: 48
+**Southern Hip Hop         **Number: 49
+**Church         **Number: 50
+**Folk Rock         **Number: 51
+**Alternative Country         **Number: 52
+**Gangsta Rap         **Number: 53
+**Electro House         **Number: 54
+**Country Rock         **Number: 55
+**Indie Pop         **Number: 56
+**Norteño         **Number: 57
+**Chillout         **Number: 58
+**Hindu         **Number: 59
+**Bhajan         **Number: 60
+[15:30:44] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331216977788928) ("Folgende Genres wurden gefunden:
+**Hip Hop         **Number: 1
+**Pop         **Number: 2
+**Rock         **Number: 3
+**Latin         **Number: 4
+**Electronic         **Number: 5
+**Country         **Number: 6
+**Alternative Rock         **Number: 7
+**Modern R & B         **Number: 8
+**Trap         **Number: 9
+**Christian         **Number: 10
+**Heavy Metal         **Number: 11
+**Soul         **Number: 12
+**Mexican         **Number: 13
+**House         **Number: 14
+**Asian         **Number: 15
+**Reggae         **Number: 16
+**Pop-Rock         **Number: 17
+**Rythm and Blues         **Number: 18
+**Classic         **Number: 19
+**Hard Rock         **Number: 20
+**Meditation         **Number: 21
+**Electronic Dance         **Number: 22
+**Indie         **Number: 23
+**New Age         **Number: 24
+**Dancehall         **Number: 25
+**K-Pop         **Number: 26
+**Jazz         **Number: 27
+**Banda         **Number: 28
+**Westcoast-Hip-Hop         **Number: 29
+**Gospel         **Number: 30
+**Freestyle Rap         **Number: 31
+**Cumbia         **Number: 32
+**Punk Rock         **Number: 33
+**Battle-Rap         **Number: 34
+**Contemporary Cristian         **Number: 35
+**Reggaeton         **Number: 36
+**Country Pop         **Number: 37
+**Bachata         **Number: 38
+**Indie Rock         **Number: 39
+**Funk         **Number: 40
+**Synthpop         **Number: 41
+**Elektro Pop         **Number: 42
+**Indian         **Number: 43
+**Latin Pop         **Number: 44
+**Soft Rock         **Number: 45
+**Corrido         **Number: 46
+**Theme         **Number: 47
+**Dubstep         **Number: 48
+**Southern Hip Hop         **Number: 49
+**Church         **Number: 50
+**Folk Rock         **Number: 51
+**Alternative Country         **Number: 52
+**Gangsta Rap         **Number: 53
+**Electro House         **Number: 54
+**Country Rock         **Number: 55
+**Indie Pop         **Number: 56
+**Norteño         **Number: 57
+**Chillout         **Number: 58
+**Hindu         **Number: 59
+**Bhajan         **Number: 60")
+[15:30:45] [ INFO ] [MessageListener] Message received. (**Alternative Metal         **Number: 61
+**Rap Rock         **Number: 62
+**Ambient         **Number: 63
+**Deep-House         **Number: 64
+**Pop Rap         **Number: 65
+**Vocal         **Number: 66
+**Post-Grunge         **Number: 67
+**Acoustic         **Number: 68
+**Disco         **Number: 69
+**Salsa         **Number: 70
+**Electro         **Number: 71
+**Eastcost-Hip-Hop         **Number: 72
+**Nu Metal         **Number: 73
+**New Wave         **Number: 74
+**Progressive Rock         **Number: 75
+**Trance         **Number: 76
+**Alternative Hip Hop         **Number: 77
+**Hintergrund         **Number: 78
+**Power Pop         **Number: 79
+**Blues         **Number: 80
+**Afrikanisch         **Number: 81
+**Folk         **Number: 82
+**Thrash Metal         **Number: 83
+**Pop Punk         **Number: 84
+**Blue Eyed Soul         **Number: 85
+**Vocaloid         **Number: 86
+**Filmi         **Number: 87
+**Opera         **Number: 88
+**Progressive House         **Number: 89
+**Ballad         **Number: 90
+**Grunge         **Number: 91
+**Electronic Rock         **Number: 92
+**Brazilian         **Number: 93
+**Hymn         **Number: 94
+**Smooth Jazz         **Number: 95
+**Southern Rock         **Number: 96
+**Downtempo         **Number: 97
+**Romantic         **Number: 98
+**Psychedelic Rock         **Number: 99
+**Riddim         **Number: 100
+
+:information_source: Das gewünschte Genre kann mit **'!play genre <Nummer>'** gewählt werden.)
+[15:30:45] [ INFO ] [MessageListener] Test2 	 Test 	 **Alternative Metal         **Number: 61
+**Rap Rock         **Number: 62
+**Ambient         **Number: 63
+**Deep-House         **Number: 64
+**Pop Rap         **Number: 65
+**Vocal         **Number: 66
+**Post-Grunge         **Number: 67
+**Acoustic         **Number: 68
+**Disco         **Number: 69
+**Salsa         **Number: 70
+**Electro         **Number: 71
+**Eastcost-Hip-Hop         **Number: 72
+**Nu Metal         **Number: 73
+**New Wave         **Number: 74
+**Progressive Rock         **Number: 75
+**Trance         **Number: 76
+**Alternative Hip Hop         **Number: 77
+**Hintergrund         **Number: 78
+**Power Pop         **Number: 79
+**Blues         **Number: 80
+**Afrikanisch         **Number: 81
+**Folk         **Number: 82
+**Thrash Metal         **Number: 83
+**Pop Punk         **Number: 84
+**Blue Eyed Soul         **Number: 85
+**Vocaloid         **Number: 86
+**Filmi         **Number: 87
+**Opera         **Number: 88
+**Progressive House         **Number: 89
+**Ballad         **Number: 90
+**Grunge         **Number: 91
+**Electronic Rock         **Number: 92
+**Brazilian         **Number: 93
+**Hymn         **Number: 94
+**Smooth Jazz         **Number: 95
+**Southern Rock         **Number: 96
+**Downtempo         **Number: 97
+**Romantic         **Number: 98
+**Psychedelic Rock         **Number: 99
+**Riddim         **Number: 100
+
+:information_source: Das gewünschte Genre kann mit **'!play genre <Nummer>'** gewählt werden.
+[15:30:45] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331217686626304) ("**Alternative Metal         **Number: 61
+**Rap Rock         **Number: 62
+**Ambient         **Number: 63
+**Deep-House         **Number: 64
+**Pop Rap         **Number: 65
+**Vocal         **Number: 66
+**Post-Grunge         **Number: 67
+**Acoustic         **Number: 68
+**Disco         **Number: 69
+**Salsa         **Number: 70
+**Electro         **Number: 71
+**Eastcost-Hip-Hop         **Number: 72
+**Nu Metal         **Number: 73
+**New Wave         **Number: 74
+**Progressive Rock         **Number: 75
+**Trance         **Number: 76
+**Alternative Hip Hop         **Number: 77
+**Hintergrund         **Number: 78
+**Power Pop         **Number: 79
+**Blues         **Number: 80
+**Afrikanisch         **Number: 81
+**Folk         **Number: 82
+**Thrash Metal         **Number: 83
+**Pop Punk         **Number: 84
+**Blue Eyed Soul         **Number: 85
+**Vocaloid         **Number: 86
+**Filmi         **Number: 87
+**Opera         **Number: 88
+**Progressive House         **Number: 89
+**Ballad         **Number: 90
+**Grunge         **Number: 91
+**Electronic Rock         **Number: 92
+**Brazilian         **Number: 93
+**Hymn         **Number: 94
+**Smooth Jazz         **Number: 95
+**Southern Rock         **Number: 96
+**Downtempo         **Number: 97
+**Romantic         **Number: 98
+**Psychedelic Rock         **Number: 99
+**Riddim         **Number: 100
+
+:information_source: Das gewünschte Genre kann mit **'!play genre <Nummer>'** gewählt werden.")
+[15:30:54] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331215975219200) ("!play genre all")
+[15:31:09] [ INFO ] [MessageListener] Message received. (!play genre 3)
+[15:31:09] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331319960272896) ("!play genre 3")
+[15:31:09] [ INFO ] [MessageListener] Command detected: play
+[15:31:09] [ INFO ] [MessageListener] Message received. (Ab jetzt werden lieder aus dem Genre **Rock** gepielt.
+:information_source: Die standart Playlist kann mit **'!play default'** wieder aktiviert werden)
+[15:31:09] [ INFO ] [MessageListener] Test2 	 Test 	 Ab jetzt werden lieder aus dem Genre **Rock** gepielt.
+:information_source: Die standart Playlist kann mit **'!play default'** wieder aktiviert werden
+[15:31:09] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331320988008448) ("Ab jetzt werden lieder aus dem Genre **Rock** gepielt.
+:information_source: Die standart Playlist kann mit **'!play default'** wieder aktiviert werden")
+[15:31:11] [ INFO ] [MessageListener] Message received. (!skip)
+[15:31:11] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331330538569729) ("!skip")
+[15:31:11] [ INFO ] [MessageListener] Command detected: skip
+[15:31:11] [ INFO ] [TrackScheduler] Next Track from: unLnJvzf-So
+[15:31:12] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test2. (Members in Channel without bot: 2)
+[15:31:12] [ INFO ] [SkipCommand] SkipCommand: Lied wird übersprungen: **Billy Idol - Rebel Yell (Lyrics)**
+[15:31:12] [ INFO ] [LocalAudioTrackExecutor] Playing track BPwZaQfoIbU finished or was stopped.
+[15:31:12] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331333176786944) ("Lied wird übersprungen: **Billy Idol - Rebel Yell (Lyrics)**")
+[15:31:12] [ INFO ] [MessageListener] Message received. (Lied wird übersprungen: **Billy Idol - Rebel Yell (Lyrics)**)
+[15:31:12] [ INFO ] [MessageListener] Test2 	 Test 	 Lied wird übersprungen: **Billy Idol - Rebel Yell (Lyrics)**
+[15:31:19] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331319960272896) ("!play genre 3")
+[15:31:22] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331330538569729) ("!skip")
+[15:32:02] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331333176786944) ("Lied wird übersprungen: **Billy Idol - Rebel Yell (Lyrics)**")
+[15:32:14] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331216977788928) ("Folgende Genres wurden gefunden:
+**Hip Hop         **Number: 1
+**Pop         **Number: 2
+**Rock         **Number: 3
+**Latin         **Number: 4
+**Electronic         **Number: 5
+**Country         **Number: 6
+**Alternative Rock         **Number: 7
+**Modern R & B         **Number: 8
+**Trap         **Number: 9
+**Christian         **Number: 10
+**Heavy Metal         **Number: 11
+**Soul         **Number: 12
+**Mexican         **Number: 13
+**House         **Number: 14
+**Asian         **Number: 15
+**Reggae         **Number: 16
+**Pop-Rock         **Number: 17
+**Rythm and Blues         **Number: 18
+**Classic         **Number: 19
+**Hard Rock         **Number: 20
+**Meditation         **Number: 21
+**Electronic Dance         **Number: 22
+**Indie         **Number: 23
+**New Age         **Number: 24
+**Dancehall         **Number: 25
+**K-Pop         **Number: 26
+**Jazz         **Number: 27
+**Banda         **Number: 28
+**Westcoast-Hip-Hop         **Number: 29
+**Gospel         **Number: 30
+**Freestyle Rap         **Number: 31
+**Cumbia         **Number: 32
+**Punk Rock         **Number: 33
+**Battle-Rap         **Number: 34
+**Contemporary Cristian         **Number: 35
+**Reggaeton         **Number: 36
+**Country Pop         **Number: 37
+**Bachata         **Number: 38
+**Indie Rock         **Number: 39
+**Funk         **Number: 40
+**Synthpop         **Number: 41
+**Elektro Pop         **Number: 42
+**Indian         **Number: 43
+**Latin Pop         **Number: 44
+**Soft Rock         **Number: 45
+**Corrido         **Number: 46
+**Theme         **Number: 47
+**Dubstep         **Number: 48
+**Southern Hip Hop         **Number: 49
+**Church         **Number: 50
+**Folk Rock         **Number: 51
+**Alternative Country         **Number: 52
+**Gangsta Rap         **Number: 53
+**Electro House         **Number: 54
+**Country Rock         **Number: 55
+**Indie Pop         **Number: 56
+**Norteño         **Number: 57
+**Chillout         **Number: 58
+**Hindu         **Number: 59
+**Bhajan         **Number: 60")
+[15:32:15] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331217686626304) ("**Alternative Metal         **Number: 61
+**Rap Rock         **Number: 62
+**Ambient         **Number: 63
+**Deep-House         **Number: 64
+**Pop Rap         **Number: 65
+**Vocal         **Number: 66
+**Post-Grunge         **Number: 67
+**Acoustic         **Number: 68
+**Disco         **Number: 69
+**Salsa         **Number: 70
+**Electro         **Number: 71
+**Eastcost-Hip-Hop         **Number: 72
+**Nu Metal         **Number: 73
+**New Wave         **Number: 74
+**Progressive Rock         **Number: 75
+**Trance         **Number: 76
+**Alternative Hip Hop         **Number: 77
+**Hintergrund         **Number: 78
+**Power Pop         **Number: 79
+**Blues         **Number: 80
+**Afrikanisch         **Number: 81
+**Folk         **Number: 82
+**Thrash Metal         **Number: 83
+**Pop Punk         **Number: 84
+**Blue Eyed Soul         **Number: 85
+**Vocaloid         **Number: 86
+**Filmi         **Number: 87
+**Opera         **Number: 88
+**Progressive House         **Number: 89
+**Ballad         **Number: 90
+**Grunge         **Number: 91
+**Electronic Rock         **Number: 92
+**Brazilian         **Number: 93
+**Hymn         **Number: 94
+**Smooth Jazz         **Number: 95
+**Southern Rock         **Number: 96
+**Downtempo         **Number: 97
+**Romantic         **Number: 98
+**Psychedelic Rock         **Number: 99
+**Riddim         **Number: 100
+
+:information_source: Das gewünschte Genre kann mit **'!play genre <Nummer>'** gewählt werden.")
+[15:33:09] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331320988008448) ("Ab jetzt werden lieder aus dem Genre **Rock** gepielt.
+:information_source: Die standart Playlist kann mit **'!play default'** wieder aktiviert werden")
+[15:33:26] [ INFO ] [MessageListener] Message received. (!play https://www.youtube.com/watch?v=SIXp7u2sWjI)
+[15:33:26] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331896073093121) ("!play https://www.youtube.com/watch?v=SIXp7u2sWjI")
+[15:33:26] [ INFO ] [MessageListener] Command detected: play
+[15:33:27] [ INFO ] [MessageListener] Message received. (Zur Warteschlange hinzugefügt: **Welcome to the Black Parade (ACAPELLA) - My Chemical Romance cover by Austin Jones // MCRX**)
+[15:33:27] [ INFO ] [MessageListener] Test2 	 Test 	 Zur Warteschlange hinzugefügt: **Welcome to the Black Parade (ACAPELLA) - My Chemical Romance cover by Austin Jones // MCRX**
+[15:33:27] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331898355056642) ("Zur Warteschlange hinzugefügt: **Welcome to the Black Parade (ACAPELLA) - My Chemical Romance cover by Austin Jones // MCRX**")
+[15:33:36] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331896073093121) ("!play https://www.youtube.com/watch?v=SIXp7u2sWjI")
+[15:33:39] [ INFO ] [MessageListener] Message received. (!skip)
+[15:33:39] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331949810778113) ("!skip")
+[15:33:39] [ INFO ] [MessageListener] Command detected: skip
+[15:33:39] [ INFO ] [SkipCommand] Skipp accepted: 1 >= 0.4
+[15:33:39] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test2. (Members in Channel without bot: 2)
+[15:33:39] [ INFO ] [SkipCommand] SkipCommand: Lied wird übersprungen: **The Flaming Lips - How?? (Official Music Video)**
+[15:33:39] [ INFO ] [LocalAudioTrackExecutor] Playing track unLnJvzf-So finished or was stopped.
+[15:33:39] [ INFO ] [MessageListener] Message received. (Lied wird übersprungen: **The Flaming Lips - How?? (Official Music Video)**)
+[15:33:39] [ INFO ] [MessageListener] Test2 	 Test 	 Lied wird übersprungen: **The Flaming Lips - How?? (Official Music Video)**
+[15:33:39] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331950678867968) ("Lied wird übersprungen: **The Flaming Lips - How?? (Official Music Video)**")
+[15:33:45] [ INFO ] [MessageListener] Message received. (!np)
+[15:33:45] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331975093780492) ("!np")
+[15:33:45] [ INFO ] [MessageListener] Command detected: np
+[15:33:46] [ INFO ] [MessageListener] Message received. ()
+[15:33:46] [ INFO ] [MessageListener] Test2 	 Test 	 
+[15:33:46] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284331977471950848) ("")
+[15:33:49] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331949810778113) ("!skip")
+[15:33:55] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331975093780492) ("!np")
+[15:34:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331898355056642) ("Zur Warteschlange hinzugefügt: **Welcome to the Black Parade (ACAPELLA) - My Chemical Romance cover by Austin Jones // MCRX**")
+[15:34:29] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331950678867968) ("Lied wird übersprungen: **The Flaming Lips - How?? (Official Music Video)**")
+[15:34:36] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284331977471950848) ("")
+[15:38:55] [ INFO ] [TrackScheduler] Next Track from: c-GiWoDGhJM
+[15:38:55] [ INFO ] [LocalAudioTrackExecutor] Playing track SIXp7u2sWjI finished or was stopped.
+[15:38:55] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test2. (Members in Channel without bot: 2)
+[15:40:29] [ INFO ] [MessageListener] Message received. (!skip)
+[15:40:29] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284333668778901507) ("!skip")
+[15:40:29] [ INFO ] [MessageListener] Command detected: skip
+[15:40:29] [ INFO ] [TrackScheduler] Next Track from: nim9t2X02eU
+[15:40:29] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test2. (Members in Channel without bot: 2)
+[15:40:29] [ INFO ] [SkipCommand] SkipCommand: Lied wird übersprungen: **BackWordz- Be Great (Official Music Video)**
+[15:40:29] [ INFO ] [LocalAudioTrackExecutor] Playing track c-GiWoDGhJM finished or was stopped.
+[15:40:30] [ INFO ] [MessageListener] Message received. (Lied wird übersprungen: **BackWordz- Be Great (Official Music Video)**)
+[15:40:30] [ INFO ] [MessageListener] Test2 	 Test 	 Lied wird übersprungen: **BackWordz- Be Great (Official Music Video)**
+[15:40:30] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284333671966572544) ("Lied wird übersprungen: **BackWordz- Be Great (Official Music Video)**")
+[15:40:39] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284333668778901507) ("!skip")
+[15:41:20] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284333671966572544) ("Lied wird übersprungen: **BackWordz- Be Great (Official Music Video)**")
+[15:42:44] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 1)
+[15:42:47] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[15:42:47] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[15:42:47] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[15:42:51] [ INFO ] [MessageListener] Message received. (!s)
+[15:42:51] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (284334266333134848) ("!s")
+[15:42:51] [ INFO ] [MessageListener] Command detected: s
+[15:42:51] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[15:42:51] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (284334266333134848) ("!s")
+[15:42:52] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[15:42:55] [ INFO ] [StaticSchedulePool] Executing SchedulePool

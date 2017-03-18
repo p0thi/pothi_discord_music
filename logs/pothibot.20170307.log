@@ -1,0 +1,38 @@
+[16:24:37] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[16:24:39] [ INFO ] [JDA] Login Successful!
+[16:24:39] [ INFO ] [JDA] Connected to WebSocket
+[16:24:39] [ INFO ] [JDA] Finished Loading!
+[16:24:39] [ INFO ] [Main] All 1 shards are ready.
+[16:24:39] [ INFO ] [Main] Connecting to 2 guilds...
+[16:24:40] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[16:24:40] [ INFO ] [GuildReceiveHandler] Instance created
+[16:24:41] [ INFO ] [JDA] Audio System successfully setup!
+[16:24:41] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=PFKCFewHMc4
+[16:24:41] [ INFO ] [Main] Joining guild. (Test)
+[16:24:42] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[16:24:42] [ INFO ] [GuildReceiveHandler] Instance created
+[16:24:42] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=NY8IS0ssnXQ
+[16:24:54] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[16:24:55] [ INFO ] [JDA] Login Successful!
+[16:24:56] [ INFO ] [JDA] Connected to WebSocket
+[16:24:56] [ INFO ] [JDA] Finished Loading!
+[16:24:56] [ INFO ] [Main] All 1 shards are ready.
+[16:24:56] [ INFO ] [Main] Connecting to 2 guilds...
+[16:24:56] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[16:24:56] [ INFO ] [GuildReceiveHandler] Instance created
+[16:24:57] [ INFO ] [JDA] Audio System successfully setup!
+[16:24:57] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=vmDDOFXSgAs
+[16:24:57] [ INFO ] [Main] Joining guild. (Test)
+[16:24:57] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[16:24:57] [ INFO ] [GuildReceiveHandler] Instance created
+[16:24:57] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=or5qBh8Xbpc
+[16:24:58] [ INFO ] [Main] Joining guild. (Test2)
+[16:24:58] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[16:24:58] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[16:25:05] [ INFO ] [MessageListener] Message received. (!s)
+[16:25:05] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (288693561346490369) ("!s")
+[16:25:05] [ INFO ] [MessageListener] Command detected: s
+[16:25:05] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[16:25:05] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (288693561346490369) ("!s")
+[16:25:05] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[16:25:08] [ INFO ] [StaticSchedulePool] Executing SchedulePool

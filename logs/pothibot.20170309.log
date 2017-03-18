@@ -1,0 +1,308 @@
+[14:24:51] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[14:24:52] [ INFO ] [JDA] Login Successful!
+[14:24:52] [ INFO ] [JDA] Connected to WebSocket
+[14:24:52] [ INFO ] [JDA] Finished Loading!
+[14:24:52] [ INFO ] [Main] All 1 shards are ready.
+[14:24:52] [ INFO ] [Main] Connecting to 2 guilds...
+[14:24:53] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[14:24:53] [ INFO ] [GuildReceiveHandler] Instance created
+[14:24:54] [ INFO ] [JDA] Audio System successfully setup!
+[14:24:54] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=Hn-enjcgV1o
+[14:24:55] [ INFO ] [Main] Joining guild. (Test)
+[14:24:55] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[14:24:55] [ INFO ] [GuildReceiveHandler] Instance created
+[14:24:55] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=Gu2pVPWGYMQ
+[14:24:55] [ INFO ] [Main] Joining guild. (Test2)
+[14:24:56] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 2)
+[14:24:56] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[14:24:56] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[14:25:03] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 1)
+[14:25:03] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 1)
+[14:25:03] [ INFO ] [GuildMusicManager] Resuming player in Test2 (Member joined empty Channel).
+[14:25:10] [ INFO ] [MessageListener] Message received. (!np)
+[14:25:10] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289025765180440586) ("!np")
+[14:25:10] [ INFO ] [MessageListener] Command detected: np
+[14:25:11] [ INFO ] [MessageListener] Message received. ()
+[14:25:11] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289025768229699584) ("")
+[14:25:11] [ INFO ] [MessageListener] Test2 	 Test 	 
+[14:25:20] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289025765180440586) ("!np")
+[14:25:29] [ INFO ] [MessageListener] Message received. (!s)
+[14:25:29] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289025846340222976) ("!s")
+[14:25:29] [ INFO ] [MessageListener] Command detected: s
+[14:25:29] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[14:25:29] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289025768229699584) ("")
+[14:25:29] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289025846340222976) ("!s")
+[14:25:29] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[14:25:32] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:21:28] [ INFO ] [JDA] Login Successful!
+[19:21:28] [ INFO ] [JDA] Connected to WebSocket
+[19:21:29] [ INFO ] [JDA] Finished Loading!
+[19:21:29] [ INFO ] [Main] All 1 shards are ready.
+[19:21:29] [ INFO ] [Main] Connecting to 2 guilds...
+[19:21:30] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[19:21:30] [ INFO ] [GuildReceiveHandler] Instance created
+[19:21:30] [ INFO ] [JDA] Audio System successfully setup!
+[19:21:30] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=dtiSA2RKDzc
+[19:21:30] [ INFO ] [Main] Joining guild. (Test)
+[19:21:31] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[19:21:31] [ INFO ] [GuildReceiveHandler] Instance created
+[19:21:31] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=96AzlkwtRmc
+[19:21:31] [ INFO ] [Main] Joining guild. (Test2)
+[19:21:31] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[19:21:32] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[19:21:32] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[19:21:38] [ INFO ] [MessageListener] Message received. (!status)
+[19:21:38] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289462774868869150) ("!status")
+[19:21:38] [ INFO ] [MessageListener] Command detected: status
+[19:21:44] [ INFO ] [MessageListener] Message received. ()
+[19:21:44] [ INFO ] [MessageListener] Test 	 GLOW-bot 	 
+[19:21:45] [ INFO ] [MessageListener] Message received. ()
+[19:21:45] [ INFO ] [MessageListener] Test 	 Test 	 
+[19:21:45] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289462804904411136) ("")
+[19:21:48] [ WARN ] [MessageDeleter] Could not delete Message! Already deleted?! ("!status")
+[19:21:59] [ INFO ] [MessageListener] Message received. (!status)
+[19:21:59] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289462864719380480) ("!status")
+[19:21:59] [ INFO ] [MessageListener] Command detected: status
+[19:21:59] [ INFO ] [MessageListener] Message received. ()
+[19:21:59] [ INFO ] [MessageListener] Test 	 GLOW-bot 	 
+[19:21:59] [ INFO ] [MessageListener] Message received. ()
+[19:21:59] [ INFO ] [MessageListener] Test 	 Test 	 
+[19:21:59] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289462865205919756) ("")
+[19:22:09] [ WARN ] [MessageDeleter] Could not delete Message! Already deleted?! ("!status")
+[19:22:35] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (289462804904411136) ("")
+[19:22:49] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (289462865205919756) ("")
+[19:23:16] [ INFO ] [MessageListener] Message received. (!s)
+[19:23:16] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289463187231997963) ("!s")
+[19:23:16] [ INFO ] [MessageListener] Command detected: s
+[19:23:16] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:23:16] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289463187231997963) ("!s")
+[19:23:16] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[19:23:19] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:23:23] [ INFO ] [JDA] Login Successful!
+[19:23:23] [ INFO ] [JDA] Connected to WebSocket
+[19:23:23] [ INFO ] [JDA] Finished Loading!
+[19:23:24] [ INFO ] [Main] All 1 shards are ready.
+[19:23:24] [ INFO ] [Main] Connecting to 2 guilds...
+[19:23:24] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[19:23:24] [ INFO ] [GuildReceiveHandler] Instance created
+[19:23:24] [ INFO ] [JDA] Audio System successfully setup!
+[19:23:24] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=lZiNtbgm9oM
+[19:23:25] [ INFO ] [Main] Joining guild. (Test)
+[19:23:25] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[19:23:25] [ INFO ] [GuildReceiveHandler] Instance created
+[19:23:25] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=yK0P1Bk8Cx4
+[19:23:26] [ INFO ] [Main] Joining guild. (Test2)
+[19:23:26] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[19:23:26] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[19:23:26] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[19:23:33] [ INFO ] [MessageListener] Message received. (!status)
+[19:23:33] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289463257977061376) ("!status")
+[19:23:33] [ INFO ] [MessageListener] Command detected: status
+[19:23:33] [ INFO ] [MessageListener] Message received. ()
+[19:23:33] [ INFO ] [MessageListener] Test2 	 Test 	 
+[19:23:33] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289463260556558337) ("")
+[19:23:43] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289463257977061376) ("!status")
+[19:24:24] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289463260556558337) ("")
+[19:27:03] [ INFO ] [MessageListener] Message received. (!status)
+[19:27:03] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289464140458885120) ("!status")
+[19:27:03] [ INFO ] [MessageListener] Command detected: status
+[19:27:03] [ INFO ] [MessageListener] Message received. ()
+[19:27:03] [ INFO ] [MessageListener] Test2 	 Test 	 
+[19:27:03] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289464142178287616) ("")
+[19:27:13] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289464140458885120) ("!status")
+[19:27:41] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=ivY2Kfhw31Q
+[19:27:42] [ ERROR] [TrackScheduler] FriendlyException while loading. 
+com.sedmelluq.discord.lavaplayer.tools.FriendlyException: This video is unavailable.
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.determineFailureReasonFromStatus(YoutubeAudioSourceManager.java:312)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.determineFailureReason(YoutubeAudioSourceManager.java:303)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.getTrackInfoFromMainPage(YoutubeAudioSourceManager.java:286)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadTrackWithVideoId(YoutubeAudioSourceManager.java:200)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadTrack(YoutubeAudioSourceManager.java:253)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:184)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:128)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:418)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:404)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:213)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+[19:27:42] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=jlV3zeWnWZY
+[19:27:43] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[19:27:54] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289464142178287616) ("")
+[19:32:03] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=lRt54xjIq7w
+[19:32:03] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[19:32:16] [ INFO ] [MessageListener] Message received. (!status)
+[19:32:16] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289465454160773120) ("!status")
+[19:32:16] [ INFO ] [MessageListener] Command detected: status
+[19:32:17] [ INFO ] [MessageListener] Message received. ()
+[19:32:17] [ INFO ] [MessageListener] Test2 	 Test 	 
+[19:32:17] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289465455620521986) ("")
+[19:32:26] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289465454160773120) ("!status")
+[19:33:07] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289465455620521986) ("")
+[19:36:16] [ INFO ] [MessageListener] Message received. (!s)
+[19:36:16] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289466458105315330) ("!s")
+[19:36:16] [ INFO ] [MessageListener] Command detected: s
+[19:36:16] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:36:16] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289466458105315330) ("!s")
+[19:36:16] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[19:36:19] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:36:24] [ INFO ] [JDA] Login Successful!
+[19:36:25] [ INFO ] [JDA] Connected to WebSocket
+[19:36:25] [ INFO ] [JDA] Finished Loading!
+[19:36:25] [ INFO ] [Main] All 1 shards are ready.
+[19:36:25] [ INFO ] [Main] Connecting to 2 guilds...
+[19:36:26] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[19:36:26] [ INFO ] [GuildReceiveHandler] Instance created
+[19:36:26] [ INFO ] [JDA] Audio System successfully setup!
+[19:36:26] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=drsJ50vH6ro
+[19:36:27] [ INFO ] [Main] Joining guild. (Test)
+[19:36:27] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[19:36:27] [ INFO ] [GuildReceiveHandler] Instance created
+[19:36:27] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=j4n7fWjmomA
+[19:36:27] [ INFO ] [Main] Joining guild. (Test2)
+[19:36:27] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[19:36:28] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[19:36:28] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[19:36:29] [ INFO ] [MessageListener] Message received. (!status)
+[19:36:29] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289466512987783179) ("!status")
+[19:36:29] [ INFO ] [MessageListener] Command detected: status
+[19:36:29] [ INFO ] [MessageListener] Message received. ()
+[19:36:29] [ INFO ] [MessageListener] Test2 	 Test 	 
+[19:36:29] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289466516154613760) ("")
+[19:36:39] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289466512987783179) ("!status")
+[19:36:50] [ INFO ] [MessageListener] Message received. (!status)
+[19:36:50] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289466601021898752) ("!status")
+[19:36:50] [ INFO ] [MessageListener] Command detected: status
+[19:36:50] [ INFO ] [MessageListener] Message received. ()
+[19:36:50] [ INFO ] [MessageListener] Test2 	 Test 	 
+[19:36:50] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289466602066411520) ("")
+[19:37:00] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289466601021898752) ("!status")
+[19:37:20] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289466516154613760) ("")
+[19:37:40] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289466602066411520) ("")
+[19:39:34] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=v9U0qMHHkSo
+[19:39:35] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[19:41:38] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[19:44:32] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=W6CjO0H2j0s
+[19:44:32] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[19:53:01] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=knPVJ9rj5dM
+[19:53:02] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[19:54:41] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=-ZHYfjSg7A4
+[19:54:42] [ ERROR] [TrackScheduler] FriendlyException while loading. 
+com.sedmelluq.discord.lavaplayer.tools.FriendlyException: This video is not available.
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.determineFailureReasonFromStatus(YoutubeAudioSourceManager.java:312)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.determineFailureReason(YoutubeAudioSourceManager.java:303)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.getTrackInfoFromMainPage(YoutubeAudioSourceManager.java:286)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadTrackWithVideoId(YoutubeAudioSourceManager.java:200)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadTrack(YoutubeAudioSourceManager.java:253)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:184)
+	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:128)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:418)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:404)
+	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:213)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+[19:54:42] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=K_h1geOaLvY
+[19:54:42] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[19:59:13] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=IwSTe9uit48
+[19:59:13] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:04:01] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=wJuEjAo4ues
+[20:04:02] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:08:02] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=a52Ul2AM92c
+[20:08:03] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:11:13] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=9-VL30-Bn48
+[20:11:13] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:14:58] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=aDlNMawir4o
+[20:14:59] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:19:17] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=heDGwljdmvM
+[20:19:17] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:23:36] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=WZdH6rvhKd8
+[20:23:37] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:27:13] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=OMD8hBsA-RI
+[20:27:13] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:29:41] [ INFO ] [MessageListener] Message received. (!s)
+[20:29:41] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289479903278137345) ("!s")
+[20:29:41] [ INFO ] [MessageListener] Command detected: s
+[20:29:41] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[20:29:41] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289479903278137345) ("!s")
+[20:29:42] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[20:29:45] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[20:29:49] [ INFO ] [JDA] Login Successful!
+[20:29:50] [ INFO ] [JDA] Connected to WebSocket
+[20:29:50] [ INFO ] [JDA] Finished Loading!
+[20:29:51] [ INFO ] [Main] All 1 shards are ready.
+[20:29:51] [ INFO ] [Main] Connecting to 2 guilds...
+[20:29:52] [ INFO ] [GuildData] Test: Default Playlist loaded with 2531 entries.
+[20:29:52] [ INFO ] [GuildReceiveHandler] Instance created
+[20:29:54] [ INFO ] [JDA] Audio System successfully setup!
+[20:29:54] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=1yfxp1NhLIs
+[20:29:54] [ INFO ] [Main] Joining guild. (Test)
+[20:29:54] [ INFO ] [GuildData] Test2: Default Playlist loaded with 2531 entries.
+[20:29:54] [ INFO ] [GuildReceiveHandler] Instance created
+[20:29:54] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=5MnDbWqe_kQ
+[20:29:55] [ INFO ] [Main] Joining guild. (Test2)
+[20:29:55] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:29:56] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[20:29:56] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[20:30:02] [ INFO ] [MessageListener] Message received. (!gif)
+[20:30:02] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289479991320641536) ("!gif")
+[20:30:02] [ INFO ] [MessageListener] Command detected: gif
+[20:30:03] [ INFO ] [MessageListener] Message received. (http://media3.giphy.com/media/yj5pxvw4mEA1i/giphy.gif)
+[20:30:03] [ INFO ] [MessageListener] Test2 	 Test 	 http://media3.giphy.com/media/yj5pxvw4mEA1i/giphy.gif
+[20:30:03] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289479993237438464) ("http://media3.giphy.com/media/yj5pxvw4mEA1i/giphy.gif")
+[20:30:08] [ INFO ] [MessageListener] Message received. (!g)
+[20:30:08] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289480017107353602) ("!g")
+[20:30:08] [ INFO ] [MessageListener] Command detected: g
+[20:30:09] [ INFO ] [MessageListener] Message received. (http://media0.giphy.com/media/2c85nqHAg7b4UjvMY/giphy.gif)
+[20:30:09] [ INFO ] [MessageListener] Test2 	 Test 	 http://media0.giphy.com/media/2c85nqHAg7b4UjvMY/giphy.gif
+[20:30:09] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289480019200311308) ("http://media0.giphy.com/media/2c85nqHAg7b4UjvMY/giphy.gif")
+[20:30:12] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289479991320641536) ("!gif")
+[20:30:19] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289480017107353602) ("!g")
+[20:30:53] [ INFO ] [MessageListener] Message received. (!nowplaying)
+[20:30:53] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289480206006353920) ("!nowplaying")
+[20:30:53] [ INFO ] [MessageListener] Command detected: nowplaying
+[20:30:54] [ INFO ] [MessageListener] Message received. (Im Moment wird nichts abgespielt.)
+[20:30:54] [ INFO ] [MessageListener] Test2 	 Test 	 Im Moment wird nichts abgespielt.
+[20:30:54] [ INFO ] [MessageDeleter] Message successfully queued, in Test2. (289480206723448833) ("Im Moment wird nichts abgespielt.")
+[20:31:02] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[20:31:03] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289480206006353920) ("!nowplaying")
+[20:31:05] [ INFO ] [MessageListener] Message received. (!np)
+[20:31:05] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289480253405921300) ("!np")
+[20:31:05] [ INFO ] [MessageListener] Command detected: np
+[20:31:05] [ INFO ] [MessageListener] Message received. ()
+[20:31:05] [ INFO ] [MessageListener] Test 	 Test 	 
+[20:31:05] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289480255289425920) ("")
+[20:31:05] [ INFO ] [MessageListener] Message received. ()
+[20:31:05] [ INFO ] [MessageListener] Test 	 GLOW-bot 	 
+[20:31:11] [ INFO ] [MessageListener] Message received. (!status)
+[20:31:11] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289480278479732746) ("!status")
+[20:31:11] [ INFO ] [MessageListener] Command detected: status
+[20:31:15] [ WARN ] [MessageDeleter] Could not delete Message! Already deleted?! ("!np")
+[20:31:19] [ INFO ] [MessageListener] Message received. ()
+[20:31:19] [ INFO ] [MessageListener] Test 	 GLOW-bot 	 
+[20:31:19] [ INFO ] [MessageListener] Message received. ()
+[20:31:19] [ INFO ] [MessageListener] Test 	 Test 	 
+[20:31:19] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289480314680639488) ("")
+[20:31:21] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (289480278479732746) ("!status")
+[20:31:44] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289480206723448833) ("Im Moment wird nichts abgespielt.")
+[20:31:55] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (289480255289425920) ("")
+[20:32:09] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (289480314680639488) ("")
+[20:32:56] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=fvRkGglLe-U
+[20:32:56] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 7)
+[20:33:03] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289479993237438464) ("http://media3.giphy.com/media/yj5pxvw4mEA1i/giphy.gif")
+[20:33:09] [ INFO ] [MessageDeleter] Message successfully deleted, in Test2. (289480019200311308) ("http://media0.giphy.com/media/2c85nqHAg7b4UjvMY/giphy.gif")
+[20:35:27] [ INFO ] [MessageListener] Message received. (s)
+[20:35:27] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 6)
+[20:35:27] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 5)
+[20:35:28] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 4)
+[20:35:28] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 3)
+[20:35:28] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 2)
+[20:35:37] [ INFO ] [MessageListener] Message received. (!s)
+[20:35:37] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (289481396894826497) ("!s")
+[20:35:37] [ INFO ] [MessageListener] Command detected: s
+[20:35:37] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[20:35:37] [ WARN ] [MessageDeleter] Could not delete Message! Already deleted?! ("!s")
+[20:35:38] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[20:35:41] [ INFO ] [StaticSchedulePool] Executing SchedulePool

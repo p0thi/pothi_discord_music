@@ -1,0 +1,908 @@
+[18:42:40] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:42:41] [ INFO ] [JDA] Login Successful!
+[18:42:42] [ INFO ] [JDA] Connected to WebSocket
+[18:42:42] [ INFO ] [JDA] Finished Loading!
+[18:42:42] [ INFO ] [Main] All 1 shards are ready.
+[18:42:42] [ INFO ] [Main] Connecting to 2 guilds...
+[18:42:42] [ INFO ] [GuildReceiveHandler] Instance created
+[18:42:42] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:42:44] [ INFO ] [JDA] Audio System successfully setup!
+[18:42:44] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/majorlazer/boom-feat-ty-dolla-ign-wizkid-kranium
+[18:42:44] [ INFO ] [GuildReceiveHandler] Instance created
+[18:42:44] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:42:44] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=7uy0ldI_1HA
+[18:42:45] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 0)
+[18:42:45] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:42:45] [ INFO ] [GuildMusicManager] Pausing player in Test (Empty Channel).
+[18:42:46] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[18:42:46] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:42:46] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[18:43:54] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:43:55] [ INFO ] [JDA] Login Successful!
+[18:43:55] [ INFO ] [JDA] Connected to WebSocket
+[18:43:55] [ INFO ] [JDA] Finished Loading!
+[18:43:55] [ INFO ] [Main] All 1 shards are ready.
+[18:43:55] [ INFO ] [Main] Connecting to 2 guilds...
+[18:43:55] [ INFO ] [GuildReceiveHandler] Instance created
+[18:43:55] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:43:56] [ INFO ] [JDA] Audio System successfully setup!
+[18:43:56] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=dZEnQogAd8U
+[18:43:56] [ INFO ] [GuildReceiveHandler] Instance created
+[18:43:56] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:43:56] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=dLKTkC6TpF4
+[18:44:00] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:117)
+	at pothi_discord_music.Main.main(Main.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[18:47:46] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=nedAfpJV53w
+[18:47:46] [ INFO ] [LocalAudioTrackExecutor] Playing track dZEnQogAd8U finished or was stopped.
+[18:47:47] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test. (Members in Channel without bot: 0)
+[18:47:47] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:47:47] [ INFO ] [GuildMusicManager] Pausing player in Test (Empty Channel).
+[18:48:08] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:48:09] [ INFO ] [JDA] Login Successful!
+[18:48:09] [ INFO ] [JDA] Connected to WebSocket
+[18:48:10] [ INFO ] [JDA] Finished Loading!
+[18:48:10] [ INFO ] [Main] All 1 shards are ready.
+[18:48:10] [ INFO ] [Main] Connecting to 2 guilds...
+[18:48:10] [ INFO ] [GuildReceiveHandler] Instance created
+[18:48:10] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:48:10] [ INFO ] [JDA] Audio System successfully setup!
+[18:48:10] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=60ItHLz5WEA
+[18:48:10] [ INFO ] [GuildReceiveHandler] Instance created
+[18:48:10] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:48:10] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=ovrGzbsQZqc
+[18:48:15] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:117)
+	at pothi_discord_music.Main.main(Main.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[18:49:45] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:49:46] [ INFO ] [JDA] Login Successful!
+[18:49:46] [ INFO ] [JDA] Connected to WebSocket
+[18:49:47] [ INFO ] [JDA] Finished Loading!
+[18:49:47] [ INFO ] [Main] All 1 shards are ready.
+[18:49:47] [ INFO ] [Main] Connecting to 2 guilds...
+[18:49:47] [ INFO ] [GuildReceiveHandler] Instance created
+[18:49:47] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:49:47] [ INFO ] [JDA] Audio System successfully setup!
+[18:49:47] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/benderrockz/die-rzte-himmelblau
+[18:49:47] [ INFO ] [GuildReceiveHandler] Instance created
+[18:49:47] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:49:47] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=r1grU9z9yh8
+[18:49:52] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:118)
+	at pothi_discord_music.Main.main(Main.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[18:51:56] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:51:56] [ INFO ] [JDA] Login Successful!
+[18:51:57] [ INFO ] [JDA] Connected to WebSocket
+[18:51:57] [ INFO ] [JDA] Finished Loading!
+[18:51:57] [ INFO ] [Main] All 1 shards are ready.
+[18:51:57] [ INFO ] [Main] Connecting to 2 guilds...
+[18:51:57] [ INFO ] [GuildReceiveHandler] Instance created
+[18:51:57] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:51:57] [ INFO ] [JDA] Audio System successfully setup!
+[18:51:57] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=vLom-87AmO8
+[18:51:58] [ INFO ] [GuildReceiveHandler] Instance created
+[18:51:58] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:51:58] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=sYcpbvBZ1fU
+[18:52:02] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:118)
+	at pothi_discord_music.Main.main(Main.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[18:52:42] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:52:43] [ INFO ] [JDA] Login Successful!
+[18:52:43] [ INFO ] [JDA] Connected to WebSocket
+[18:52:43] [ INFO ] [JDA] Finished Loading!
+[18:52:43] [ INFO ] [Main] All 1 shards are ready.
+[18:52:43] [ INFO ] [Main] Connecting to 2 guilds...
+[18:52:43] [ INFO ] [GuildReceiveHandler] Instance created
+[18:52:43] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:52:43] [ INFO ] [JDA] Audio System successfully setup!
+[18:52:43] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=RwxZDl6P4E0
+[18:52:44] [ INFO ] [GuildReceiveHandler] Instance created
+[18:52:44] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:52:44] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/faboulous9/linkin-park-castle-of-glass
+[18:52:44] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=5GMTuJgsZdc
+[18:52:48] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:118)
+	at pothi_discord_music.Main.main(Main.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[18:54:00] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:54:01] [ INFO ] [JDA] Login Successful!
+[18:54:01] [ INFO ] [JDA] Connected to WebSocket
+[18:54:01] [ INFO ] [JDA] Finished Loading!
+[18:54:01] [ INFO ] [Main] All 1 shards are ready.
+[18:54:01] [ INFO ] [Main] Connecting to 2 guilds...
+[18:54:01] [ INFO ] [GuildReceiveHandler] Instance created
+[18:54:01] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:54:01] [ INFO ] [JDA] Audio System successfully setup!
+[18:54:01] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=-MrwLLxyPGc
+[18:54:02] [ INFO ] [GuildReceiveHandler] Instance created
+[18:54:02] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:54:02] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=hwZNL7QVJjE
+[18:54:06] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:121)
+	at pothi_discord_music.Main.main(Main.java:90)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[18:57:01] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=EZt6mZ-Te1U
+[18:57:01] [ INFO ] [LocalAudioTrackExecutor] Playing track hwZNL7QVJjE finished or was stopped.
+[18:57:02] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[18:57:02] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:57:02] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[18:57:12] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:57:13] [ INFO ] [JDA] Login Successful!
+[18:57:13] [ INFO ] [JDA] Connected to WebSocket
+[18:57:13] [ INFO ] [JDA] Finished Loading!
+[18:57:13] [ INFO ] [Main] All 1 shards are ready.
+[18:57:13] [ INFO ] [Main] Connecting to 2 guilds...
+[18:57:13] [ INFO ] [GuildReceiveHandler] Instance created
+[18:57:13] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:57:14] [ INFO ] [JDA] Audio System successfully setup!
+[18:57:14] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/marshmellomusic/alone
+[18:57:14] [ INFO ] [GuildReceiveHandler] Instance created
+[18:57:14] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:57:14] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=zUzd9KyIDrM
+[18:57:25] [ INFO ] [MessageListener] Message received. (!np)
+[18:57:25] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296087165632512) ("!np")
+[18:57:25] [ INFO ] [MessageListener] Command detected: np
+[18:57:25] [ WARN ] [MessageListener] Could not executeAllTasks commsnd: np
+[18:57:35] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296087165632512) ("!np")
+[18:58:52] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[18:58:53] [ INFO ] [JDA] Login Successful!
+[18:58:53] [ INFO ] [JDA] Connected to WebSocket
+[18:58:54] [ INFO ] [JDA] Finished Loading!
+[18:58:54] [ INFO ] [Main] All 1 shards are ready.
+[18:58:54] [ INFO ] [Main] Connecting to 2 guilds...
+[18:58:54] [ INFO ] [GuildReceiveHandler] Instance created
+[18:58:54] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[18:58:54] [ INFO ] [JDA] Audio System successfully setup!
+[18:58:54] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=TQxp1aP_IaE
+[18:58:54] [ INFO ] [GuildReceiveHandler] Instance created
+[18:58:54] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:58:54] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=9OquWmdUYXw
+[18:58:59] [ INFO ] [MessageListener] Message received. (!np)
+[18:58:59] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296479660081152) ("!np")
+[18:58:59] [ INFO ] [MessageListener] Command detected: np
+[18:58:59] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[18:58:59] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[18:58:59] [ ERROR] [JDA] Encountered an exception:
+[18:58:59] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[18:58:59] [ INFO ] [MessageListener] Message received. ()
+[18:58:59] [ INFO ] [MessageListener] Test 	 Test 	 
+[18:58:59] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296481581203457) ("")
+[18:59:05] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=0bS1R9ZRRfw
+[18:59:05] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=YG9otasNmxI
+[18:59:06] [ INFO ] [GuildMusicManager] From: TrackScheduler -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[18:59:06] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[18:59:06] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[18:59:08] [ INFO ] [LocalAudioTrackExecutor] Playing track 9OquWmdUYXw finished or was stopped.
+[18:59:09] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296479660081152) ("!np")
+[18:59:49] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296481581203457) ("")
+[19:00:00] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:00:01] [ INFO ] [JDA] Login Successful!
+[19:00:01] [ INFO ] [JDA] Connected to WebSocket
+[19:00:01] [ INFO ] [JDA] Finished Loading!
+[19:00:01] [ INFO ] [Main] All 1 shards are ready.
+[19:00:01] [ INFO ] [Main] Connecting to 2 guilds...
+[19:00:01] [ INFO ] [GuildReceiveHandler] Instance created
+[19:00:01] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:00:01] [ INFO ] [JDA] Audio System successfully setup!
+[19:00:01] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=w9PXnACu9jo
+[19:00:02] [ INFO ] [GuildReceiveHandler] Instance created
+[19:00:02] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:00:02] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=6e3QMgWuWi0
+[19:00:06] [ INFO ] [MessageListener] Message received. (!np)
+[19:00:06] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296764906307584) ("!np")
+[19:00:06] [ INFO ] [MessageListener] Command detected: np
+[19:00:07] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:00:07] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:00:07] [ ERROR] [JDA] Encountered an exception:
+[19:00:07] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:00:07] [ INFO ] [MessageListener] Message received. ()
+[19:00:07] [ INFO ] [MessageListener] Test 	 Test 	 
+[19:00:07] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296766835818498) ("")
+[19:00:16] [ INFO ] [MessageListener] Message received. (!s)
+[19:00:16] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296805159174166) ("!s")
+[19:00:16] [ INFO ] [MessageListener] Command detected: s
+[19:00:16] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:00:16] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296764906307584) ("!np")
+[19:00:16] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296766835818498) ("")
+[19:00:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296805159174166) ("!s")
+[19:00:17] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[19:00:17] [ WARN ] [MessageDeleter] Could not delete Message! Already deleted?! ("!np")
+[19:00:20] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:00:49] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:00:50] [ INFO ] [JDA] Login Successful!
+[19:00:51] [ INFO ] [JDA] Connected to WebSocket
+[19:00:51] [ INFO ] [JDA] Finished Loading!
+[19:00:51] [ INFO ] [Main] All 1 shards are ready.
+[19:00:51] [ INFO ] [Main] Connecting to 2 guilds...
+[19:00:51] [ INFO ] [GuildReceiveHandler] Instance created
+[19:00:51] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:00:51] [ INFO ] [JDA] Audio System successfully setup!
+[19:00:51] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=wjKHEXsA7lg
+[19:00:52] [ INFO ] [GuildReceiveHandler] Instance created
+[19:00:52] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:00:52] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=LUlZ5n0cyak
+[19:00:52] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 0)
+[19:00:52] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:00:52] [ INFO ] [GuildMusicManager] Pausing player in Test (Empty Channel).
+[19:00:52] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[19:00:52] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:00:52] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[19:01:00] [ INFO ] [MessageListener] Message received. (!np)
+[19:01:00] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296990874435584) ("!np")
+[19:01:00] [ INFO ] [MessageListener] Command detected: np
+[19:01:00] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:01:00] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:01:00] [ ERROR] [JDA] Encountered an exception:
+[19:01:00] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:01:01] [ INFO ] [MessageListener] Message received. (Im Moment wird nichts abgespielt.)
+[19:01:01] [ INFO ] [MessageListener] Test 	 Test 	 Im Moment wird nichts abgespielt.
+[19:01:01] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283296991235014657) ("Im Moment wird nichts abgespielt.")
+[19:01:06] [ INFO ] [MessageListener] Message received. (!np)
+[19:01:06] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297015419371520) ("!np")
+[19:01:06] [ INFO ] [MessageListener] Command detected: np
+[19:01:06] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:01:06] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:01:06] [ ERROR] [JDA] Encountered an exception:
+[19:01:06] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:01:06] [ INFO ] [MessageListener] Message received. (Im Moment wird nichts abgespielt.)
+[19:01:06] [ INFO ] [MessageListener] Test 	 Test 	 Im Moment wird nichts abgespielt.
+[19:01:06] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297015838932993) ("Im Moment wird nichts abgespielt.")
+[19:01:11] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296990874435584) ("!np")
+[19:01:14] [ INFO ] [MessageListener] Message received. (!np)
+[19:01:14] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297047451402242) ("!np")
+[19:01:14] [ INFO ] [MessageListener] Command detected: np
+[19:01:14] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:01:14] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:01:14] [ ERROR] [JDA] Encountered an exception:
+[19:01:14] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:01:14] [ INFO ] [MessageListener] Message received. (Im Moment wird nichts abgespielt.)
+[19:01:14] [ INFO ] [MessageListener] Test 	 Test 	 Im Moment wird nichts abgespielt.
+[19:01:14] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297048021958657) ("Im Moment wird nichts abgespielt.")
+[19:01:16] [ INFO ] [MessageListener] Message received. (!s)
+[19:01:16] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297057526120448) ("!s")
+[19:01:16] [ INFO ] [MessageListener] Command detected: s
+[19:01:16] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:01:16] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297015419371520) ("!np")
+[19:01:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283296991235014657) ("Im Moment wird nichts abgespielt.")
+[19:01:17] [ WARN ] [MessageDeleter] Could not delete Message! Already deleted?! ("!np")
+[19:01:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297015838932993) ("Im Moment wird nichts abgespielt.")
+[19:01:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297047451402242) ("!np")
+[19:01:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297048021958657) ("Im Moment wird nichts abgespielt.")
+[19:01:17] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297057526120448) ("!s")
+[19:01:17] [ INFO ] [ShutdownCommand] Everything done. Shutdown in 3.0 seconds.
+[19:01:20] [ INFO ] [StaticSchedulePool] Executing SchedulePool
+[19:02:14] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:02:15] [ INFO ] [JDA] Login Successful!
+[19:02:16] [ INFO ] [JDA] Connected to WebSocket
+[19:02:16] [ INFO ] [JDA] Finished Loading!
+[19:02:16] [ INFO ] [Main] All 1 shards are ready.
+[19:02:16] [ INFO ] [Main] Connecting to 2 guilds...
+[19:02:16] [ INFO ] [GuildReceiveHandler] Instance created
+[19:02:16] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:02:16] [ INFO ] [JDA] Audio System successfully setup!
+[19:02:16] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=ZGVNqBSOSeQ
+[19:02:17] [ INFO ] [GuildReceiveHandler] Instance created
+[19:02:17] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:02:17] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=-s2-6KYgqpQ
+[19:02:18] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test. (Members in Channel without bot: 0)
+[19:02:18] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:02:18] [ INFO ] [GuildMusicManager] Pausing player in Test (Empty Channel).
+[19:02:18] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[19:02:18] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:02:18] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[19:02:21] [ INFO ] [MessageListener] Message received. (!np)
+[19:02:21] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297328142745610) ("!np")
+[19:02:21] [ INFO ] [MessageListener] Command detected: np
+[19:02:21] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:02:21] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:02:21] [ ERROR] [JDA] Encountered an exception:
+[19:02:21] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:02:21] [ INFO ] [MessageListener] Message received. (Im Moment wird nichts abgespielt.)
+[19:02:21] [ INFO ] [MessageListener] Test 	 Test 	 Im Moment wird nichts abgespielt.
+[19:02:21] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297328545398784) ("Im Moment wird nichts abgespielt.")
+[19:02:31] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297328142745610) ("!np")
+[19:03:07] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:03:08] [ INFO ] [JDA] Login Successful!
+[19:03:09] [ INFO ] [JDA] Connected to WebSocket
+[19:03:09] [ INFO ] [JDA] Finished Loading!
+[19:03:09] [ INFO ] [Main] All 1 shards are ready.
+[19:03:09] [ INFO ] [Main] Connecting to 2 guilds...
+[19:03:09] [ INFO ] [GuildReceiveHandler] Instance created
+[19:03:09] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:03:09] [ INFO ] [JDA] Audio System successfully setup!
+[19:03:09] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=MbXWrmQW-OE
+[19:03:10] [ INFO ] [GuildReceiveHandler] Instance created
+[19:03:10] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:03:10] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/m83/midnight-city
+[19:03:14] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:117)
+	at pothi_discord_music.Main.main(Main.java:90)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[19:03:43] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:03:44] [ INFO ] [JDA] Login Successful!
+[19:03:44] [ INFO ] [JDA] Connected to WebSocket
+[19:03:44] [ INFO ] [JDA] Finished Loading!
+[19:03:44] [ INFO ] [Main] All 1 shards are ready.
+[19:03:44] [ INFO ] [Main] Connecting to 2 guilds...
+[19:03:44] [ INFO ] [GuildReceiveHandler] Instance created
+[19:03:44] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:03:44] [ INFO ] [JDA] Audio System successfully setup!
+[19:03:44] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=e1PIxWEoAtM
+[19:03:45] [ INFO ] [GuildReceiveHandler] Instance created
+[19:03:45] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:03:45] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/majorlazer/be-together-feat-wild-belle
+[19:03:49] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:117)
+	at pothi_discord_music.Main.main(Main.java:90)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[19:04:12] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:04:13] [ INFO ] [JDA] Login Successful!
+[19:04:14] [ INFO ] [JDA] Connected to WebSocket
+[19:04:14] [ INFO ] [JDA] Finished Loading!
+[19:04:14] [ INFO ] [Main] All 1 shards are ready.
+[19:04:14] [ INFO ] [Main] Connecting to 2 guilds...
+[19:04:14] [ INFO ] [GuildReceiveHandler] Instance created
+[19:04:14] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:04:14] [ INFO ] [JDA] Audio System successfully setup!
+[19:04:14] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=VAWjsVoDpm0
+[19:04:15] [ INFO ] [GuildReceiveHandler] Instance created
+[19:04:15] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:04:15] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=7uy0ldI_1HA
+[19:04:19] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:117)
+	at pothi_discord_music.Main.main(Main.java:90)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[19:04:23] [ INFO ] [MessageListener] Message received. (!np)
+[19:04:23] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297841387012098) ("!np")
+[19:04:23] [ INFO ] [MessageListener] Command detected: np
+[19:04:24] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:04:24] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:04:24] [ ERROR] [JDA] Encountered an exception:
+[19:04:24] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:04:24] [ INFO ] [MessageListener] Message received. ()
+[19:04:24] [ INFO ] [MessageListener] Test 	 Test 	 
+[19:04:24] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283297843903463424) ("")
+[19:04:33] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297841387012098) ("!np")
+[19:05:14] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283297843903463424) ("")
+[19:06:44] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:06:45] [ INFO ] [JDA] Login Successful!
+[19:06:45] [ INFO ] [JDA] Connected to WebSocket
+[19:06:45] [ INFO ] [JDA] Finished Loading!
+[19:06:45] [ INFO ] [Main] All 1 shards are ready.
+[19:06:45] [ INFO ] [Main] Connecting to 2 guilds...
+[19:06:46] [ INFO ] [GuildReceiveHandler] Instance created
+[19:06:46] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:06:46] [ INFO ] [JDA] Audio System successfully setup!
+[19:06:46] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=MLeIyy2ipps
+[19:06:46] [ INFO ] [GuildReceiveHandler] Instance created
+[19:06:46] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:06:46] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/winandwoo/recognize
+[19:06:50] [ INFO ] [GuildMusicManager] From: MessageListener -> Checking for autopause in Test2. (Members in Channel without bot: 0)
+[19:06:50] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:06:50] [ INFO ] [GuildMusicManager] Pausing player in Test2 (Empty Channel).
+[19:06:50] [ ERROR] [ExceptionHandler] Uncought Exception. 
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.Main.initShards(Main.java:117)
+	at pothi_discord_music.Main.main(Main.java:90)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
+[19:07:36] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:07:37] [ INFO ] [JDA] Login Successful!
+[19:07:38] [ INFO ] [JDA] Connected to WebSocket
+[19:07:38] [ INFO ] [JDA] Finished Loading!
+[19:07:38] [ INFO ] [Main] All 1 shards are ready.
+[19:07:38] [ INFO ] [Main] Connecting to 2 guilds...
+[19:07:38] [ INFO ] [GuildReceiveHandler] Instance created
+[19:07:38] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:07:38] [ INFO ] [JDA] Audio System successfully setup!
+[19:07:38] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=0bS1R9ZRRfw
+[19:07:38] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=2YVtby__ZS0
+[19:07:39] [ INFO ] [GuildReceiveHandler] Instance created
+[19:07:39] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:07:39] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=o5ENzs8Czm0
+[19:08:00] [ INFO ] [MessageListener] Message received. (!np)
+[19:08:00] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283298749957275658) ("!np")
+[19:08:00] [ INFO ] [MessageListener] Command detected: np
+[19:08:00] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:08:00] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:08:00] [ ERROR] [JDA] Encountered an exception:
+[19:08:00] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onGuildMessageReceived(MessageListener.java:69)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:299)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleDefaultMessage(MessageCreateHandler.java:97)
+	at net.dv8tion.jda.core.handle.MessageCreateHandler.handleInternally(MessageCreateHandler.java:47)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at com.neovisionaries.ws.client.ListenerManager.callOnTextMessage(ListenerManager.java:352)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:262)
+	at com.neovisionaries.ws.client.ReadingThread.callOnTextMessage(ReadingThread.java:240)
+	at com.neovisionaries.ws.client.ReadingThread.handleTextFrame(ReadingThread.java:965)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:748)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:08:00] [ INFO ] [MessageListener] Message received. ()
+[19:08:00] [ INFO ] [MessageListener] Test 	 Test 	 
+[19:08:00] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283298752050233344) ("")
+[19:08:10] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283298749957275658) ("!np")
+[19:08:51] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283298752050233344) ("")
+[19:09:35] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:09:36] [ INFO ] [JDA] Login Successful!
+[19:09:36] [ INFO ] [JDA] Connected to WebSocket
+[19:09:37] [ INFO ] [JDA] Finished Loading!
+[19:09:37] [ INFO ] [Main] All 1 shards are ready.
+[19:09:37] [ INFO ] [Main] Connecting to 2 guilds...
+[19:09:37] [ INFO ] [GuildReceiveHandler] Instance created
+[19:09:37] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:09:37] [ INFO ] [JDA] Audio System successfully setup!
+[19:09:37] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=7wRHBLwpASw
+[19:09:37] [ INFO ] [GuildReceiveHandler] Instance created
+[19:09:37] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:09:37] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=1yUYvyAY954
+[19:09:49] [ INFO ] [MessageListener] Message received. (!np)
+[19:09:49] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283299205823463425) ("!np")
+[19:09:49] [ INFO ] [MessageListener] Command detected: np
+[19:09:49] [ WARN ] [MessageListener] Could not executeAllTasks commsnd: np
+[19:09:59] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283299205823463425) ("!np")
+[19:10:37] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:10:39] [ INFO ] [JDA] Login Successful!
+[19:10:39] [ INFO ] [JDA] Connected to WebSocket
+[19:10:39] [ INFO ] [JDA] Finished Loading!
+[19:10:39] [ INFO ] [Main] All 1 shards are ready.
+[19:10:39] [ INFO ] [Main] Connecting to 2 guilds...
+[19:10:39] [ INFO ] [GuildReceiveHandler] Instance created
+[19:10:39] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:10:40] [ INFO ] [JDA] Audio System successfully setup!
+[19:10:40] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=dlvStoOyEzE
+[19:10:40] [ INFO ] [GuildReceiveHandler] Instance created
+[19:10:40] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:10:40] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=7wRHBLwpASw
+[19:10:42] [ INFO ] [MessageListener] Message received. (!np)
+[19:10:42] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283299430772375554) ("!np")
+[19:10:42] [ INFO ] [MessageListener] Command detected: np
+[19:10:42] [ WARN ] [MessageListener] Could not executeAllTasks commsnd: np
+[19:10:52] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283299430772375554) ("!np")
+[19:10:59] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:11:00] [ INFO ] [JDA] Login Successful!
+[19:11:00] [ INFO ] [JDA] Connected to WebSocket
+[19:11:01] [ INFO ] [JDA] Finished Loading!
+[19:11:01] [ INFO ] [Main] All 1 shards are ready.
+[19:11:01] [ INFO ] [Main] Connecting to 2 guilds...
+[19:11:01] [ INFO ] [GuildReceiveHandler] Instance created
+[19:11:01] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:11:01] [ INFO ] [JDA] Audio System successfully setup!
+[19:11:01] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=BPwZaQfoIbU
+[19:11:01] [ INFO ] [GuildReceiveHandler] Instance created
+[19:11:01] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:11:01] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=GfTBEZP09D8
+[19:11:12] [ INFO ] [MessageListener] Message received. (!np)
+[19:11:12] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283299555687137281) ("!np")
+[19:11:12] [ INFO ] [MessageListener] Command detected: np
+[19:11:12] [ WARN ] [MessageListener] Could not executeAllTasks commsnd: np
+[19:11:22] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283299555687137281) ("!np")
+[19:12:38] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:12:39] [ INFO ] [JDA] Login Successful!
+[19:12:40] [ INFO ] [JDA] Connected to WebSocket
+[19:12:40] [ INFO ] [JDA] Finished Loading!
+[19:12:40] [ INFO ] [Main] All 1 shards are ready.
+[19:12:40] [ INFO ] [Main] Connecting to 2 guilds...
+[19:12:40] [ INFO ] [GuildReceiveHandler] Instance created
+[19:12:40] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:12:40] [ INFO ] [JDA] Audio System successfully setup!
+[19:12:40] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=60ItHLz5WEA
+[19:12:41] [ INFO ] [GuildReceiveHandler] Instance created
+[19:12:41] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:12:41] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=YG9otasNmxI
+[19:12:43] [ INFO ] [MessageListener] Message received. (!np)
+[19:12:43] [ INFO ] [MessageDeleter] Message successfully queued, in Test. (283299939780657153) ("!np")
+[19:12:43] [ INFO ] [MessageListener] Command detected: np
+[19:12:43] [ WARN ] [MessageListener] Could not executeAllTasks commsnd: np
+[19:12:54] [ INFO ] [MessageDeleter] Message successfully deleted, in Test. (283299939780657153) ("!np")
+[19:15:43] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:15:44] [ INFO ] [JDA] Login Successful!
+[19:15:45] [ INFO ] [JDA] Connected to WebSocket
+[19:15:45] [ INFO ] [JDA] Finished Loading!
+[19:15:45] [ INFO ] [Main] All 1 shards are ready.
+[19:15:45] [ INFO ] [Main] Connecting to 2 guilds...
+[19:15:45] [ INFO ] [GuildReceiveHandler] Instance created
+[19:15:45] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:15:45] [ INFO ] [JDA] Audio System successfully setup!
+[19:15:45] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=vRfQRdbrTIQ
+[19:15:46] [ INFO ] [GuildReceiveHandler] Instance created
+[19:15:46] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:15:46] [ INFO ] [TrackScheduler] Next Track from: https://www.youtube.com/watch?v=MqUCDzom5Xw
+[19:15:46] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:15:46] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onReady(MessageListener.java:135)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:284)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.requests.WebSocketClient.ready(WebSocketClient.java:128)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildLoadComplete(ReadyHandler.java:165)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildSetupComplete(ReadyHandler.java:191)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.lambda$handleInternally$93(GuildCreateHandler.java:45)
+	at net.dv8tion.jda.core.entities.EntityBuilder.createGuildFirstPass(EntityBuilder.java:301)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.handleInternally(GuildCreateHandler.java:39)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onBinaryMessage(WebSocketClient.java:721)
+	at com.neovisionaries.ws.client.ListenerManager.callOnBinaryMessage(ListenerManager.java:368)
+	at com.neovisionaries.ws.client.ReadingThread.callOnBinaryMessage(ReadingThread.java:272)
+	at com.neovisionaries.ws.client.ReadingThread.handleBinaryFrame(ReadingThread.java:992)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:751)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:15:46] [ ERROR] [JDA] Encountered an exception:
+[19:15:46] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onReady(MessageListener.java:135)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:284)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.requests.WebSocketClient.ready(WebSocketClient.java:128)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildLoadComplete(ReadyHandler.java:165)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildSetupComplete(ReadyHandler.java:191)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.lambda$handleInternally$93(GuildCreateHandler.java:45)
+	at net.dv8tion.jda.core.entities.EntityBuilder.createGuildFirstPass(EntityBuilder.java:301)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.handleInternally(GuildCreateHandler.java:39)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onBinaryMessage(WebSocketClient.java:721)
+	at com.neovisionaries.ws.client.ListenerManager.callOnBinaryMessage(ListenerManager.java:368)
+	at com.neovisionaries.ws.client.ReadingThread.callOnBinaryMessage(ReadingThread.java:272)
+	at com.neovisionaries.ws.client.ReadingThread.handleBinaryFrame(ReadingThread.java:992)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:751)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
+[19:17:34] [ WARN ] [TextUtils] Teile des Config Files konnten nicht gelesen werden! (spam_channels)
+[19:17:35] [ INFO ] [JDA] Login Successful!
+[19:17:36] [ INFO ] [JDA] Connected to WebSocket
+[19:17:36] [ INFO ] [JDA] Finished Loading!
+[19:17:36] [ INFO ] [Main] All 1 shards are ready.
+[19:17:36] [ INFO ] [Main] Connecting to 2 guilds...
+[19:17:36] [ INFO ] [GuildReceiveHandler] Instance created
+[19:17:36] [ INFO ] [GuildMusicManager] Test: Default Playlist loaded.
+[19:17:36] [ INFO ] [JDA] Audio System successfully setup!
+[19:17:36] [ INFO ] [TrackScheduler] Next Track from: https://youtube.com/watch?v=ye5BuYf8q4o
+[19:17:37] [ INFO ] [GuildReceiveHandler] Instance created
+[19:17:37] [ INFO ] [GuildMusicManager] Test2: Default Playlist loaded.
+[19:17:37] [ INFO ] [TrackScheduler] Next Track from: https://soundcloud.com/solenceofficial/solence-warriors-imagine-dragons-cover
+[19:17:37] [ ERROR] [JDA] One of the EventListeners had an uncaught exception
+[19:17:37] [ ERROR] [JDA] An exception occurred
+java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onReady(MessageListener.java:135)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:284)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.requests.WebSocketClient.ready(WebSocketClient.java:128)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildLoadComplete(ReadyHandler.java:165)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildSetupComplete(ReadyHandler.java:191)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.lambda$handleInternally$93(GuildCreateHandler.java:45)
+	at net.dv8tion.jda.core.entities.EntityBuilder.createGuildFirstPass(EntityBuilder.java:301)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.handleInternally(GuildCreateHandler.java:39)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onBinaryMessage(WebSocketClient.java:721)
+	at com.neovisionaries.ws.client.ListenerManager.callOnBinaryMessage(ListenerManager.java:368)
+	at com.neovisionaries.ws.client.ReadingThread.callOnBinaryMessage(ReadingThread.java:272)
+	at com.neovisionaries.ws.client.ReadingThread.handleBinaryFrame(ReadingThread.java:992)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:751)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+[19:17:37] [ ERROR] [JDA] Encountered an exception:
+[19:17:37] [ ERROR] [JDA] java.lang.ArithmeticException: / by zero
+	at pothi_discord_music.listeners.MessageListener.onReady(MessageListener.java:135)
+	at net.dv8tion.jda.core.hooks.ListenerAdapter.onEvent(ListenerAdapter.java:284)
+	at net.dv8tion.jda.core.hooks.InterfacedEventManager.handle(InterfacedEventManager.java:64)
+	at net.dv8tion.jda.core.requests.WebSocketClient.ready(WebSocketClient.java:128)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildLoadComplete(ReadyHandler.java:165)
+	at net.dv8tion.jda.core.handle.ReadyHandler.guildSetupComplete(ReadyHandler.java:191)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.lambda$handleInternally$93(GuildCreateHandler.java:45)
+	at net.dv8tion.jda.core.entities.EntityBuilder.createGuildFirstPass(EntityBuilder.java:301)
+	at net.dv8tion.jda.core.handle.GuildCreateHandler.handleInternally(GuildCreateHandler.java:39)
+	at net.dv8tion.jda.core.handle.SocketHandler.handle(SocketHandler.java:38)
+	at net.dv8tion.jda.core.requests.WebSocketClient.handleEvent(WebSocketClient.java:688)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onTextMessage(WebSocketClient.java:437)
+	at net.dv8tion.jda.core.requests.WebSocketClient.onBinaryMessage(WebSocketClient.java:721)
+	at com.neovisionaries.ws.client.ListenerManager.callOnBinaryMessage(ListenerManager.java:368)
+	at com.neovisionaries.ws.client.ReadingThread.callOnBinaryMessage(ReadingThread.java:272)
+	at com.neovisionaries.ws.client.ReadingThread.handleBinaryFrame(ReadingThread.java:992)
+	at com.neovisionaries.ws.client.ReadingThread.handleFrame(ReadingThread.java:751)
+	at com.neovisionaries.ws.client.ReadingThread.main(ReadingThread.java:110)
+	at com.neovisionaries.ws.client.ReadingThread.run(ReadingThread.java:66)
+
