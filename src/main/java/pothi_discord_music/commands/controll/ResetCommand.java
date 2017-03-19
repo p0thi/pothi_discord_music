@@ -20,6 +20,8 @@ public class ResetCommand extends GuildCommand {
         User user = event.getAuthor();
         Guild guild = event.getGuild();
 
+        boolean skipTrack = args.length > 1 && args[1].toLowerCase().equals("song");
+
 
         if (!checkPermission(guild, user)) {
             return;
@@ -27,13 +29,26 @@ public class ResetCommand extends GuildCommand {
 
         GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
 
-        manager.player.stopTrack();
+        if(skipTrack) {
+            manager.player.stopTrack();
+        }
+        else {
+            manager.player.setPaused(true);
+        }
+
         if(guild.getAudioManager().isConnected()) {
             VoiceChannel currentVoice = guild.getAudioManager().getConnectedChannel();
             guild.getAudioManager().closeAudioConnection();
             guild.getAudioManager().openAudioConnection(currentVoice);
         }
-        manager.scheduler.nextTrack();
+
+        if(skipTrack) {
+            manager.scheduler.nextTrack();
+        }
+        else {
+            manager.player.setPaused(false);
+        }
+
     }
 
 
