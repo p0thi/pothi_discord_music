@@ -184,7 +184,7 @@ public class PlayCommand extends GuildCommand {
 
             VideoSelection oldSelection = manager.selections.get(user.getId());
             if(oldSelection != null) {
-                oldSelection.getOutMsg().deleteMessage().queue();
+                oldSelection.getOutMsg().delete().queue();
             }
 
             MessageBuilder builder = new MessageBuilder();

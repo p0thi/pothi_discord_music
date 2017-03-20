@@ -62,7 +62,7 @@ public class MessageDeleter implements Consumer<Message>, Schedule {
             String id = this.message.getId();
             Guild guild = this.message.getGuild();
 
-            this.message.deleteMessage().complete();
+            this.message.delete().complete();
 
             log.info("Message successfully deleted, in "
                     + guild.getName() + ". (" + id + ")" + " (\"" + content + "\")");
