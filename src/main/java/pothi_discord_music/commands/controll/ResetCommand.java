@@ -1,9 +1,6 @@
 package pothi_discord_music.commands.controll;
 
-import net.dv8tion.jda.core.entities.Channel;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.entities.VoiceChannel;
+import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.Main;
 import pothi_discord_music.commands.Command;
@@ -19,6 +16,7 @@ public class ResetCommand extends GuildCommand {
     public void action(GuildMessageReceivedEvent event, String[] args) {
         User user = event.getAuthor();
         Guild guild = event.getGuild();
+        TextChannel channel = event.getChannel();
 
         boolean skipTrack = args.length > 1 && args[1].toLowerCase().equals("song");
 
@@ -26,6 +24,8 @@ public class ResetCommand extends GuildCommand {
         if (!checkPermission(guild, user)) {
             return;
         }
+
+        channel.sendTyping();
 
         GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
 

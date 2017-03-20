@@ -29,7 +29,7 @@ public class AutoplaylistDBObject extends CouchDbDocument{
     private HttpClient httpClient;
     private CouchDbInstance dbInstance;
     private CouchDbConnector db;
-    private AutoplaylistDBObjectRepository repo; 
+    private AutoplaylistDBObjectRepository repo;
 
 
     public static AutoplaylistDBObject getObjectById(String id){
