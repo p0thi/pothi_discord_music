@@ -1,9 +1,0 @@
-token=<discord bot token>
-owner=<discord user id of the owner>
-prefix=<prefix for  commands e.g.!>
-admins=<bot admin discord ids seperatet with spaces>
-database_root=<ip with port to a nosql database>
-guilds=<ids of guilds. seperatet with spaces>
-google_key=<google api key>
-mashape_application_key=<meshape api key>
-default_channels=<default channels>

@@ -1,18 +1,15 @@
-package pothi_discord_music.utils.couch_db.guilddata.permissions;
+package pothi_discord_music.utils.database.guilddata.permissions;
 
 import net.dv8tion.jda.core.entities.Guild;
-import org.ektorp.support.CouchDbDocument;
-import pothi_discord_music.permissions.Permission;
 import pothi_discord_music.utils.Param;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by Pascal Pothmann on 10.03.2017.
  */
-public class GuildPermissionDBObject extends CouchDbDocument {
+public class GuildPermissionDBObject {
     private String owner = "Unknown";
     private List<PermissionRole> roles = new ArrayList<>();
     private PermissionRole defaultRole = PermissionRole.createDefaultRole();

@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.utils.GuildData;
-import pothi_discord_music.utils.couch_db.guilddata.GuildDBObject;
+import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -38,12 +38,12 @@ public class VolumeCommand extends GuildCommand {
         valid = valid && (words.length == 2);
 
         GuildMusicManager musicManager = Main.getGuildAudioPlayer(guild);
-        GuildDBObject guildDBObject = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getGuildDBObject();
+        MongoGuilddata mongoGuilddata = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getGuildDBObject();
 
         if(!valid) {
             if(words.length == 1) {
                 channel.sendMessage("Aktuelle Lautstärke: **" + musicManager.player.getVolume()
-                        + "** (Standart: " + guildDBObject.getPlayerStartVolume() + ").").queue(new MessageDeleter());
+                        + "** (Standart: " + mongoGuilddata.getPlayerStartVolume() + ").").queue(new MessageDeleter());
                 return;
             }
             channel.sendMessage("Ungültiger Befehl.").queue();

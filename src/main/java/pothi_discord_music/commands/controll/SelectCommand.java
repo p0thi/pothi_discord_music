@@ -7,16 +7,14 @@ import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pothi_discord_music.Main;
-import pothi_discord_music.commands.Command;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
 import pothi_discord_music.managers.music.GuildMusicManager;
 import pothi_discord_music.utils.GuildData;
-import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.VideoSelection;
-import pothi_discord_music.utils.couch_db.guilddata.GuildDBObject;
-import pothi_discord_music.utils.couch_db.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
+import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 import pothi_discord_music.utils.youtube.YoutubeVideo;
 
 /**
@@ -38,8 +36,8 @@ public class SelectCommand extends GuildCommand {
         GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
 
         GuildData guildData = GuildData.ALL_GUILD_DATAS.get(guild.getId());
-        GuildDBObject guildDBObject = guildData.getGuildDBObject();
-        GuildPermissionDBObject gpo = guildDBObject.getPermissions();
+        MongoGuilddata mongoGuilddata = guildData.getGuildDBObject();
+        GuildPermissionDBObject gpo = mongoGuilddata.getPermissions();
 
         AudioPlayer player = manager.player;
         manager.setCurrentTC(channel);

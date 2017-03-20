@@ -84,7 +84,7 @@ public class PlayCommand extends GuildCommand {
                         channel.sendMessage("Ab jetzt werden lieder aus dem Genre **"
                                 + genre.getReadableName() + "** gepielt." +
                                 "\n:information_source: Die standart Playlist kann mit **'"
-                                + Param.PREFIX + "play default'** wieder aktiviert werden")
+                                + Param.PREFIX() + "play default'** wieder aktiviert werden")
                                 .queue(new MessageDeleter(120000));
                     }
                     else {
@@ -110,7 +110,7 @@ public class PlayCommand extends GuildCommand {
                             mM.append("**" + genre.getReadableName()
                                     + "         " + "**Number: " + (genre.ordinal() + 1) + "\n");
                         }
-                        mM.append("\n:information_source: Das gewünschte Genre kann mit **'" + Param.PREFIX + "play genre <Nummer>'** gewählt werden.");
+                        mM.append("\n:information_source: Das gewünschte Genre kann mit **'" + Param.PREFIX() + "play genre <Nummer>'** gewählt werden.");
 
                         for(String msg : mM.complete()) {
                             channel.sendMessage(msg).queue(new MessageDeleter(90000));
@@ -124,8 +124,8 @@ public class PlayCommand extends GuildCommand {
             GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
             if (args[1].toLowerCase().equals("genre") || args[1].toLowerCase().equals("genres")) {
                 channel.sendMessage(":information_source: Du kannst ein Genre mit dem Befehl **'"
-                        + Param.PREFIX + "play genre <Suchbegriff>'** suchen, oder Dir mit **'"
-                        + Param.PREFIX + "play genre all'** alle verfügbaren anzeigen lassen.")
+                        + Param.PREFIX() + "play genre <Suchbegriff>'** suchen, oder Dir mit **'"
+                        + Param.PREFIX() + "play genre all'** alle verfügbaren anzeigen lassen.")
                         .queue(new MessageDeleter());
                 return;
             }
@@ -171,7 +171,7 @@ public class PlayCommand extends GuildCommand {
         try {
             vids = YoutubeAPI.searchForVideos(query);
         } catch (JSONException e) {
-            channel.sendMessage("Ein Fehler bei der Suche ist aufgetreten. Möglicherweise funktioniert es, wenn direkt eine Quelle angegeben wird\n```\n" + Param.PREFIX + "play <url>```").queue(new MessageDeleter());
+            channel.sendMessage("Ein Fehler bei der Suche ist aufgetreten. Möglicherweise funktioniert es, wenn direkt eine Quelle angegeben wird\n```\n" + Param.PREFIX() + "play <url>```").queue(new MessageDeleter());
             log.debug("YouTube search exception", e);
             return;
         }
@@ -188,7 +188,7 @@ public class PlayCommand extends GuildCommand {
             }
 
             MessageBuilder builder = new MessageBuilder();
-            builder.append("**Bitte ein Video mit dem Befehl `" + Param.PREFIX + "play n` auswählen:**");
+            builder.append("**Bitte ein Video mit dem Befehl `" + Param.PREFIX() + "play n` auswählen:**");
 
             int i = 1;
             for (YoutubeVideo vid : vids) {

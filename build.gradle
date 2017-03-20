@@ -36,8 +36,6 @@ dependencies {
     compile 'com.sedmelluq:lavaplayer:1.2.31'
     compile 'me.xdrop:fuzzywuzzy:1.1.6'
 
-    // https://github.com/helun/Ektorp
-    compile 'org.ektorp:org.ektorp:1.4.2'
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     // compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
@@ -60,6 +58,7 @@ dependencies {
     compile 'com.github.oshi:oshi-core:3.4.2'
     
     //mongodb + BSON
-    compile 'org.mongodb:mongo-java-driver:2.13.3'
-    compile 'org.mongodb:bson:2.13.3'
+    // https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.2.2'
+    compile 'org.mongodb:bson:3.2.2'
 }

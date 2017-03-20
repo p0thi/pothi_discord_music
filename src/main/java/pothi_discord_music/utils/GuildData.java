@@ -8,8 +8,8 @@ import pothi_discord_music.handlers.GuildReceiveHandler;
 import pothi_discord_music.managers.music.AutoPlaylist;
 import pothi_discord_music.utils.audio.AudioUtils;
 import pothi_discord_music.utils.audio.YoutubeMusicGenre;
-import pothi_discord_music.utils.couch_db.autoplaylists.AutoplaylistDBObject;
-import pothi_discord_music.utils.couch_db.guilddata.GuildDBObject;
+import pothi_discord_music.utils.database.autoplaylists.MongoAutoplaylist;
+import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,8 +50,8 @@ public class GuildData {
     METHODS
      */
 
-    public GuildDBObject getGuildDBObject() {
-        return GuildDBObject.getObjectById(GUILD.getId());
+    public MongoGuilddata getGuildDBObject() {
+        return MongoGuilddata.getObjectById(GUILD.getId());
     }
 
     public void destroy() {
@@ -65,7 +65,7 @@ public class GuildData {
             log.info( GUILD.getName() + " Custom Playlist loaded with " + this.defaultAutoplaylist.size() + " entries.");
         }
         else {
-            AutoplaylistDBObject obj = AutoplaylistDBObject.getObjectById("14f2af318304a83d5385df23450657d5");
+            MongoAutoplaylist obj = MongoAutoplaylist.getObjectById("14f2af318304a83d5385df23450657d5");
 
             this.defaultAutoplaylist = new AutoPlaylist(obj.getContent(), null); //TODO pass in a valid source
 

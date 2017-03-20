@@ -27,7 +27,8 @@ import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.AudioUtils;
-import pothi_discord_music.utils.couch_db.guilddata.GuildDBObject;
+import pothi_discord_music.utils.database.CouchDB;
+import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 import pothi_discord_music.utils.log.SimpleLogToSLF4JAdapter;
 
 import java.io.IOException;
@@ -49,6 +50,7 @@ public class Main {
     static final int SHARD_CREATION_SLEEP_INTERVAL = 5100;
     private static AtomicInteger numShardsReady = new AtomicInteger(0);
     public static final long START_TIME = System.currentTimeMillis();
+    private static CouchDB database;
 
     // Static variables
 
@@ -76,11 +78,13 @@ public class Main {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> StaticSchedulePool.executeAllTasks()));
 
         try {
-            TextUtils.applyConfigFile("./pothi_discord_music/config/config.txt");
+            TextUtils.applyConfigFile("./pothi_discord_music/config/config.json");
         } catch (IOException e) {
             log.error("Could not load Config! Exiting...");
             return;
         }
+
+        database = new CouchDB();
 
 
         //Attach log adapter
@@ -100,7 +104,7 @@ public class Main {
 
         ///*
         try {
-            numShards = DiscordUtil.getRecommendedShardCount(Param.BOT_TOKEN);
+            numShards = DiscordUtil.getRecommendedShardCount(Param.BOT_TOKEN());
         } catch (UnirestException e) {
             throw new RuntimeException("Unable to get recommended shard count!", e);
         }
@@ -222,8 +226,8 @@ public class Main {
         if(musicManager == null) {
             musicManager = new GuildMusicManager(guild, getDiscordBotByJDA(guild.getJDA()).getPlayerManager());
             allMusicManagers.put(guildId, musicManager);
-            GuildDBObject guildDBObject = GuildData.ALL_GUILD_DATAS.get(guildId).getGuildDBObject();
-            musicManager.player.setVolume(guildDBObject.getPlayerStartVolume());
+            MongoGuilddata mongoGuilddata = GuildData.ALL_GUILD_DATAS.get(guildId).getGuildDBObject();
+            musicManager.player.setVolume(mongoGuilddata.getPlayerStartVolume());
         }
 
         guild.getAudioManager().setSendingHandler(musicManager.getSendHandler());
@@ -254,7 +258,7 @@ public class Main {
 
         //TODO: get specific VOiceChannel
         for(VoiceChannel vc : voiceChannels) {
-            if (Param.isInList(Param.DEFAULT_CHANNELS, vc.getId())) {
+            if (Param.isInList(Param.DEFAULT_CHANNELS(), vc.getId())) {
                 defaultVoice = vc;
                 break;
             }
@@ -277,5 +281,11 @@ public class Main {
 
     public static Map<String, GuildCommandManager> getGuildCommandManagers() {
         return guildCommandManagers;
+    }
+
+    public static CouchDB getMongo() { return database; }
+
+    public static void setDatabase(CouchDB database) {
+        Main.database = database;
     }
 }

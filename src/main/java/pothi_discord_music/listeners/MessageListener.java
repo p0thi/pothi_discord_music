@@ -46,13 +46,13 @@ public class MessageListener extends AbstractEventListener {
 
         TOTAL_MESSAGES.incrementAndGet();
 
-        if (msg.length() <= Param.PREFIX.length()) {
+        if (msg.length() <= Param.PREFIX().length()) {
             return;
         }
 
-        if (msg.startsWith(Param.PREFIX)) {
+        if (msg.startsWith(Param.PREFIX())) {
             String[] words = msg.split("[ \r\n]");
-            String content = event.getMessage().getContent().replaceFirst(Param.PREFIX, "");
+            String content = event.getMessage().getContent().replaceFirst(Param.PREFIX(), "");
 
 
             Matcher matcher = PATTERN.matcher(content);
@@ -160,15 +160,15 @@ public class MessageListener extends AbstractEventListener {
     @Override
     public void onReady(ReadyEvent event) {
         super.onReady(event);
-        event.getJDA().getPresence().setGame(Game.of("[" + Main.getInstance(event.getJDA()).getShardInfo().getShardId() + "] Say " + Param.PREFIX + "help"));
+        event.getJDA().getPresence().setGame(Game.of("[" + Main.getInstance(event.getJDA()).getShardInfo().getShardId() + "] Say " + Param.PREFIX() + "help"));
 
-        User owner = event.getJDA().getUserById(Param.OWNER_ID);
+        User owner = event.getJDA().getUserById(Param.OWNER_ID());
         ExceptionHandler.setOwner(owner);
     }
 
     @Override
     public void onReconnect(ReconnectedEvent event) {
-        event.getJDA().getPresence().setGame(Game.of("[" + Main.getInstance(event.getJDA()).getShardInfo().getShardId() + "] Say " + Param.PREFIX + "help"));
+        event.getJDA().getPresence().setGame(Game.of("[" + Main.getInstance(event.getJDA()).getShardInfo().getShardId() + "] Say " + Param.PREFIX() + "help"));
     }
 
     @Override

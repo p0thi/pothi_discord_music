@@ -14,8 +14,8 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.Param;
-import pothi_discord_music.utils.couch_db.guilddata.GuildDBObject;
-import pothi_discord_music.utils.couch_db.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
+import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -86,7 +86,7 @@ public class SkipCommand extends GuildCommand {
             textChannel.sendMessage(
                     String.format(("Mindestens %d%% aller aktuellen Zuhörer müssen dem Überspringen mit '%sskip' zustimmen." +
                             "\nAktuell: **%d/%d**."),
-                            skipPercent, Param.PREFIX, skipCount, (int)memberCount))
+                            skipPercent, Param.PREFIX(), skipCount, (int)memberCount))
                     .queue(new MessageDeleter());
             return false;
         }
@@ -98,8 +98,8 @@ public class SkipCommand extends GuildCommand {
         boolean result = Param.isDeveloper(user.getId());
 
         GuildData guildData = GuildData.ALL_GUILD_DATAS.get(guild.getId());
-        GuildDBObject guildDBObject = guildData.getGuildDBObject();
-        GuildPermissionDBObject permissions = guildDBObject.getPermissions();
+        MongoGuilddata mongoGuilddata = guildData.getGuildDBObject();
+        GuildPermissionDBObject permissions = mongoGuilddata.getPermissions();
 
         result = result || permissions.canUserInstaskip(guild, user.getId());
         result = result || permissions.hasUserPermissionForCommand(guild, user.getId(), getName());

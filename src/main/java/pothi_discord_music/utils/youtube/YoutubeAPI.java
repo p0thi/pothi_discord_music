@@ -27,7 +27,7 @@ public class YoutubeAPI {
         try {
             data = Unirest.get("https://www.googleapis.com/youtube/v3/search?part=id&type=video&maxResults=5&regionCode=US&fields=items(id/videoId)")
                     .queryString("q", URLEncoder.encode(query, "UTF-8"))
-                    .queryString("key", Param.GOOGLE_API_KEY)
+                    .queryString("key", Param.GOOGLE_API_KEY())
                     .asJson()
                     .getBody()
                     .getObject();
@@ -53,7 +53,7 @@ public class YoutubeAPI {
         try {
             data = Unirest.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&fields=items(id,snippet/title,contentDetails/duration)")
                     .queryString("id", id)
-                    .queryString("key", Param.GOOGLE_API_KEY)
+                    .queryString("key", Param.GOOGLE_API_KEY())
 
                     .asJson()
                     .getBody()
@@ -79,7 +79,7 @@ public class YoutubeAPI {
             try {
                 data = Unirest.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet")
                         .queryString("id", id)
-                        .queryString("key", Param.GOOGLE_API_KEY)
+                        .queryString("key", Param.GOOGLE_API_KEY())
                         .asJson()
                         .getBody()
                         .getObject();
@@ -117,7 +117,7 @@ public class YoutubeAPI {
             data = Unirest.get("https://www.googleapis.com/youtube/v3/playlists?part=contentDetails,id,snippet")
                     .queryString("channelId", channelId)
                     .queryString("maxResults", 50)
-                    .queryString("key", Param.GOOGLE_API_KEY)
+                    .queryString("key", Param.GOOGLE_API_KEY())
                     .asJson()
                     .getBody()
                     .getObject();
@@ -145,7 +145,7 @@ public class YoutubeAPI {
                         .queryString("pageToken", pageToken)
                         .queryString("channelId", channelId)
                         .queryString("maxResults", 50)
-                        .queryString("key", Param.GOOGLE_API_KEY)
+                        .queryString("key", Param.GOOGLE_API_KEY())
                         .asJson()
                         .getBody()
                         .getObject();
@@ -206,7 +206,7 @@ public class YoutubeAPI {
             data = Unirest.get("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet")
                     .queryString("playlistId", playlistId)
                     .queryString("maxResults", 50)
-                    .queryString("key", Param.GOOGLE_API_KEY)
+                    .queryString("key", Param.GOOGLE_API_KEY())
                     .asJson()
                     .getBody()
                     .getObject();
@@ -230,7 +230,7 @@ public class YoutubeAPI {
                         .queryString("playlistId", playlistId)
                         .queryString("maxResults", 50)
                         .queryString("pageToken", pageToken)
-                        .queryString("key", Param.GOOGLE_API_KEY)
+                        .queryString("key", Param.GOOGLE_API_KEY())
                         .asJson()
                         .getBody()
                         .getObject();

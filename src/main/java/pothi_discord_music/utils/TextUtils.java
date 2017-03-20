@@ -1,6 +1,7 @@
 package pothi_discord_music.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +28,16 @@ public class TextUtils {
     }
 
     public static void applyConfigFile(String path) throws IOException {
+        File configFile = new File(path);
+        ArrayList<String> lines = readTxt(configFile);
+        StringBuilder b = new StringBuilder();
+
+        for (String line : lines) {
+            b.append(line);
+        }
+        Param.setConfig(new JSONObject(b.toString()));
+
+        /*
         ArrayList<String[]> sortedList = seperateList(path);
         for(String[] a:sortedList  ){
             ArrayList<String> tmp1 = new ArrayList<>();
@@ -89,6 +100,7 @@ public class TextUtils {
 
             }
         }
+        */
     }
 
     public static void saveCommands(){

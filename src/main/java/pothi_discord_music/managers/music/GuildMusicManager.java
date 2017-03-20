@@ -22,16 +22,12 @@ import net.dv8tion.jda.core.entities.VoiceChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pothi_discord_music.utils.GuildData;
-import pothi_discord_music.utils.Param;
-import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.VideoSelection;
 import pothi_discord_music.utils.audio.YoutubeMusicGenre;
-import pothi_discord_music.utils.couch_db.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Holder for both the player and a track scheduler for one guild.

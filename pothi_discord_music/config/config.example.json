@@ -1,0 +1,17 @@
+{
+  "token" : "DISCORD_BOT_TOKEN",
+  "owner" : "OWNER_USER_ID",
+  "prefix" : "!",
+  "admins" : [
+    "LIST_OF_USER_IDS"
+  ],
+  "database_root" : "DATABASE_HOST / PORT",
+  "guilds" : [
+    "GUILD_IDS"
+  ],
+  "google_key" : "GOOGLE_API_KEY",
+  "mashape_application_key" : "MASHAPE_API_KEY",
+  "default_channels" : [
+    "DEFAULT CHANNELS IN GUILDS TO JOIN"
+  ]
+}

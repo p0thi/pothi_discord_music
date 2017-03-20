@@ -2,28 +2,16 @@ package pothi_discord_music.utils.audio;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
-import org.ektorp.CouchDbConnector;
-import org.ektorp.CouchDbInstance;
-import org.ektorp.http.HttpClient;
-import org.ektorp.http.StdHttpClient;
-import org.ektorp.impl.StdCouchDbConnector;
-import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pothi_discord_music.managers.music.AutoPlaylist;
 import pothi_discord_music.utils.TextUtils;
-import pothi_discord_music.utils.couch_db.autoplaylists.AutoplaylistDBObject;
-import pothi_discord_music.utils.couch_db.autoplaylists.AutoplaylistDBObjectRepository;
+import pothi_discord_music.utils.database.autoplaylists.MongoAutoplaylist;
 import pothi_discord_music.utils.youtube.YoutubeAPI;
 import pothi_discord_music.utils.youtube.YoutubePlaylist;
 import pothi_discord_music.utils.youtube.YoutubeVideo;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -179,7 +167,7 @@ public enum YoutubeMusicGenre {
     }
 
     public List<String> getAllEntries() {
-        AutoplaylistDBObject obj = AutoplaylistDBObject.getObjectById(this.name());
+        MongoAutoplaylist obj = MongoAutoplaylist.getObjectById(this.name());
 
         return obj.getContent();
     }

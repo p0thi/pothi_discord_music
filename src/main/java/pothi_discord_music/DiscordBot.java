@@ -32,7 +32,7 @@ public class DiscordBot extends Main{
             while (!success) {
                 JDABuilder builder = new JDABuilder(AccountType.BOT)
                         .addListener(messageListener)
-                        .setToken(Param.BOT_TOKEN)
+                        .setToken(Param.BOT_TOKEN())
                         .setBulkDeleteSplittingEnabled(true)
                         .setEnableShutdownHook(false);
                 //.setAudioSendFactory(new NativeAudioSendFactory()); // TODO ?

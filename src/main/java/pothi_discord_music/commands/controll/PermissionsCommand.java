@@ -7,10 +7,9 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
 import pothi_discord_music.utils.GuildData;
-import pothi_discord_music.utils.couch_db.guilddata.permissions.GuildPermissionDBObject;
-import pothi_discord_music.utils.couch_db.guilddata.permissions.PermissionRole;
+import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.guilddata.permissions.PermissionRole;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 /**

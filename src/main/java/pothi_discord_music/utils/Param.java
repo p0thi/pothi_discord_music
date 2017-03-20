@@ -22,48 +22,42 @@ public class Param {
     public static String OWNER_ID() {
         return config.getString("owner");
     }
-    public static int MAX_PLAYLIST_SIZE = 20;
-    public static long MAX_SONG_LENGTH = 720000;
-    public static int PLAYER_START_VOLUME = 20;
     public static String GOOGLE_API_KEY() {
         return config.getString("google_key");
     }
     public static String MASHAPE_APP_KEY() {
         return config.getString("mashape_application_key");
     }
-    public static String DATABASE_ROOT() {
-        return config.getString("database_root");
-    }
-    public static String[] ADMINS() {
-        JSONArray jsonAdmins = config.getJSONArray("admins");
-        String[] result = new String[jsonAdmins.length()];
-
-        for (int i = 0; i < jsonAdmins.length(); i++) {
-            result[i] = jsonAdmins.getString(i);
-        }
-        return result;
+    public static String MONGO_USER() { return config.getString("mongo_user"); }
+    public static String MONGO_PW() { return config.getString("mongo_pw"); }
+    public static ArrayList<String> ADMINS() {
+        return getListFromKey("admins");
     }
     public static ArrayList<String> ACCEPTED_GUILDS() {
-        JSONArray jsonAdmins = config.getJSONArray("guilds");
-        ArrayList<String> result = new ArrayList<>();
-
-        for (int i = 0; i < jsonAdmins.length(); i++) {
-            result.add(i, jsonAdmins.getString(i));
-        }
-        return result;
+        return getListFromKey("guilds");
     }
     public static ArrayList<String> DEFAULT_CHANNELS() {
-        JSONArray jsonAdmins = config.getJSONArray("default_channels");
-        ArrayList<String> result = new ArrayList<>();
-
-        for (int i = 0; i < jsonAdmins.length(); i++) {
-            result.add(i, jsonAdmins.getString(i));
-        }
-        return result;
+        return getListFromKey("default_channels");
     }
+    public static String MONGO_ROOT() {
+        return config.getString("mongo_root");
+    }
+
+
+
     public static int SKIP_PERCENT = 20;
     public static final String BOT_COLOR_HEX = "#FF9900";
 
+
+    private static ArrayList<String> getListFromKey(String key) {
+        JSONArray jsonAdmins = config.getJSONArray(key);
+        ArrayList<String> result = new ArrayList<>();
+
+        for (int i = 0; i < jsonAdmins.length(); i++) {
+            result.add(i, jsonAdmins.getString(i));
+        }
+        return result;
+    }
 
 
     public static <T extends Comparable> boolean isInList(T[] list, T t){

@@ -1,9 +1,7 @@
-package pothi_discord_music.utils.couch_db.guilddata.permissions;
+package pothi_discord_music.utils.database.guilddata.permissions;
 
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
-import org.ektorp.support.CouchDbDocument;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 /**
  * Created by Pascal Pothmann on 10.03.2017.
  */
-public class PermissionRole extends CouchDbDocument {
+public class PermissionRole {
     private String name = "Unnamed";
     private List<String> roleIds = new ArrayList<>();
     private List<String> userIds = new ArrayList<>();
