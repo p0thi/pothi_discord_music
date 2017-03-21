@@ -27,7 +27,7 @@ import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.AudioUtils;
-import pothi_discord_music.utils.database.CouchDB;
+import pothi_discord_music.utils.database.MongoDB;
 import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 import pothi_discord_music.utils.log.SimpleLogToSLF4JAdapter;
 
@@ -50,7 +50,7 @@ public class Main {
     static final int SHARD_CREATION_SLEEP_INTERVAL = 5100;
     private static AtomicInteger numShardsReady = new AtomicInteger(0);
     public static final long START_TIME = System.currentTimeMillis();
-    private static CouchDB database;
+    private static MongoDB database;
 
     // Static variables
 
@@ -84,7 +84,7 @@ public class Main {
             return;
         }
 
-        database = new CouchDB();
+        database = new MongoDB();
 
 
         //Attach log adapter
@@ -283,9 +283,9 @@ public class Main {
         return guildCommandManagers;
     }
 
-    public static CouchDB getMongo() { return database; }
+    public static MongoDB getMongo() { return database; }
 
-    public static void setDatabase(CouchDB database) {
+    public static void setDatabase(MongoDB database) {
         Main.database = database;
     }
 }

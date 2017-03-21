@@ -14,14 +14,14 @@ import java.util.Arrays;
 /**
  * Created by Pascal Pothmann on 20.03.2017.
  */
-public class CouchDB {
-    private static final Logger log = LoggerFactory.getLogger(CouchDB.class);
+public class MongoDB {
+    private static final Logger log = LoggerFactory.getLogger(MongoDB.class);
 
     private MongoCredential credentials;
     private ServerAddress serverAddress;
     private MongoClient mongoClient;
 
-    public CouchDB() {
+    public MongoDB() {
         this.credentials = MongoCredential.createCredential(
                 Param.MONGO_USER(),
                 "admin",
