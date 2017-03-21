@@ -46,10 +46,11 @@ public class SummonCommand extends GuildCommand {
             return;
         }
 
-        if (guild.getAudioManager().getConnectedChannel().getId().equals(memberVoiceChannel.getId())) {
+        if (guild.getAudioManager().getConnectedChannel() != null
+                && guild.getAudioManager().getConnectedChannel().getId().equals(memberVoiceChannel.getId())) {
             guild.getAudioManager().closeAudioConnection();
         }
-        
+
         guild.getAudioManager().openAudioConnection(memberVoiceChannel);
     }
 
