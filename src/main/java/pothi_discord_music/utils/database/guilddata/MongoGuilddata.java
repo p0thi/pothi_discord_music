@@ -2,6 +2,7 @@ package pothi_discord_music.utils.database.guilddata;
 
 import static com.mongodb.client.model.Filters.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * Created by Pascal Pothmann on 24.02.2017.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MongoGuilddata {
     private static final String DATABASE_NAME = "guilddatas";
 
