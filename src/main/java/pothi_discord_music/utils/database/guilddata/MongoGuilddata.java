@@ -31,6 +31,7 @@ public class MongoGuilddata {
     private GuildPermissionDBObject permissions = new GuildPermissionDBObject();
     private List<String> soundCommands = new ArrayList<>();
     private List<String> tmpSoundCommands = new ArrayList<>();
+    private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
 
     //////////////////////////////////////////////////
@@ -142,6 +143,14 @@ public class MongoGuilddata {
 
     public void setTmpSoundCommands(List<String> tmpSoundCommands) {
         this.tmpSoundCommands = tmpSoundCommands;
+    }
+
+    public List<String> getBannedAudioCommandUsers() {
+        return bannedAudioCommandUsers;
+    }
+
+    public void setBannedAudioCommandUsers(List<String> bannedAudioCommandUsers) {
+        this.bannedAudioCommandUsers = bannedAudioCommandUsers;
     }
 
     @JsonProperty("_id")
