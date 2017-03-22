@@ -31,9 +31,7 @@ public class MongoGuilddata {
     private int playerStartVolume = 20;
     private int songSkipPercent = 30;
     private GuildPermissionDBObject permissions = new GuildPermissionDBObject();
-    private List<String> soundCommands = new ArrayList<>();
-    private List<String> tmpSoundCommands = new ArrayList<>();
-    private List<String> bannedAudioCommandUsers = new ArrayList<>();
+
 
 
     //////////////////////////////////////////////////
@@ -131,29 +129,7 @@ public class MongoGuilddata {
         this.songSkipPercent = songSkipPercent;
     }
 
-    public List<String> getSoundCommands() {
-        return soundCommands;
-    }
 
-    public void setSoundCommands(List<String> soundCommands) {
-        this.soundCommands = soundCommands;
-    }
-
-    public List<String> getTmpSoundCommands() {
-        return tmpSoundCommands;
-    }
-
-    public void setTmpSoundCommands(List<String> tmpSoundCommands) {
-        this.tmpSoundCommands = tmpSoundCommands;
-    }
-
-    public List<String> getBannedAudioCommandUsers() {
-        return bannedAudioCommandUsers;
-    }
-
-    public void setBannedAudioCommandUsers(List<String> bannedAudioCommandUsers) {
-        this.bannedAudioCommandUsers = bannedAudioCommandUsers;
-    }
 
     @JsonProperty("_id")
     public String getId() {
