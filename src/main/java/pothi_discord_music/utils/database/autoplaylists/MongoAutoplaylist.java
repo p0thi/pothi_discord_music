@@ -1,11 +1,13 @@
 package pothi_discord_music.utils.database.autoplaylists;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import pothi_discord_music.Main;
+import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +28,19 @@ public class MongoAutoplaylist {
     private boolean isGenre;
 
     /////////////////////////////////////////////////////////////////////////
+
+    @JsonCreator
+    public static MongoAutoplaylist create(String jsonString) {
+        MongoAutoplaylist result = null;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            result = mapper.readValue(jsonString, MongoAutoplaylist.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 
     public static MongoAutoplaylist getObjectById(String id){
