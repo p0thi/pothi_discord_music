@@ -1,5 +1,6 @@
 package pothi_discord_music.utils.database.guilddata.permissions;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.dv8tion.jda.core.entities.Guild;
 import pothi_discord_music.utils.Param;
 
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * Created by Pascal Pothmann on 10.03.2017.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GuildPermissionDBObject {
     private String owner = "Unknown";
     private List<PermissionRole> roles = new ArrayList<>();
