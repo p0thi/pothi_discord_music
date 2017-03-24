@@ -8,14 +8,12 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pothi_discord_music.commands.Command;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.GuildReceiveHandler;
 import pothi_discord_music.handlers.MessageDeleter;
-import pothi_discord_music.utils.GuildData;
-import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.AudioUtils;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +43,7 @@ public class RecordCommand extends GuildCommand {
         }
         channel = event.getChannel();
 
-        guildData = GuildData.ALL_GUILD_DATAS.get(guild.getId());
+        guildData = GuildData.getGuildDataById(guild.getId());
 
         if(guildData.getAudioUtils() == null) {
             guildData.setAudioUtils(new AudioUtils());

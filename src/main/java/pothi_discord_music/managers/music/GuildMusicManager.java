@@ -21,10 +21,11 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.audio.VideoSelection;
 import pothi_discord_music.utils.audio.YoutubeMusicGenre;
 import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +73,7 @@ public class GuildMusicManager {
 
 
     public void playRequestByKey(Guild guild, String userId, String value, TextChannel channel, boolean skipMessages) {
-        GuildPermissionDBObject gpo = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getGuildDBObject().getPermissions();
+        Permissions gpo = GuildData.getGuildDataById(guild.getId()).getPermissions();
         Main.getDiscordBotByJDA(channel.getJDA())
                 .getPlayerManager().loadItemOrdered(this, value, new AudioLoadResultHandler() {
             @Override
@@ -199,7 +200,7 @@ public class GuildMusicManager {
     }
 
     public void loadDefaultPlaylist(){
-        this.playlist = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getDefaultAutoplaylist();
+        this.playlist = GuildData.getGuildDataById(guild.getId()).getDefaultAutoplaylist();
     }
 
     public TextChannel getActiveTextChannel() {

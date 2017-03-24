@@ -5,11 +5,7 @@ import net.dv8tion.jda.core.audio.UserAudio;
 import net.dv8tion.jda.core.entities.Guild;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pothi_discord_music.utils.GuildData;
-import pothi_discord_music.utils.audio.AudioUtils;
-
-import java.io.IOException;
-import java.util.Arrays;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 
 /**
  * Created by Pascal Pothmann on 27.01.2017.
@@ -38,7 +34,7 @@ public class GuildReceiveHandler extends AbstractReceiveHandler {
 
     @Override
     public void handleCombinedAudio(CombinedAudio combinedAudio) {
-        GuildData.ALL_GUILD_DATAS.get(GUILD.getId()).getAudioUtils().addBytes(combinedAudio.getAudioData(1.0));
+        GuildData.getGuildDataById(GUILD.getId()).getAudioUtils().addBytes(combinedAudio.getAudioData(1.0));
         //log.info(Arrays.toString(combinedAudio.getAudioData(1.0)));
     }
 

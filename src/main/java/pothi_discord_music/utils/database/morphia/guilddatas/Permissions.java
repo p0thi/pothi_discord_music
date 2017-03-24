@@ -1,22 +1,28 @@
-package pothi_discord_music.utils.database.guilddata.permissions;
+package pothi_discord_music.utils.database.morphia.guilddatas;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.dv8tion.jda.core.entities.Guild;
+import org.mongodb.morphia.annotations.Embedded;
 import pothi_discord_music.utils.Param;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pascal Pothmann on 10.03.2017.
+ * Created by Pascal Pothmann on 24.03.2017.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class GuildPermissionDBObject {
-    private String owner = "Unknown";
-    private List<PermissionRole> roles = new ArrayList<>();
-    private PermissionRole defaultRole = PermissionRole.createDefaultRole();
+@Embedded
+public class Permissions {
+    private String owner = "";
+    @Embedded private RoleEntity defaultRole = createDefaultRole();
+    @Embedded private List<RoleEntity> roles = new ArrayList<>();
 
+    private static RoleEntity createDefaultRole() {
+        RoleEntity defaultRoleEntity = new RoleEntity();
+        defaultRoleEntity.setName("Default");
+        defaultRoleEntity.setDefaultRole(true);
 
+        return defaultRoleEntity;
+    }
 
     public boolean hasUserPermissionForCommand(Guild guild, String userId, String commandName) {
         boolean result = Param.isDeveloper(userId);
@@ -26,7 +32,7 @@ public class GuildPermissionDBObject {
             result = true;
         }
         else {
-            for (PermissionRole pr : roles) {
+            for (RoleEntity pr : roles) {
                 if (pr.hasUserAccess(guild, userId) && pr.hasRolePermissionForCommand(commandName)) {
                     result = true;
                     break;
@@ -37,11 +43,11 @@ public class GuildPermissionDBObject {
         return result;
     }
 
-    public ArrayList<PermissionRole> getRolesOfUser(Guild guild, String userID) {
-        ArrayList<PermissionRole> result = new ArrayList<>();
+    public ArrayList<RoleEntity> getRolesOfUser(Guild guild, String userID) {
+        ArrayList<RoleEntity> result = new ArrayList<>();
         result.add(defaultRole);
 
-        for(PermissionRole pr : roles) {
+        for(RoleEntity pr : roles) {
             if (pr.hasUserAccess(guild, userID)) {
                 result.add(pr);
             }
@@ -53,7 +59,7 @@ public class GuildPermissionDBObject {
     public int getMaxPlaylistSizeOfUser(Guild guild, String userId) {
         int result = defaultRole.getMaxPlaylistSize();
 
-        for (PermissionRole pr : roles) {
+        for (RoleEntity pr : roles) {
             result = Math.max(result, pr.getMaxPlaylistSizeOfUser(guild, userId));
         }
 
@@ -63,7 +69,7 @@ public class GuildPermissionDBObject {
     public long getMaxSongLengthOfUser(Guild guild, String userId) {
         long result = defaultRole.getMaxSongLengthMillis();
 
-        for (PermissionRole pr : roles) {
+        for (RoleEntity pr : roles) {
             result = Math.max(result, pr.getMaxSongLengthOfUser(guild, userId));
         }
 
@@ -75,7 +81,7 @@ public class GuildPermissionDBObject {
             return true;
         }
 
-        for(PermissionRole pr : roles) {
+        for(RoleEntity pr : roles) {
             if (pr.canUserInstaskip(guild, userId)) {
                 return true;
             }
@@ -91,19 +97,19 @@ public class GuildPermissionDBObject {
         this.owner = owner;
     }
 
-    public List<PermissionRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<PermissionRole> roles) {
-        this.roles = roles;
-    }
-
-    public PermissionRole getDefaultRole() {
+    public RoleEntity getDefaultRole() {
         return defaultRole;
     }
 
-    public void setDefaultRole(PermissionRole defaultRole) {
-        this.defaultRole = defaultRole;
+    public void setDefaultRole(RoleEntity defaultRoleEntity) {
+        this.defaultRole = defaultRoleEntity;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roleEntities) {
+        this.roles = roleEntities;
     }
 }

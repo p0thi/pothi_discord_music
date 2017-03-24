@@ -1,7 +1,11 @@
 package pothi_discord_music;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.sun.media.jfxmediaimpl.platform.java.JavaPlatform;
 import net.dv8tion.jda.core.events.ReadyEvent;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.mapping.DefaultCreator;
 import pothi_discord_music.commands.controll.StatusCommand;
 import pothi_discord_music.commands.controll.*;
 import pothi_discord_music.commands.fun.GifCommand;
@@ -23,12 +27,11 @@ import net.dv8tion.jda.core.utils.SimpleLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pothi_discord_music.utils.DiscordUtil;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.AudioUtils;
 import pothi_discord_music.utils.database.MongoDB;
-import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord_music.utils.log.SimpleLogToSLF4JAdapter;
 
 import java.io.IOException;
@@ -50,7 +53,10 @@ public class Main {
     static final int SHARD_CREATION_SLEEP_INTERVAL = 5100;
     private static AtomicInteger numShardsReady = new AtomicInteger(0);
     public static final long START_TIME = System.currentTimeMillis();
-    private static MongoDB database;
+
+    public static MongoDB mongoDB;
+    public static Datastore datastore;
+    public static Morphia morphia;
 
     // Static variables
 
@@ -84,7 +90,12 @@ public class Main {
             return;
         }
 
-        database = new MongoDB();
+        mongoDB = new MongoDB();
+        morphia = new Morphia();
+        morphia.getMapper().getOptions().setStoreEmpties(true);
+        morphia.mapPackage("pothi_discord_music.utils.database.morphia");
+        //morphia.mapPackage("pothi_discord_music.utils.database.morphia.guilddatas");
+        datastore = morphia.createDatastore(mongoDB.getMongoClient(), "pothibot");
 
 
         //Attach log adapter
@@ -176,8 +187,7 @@ public class Main {
                 log.info("Connecting to " + allGuilds.size() + " guilds...");
                 for(Guild guild : allGuilds) {
                     //TODO should also happen on GuildJoin event!!!!
-                    GuildData guildData = new GuildData(guild);
-                    GuildData.ALL_GUILD_DATAS.put(guild.getId(), guildData);
+                    GuildData guildData = GuildData.getGuildDataById(guild.getId());
 
                     GuildReceiveHandler grh = new GuildReceiveHandler(guild);
                     guildData.setGuildReceiveHandler(grh);
@@ -226,7 +236,7 @@ public class Main {
         if(musicManager == null) {
             musicManager = new GuildMusicManager(guild, getDiscordBotByJDA(guild.getJDA()).getPlayerManager());
             allMusicManagers.put(guildId, musicManager);
-            MongoGuilddata mongoGuilddata = GuildData.ALL_GUILD_DATAS.get(guildId).getGuildDBObject();
+            GuildData mongoGuilddata = GuildData.getGuildDataById(guildId);
             musicManager.player.setVolume(mongoGuilddata.getPlayerStartVolume());
         }
 
@@ -281,11 +291,5 @@ public class Main {
 
     public static Map<String, GuildCommandManager> getGuildCommandManagers() {
         return guildCommandManagers;
-    }
-
-    public static MongoDB getMongo() { return database; }
-
-    public static void setDatabase(MongoDB database) {
-        Main.database = database;
     }
 }

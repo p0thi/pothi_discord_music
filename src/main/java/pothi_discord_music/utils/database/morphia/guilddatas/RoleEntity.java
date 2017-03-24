@@ -1,43 +1,25 @@
-package pothi_discord_music.utils.database.guilddata.permissions;
+package pothi_discord_music.utils.database.morphia.guilddatas;
 
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Role;
+import org.mongodb.morphia.annotations.Embedded;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pascal Pothmann on 10.03.2017.
+ * Created by Pascal Pothmann on 24.03.2017.
  */
-public class PermissionRole {
+@Embedded
+public class RoleEntity {
     private String name = "Unnamed";
+    private int maxPlaylistSize = 25;
+    private long maxSongLengthMillis = 720000;
+    private boolean defaultRole = false;
+    private boolean canInstaSkip = false;
+
     private List<String> roleIds = new ArrayList<>();
     private List<String> userIds = new ArrayList<>();
     private List<String> commandNames = new ArrayList<>();
-    private int maxPlaylistSize = 25;
-    private long maxSongLengthMillis = 720000;
-    private boolean canInstaSkip = false;
-    private boolean defaultRole = false;
-
-
-    public static PermissionRole createDefaultRole() {
-        PermissionRole pr = new PermissionRole();
-
-        pr.setName("Default");
-        pr.setDefaultRole(true);
-
-        List<String> commandNames = pr.getCommandNames();
-        commandNames.add("PingCommand");
-        commandNames.add("GifCommand");
-        commandNames.add("RollCommand");
-        commandNames.add("NowPlayingCommand");
-        commandNames.add("QueueCommand");
-        commandNames.add("SkipCommand");
-        commandNames.add("HelpCommand");
-        commandNames.add("PermissionsCommand");
-
-        return pr;
-    }
 
 
     public boolean hasUserAccess(Guild guild, String userId) {
@@ -50,7 +32,7 @@ public class PermissionRole {
         }
 
         for(String roleId : roleIds) {
-            Role tmpRole = guild.getRoleById(roleId);
+            net.dv8tion.jda.core.entities.Role tmpRole = guild.getRoleById(roleId);
             if (guild.getMemberById(userId).getRoles().contains(tmpRole)){
                 return true;
             }
@@ -98,30 +80,6 @@ public class PermissionRole {
         this.name = name;
     }
 
-    public List<String> getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(List<String> roleIds) {
-        this.roleIds = roleIds;
-    }
-
-    public List<String> getUserIds() {
-        return userIds;
-    }
-
-    public void setUserIds(List<String> userIds) {
-        this.userIds = userIds;
-    }
-
-    public List<String> getCommandNames() {
-        return commandNames;
-    }
-
-    public void setCommandNames(List<String> commandNames) {
-        this.commandNames = commandNames;
-    }
-
     public int getMaxPlaylistSize() {
         return maxPlaylistSize;
     }
@@ -146,11 +104,35 @@ public class PermissionRole {
         this.defaultRole = defaultRole;
     }
 
-    public boolean isInstaSkip() {
+    public boolean isCanInstaSkip() {
         return canInstaSkip;
     }
 
-    public void setInstaSkip(boolean instaSkip) {
-        this.canInstaSkip = instaSkip;
+    public void setCanInstaSkip(boolean canInstaSkip) {
+        this.canInstaSkip = canInstaSkip;
+    }
+
+    public List<String> getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(List<String> roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public List<String> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(List<String> userIds) {
+        this.userIds = userIds;
+    }
+
+    public List<String> getCommandNames() {
+        return commandNames;
+    }
+
+    public void setCommandNames(List<String> commandNames) {
+        this.commandNames = commandNames;
     }
 }

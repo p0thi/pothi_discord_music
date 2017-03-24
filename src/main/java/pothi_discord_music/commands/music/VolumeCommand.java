@@ -8,8 +8,8 @@ import pothi_discord_music.managers.music.GuildMusicManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -38,7 +38,7 @@ public class VolumeCommand extends GuildCommand {
         valid = valid && (words.length == 2);
 
         GuildMusicManager musicManager = Main.getGuildAudioPlayer(guild);
-        MongoGuilddata mongoGuilddata = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getGuildDBObject();
+        GuildData mongoGuilddata = GuildData.getGuildDataById(guild.getId());
 
         if(!valid) {
             if(words.length == 1) {

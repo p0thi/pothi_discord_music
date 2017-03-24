@@ -14,10 +14,10 @@ import pothi_discord_music.handlers.MessageDeleter;
 import pothi_discord_music.managers.music.GuildMusicManager;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.managers.MessageManager;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.audio.VideoSelection;
 import pothi_discord_music.utils.audio.YoutubeMusicGenre;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord_music.utils.youtube.YoutubeAPI;
 import pothi_discord_music.utils.youtube.YoutubeVideo;
 
@@ -69,7 +69,7 @@ public class PlayCommand extends GuildCommand {
             switch (args[1].toLowerCase()) {
                 case "genre":
                 case  "genres":
-                    GuildData guildData = GuildData.ALL_GUILD_DATAS.get(guild.getId());
+                    GuildData guildData = GuildData.getGuildDataById(guild.getId());
 
                     if (StringUtils.isNumeric(args[2])) {
                         int index = Integer.parseInt(args[2]);

@@ -12,10 +12,11 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -75,7 +76,7 @@ public class SkipCommand extends GuildCommand {
 
         scheduler.increaseSkipRequestCounter();
 
-        int skipPercent = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getGuildDBObject().getSongSkipPercent();
+        int skipPercent = GuildData.getGuildDataById(guild.getId()).getSongSkipPercent();
         int skipCount = scheduler.getSkipRequestsCounter();
         double memberCount = (double)channel.getMembers().size() - 1;
         if(skipCount >= memberCount * ((double)skipPercent / 100.0)) {
@@ -97,9 +98,10 @@ public class SkipCommand extends GuildCommand {
     public boolean checkPermission(Guild guild, User user) {
         boolean result = Param.isDeveloper(user.getId());
 
-        GuildData guildData = GuildData.ALL_GUILD_DATAS.get(guild.getId());
-        MongoGuilddata mongoGuilddata = guildData.getGuildDBObject();
-        GuildPermissionDBObject permissions = mongoGuilddata.getPermissions();
+        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+
+        System.out.println();
+        Permissions permissions = guildData.getPermissions();
 
         result = result || permissions.canUserInstaskip(guild, user.getId());
         result = result || permissions.hasUserPermissionForCommand(guild, user.getId(), getName());

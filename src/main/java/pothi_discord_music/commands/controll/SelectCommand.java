@@ -10,11 +10,12 @@ import pothi_discord_music.Main;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
 import pothi_discord_music.managers.music.GuildMusicManager;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.VideoSelection;
 import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord_music.utils.youtube.YoutubeVideo;
 
 /**
@@ -35,9 +36,8 @@ public class SelectCommand extends GuildCommand {
     public static void select(Guild guild, TextChannel channel, User user, String[] args) {
         GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
 
-        GuildData guildData = GuildData.ALL_GUILD_DATAS.get(guild.getId());
-        MongoGuilddata mongoGuilddata = guildData.getGuildDBObject();
-        GuildPermissionDBObject gpo = mongoGuilddata.getPermissions();
+        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        Permissions gpo = guildData.getPermissions();
 
         AudioPlayer player = manager.player;
         manager.setCurrentTC(channel);

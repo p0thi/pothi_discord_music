@@ -6,9 +6,11 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
-import pothi_discord_music.utils.GuildData;
 import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 import pothi_discord_music.utils.database.guilddata.permissions.PermissionRole;
+import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
+import pothi_discord_music.utils.database.morphia.guilddatas.RoleEntity;
 
 import java.util.List;
 
@@ -26,12 +28,12 @@ public class PermissionsCommand extends GuildCommand{
         }
 
         TextChannel channel = event.getChannel();
-        GuildPermissionDBObject gpo = GuildData.ALL_GUILD_DATAS.get(guild.getId()).getGuildDBObject().getPermissions();
-        List<PermissionRole> permissions = gpo.getRolesOfUser(guild, user.getId());
+        Permissions gpo = GuildData.getGuildDataById(guild.getId()).getPermissions();
+        List<RoleEntity> roleEntities = gpo.getRolesOfUser(guild, user.getId());
 
         StringBuilder sb = new StringBuilder("Das sind deine internen Rollen: \n\n");
 
-        for(PermissionRole pr : permissions) {
+        for(RoleEntity pr : roleEntities) {
             sb.append(pr.getName() + "\n");
             for(String cmd : pr.getCommandNames()) {
                 sb.append("\t" + cmd + "\n");

@@ -46,7 +46,7 @@ public class MongoAutoplaylist {
     public static MongoAutoplaylist getObjectById(String id){
         MongoAutoplaylist result = null;
 
-        MongoCollection<Document> col = Main.getMongo()
+        MongoCollection<Document> col = Main.mongoDB
                 .getMongoDatabase("pothibot")
                 .getCollection("autoplaylists");
         FindIterable<Document> iterable = col.find(eq("_id", id));
