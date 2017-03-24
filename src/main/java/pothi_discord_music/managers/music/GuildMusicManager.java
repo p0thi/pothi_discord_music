@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pothi_discord_music.utils.audio.VideoSelection;
 import pothi_discord_music.utils.audio.YoutubeMusicGenre;
-import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
 

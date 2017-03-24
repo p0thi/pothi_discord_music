@@ -12,8 +12,6 @@ import pothi_discord_music.handlers.MessageDeleter;
 import pothi_discord_music.managers.music.GuildMusicManager;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.VideoSelection;
-import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
-import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord_music.utils.youtube.YoutubeVideo;

@@ -6,8 +6,6 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
-import pothi_discord_music.utils.database.guilddata.permissions.GuildPermissionDBObject;
-import pothi_discord_music.utils.database.guilddata.permissions.PermissionRole;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord_music.utils.database.morphia.guilddatas.RoleEntity;

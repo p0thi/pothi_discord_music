@@ -8,7 +8,6 @@ import pothi_discord_music.managers.music.GuildMusicManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import pothi_discord_music.utils.database.guilddata.MongoGuilddata;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 
 /**
