@@ -8,16 +8,13 @@ import com.sedmelluq.discord.lavaplayer.source.soundcloud.SoundCloudAudioTrack;
 import com.sedmelluq.discord.lavaplayer.source.twitch.TwitchStreamAudioTrack;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
 import pothi_discord_music.Main;
 import pothi_discord_music.commands.Command;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
 import pothi_discord_music.managers.music.GuildMusicManager;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONObject;
 import org.json.XML;
@@ -49,25 +46,35 @@ public class NowPlayingCommand extends GuildCommand {
 
         if(musicManager.player.getPlayingTrack() != null && !musicManager.player.isPaused()) {
             AudioTrack at = musicManager.player.getPlayingTrack();
+            EmbedBuilder embed = null;
             try {
                 if (at instanceof YoutubeAudioTrack) {
-                    sendYoutubeEmbed(channel, (YoutubeAudioTrack) at);
+                    embed = sendYoutubeEmbed(channel, (YoutubeAudioTrack) at);
                 } else if (at instanceof SoundCloudAudioTrack) {
-                    sendSoundcloudEmbed(channel, (SoundCloudAudioTrack) at);
+                    embed = sendSoundcloudEmbed(channel, (SoundCloudAudioTrack) at);
                 } else if (at instanceof HttpAudioTrack && at.getIdentifier().contains("gensokyoradio.net")) {
                     //Special handling for GR
-                    sendGensokyoRadioEmbed(channel);
+                    embed = sendGensokyoRadioEmbed(channel);
                 } else if (at instanceof HttpAudioTrack) {
-                    sendHttpEmbed(channel, (HttpAudioTrack) at);
+                    embed = sendHttpEmbed(channel, (HttpAudioTrack) at);
                 } else if (at instanceof BandcampAudioTrack) {
-                    sendBandcampResponse(channel, (BandcampAudioTrack) at);
+                    embed = sendBandcampResponse(channel, (BandcampAudioTrack) at);
                 } else if (at instanceof TwitchStreamAudioTrack) {
-                    sendTwitchEmbed(channel, (TwitchStreamAudioTrack) at);
+                    embed = sendTwitchEmbed(channel, (TwitchStreamAudioTrack) at);
                 } else {
-                    sendDefaultEmbed(channel, at);
+                    embed = sendDefaultEmbed(channel, at);
                 }
             } catch (Exception e){
                 sendDefaultEmbed(channel, at);
+            }
+
+            if (embed != null) {
+                embed.addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
+                .addField("Volume", musicManager.player.getVolume() + "", false);
+                channel.sendMessage(embed.build()).queue(new MessageDeleter());
+            }
+            else {
+                channel.sendMessage("Ein Fehler ist aufgetreten.").queue(new MessageDeleter());
             }
         }
         else {
@@ -80,7 +87,7 @@ public class NowPlayingCommand extends GuildCommand {
         return null;
     }
 
-    private void sendDefaultEmbed(TextChannel channel, AudioTrack at) {
+    private EmbedBuilder sendDefaultEmbed(TextChannel channel, AudioTrack at) {
         String desc = at.getDuration() == Long.MAX_VALUE ?
                 "[LIVE]" :
                 TextUtils.progressBar(at.getPosition(), at.getDuration(), 25) +
@@ -90,19 +97,17 @@ public class NowPlayingCommand extends GuildCommand {
                         + TextUtils.formatMillis(at.getDuration())
                         + "]";
 
-        MessageEmbed embed = new EmbedBuilder()
+        EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(at.getInfo().author, null, null)
                 .setTitle(at.getInfo().title, DEFAULT_URL)
                 .setDescription(desc + "\n\nGeladen von " + at.getSourceManager().getSourceName())
-                .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
                 .setColor(Color.orange)
-                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
-                .build();
+                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl());
 
-        channel.sendMessage(embed).queue(new MessageDeleter());
+        return embed;
     }
 
-    private void sendBandcampResponse(TextChannel channel, BandcampAudioTrack at) {
+    private EmbedBuilder sendBandcampResponse(TextChannel channel, BandcampAudioTrack at) {
         String desc = at.getDuration() == Long.MAX_VALUE ?
                 "[LIVE]" :
                 "["
@@ -111,32 +116,28 @@ public class NowPlayingCommand extends GuildCommand {
                         + TextUtils.formatMillis(at.getDuration())
                         + "]";
 
-        MessageEmbed embed = new EmbedBuilder()
+        EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(at.getInfo().author, null, null)
                 .setTitle(at.getInfo().title, DEFAULT_URL)
                 .setDescription(desc + "\n\nGeladen von Bandcamp")
-                .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
                 .setColor(new Color(99, 154, 169))
-                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
-                .build();
+                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl());
 
-        channel.sendMessage(embed).queue(new MessageDeleter());
+        return embed;
     }
 
-    private void sendTwitchEmbed(TextChannel channel, TwitchStreamAudioTrack at){
-        MessageEmbed embed = new EmbedBuilder()
+    private EmbedBuilder sendTwitchEmbed(TextChannel channel, TwitchStreamAudioTrack at){
+        EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(at.getInfo().author, at.getIdentifier(), null) //TODO: Add thumb
                 .setTitle(at.getInfo().title, DEFAULT_URL)
                 .setDescription("Geladen von Twitch")
-                .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
                 .setColor(new Color(100, 65, 164))
-                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
-                .build();
+                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl());
 
-        channel.sendMessage(embed).queue(new MessageDeleter());
+        return embed;
     }
 
-    private void sendHttpEmbed(TextChannel channel, HttpAudioTrack at) {
+    private EmbedBuilder sendHttpEmbed(TextChannel channel, HttpAudioTrack at) {
         String desc = at.getDuration() == Long.MAX_VALUE ?
                 "[LIVE]" :
                 TextUtils.progressBar(at.getPosition(), at.getDuration(), 25) +
@@ -146,19 +147,17 @@ public class NowPlayingCommand extends GuildCommand {
                         + TextUtils.formatMillis(at.getDuration())
                         + "]";
 
-        MessageEmbed embed = new EmbedBuilder()
+        EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(at.getInfo().author, null, null)
                 .setTitle(at.getInfo().title, at.getIdentifier())
                 .setDescription(desc + "\n\nGeladen von " + at.getIdentifier()) //TODO: Probe data
-                .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
                 .setColor(Color.orange)
-                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
-                .build();
+                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl());
 
-        channel.sendMessage(embed).queue(new MessageDeleter());
+        return embed;
     }
 
-    private void sendGensokyoRadioEmbed(TextChannel channel) {
+    private EmbedBuilder sendGensokyoRadioEmbed(TextChannel channel) {
         try {
             JSONObject data = XML.toJSONObject(Unirest.get("https://gensokyoradio.net/xml/").asString().getBody()).getJSONObject("GENSOKYORADIODATA");
 
@@ -188,17 +187,16 @@ public class NowPlayingCommand extends GuildCommand {
                     .addField("Zuhörer", Integer.toString(data.getJSONObject("SERVERINFO").getInt("LISTENERS")), true)
                     .setImage(albumArt)
                     .setColor(new Color(66, 16, 80))
-                    .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
                     .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
                     .build();
 
-            channel.sendMessage(eb.build()).queue(new MessageDeleter());
+            return eb;
         } catch (UnirestException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void sendYoutubeEmbed(TextChannel channel, YoutubeAudioTrack at) {
+    private EmbedBuilder sendYoutubeEmbed(TextChannel channel, YoutubeAudioTrack at) {
         YoutubeVideo yv = YoutubeAPI.getVideoFromID(at.getIdentifier(), true);
         String timeField =
                 TextUtils.progressBar(at.getPosition(), at.getDuration(), 25) +
@@ -223,17 +221,16 @@ public class NowPlayingCommand extends GuildCommand {
             eb.addField("Beschreibung", desc, false);
         }
 
-        MessageEmbed embed = eb.setColor(new Color(205, 32, 31))
+        EmbedBuilder embed = eb.setColor(new Color(205, 32, 31))
                 .setThumbnail("https://i.ytimg.com/vi/" + at.getIdentifier() + "/hqdefault.jpg")
                 .setAuthor(yv.getCannelTitle(), yv.getChannelUrl(), yv.getChannelThumbUrl())
-                .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
-                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
-                .build();
-        channel.sendMessage(embed).queue(new MessageDeleter());
+                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl());
+
+        return embed;
     }
 
-    private void sendSoundcloudEmbed(TextChannel channel, SoundCloudAudioTrack at) {
-        MessageEmbed embed = new EmbedBuilder()
+    private EmbedBuilder sendSoundcloudEmbed(TextChannel channel, SoundCloudAudioTrack at) {
+        EmbedBuilder embed = new EmbedBuilder()
                 .setAuthor(at.getInfo().author, null, null)
                 .setTitle(at.getInfo().title, DEFAULT_URL)
                 .setDescription(
@@ -243,12 +240,10 @@ public class NowPlayingCommand extends GuildCommand {
                         + "/"
                         + TextUtils.formatMillis(at.getDuration())
                         + "]\n\nGeladen von Soundcloud") //TODO: Gather description, thumbnail, etc
-                .addField("Aktuelle Autoplaylist", Main.getGuildAudioPlayer(channel.getGuild()).playlist.getName(), true)
                 .setColor(new Color(255, 85, 0))
-                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl())
-                .build();
+                .setFooter(channel.getJDA().getSelfUser().getName(), channel.getJDA().getSelfUser().getAvatarUrl());
 
-        channel.sendMessage(embed).queue(new MessageDeleter());
+        return embed;
     }
 }
 
