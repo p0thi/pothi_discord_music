@@ -1,11 +1,9 @@
 package pothi_discord_music;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sun.media.jfxmediaimpl.platform.java.JavaPlatform;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.mapping.DefaultCreator;
 import pothi_discord_music.commands.controll.StatusCommand;
 import pothi_discord_music.commands.controll.*;
 import pothi_discord_music.commands.fun.GifCommand;
