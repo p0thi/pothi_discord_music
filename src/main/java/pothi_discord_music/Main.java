@@ -169,6 +169,8 @@ public class Main {
             gcm.addAlias("<", "repeat");
             gcm.addCommand("pause", new PauseCommand());
             gcm.addAlias("||", "pause");
+            gcm.addAlias("II", "pause");
+            gcm.addAlias("ll", "pause");
             gcm.addCommand("permission", new PermissionsCommand());
             gcm.addAlias("permissions", "permission");
             gcm.addCommand("shutdown", new ShutdownCommand());
