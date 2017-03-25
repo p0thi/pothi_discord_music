@@ -24,9 +24,11 @@ public class EchoCommand extends GuildCommand {
             return;
         }
 
+        event.getMessage().delete().queue();
+
         for (Guild myGuild : Main.getAllGuilds()) {
             myGuild.getPublicChannel().sendMessage(String.join(" ", Arrays.copyOfRange(args, 1, args.length)))
-                    .queue();
+                    .queue(new MessageDeleter());
         }
     }
 

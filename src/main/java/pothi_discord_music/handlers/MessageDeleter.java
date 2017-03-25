@@ -43,13 +43,15 @@ public class MessageDeleter implements Consumer<Message>, Schedule {
         log.info("Message successfully queued, in "
                 + message.getGuild().getName() + ". (" + message.getId() + ")" + " (\"" + message.getContent() + "\")");
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                delete();
-                finish();
-            }
-        }, millis);
+        if (millis >= 0) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    delete();
+                    finish();
+                }
+            }, millis);
+        }
     }
 
     @Override
