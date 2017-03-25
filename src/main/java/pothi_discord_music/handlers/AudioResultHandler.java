@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class AudioResultHandler implements AudioLoadResultHandler {
-    private static final Logger log = LoggerFactory.getLogger(AudioResultHandler.class);
 
     private TrackScheduler scheduler;
 

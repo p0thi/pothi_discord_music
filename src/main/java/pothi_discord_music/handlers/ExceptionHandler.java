@@ -3,15 +3,14 @@ package pothi_discord_music.handlers;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import pothi_discord_music.utils.Param;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 
 /**
  * Created by Pascal Pothmann on 20.02.2017.
  */
 public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
-    private static final Logger log = LoggerFactory.getLogger(ExceptionHandler.class);
+    private static final Logger log = MorphiaLoggerFactory.get(ExceptionHandler.class);
 
     private static User owner = null;
 

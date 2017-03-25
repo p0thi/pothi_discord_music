@@ -20,7 +20,6 @@ import pothi_discord_music.utils.database.morphia.guilddatas.Permissions;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class SkipCommand extends GuildCommand {
-    private static final Logger log = LoggerFactory.getLogger(SkipCommand.class);
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args) {

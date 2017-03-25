@@ -8,15 +8,15 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import org.apache.http.client.config.RequestConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.utils.Param;
 
 /**
  * Created by Pascal Pothmann on 28.01.2017.
  */
 public class DiscordBot extends Main{
-    private static final Logger log = LoggerFactory.getLogger(DiscordBot.class);
+    private static final Logger log = MorphiaLoggerFactory.get(DiscordBot.class);;
 
     //Instance variables
     AudioPlayerManager playerManager = new DefaultAudioPlayerManager();

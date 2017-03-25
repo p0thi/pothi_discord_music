@@ -8,11 +8,11 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import net.dv8tion.jda.core.entities.Guild;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.Main;
 import pothi_discord_music.managers.music.GuildMusicManager;
 import net.dv8tion.jda.core.entities.VoiceChannel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -27,7 +27,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class TrackScheduler extends AudioEventAdapter {
-    private static final Logger log = LoggerFactory.getLogger(TrackScheduler.class);
+    private static final Logger log = MorphiaLoggerFactory.get(Main.class);
 
     public final Deque<AudioTrack> queue;
     public final AudioPlayer player;

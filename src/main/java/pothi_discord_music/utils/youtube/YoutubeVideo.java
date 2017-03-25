@@ -3,8 +3,8 @@ package pothi_discord_music.utils.youtube;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.utils.Param;
 
 import java.util.regex.Matcher;
@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class YoutubeVideo {
 
-    private static final Logger log = LoggerFactory.getLogger(YoutubeVideo.class);
+    private static final Logger log = MorphiaLoggerFactory.get(YoutubeVideo.class);
 
     String id = null;
     String name = null;

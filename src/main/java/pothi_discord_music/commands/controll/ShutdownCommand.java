@@ -2,8 +2,9 @@ package pothi_discord_music.commands.controll;
 
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.managers.AudioManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.DiscordBot;
 import pothi_discord_music.Main;
 import pothi_discord_music.commands.Command;
@@ -20,7 +21,7 @@ import java.util.List;
  * Created by Pascal Pothmann on 27.01.2017.
  */
 public class ShutdownCommand extends GuildCommand {
-    private static final Logger log = LoggerFactory.getLogger(ShutdownCommand.class);
+    private static final Logger log = MorphiaLoggerFactory.get(ShutdownCommand.class);
 
     private static long timeBeforeShutdown = 0;
 

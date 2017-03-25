@@ -2,12 +2,11 @@ package pothi_discord_music.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 
 import java.io.*;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class TextUtils {
-    private static final Logger log = LoggerFactory.getLogger(TextUtils.class);
+    private static final Logger log = MorphiaLoggerFactory.get(TextUtils.class);
 
     public static long parseISO8601DurationToMillis(String duration) {
         Duration d = Duration.parse(duration);

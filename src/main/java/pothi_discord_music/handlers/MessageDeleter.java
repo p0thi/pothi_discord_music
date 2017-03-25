@@ -2,8 +2,9 @@ package pothi_discord_music.handlers;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.dv8tion.jda.core.entities.MessageEmbed;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,7 +14,7 @@ import java.util.function.Consumer;
  * Created by Pascal Pothmann on 27.01.2017.
  */
 public class MessageDeleter implements Consumer<Message>, Schedule {
-    private static final Logger log = LoggerFactory.getLogger(MessageDeleter.class);
+    private static final Logger log = MorphiaLoggerFactory.get(MessageDeleter.class);
 
     static Timer timer = new Timer();
     private long millis;
@@ -68,7 +69,7 @@ public class MessageDeleter implements Consumer<Message>, Schedule {
                     + guild.getName() + ". (" + id + ")" + " (\"" + content + "\")");
         } catch (NullPointerException ignore) {
         } catch (Exception e) {
-            log.warn("Could not delete Message! Already deleted?! (\"" + message.getContent() + "\")");
+            log.warning("Could not delete Message! Already deleted?! (\"" + message.getContent() + "\")");
         }
     }
 

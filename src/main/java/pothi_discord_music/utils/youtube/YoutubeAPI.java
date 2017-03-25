@@ -5,19 +5,15 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.utils.Param;
-import pothi_discord_music.utils.TextUtils;
-import pothi_discord_music.utils.audio.YoutubeMusicGenre;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class YoutubeAPI {
-    private static final Logger log = LoggerFactory.getLogger(YoutubeAPI.class);
+    private static final Logger log = MorphiaLoggerFactory.get(YoutubeAPI.class);
 
     private YoutubeAPI() {
     }

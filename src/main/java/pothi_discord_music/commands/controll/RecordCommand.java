@@ -24,7 +24,6 @@ import java.util.Date;
  * Created by Pascal Pothmann on 28.01.2017.
  */
 public class RecordCommand extends GuildCommand {
-    private static final Logger log = LoggerFactory.getLogger(RecordCommand.class);
 
     private User user;
     private TextChannel channel;

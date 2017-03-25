@@ -6,6 +6,8 @@ import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ReconnectedEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.Main;
 import pothi_discord_music.handlers.ExceptionHandler;
 import pothi_discord_music.handlers.MessageDeleter;
@@ -14,8 +16,6 @@ import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pothi_discord_music.utils.Param;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class MessageListener extends AbstractEventListener {
-    private static final Logger log = LoggerFactory.getLogger(MessageListener.class);
+    private static final Logger log = MorphiaLoggerFactory.get(Main.class);
 
     private static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_<>|])+");
     public static final AtomicLong TOTAL_MESSAGES = new AtomicLong();
@@ -67,7 +67,7 @@ public class MessageListener extends AbstractEventListener {
                     try {
                         Main.getGuildCommandManagers().get(event.getGuild().getId()).getCommand(command).action(event, words);
                     } catch (Exception e) {
-                        log.warn("Could not executeAllTasks commsnd: " + command);
+                        log.warning("Could not executeAllTasks commsnd: " + command);
                         e.printStackTrace();
                         new ExceptionHandler(e);
                     }

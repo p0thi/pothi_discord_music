@@ -6,8 +6,6 @@ import pothi_discord_music.utils.lame.lowlevel.LameEncoder;
 import pothi_discord_music.utils.lame.mp3.Lame;
 import pothi_discord_music.utils.lame.mp3.MPEGMode;
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.sound.sampled.AudioFormat;
 import java.io.*;
@@ -16,8 +14,6 @@ import java.io.*;
  * Created by Pascal Pothmann on 28.01.2017.
  */
 public class AudioUtils {
-    private static final Logger log = LoggerFactory.getLogger(AudioUtils.class);
-
     private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     private int sampleRate = 48000;
     private int channels = 2;

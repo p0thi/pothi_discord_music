@@ -3,15 +3,15 @@ package pothi_discord_music.handlers;
 import net.dv8tion.jda.core.audio.CombinedAudio;
 import net.dv8tion.jda.core.audio.UserAudio;
 import net.dv8tion.jda.core.entities.Guild;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
 
 /**
  * Created by Pascal Pothmann on 27.01.2017.
  */
 public class GuildReceiveHandler extends AbstractReceiveHandler {
-    private static final Logger log = LoggerFactory.getLogger(GuildReceiveHandler.class);
+    private static final Logger log = MorphiaLoggerFactory.get(GuildReceiveHandler.class);
 
     long count = 0;
     boolean listenerStarted = false;

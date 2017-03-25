@@ -4,6 +4,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.commands.controll.StatusCommand;
 import pothi_discord_music.commands.controll.*;
 import pothi_discord_music.commands.fun.GifCommand;
@@ -22,15 +24,13 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.managers.AudioManager;
 import net.dv8tion.jda.core.utils.SimpleLog;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import pothi_discord_music.utils.DiscordUtil;
 import pothi_discord_music.utils.Param;
 import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.AudioUtils;
 import pothi_discord_music.utils.database.MongoDB;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
-import pothi_discord_music.utils.log.SLF4JInputStreamLogger;
 import pothi_discord_music.utils.log.SimpleLogToSLF4JAdapter;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class Main {
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger log = MorphiaLoggerFactory.get(Main.class);
 
     public static final Main self = new Main();
     static final int SHARD_CREATION_SLEEP_INTERVAL = 5100;
@@ -159,6 +159,7 @@ public class Main {
             gcm.addCommand("ping", new PingCommand());
             gcm.addCommand("status", new StatusCommand());
             gcm.addCommand("id", new IdCommand());
+            gcm.addCommand("echo", new EchoCommand());
 
 
 
@@ -200,7 +201,7 @@ public class Main {
                         musicManager.connectAndPlay();
                         log.info("Joining guild. (" + guild.getName() + ")");
                     } catch (InterruptedException e){
-                        log.warn("could not autojoin guild: " + guild.getName());
+                        log.warning("could not autojoin guild: " + guild.getName());
                     }
                 }
             }

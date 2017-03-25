@@ -12,6 +12,8 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Member;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.Main;
 import pothi_discord_music.handlers.AudioPlayerSendHandler;
 import pothi_discord_music.handlers.MessageDeleter;
@@ -19,8 +21,6 @@ import pothi_discord_music.listeners.TrackScheduler;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pothi_discord_music.utils.audio.VideoSelection;
 import pothi_discord_music.utils.audio.YoutubeMusicGenre;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
@@ -33,7 +33,7 @@ import java.util.HashMap;
  * Holder for both the player and a track scheduler for one guild.
  */
 public class GuildMusicManager {
-    private static final Logger log = LoggerFactory.getLogger(GuildMusicManager.class);
+    private static final Logger log = MorphiaLoggerFactory.get(Main.class);
 
     /**
      * Audio player for the guild.
@@ -206,7 +206,7 @@ public class GuildMusicManager {
         if (currentTC != null) {
             return currentTC;
         } else {
-            log.warn("No currentTC in " + guild + "! Returning public channel...");
+            log.warning("No currentTC in " + guild + "! Returning public channel...");
             return guild.getPublicChannel();
         }
     }

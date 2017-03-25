@@ -4,8 +4,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.utils.Param;
 
 
@@ -15,7 +15,7 @@ import java.util.Arrays;
  * Created by Pascal Pothmann on 20.03.2017.
  */
 public class MongoDB {
-    private static final Logger log = LoggerFactory.getLogger(MongoDB.class);
+    private static final Logger log = MorphiaLoggerFactory.get(MongoFile.class);
 
     private MongoCredential credentials;
     private ServerAddress serverAddress;

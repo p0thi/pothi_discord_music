@@ -30,7 +30,6 @@ import java.util.regex.Pattern;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class PlayCommand extends GuildCommand {
-    private static final Logger log = LoggerFactory.getLogger(PlayCommand.class);
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args) {

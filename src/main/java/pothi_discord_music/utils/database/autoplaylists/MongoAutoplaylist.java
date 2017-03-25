@@ -47,7 +47,7 @@ public class MongoAutoplaylist {
 
         MongoCollection<Document> col = Main.mongoDB
                 .getMongoDatabase("pothibot")
-                .getCollection("autoplaylists");
+                .getCollection(DATABASE_NAME);
         FindIterable<Document> iterable = col.find(eq("_id", id));
         ObjectMapper mapper = new ObjectMapper();
 

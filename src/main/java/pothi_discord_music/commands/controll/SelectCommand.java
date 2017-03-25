@@ -4,8 +4,9 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord_music.Main;
 import pothi_discord_music.commands.GuildCommand;
 import pothi_discord_music.handlers.MessageDeleter;
@@ -20,7 +21,7 @@ import pothi_discord_music.utils.youtube.YoutubeVideo;
  * Created by Pascal Pothmann on 31.01.2017.
  */
 public class SelectCommand extends GuildCommand {
-    private static final Logger log = LoggerFactory.getLogger(SelectCommand.class);
+    private static final Logger log = MorphiaLoggerFactory.get(SelectCommand.class);
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args) {
         //TODO: Dafuq??
