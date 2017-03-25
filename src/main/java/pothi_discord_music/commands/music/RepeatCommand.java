@@ -27,7 +27,7 @@ public class RepeatCommand extends GuildCommand {
         TextChannel channel = event.getChannel();
 
         GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
-        AudioTrack currentTrack = manager.player.getPlayingTrack();
+        AudioTrack currentTrack = manager.player.getPlayingTrack().makeClone();
 
         if (currentTrack != null) {
 
