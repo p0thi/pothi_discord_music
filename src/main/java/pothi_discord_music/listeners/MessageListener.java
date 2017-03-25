@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class MessageListener extends AbstractEventListener {
     private static final Logger log = LoggerFactory.getLogger(MessageListener.class);
 
-    private static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_])+");
+    private static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_<>|])+");
     public static final AtomicLong TOTAL_MESSAGES = new AtomicLong();
     public static final AtomicLong TOTAL_COMMANDS = new AtomicLong();
 

@@ -14,7 +14,11 @@ import net.dv8tion.jda.core.entities.VoiceChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -25,7 +29,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
     private static final Logger log = LoggerFactory.getLogger(TrackScheduler.class);
 
-    public final BlockingQueue<AudioTrack> queue;
+    public final Deque<AudioTrack> queue;
     public final AudioPlayer player;
 
     public final GuildMusicManager musicManager;
@@ -35,7 +39,7 @@ public class TrackScheduler extends AudioEventAdapter {
     public TrackScheduler(GuildMusicManager musicManager) {
         this.musicManager = musicManager;
         this.player = musicManager.player;
-        this.queue = new LinkedBlockingQueue<>();
+        this.queue = new LinkedList<>();
     }
 
     public void queue(AudioTrack track) throws InterruptedException {
@@ -44,6 +48,12 @@ public class TrackScheduler extends AudioEventAdapter {
         // track goes to the queue instead.
         if (!player.startTrack(track, true)) {
             queue.offer(track);
+        }
+    }
+
+    public void queueFirst(AudioTrack track) throws InterruptedException {
+        if (!player.startTrack(track, true)) {
+            queue.offerFirst(track);
         }
     }
 

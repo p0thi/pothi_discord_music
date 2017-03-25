@@ -30,6 +30,7 @@ import pothi_discord_music.utils.TextUtils;
 import pothi_discord_music.utils.audio.AudioUtils;
 import pothi_discord_music.utils.database.MongoDB;
 import pothi_discord_music.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord_music.utils.log.SLF4JInputStreamLogger;
 import pothi_discord_music.utils.log.SimpleLogToSLF4JAdapter;
 
 import java.io.IOException;
@@ -40,7 +41,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Created by Pascal Pothmann on 25.01.2017.
  */
@@ -146,8 +146,6 @@ public class Main {
 
 
             //Commands TODO: special commands per guild
-            gcm.addCommand("play", new PlayCommand());
-            gcm.addCommand("pause", new PauseCommand());
             gcm.addCommand("queue", new QueueCommand());
             gcm.addCommand("skip", new SkipCommand());
             gcm.addCommand("volume", new VolumeCommand());
@@ -164,6 +162,12 @@ public class Main {
 
 
 
+            gcm.addCommand("play", new PlayCommand());
+            gcm.addAlias(">", "play");
+            gcm.addCommand("repeat", new RepeatCommand());
+            gcm.addAlias("<", "repeat");
+            gcm.addCommand("pause", new PauseCommand());
+            gcm.addAlias("||", "pause");
             gcm.addCommand("permission", new PermissionsCommand());
             gcm.addAlias("permissions", "permission");
             gcm.addCommand("shutdown", new ShutdownCommand());

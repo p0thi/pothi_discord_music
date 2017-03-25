@@ -64,6 +64,13 @@ public class PlayCommand extends GuildCommand {
             return;
         }
 
+        if (args.length == 1) {
+            GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
+            manager.player.setPaused(false);
+
+            return;
+        }
+
         if (args.length > 2) {
             GuildMusicManager manager = Main.getGuildAudioPlayer(guild);
             switch (args[1].toLowerCase()) {

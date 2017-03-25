@@ -1,5 +1,6 @@
 package pothi_discord_music.commands.controll;
 
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.managers.AudioManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ShutdownCommand extends GuildCommand {
     private static final Logger log = LoggerFactory.getLogger(ShutdownCommand.class);
 
-    private static long timeBeforeShutdown = 3000;
+    private static long timeBeforeShutdown = 0;
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args) {
@@ -44,22 +45,8 @@ public class ShutdownCommand extends GuildCommand {
     public static void execute() {
 
         StaticSchedulePool.executeAllTasks();
-
-        for(DiscordBot bot : Main.shards) {
-            List<Guild> allGuilds = bot.getJDA().getGuilds();
-            for (Guild guild : allGuilds) {
-                AudioManager am = guild.getAudioManager();
-                int tries = 0;
-                while (((am.isConnected() || am.isAttemptingToConnect())) && tries < 5) {
-                    am.closeAudioConnection();
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    tries++;
-                }
-            }
+        for (DiscordBot bot : Main.shards) {
+            bot.getJDA().shutdown();
         }
 
         try {
