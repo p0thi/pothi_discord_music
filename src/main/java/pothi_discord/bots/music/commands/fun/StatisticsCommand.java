@@ -5,6 +5,7 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
+import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.utils.HugeMessageSender;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.userdata.Gametime;
@@ -31,6 +32,15 @@ public class StatisticsCommand extends GuildCommand{
 
 
         int days = -1;
+
+        if (args.length > 1 && args[1].matches("\\d+")) {
+            try {
+                days = Integer.parseInt(args[1]);
+            } catch (Exception e) {
+                event.getChannel().sendMessage("Der Zeitraum ist ungültig." + " :see_no_evil:")
+                        .queue(new MessageDeleter());
+            }
+        }
         String currentModifiedDate = TextUtils.millisToDate(System.currentTimeMillis(), "-");
 
         HugeMessageSender hugeMessageSender = new HugeMessageSender();
