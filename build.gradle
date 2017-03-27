@@ -23,7 +23,7 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
-    archiveName = "pothi_discord_music.jar"
+    archiveName = "pothi_discord.jar"
     manifest {
         attributes "Main-Class" : "pothi_discord.Main"
     }
