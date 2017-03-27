@@ -15,6 +15,7 @@ import pothi_discord.bots.music.commands.controll.*;
 import pothi_discord.bots.music.commands.fun.GifCommand;
 import pothi_discord.bots.music.commands.fun.JokeCommand;
 import pothi_discord.bots.music.commands.fun.RollCommand;
+import pothi_discord.bots.music.commands.fun.StatisticsCommand;
 import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
 import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 import pothi_discord.commands.*;
@@ -96,6 +97,7 @@ public class MusicBot extends Bot{
             gcm.addCommand("status", new StatusCommand());
             gcm.addCommand("id", new IdCommand());
             gcm.addCommand("echo", new EchoCommand());
+            gcm.addCommand("statistics", new StatisticsCommand());
 
 
 

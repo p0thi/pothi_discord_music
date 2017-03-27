@@ -34,10 +34,6 @@ import java.util.regex.Pattern;
 public class MusicBotMessageListener extends AbstractEventListener {
     private static final Logger log = MorphiaLoggerFactory.get(Main.class);
 
-    private static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_<>|])+");
-    public static final AtomicLong TOTAL_MESSAGES = new AtomicLong();
-    public static final AtomicLong TOTAL_COMMANDS = new AtomicLong();
-
     private DiscordMusicBotShard shard;
 
     public MusicBotMessageListener(DiscordMusicBotShard shard) {

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Pascal Pothmann on 27.03.2017.
  */
 @Entity(value = "gametimes", noClassnameStored = true)
-public class Gametime extends DataClass<ObjectId>{
+public class Gametime extends DataClass<ObjectId> implements Comparable<Gametime>{
     private String gameName;
 
     @Embedded private List<TimePair> timePairs = new ArrayList<>();
@@ -34,5 +34,10 @@ public class Gametime extends DataClass<ObjectId>{
 
     public void setTimePairs(List<TimePair> timePairs) {
         this.timePairs = timePairs;
+    }
+
+    @Override
+    public int compareTo(Gametime o) {
+        return this.gameName.compareTo(o.getGameName());
     }
 }

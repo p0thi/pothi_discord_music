@@ -34,9 +34,7 @@ import java.util.regex.Pattern;
 public class SoundBotMessageListener extends AbstractEventListener {
     private static final Logger log = LoggerFactory.getLogger(SoundBotMessageListener.class);
 
-    private static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_&])+");
-    public static final AtomicLong TOTAL_MESSAGES = new AtomicLong();
-    public static final AtomicLong TOTAL_COMMANDS = new AtomicLong();
+
 
     private DiscordSoundBotShard shard;
 
@@ -55,8 +53,6 @@ public class SoundBotMessageListener extends AbstractEventListener {
             log.info(event.getGuild().getName() + " \t " + event.getAuthor().getName() + " \t " + event.getMessage().getRawContent());
             return;
         }
-
-        TOTAL_MESSAGES.incrementAndGet();
 
         if (msg.length() <= Param.PREFIX().length()) {
             return;
