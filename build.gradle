@@ -25,7 +25,7 @@ jar {
     }
     archiveName = "pothi_discord_music.jar"
     manifest {
-        attributes "Main-Class" : "pothi_discord_music.Main"
+        attributes "Main-Class" : "pothi_discord.Main"
     }
 
 }

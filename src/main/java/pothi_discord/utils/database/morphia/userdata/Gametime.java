@@ -8,6 +8,7 @@ import org.mongodb.morphia.annotations.Version;
 import pothi_discord.utils.database.morphia.DataClass;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 public class Gametime extends DataClass<ObjectId>{
     private String gameName;
 
-    @Embedded private List<TimePair> timePairs;
+    @Embedded private List<TimePair> timePairs = new ArrayList<>();
 
     public String getGameName() {
         return gameName;
