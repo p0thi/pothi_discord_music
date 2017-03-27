@@ -1,4 +1,4 @@
-group 'eu.pothi.discord.music'
+group 'eu.pothi.discord.audio'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -32,8 +32,8 @@ jar {
 
 dependencies {
     compile group: 'junit', name: 'junit', version: '4.11'
-    compile 'net.dv8tion:JDA:3.0.0_157'
-    compile 'com.sedmelluq:lavaplayer:1.2.31'
+    compile 'net.dv8tion:JDA:3.0.0_162'
+    compile 'com.sedmelluq:lavaplayer:1.2.34'
     compile 'me.xdrop:fuzzywuzzy:1.1.6'
 
 
@@ -54,10 +54,9 @@ dependencies {
     
     //mongodb + BSON
     // https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
-    //compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.2.2'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.2.2'
     //compile 'org.mongodb:bson:3.3.0'
 
     // https://mvnrepository.com/artifact/org.mongodb.morphia/morphia
     compile group: 'org.mongodb.morphia', name: 'morphia', version: '1.3.2'
-
 }

@@ -1,6 +1,7 @@
 package pothi_discord_music.utils;
 
 import org.junit.Test;
+import pothi_discord.utils.TextUtils;
 
 import static org.junit.Assert.*;
 
