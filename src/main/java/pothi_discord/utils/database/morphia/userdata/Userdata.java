@@ -51,10 +51,11 @@ public class Userdata extends DataClass<String> {
 
         if (!skipCheck && allUserdatas.containsKey(getId())) {
             String currentGame = allUserdatas.get(getId()).getCurrentGame();
-            if (currentGame != null
+            if (game == null && currentGame == null
+                    || (currentGame != null
                     && game != null
                     && game.getName() != null
-                    && currentGame.equals(game.getName())) {
+                    && currentGame.equals(game.getName()))) {
                 return;
             }
         }
