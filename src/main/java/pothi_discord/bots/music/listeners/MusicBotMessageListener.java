@@ -220,7 +220,7 @@ public class MusicBotMessageListener extends AbstractEventListener {
 
         Game newGame;
         try {
-            newGame = user.getMutualGuilds().get(0).getMember(user).getGame();
+            newGame = event.getGuild().getMember(event.getUser()).getGame();
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getLocalizedMessage());

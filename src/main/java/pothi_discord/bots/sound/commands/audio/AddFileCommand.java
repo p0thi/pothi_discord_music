@@ -94,7 +94,7 @@ public class AddFileCommand extends GuildCommand{
                         mongoAudioCommand.setFileId(fileId);
 
                         mongoGuild.getSoundCommands().add(mongoAudioCommand);
-                        Main.datastore.save(mongoGuild);
+                        mongoGuild.saveInstance();
 
                         channel.sendMessage(String.format("Erfolgreich. Der Befehl %s spielt jetzt die Date" +
                                 "%s ab.", Param.PREFIX() + commandName, attachment.getFileName()))
@@ -111,7 +111,7 @@ public class AddFileCommand extends GuildCommand{
                         mongoAudioCommand.setFileId(fileId);
 
                         mongoGuild.getTmpSoundCommands().add(mongoAudioCommand);
-                        Main.datastore.save(mongoGuild);
+                        mongoGuild.saveInstance();
 
                         StringBuilder b = new StringBuilder();
                         b.append(String.format("Erfolgreich. Der Befehl %s wurde zur Adminabfrage hinzugefügt." +

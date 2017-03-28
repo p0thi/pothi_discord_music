@@ -2,11 +2,17 @@ package pothi_discord.utils.database.morphia;
 
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Version;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pothi_discord.Main;
+
+import java.util.ConcurrentModificationException;
 
 /**
  * Created by Pascal Pothmann on 24.03.2017.
  */
 public abstract class DataClass<T> {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Id
     private T id;
     @Version
@@ -26,5 +32,14 @@ public abstract class DataClass<T> {
 
     public void setV(long v) {
         this.v = v;
+    }
+
+    public void saveInstance() {
+        try {
+            Main.datastore.save(this);
+        } catch (ConcurrentModificationException e) {
+            log.error("Could not store instance " + this.getClass().getSimpleName() + " " + getId().toString()
+                + " | " + e.getMessage());
+        }
     }
 }

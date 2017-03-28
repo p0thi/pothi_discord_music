@@ -10,6 +10,7 @@ import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.DataClass;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Userdata extends DataClass<String> {
         if (result == null) {
             result = new Userdata();
             result.setId(id);
-            Main.datastore.save(result);
+            result.saveInstance();
         }
         if (!allUserdatas.containsKey(id)) {
             allUserdatas.put(id, result);
@@ -49,18 +50,22 @@ public class Userdata extends DataClass<String> {
 
     public void storeGame(Game game, boolean skipCheck) {
 
-        if (!skipCheck && allUserdatas.containsKey(getId())) {
+        if (!skipCheck) {
+
             String currentGame = allUserdatas.get(getId()).getCurrentGame();
-            if (game == null && currentGame == null
-                    || (currentGame != null
-                    && game != null
-                    && game.getName() != null
-                    && currentGame.equals(game.getName()))) {
-                return;
+            if (currentGame == null) {
+                if (game == null || game.getName() == null) {
+                    return;
+                }
+            }
+            else {
+                if (game != null && game.getName() != null && currentGame.equals(game.getName())) {
+                    return;
+                }
             }
         }
 
-        System.out.println("Storing game of user. " + getId());
+        allUserdatas.get(getId()).setCurrentGame(game == null ? null : game.getName());
 
         if (currentGame != null) {
 
@@ -96,14 +101,13 @@ public class Userdata extends DataClass<String> {
             }
 
             myTimepair.setDuration(myTimepair.getDuration() + (System.currentTimeMillis() - lastGameUpdate));
-            Main.datastore.save(myGametime);
-        }
+            myGametime.saveInstance();
+    }
 
         currentGame = game == null ? null : game.getName();
         lastGameUpdate = System.currentTimeMillis();
-        Main.datastore.save(this);
+        saveInstance();
     }
-
 
     public List<Gametime> getGametime() {
         return gametime;

@@ -51,7 +51,7 @@ public class GuildData extends DataClass<String> {
 
         if (result == null) {
             result = new GuildData();
-            Main.datastore.save(result);
+            result.saveInstance();
         }
 
         result.setLastGenreSearch(new ArrayList<>());

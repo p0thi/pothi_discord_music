@@ -96,7 +96,7 @@ public class RequestsCommand extends GuildCommand {
                 guildData.getTmpSoundCommands().remove(myCommand);
                 guildData.getSoundCommands().add(myCommand);
 
-                Main.datastore.save(guildData);
+                guildData.saveInstance();
 
                 event.getChannel().sendMessage(String.format("Der Befehl **%S** ist nun " +
                                 "für alle auf diesem Server verfügbar.",
@@ -117,7 +117,7 @@ public class RequestsCommand extends GuildCommand {
                 MongoAudioCommand.removeAudioFileFromDatabase(myCommand.getFileId());
 
                 guildData.getTmpSoundCommands().remove(myCommand);
-                Main.datastore.save(guildData);
+                guildData.saveInstance();
 
                 event.getChannel()
                         .sendMessage(String
@@ -131,7 +131,7 @@ public class RequestsCommand extends GuildCommand {
                     MongoAudioCommand.removeAudioFileFromDatabase(command.getFileId());
                 }
                 guildData.getTmpSoundCommands().clear();
-                Main.datastore.save(guildData);
+                guildData.saveInstance();
 
                 event.getChannel().sendMessage("Alle Einträge aus der Adminabfrage gelöscht."
                         + " :nerd:").queue(new MessageDeleter());

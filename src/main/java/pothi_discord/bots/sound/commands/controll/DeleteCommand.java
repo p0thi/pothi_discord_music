@@ -40,7 +40,7 @@ public class DeleteCommand extends GuildCommand {
                 if (command.getCommand().equals(args[i].toLowerCase())) {
                     builder.append(command.getCommand() + ", ");
                     guildData.getSoundCommands().remove(command);
-                    Main.datastore.save(guildData);
+                    guildData.saveInstance();
                     break inner;
                 }
             }
