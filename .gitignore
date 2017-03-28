@@ -36,3 +36,7 @@ pothi_discord_music/config/config.txt
 pothi_discord_music/media/
 src/main/java/net/
 src/test/resources/
+/pothi_discord/config/config.json
+!/src/main/java/pothi_discord/TestMain.java
+/src/main/java/pothi_discord/TestMain.java
+!/pothi_discord/config/config.json
