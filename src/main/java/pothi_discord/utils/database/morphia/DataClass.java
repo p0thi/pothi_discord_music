@@ -12,7 +12,7 @@ import java.util.ConcurrentModificationException;
  * Created by Pascal Pothmann on 24.03.2017.
  */
 public abstract class DataClass<T> {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private transient final Logger log = LoggerFactory.getLogger(this.getClass());
     @Id
     private T id;
     @Version
