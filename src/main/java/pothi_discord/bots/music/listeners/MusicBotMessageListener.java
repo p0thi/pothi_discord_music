@@ -222,7 +222,7 @@ public class MusicBotMessageListener extends AbstractEventListener {
         try {
             newGame = user.getMutualGuilds().get(0).getMember(user).getGame();
         } catch (Exception e) {
-            System.out.println("Error 1");
+            e.printStackTrace();
             log.error(e.getLocalizedMessage());
             return;
         }
@@ -230,7 +230,7 @@ public class MusicBotMessageListener extends AbstractEventListener {
         try {
             userdata.storeGame(newGame);
         } catch (Exception e) {
-            System.out.println("Error 2");
+            e.printStackTrace();
             log.error(e.getLocalizedMessage());
             return;
         }
