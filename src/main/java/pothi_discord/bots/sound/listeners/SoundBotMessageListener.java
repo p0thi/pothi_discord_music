@@ -120,7 +120,13 @@ public class SoundBotMessageListener extends AbstractEventListener {
 
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent event) {
-
+        if (event.getMember().getUser().getId().equals(event.getJDA().getSelfUser().getId())) {
+            try {
+                event.getGuild().getAudioManager().openAudioConnection(event.getChannelLeft());
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage());
+            }
+        }
     }
 
     @Override
