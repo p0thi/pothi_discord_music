@@ -52,6 +52,7 @@ public class Userdata extends DataClass<String> {
         if (!skipCheck && allUserdatas.containsKey(getId())) {
             String currentGame = allUserdatas.get(getId()).getCurrentGame();
             if (currentGame != null
+                    && game != null
                     && game.getName() != null
                     && currentGame.equals(game.getName())) {
                 return;
