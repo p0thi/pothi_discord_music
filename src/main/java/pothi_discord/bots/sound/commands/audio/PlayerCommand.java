@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.bson.types.ObjectId;
 import pothi_discord.bots.BotShard;
 import pothi_discord.Main;
+import pothi_discord.bots.sound.listeners.SoundTrackScheduler;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.listeners.TrackScheduler;
 
@@ -46,7 +47,8 @@ public class PlayerCommand extends GuildCommand {
 
     public void play(Guild guild, VoiceChannel vc, BotShard shard) {
         guild.getAudioManager().openAudioConnection(vc);
-        TrackScheduler sheduler = shard.getMyBot().getGuildAudioPlayer(guild).getScheduler();
+        SoundTrackScheduler sheduler = (SoundTrackScheduler) shard.getMyBot().getGuildAudioPlayer(guild).getScheduler();
+        sheduler.vc = vc;
 
         MongoDatabase db = Main.mongoDB.getMongoDatabase("pothibot");
         GridFSBucket gridFSBucket = GridFSBuckets.create(db);

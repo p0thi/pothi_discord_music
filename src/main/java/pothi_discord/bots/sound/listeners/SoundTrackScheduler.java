@@ -29,6 +29,7 @@ public class SoundTrackScheduler extends AudioEventAdapter implements TrackSched
     public final AudioPlayer player;
 
     public final GuildSoundManager soundManager;
+    public VoiceChannel vc = null;
 
     public SoundTrackScheduler(GuildSoundManager musicManager) {
         this.soundManager = musicManager;
@@ -103,6 +104,7 @@ public class SoundTrackScheduler extends AudioEventAdapter implements TrackSched
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (endReason.mayStartNext) {
             soundManager.guild.getAudioManager().closeAudioConnection();
+            vc = null;
         }
         try {
             File myFile = new File(track.getInfo().uri);

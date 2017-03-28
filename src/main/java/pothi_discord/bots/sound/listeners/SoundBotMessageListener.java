@@ -14,7 +14,9 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pothi_discord.bots.Bot;
 import pothi_discord.bots.BotShard;
+import pothi_discord.bots.SoundBot;
 import pothi_discord.bots.sound.DiscordSoundBotShard;
 import pothi_discord.bots.sound.commands.audio.PlayerCommand;
 import pothi_discord.handlers.MessageDeleter;
@@ -120,7 +122,9 @@ public class SoundBotMessageListener extends AbstractEventListener {
 
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent event) {
-        if (event.getMember().getUser().getId().equals(event.getJDA().getSelfUser().getId())) {
+        SoundTrackScheduler scheduler = (SoundTrackScheduler) shard.getMyBot().getGuildAudioPlayer(event.getGuild()).getScheduler();
+        if (event.getMember().getUser().getId().equals(event.getJDA().getSelfUser().getId())
+                && event.getChannelLeft().equals(scheduler.vc)) {
             try {
                 event.getGuild().getAudioManager().openAudioConnection(event.getChannelLeft());
             } catch (Exception e) {
