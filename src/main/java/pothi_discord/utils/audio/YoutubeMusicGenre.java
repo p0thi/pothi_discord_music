@@ -2,8 +2,8 @@ package pothi_discord.utils.audio;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.autoplaylists.MongoAutoplaylist;
 import pothi_discord.utils.youtube.YoutubeAPI;
@@ -119,7 +119,7 @@ public enum YoutubeMusicGenre {
     PSYCHEDELIC_ROCK("UC96BpCnF38tLoGw7xbchWGg", "Psychedelic Rock"),
     RIDDIM("UCDVP78v2uLkhwGr7BHl6Pag", "Riddim");
 
-    private static final Logger log = LoggerFactory.getLogger(YoutubeMusicGenre.class);
+    private static final Logger log = MorphiaLoggerFactory.get(YoutubeMusicGenre.class);
     private static final String DATABASE_NAME = "autoplaylists";
     private final String channelId;
     private final String readableName;

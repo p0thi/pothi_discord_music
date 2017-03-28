@@ -9,8 +9,8 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.VoiceChannel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.sound.managers.audio.GuildSoundManager;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class SoundTrackScheduler extends AudioEventAdapter implements TrackScheduler {
-    private static final Logger log = LoggerFactory.getLogger(SoundTrackScheduler.class);
+    private static final Logger log = MorphiaLoggerFactory.get(SoundTrackScheduler.class);
 
     public final AudioPlayer player;
 

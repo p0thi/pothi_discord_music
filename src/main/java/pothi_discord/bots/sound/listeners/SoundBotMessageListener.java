@@ -12,8 +12,8 @@ import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.Bot;
 import pothi_discord.bots.BotShard;
 import pothi_discord.bots.SoundBot;
@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * Created by Pascal Pothmann on 25.01.2017.
  */
 public class SoundBotMessageListener extends AbstractEventListener {
-    private static final Logger log = LoggerFactory.getLogger(SoundBotMessageListener.class);
+    private static final Logger log = MorphiaLoggerFactory.get(SoundBotMessageListener.class);
 
 
 
@@ -77,7 +77,7 @@ public class SoundBotMessageListener extends AbstractEventListener {
                         MessageDeleter.deleteMessage(event.getMessage(), 10000);
                         shard.getMyBot().getGuildCommandManagers().get(event.getGuild().getId()).getCommand(command).action(event, words, shard);
                     } catch (Exception e) {
-                        log.warn("Could not executeAllTasks commsnd: " + command);
+                        log.warning("Could not executeAllTasks commsnd: " + command);
                         e.printStackTrace();
                     }
                 } else {

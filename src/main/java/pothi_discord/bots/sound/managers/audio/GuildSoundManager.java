@@ -7,8 +7,9 @@ package pothi_discord.bots.sound.managers.audio;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import net.dv8tion.jda.core.entities.Guild;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.mongodb.morphia.logging.Logger;
+import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.Bot;
 import pothi_discord.bots.sound.listeners.SoundTrackScheduler;
 import pothi_discord.handlers.AudioPlayerSendHandler;
@@ -19,7 +20,7 @@ import pothi_discord.managers.GuildAudioManager;
  * Holder for both the player and a track scheduler for one guild.
  */
 public class GuildSoundManager implements GuildAudioManager {
-    private static final Logger log = LoggerFactory.getLogger(GuildSoundManager.class);
+    private static final Logger log = MorphiaLoggerFactory.get(GuildSoundManager.class);
 
     /**
      * Audio player for the guild.
