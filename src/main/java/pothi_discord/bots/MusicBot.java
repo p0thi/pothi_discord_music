@@ -1,6 +1,7 @@
 package pothi_discord.bots;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
@@ -27,6 +28,8 @@ import pothi_discord.utils.audio.AudioUtils;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,6 +39,7 @@ public class MusicBot extends Bot{
     private static final Logger log = MorphiaLoggerFactory.get(MusicBot.class);
 
     private String botToken;
+
 
 
     public MusicBot(String botToken) {
@@ -123,39 +127,14 @@ public class MusicBot extends Bot{
         }
 
         if(ready == numShards) {
+
+            startUserdataUpdateThread();
             log.info("All " + ready + " shards are ready.");
 
             for(BotShard bot : shards) {
                 List<Guild> allGuilds = bot.getJDA().getGuilds();
                 log.info("Connecting to " + allGuilds.size() + " guilds...");
                 for(Guild guild : allGuilds) {
-
-                    for (Member member : guild.getMembers()) {
-                        new Thread(() -> {try {
-                            if (member.getUser().isBot() || member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                return;
-                            }
-
-                            Userdata userdata = Userdata.getUserdata(member.getUser().getId());
-
-                            Game newGame;
-                            try {
-                                newGame = member.getGame();
-                            } catch (Exception e) {
-                                log.error(e.getLocalizedMessage());
-                                return;
-                            }
-
-                            try {
-                                userdata.storeGame(newGame);
-                            } catch (Exception e) {
-                                log.error(e.getLocalizedMessage());
-                                return;
-                            }
-                        } catch (Exception e){
-                            log.error(e.getLocalizedMessage());
-                        }}).start();
-                    }
 
                     //TODO should also happen on GuildJoin event!!!!
                     GuildData guildData = GuildData.getGuildDataById(guild.getId());
@@ -174,6 +153,45 @@ public class MusicBot extends Bot{
                 }
             }
         }
+
+    }
+
+    private void startUserdataUpdateThread() {
+        new Thread(() -> {
+            while (true) {
+                ArrayList<String> checkedUsers = new ArrayList<>();
+                for (BotShard shard : shards) {
+                    for (User user : shard.getJDA().getUsers()) {
+
+                        if (checkedUsers.contains(user.getId())) {
+                            continue;
+                        }
+
+                        checkedUsers.add(user.getId());
+
+                        try {
+                            Member member = user.getMutualGuilds().get(0).getMember(user);
+                            if (user.isBot() || member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
+                                continue;
+                            }
+
+                            Userdata userdata = Userdata.getUserdata(user.getId());
+
+                            userdata.storeGame(member.getGame(), true);
+
+                        } catch (Exception e) {
+                            log.error(e.getLocalizedMessage());
+                        }
+                    }
+
+                    try {
+                        Thread.sleep(600000); // 10 minutes
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
 

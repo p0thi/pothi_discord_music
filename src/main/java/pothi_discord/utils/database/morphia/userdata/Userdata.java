@@ -10,6 +10,7 @@ import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.DataClass;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ import java.util.List;
  */
 @Entity(value = "userdata", noClassnameStored = true)
 public class Userdata extends DataClass<String> {
+    private static transient HashMap<String, Userdata> allUserdatas = new HashMap<>();
+
     @Reference(lazy = true)
     private List<Gametime> gametime = new ArrayList<>();
     private Long lastGameUpdate = System.currentTimeMillis();
@@ -33,12 +36,27 @@ public class Userdata extends DataClass<String> {
             result.setId(id);
             Main.datastore.save(result);
         }
+        if (!allUserdatas.containsKey(id)) {
+            allUserdatas.put(id, result);
+        }
 
         return result;
     }
 
     public void storeGame(Game game) {
+        storeGame(game, false);
+    }
+
+    public void storeGame(Game game, boolean skipCheck) {
+
+        if (!skipCheck && allUserdatas.containsKey(getId())) {
+            if (allUserdatas.get(getId()).getCurrentGame().equals(game.getName())) {
+                return;
+            }
+        }
+
         System.out.println("Storing game of user. " + getId());
+
         if (currentGame != null) {
 
             Gametime myGametime = null;

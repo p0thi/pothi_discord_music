@@ -14,6 +14,8 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
+import java.util.ArrayList;
+
 /**
  * Created by Pascal Pothmann on 27.01.2017.
  */
@@ -31,10 +33,13 @@ public class ShutdownCommand extends GuildCommand {
             return;
         }
 
-        for (Guild tmpGuild : Main.musicBot.getAllGuilds())
+        ArrayList<String> checkedUsers = new ArrayList<>();
+        for (Guild tmpGuild : Main.musicBot.getAllGuilds()) {
 
             for (Member member : tmpGuild.getMembers()) {
-                if (member.getUser().isBot() || member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
+                if (checkedUsers.contains(member.getUser().getId())
+                        || member.getUser().isBot()
+                        || member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
                     continue;
                 }
 
@@ -50,15 +55,17 @@ public class ShutdownCommand extends GuildCommand {
                     }
 
                     try {
-                        userdata.storeGame(newGame);
+                        userdata.storeGame(newGame, true);
+                        checkedUsers.add(member.getUser().getId());
                     } catch (Exception e) {
                         log.error(e.getLocalizedMessage());
                         return;
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
                     log.error(e.getLocalizedMessage());
                 }
             }
+        }
 
 
         execute(Main.soundBot);

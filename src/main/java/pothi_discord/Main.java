@@ -23,9 +23,6 @@ import java.nio.charset.Charset;
 public class Main {
     private static final Logger log = MorphiaLoggerFactory.get(Main.class);
 
-    public static final Main self = new Main();
-    static final int SHARD_CREATION_SLEEP_INTERVAL = 5100;
-
     public static final long START_TIME = System.currentTimeMillis();
 
     public static MusicBot musicBot;
