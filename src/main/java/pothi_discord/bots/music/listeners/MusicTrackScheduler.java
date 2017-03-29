@@ -90,12 +90,13 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
     /**
      * Start the next track, stopping the current one if it is playing.
      */
-    public void nextTrack() {
+    public AudioTrack nextTrack() {
         // Start the next track, regardless of if something is already playing or not. In case queue was empty, we are
         // giving null to startTrack, which is a valid argument and will simply stop the player.
-
+        AudioTrack result = getNextTrack();
         this.skipRequestsCounter = 0;
-        player.startTrack(getNextTrack(), false);
+        player.startTrack(result, false);
+        return result;
     }
 
     @Override

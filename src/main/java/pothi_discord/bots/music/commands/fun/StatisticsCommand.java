@@ -2,6 +2,7 @@ package pothi_discord.bots.music.commands.fun;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
@@ -23,12 +24,14 @@ import java.util.Collections;
 public class StatisticsCommand extends GuildCommand{
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard botShard) {
+
+        if (!checkPermission(event)) {
+            return;
+        }
+
         User user = event.getAuthor();
         Guild guild = event.getGuild();
 
-        if (!checkPermission(guild, user)) {
-            return;
-        }
         event.getChannel().sendTyping().queue();
 
         int days = -1;
@@ -104,4 +107,5 @@ public class StatisticsCommand extends GuildCommand{
     public String helpString() {
         return null;
     }
+
 }

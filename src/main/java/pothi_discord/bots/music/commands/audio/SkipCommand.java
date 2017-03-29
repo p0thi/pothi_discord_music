@@ -1,18 +1,19 @@
 package pothi_discord.bots.music.commands.audio;
 
-import net.dv8tion.jda.core.entities.VoiceChannel;
-import pothi_discord.bots.BotShard;
-import pothi_discord.commands.GuildCommand;
-import pothi_discord.listeners.TrackScheduler;
-import pothi_discord.managers.GuildAudioManager;
-import pothi_discord.utils.Param;
-import pothi_discord.utils.database.morphia.guilddatas.Permissions;
-import pothi_discord.handlers.MessageDeleter;
-import pothi_discord.bots.music.listeners.MusicTrackScheduler;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import pothi_discord.bots.BotShard;
+import pothi_discord.bots.music.listeners.MusicTrackScheduler;
+import pothi_discord.commands.GuildCommand;
+import pothi_discord.handlers.MessageDeleter;
+import pothi_discord.listeners.TrackScheduler;
+import pothi_discord.managers.GuildAudioManager;
+import pothi_discord.permissions.PermissionManager;
+import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 
 /**
@@ -36,22 +37,30 @@ public class SkipCommand extends GuildCommand {
             return;
         }
 
-        if(!checkPermission(guild, user) && !checkSkipCount(manager, guild, channel)){
+        if(!checkPermission(event)){
             return;
         }
+
+        if (! (PermissionManager.checkUserPermission(guild, user, "can-instant-skip") || checkSkipCount(manager, guild, channel))) {
+            return;
+        }
+
+        channel.sendTyping().queue();
 
         GuildAudioManager musicManager = shard.getMyBot().getGuildAudioPlayer(guild);
 
         String content;
-
+        AudioTrack oldTrack = musicManager.getPlayer().getPlayingTrack();
+        AudioTrack newTrack = ((MusicTrackScheduler)musicManager.getScheduler()).nextTrack();
         if (musicManager.getPlayer().getPlayingTrack() != null) {
-            content  = "Lied wird übersprungen: **" + musicManager.getPlayer().getPlayingTrack().getInfo().title + "**";
+            content = "Lied wird übersprungen: **" + oldTrack.getInfo().title + "**" +
+                    "\n\n" +
+                    "Neues Lied: **" + newTrack.getInfo().title + "**";
         }
         else {
             content = "Neues Lied wird gestartet.";
         }
 
-        ((MusicTrackScheduler)musicManager.getScheduler()).nextTrack();
 
         log.info(this.getClass().getSimpleName() + ": " + content);
         channel.sendMessage(content).queue(new MessageDeleter());
@@ -88,21 +97,6 @@ public class SkipCommand extends GuildCommand {
             return false;
         }
 
-    }
-
-    @Override
-    public boolean checkPermission(Guild guild, User user) {
-        boolean result = Param.isDeveloper(user.getId());
-
-        GuildData guildData = GuildData.getGuildDataById(guild.getId());
-
-        System.out.println();
-        Permissions permissions = guildData.getPermissions();
-
-        result = result || permissions.canUserInstaskip(guild, user.getId());
-        result = result || permissions.hasUserPermissionForCommand(guild, user.getId(), getName());
-
-        return result;
     }
 
 }

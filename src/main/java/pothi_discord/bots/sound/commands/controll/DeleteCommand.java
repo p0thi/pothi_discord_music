@@ -18,12 +18,12 @@ import java.util.List;
 public class DeleteCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        Guild guild = event.getGuild();
-        User user = event.getAuthor();
 
-        if (!checkPermission(guild, user)) {
+        if (!checkPermission(event)) {
             return;
         }
+
+        Guild guild = event.getGuild();
 
         if(args.length < 2) {
             event.getChannel().sendMessage("Fehlender Befehl. " + ":see_no_evil:").queue(new MessageDeleter());
@@ -60,4 +60,5 @@ public class DeleteCommand extends GuildCommand {
     public String helpString() {
         return null;
     }
+
 }

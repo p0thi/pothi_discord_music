@@ -33,12 +33,13 @@ public class RecordCommand extends GuildCommand {
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        user = event.getAuthor();
-        guild = event.getGuild();
 
-        if(!checkPermission(guild, user)) {
+        if(!checkPermission(event)) {
             return;
         }
+
+        user = event.getAuthor();
+        guild = event.getGuild();
         channel = event.getChannel();
 
         guildData = GuildData.getGuildDataById(guild.getId());

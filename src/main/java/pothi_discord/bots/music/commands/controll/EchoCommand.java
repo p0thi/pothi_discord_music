@@ -15,10 +15,8 @@ import java.util.Arrays;
 public class EchoCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard botShard) {
-        Guild guild = event.getGuild();
-        User user = event.getAuthor();
 
-        if (!checkPermission(guild, user)) {
+        if (!checkPermission(event)) {
             return;
         }
 

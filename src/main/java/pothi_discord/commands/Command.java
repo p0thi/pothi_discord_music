@@ -2,6 +2,7 @@ package pothi_discord.commands;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.handlers.MessageDeleter;
@@ -18,6 +19,6 @@ public interface Command {
     default void prepare(){
 
     }
-    boolean checkPermission(Guild guild, User user);
+    boolean checkPermission(GuildMessageReceivedEvent event);
     String helpString();
 }

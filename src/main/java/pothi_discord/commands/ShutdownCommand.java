@@ -8,6 +8,7 @@ import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.Bot;
 import pothi_discord.bots.BotShard;
 import pothi_discord.Main;
+import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.handlers.StaticSchedulePool;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.User;
@@ -26,10 +27,8 @@ public class ShutdownCommand extends GuildCommand {
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        User user = event.getAuthor();
-        Guild guild = event.getGuild();
 
-        if(!checkPermission(guild, user)) {
+        if(!checkPermission(event)) {
             return;
         }
 

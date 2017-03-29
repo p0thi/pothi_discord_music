@@ -12,16 +12,14 @@ import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 public class ResetCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        User user = event.getAuthor();
+        if (!checkPermission(event)) {
+            return;
+        }
+
         Guild guild = event.getGuild();
         TextChannel channel = event.getChannel();
 
         boolean skipTrack = args.length > 1 && args[1].toLowerCase().equals("song");
-
-
-        if (!checkPermission(guild, user)) {
-            return;
-        }
 
         channel.sendTyping();
 

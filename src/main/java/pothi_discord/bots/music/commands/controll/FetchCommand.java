@@ -16,14 +16,14 @@ import pothi_discord.utils.audio.YoutubeMusicGenre;
 public class FetchCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        User user = event.getAuthor();
-        Guild guild = event.getGuild();
 
-        if(!checkPermission(guild, user)) {
+        if(!checkPermission(event)) {
             return;
         } if(args.length < 2) {
             return;
         }
+
+        User user = event.getAuthor();
 
         TextChannel channel = event.getChannel();
 
@@ -40,7 +40,8 @@ public class FetchCommand extends GuildCommand {
     }
 
     @Override
-    public boolean checkPermission(Guild guild, User user) {
+    public boolean checkPermission(GuildMessageReceivedEvent event) {
+        User user = event.getAuthor();
         boolean permissionGranted = true;
 
         permissionGranted = permissionGranted && Param.isDeveloper(user.getId());

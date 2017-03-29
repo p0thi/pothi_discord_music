@@ -24,12 +24,12 @@ import java.util.List;
 public class RequestsCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        User user = event.getAuthor();
-        Guild guild = event.getGuild();
-
-        if (!checkPermission(guild, user)) {
+        if (!checkPermission(event)) {
             return;
         }
+
+        User user = event.getAuthor();
+        Guild guild = event.getGuild();
 
         if (args.length < 2) {
             event.getChannel().sendMessage(String.format("Mit **%srequests show** kannst du dir alle " +

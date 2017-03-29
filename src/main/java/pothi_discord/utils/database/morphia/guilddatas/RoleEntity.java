@@ -15,7 +15,6 @@ public class RoleEntity {
     private int maxPlaylistSize = 25;
     private long maxSongLengthMillis = 720000;
     private boolean defaultRole = false;
-    private boolean canInstaSkip = false;
 
     private List<String> roleIds = new ArrayList<>();
     private List<String> userIds = new ArrayList<>();
@@ -62,15 +61,6 @@ public class RoleEntity {
         }
     }
 
-    public boolean canUserInstaskip(Guild guild, String userId) {
-        if(!hasUserAccess(guild, userId)) {
-            return false;
-        }
-        else {
-            return canInstaSkip;
-        }
-    }
-
 
     public String getName() {
         return name;
@@ -102,14 +92,6 @@ public class RoleEntity {
 
     public void setDefaultRole(boolean defaultRole) {
         this.defaultRole = defaultRole;
-    }
-
-    public boolean isCanInstaSkip() {
-        return canInstaSkip;
-    }
-
-    public void setCanInstaSkip(boolean canInstaSkip) {
-        this.canInstaSkip = canInstaSkip;
     }
 
     public List<String> getRoleIds() {

@@ -76,19 +76,6 @@ public class Permissions {
         return result;
     }
 
-    public boolean canUserInstaskip(Guild guild, String userId) {
-        if(defaultRole.canUserInstaskip(guild, userId)) {
-            return true;
-        }
-
-        for(RoleEntity pr : roles) {
-            if (pr.canUserInstaskip(guild, userId)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public String getOwner() {
         return owner;
     }

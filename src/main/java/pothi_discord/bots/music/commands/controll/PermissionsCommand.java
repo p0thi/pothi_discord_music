@@ -19,12 +19,12 @@ import java.util.List;
 public class PermissionsCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        User user = event.getAuthor();
-        Guild guild = event.getGuild();
-
-        if (!checkPermission(guild, user)) {
+        if (!checkPermission(event)) {
             return;
         }
+
+        User user = event.getAuthor();
+        Guild guild = event.getGuild();
 
         TextChannel channel = event.getChannel();
         Permissions gpo = GuildData.getGuildDataById(guild.getId()).getPermissions();
@@ -54,7 +54,7 @@ public class PermissionsCommand extends GuildCommand {
     }
 
     @Override
-    public boolean checkPermission(Guild guild, User user) {
+    public boolean checkPermission(GuildMessageReceivedEvent event) {
         return true;
     }
 }

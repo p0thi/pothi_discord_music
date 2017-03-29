@@ -20,12 +20,12 @@ import java.util.List;
 public class IdCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {
-        User user = event.getAuthor();
-        Guild guild = event.getGuild();
 
-        if (!checkPermission(guild, user)) {
+        if (!checkPermission(event)) {
             return;
         }
+
+        Guild guild = event.getGuild();
 
 
         EmbedBuilder eb = new EmbedBuilder();
