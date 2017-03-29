@@ -5,6 +5,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSBuckets;
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -15,6 +16,7 @@ import pothi_discord.Main;
 import pothi_discord.bots.sound.listeners.SoundTrackScheduler;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.listeners.TrackScheduler;
+import pothi_discord.permissions.PermissionManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +43,14 @@ public class PlayerCommand extends GuildCommand {
         }
 
         VoiceChannel userVc = guild.getMember(user).getVoiceState().getChannel();
+
+        if (args.length > 1
+                && PermissionManager.checkUserPermission(guild, user, "send-sound-bot-to-user")) {
+            Member tmpMember = guild.getMemberById(args[1]);
+            if (tmpMember != null) {
+                userVc = tmpMember.getVoiceState().getChannel();
+            }
+        }
 
         play(guild, userVc, shard);
     }
