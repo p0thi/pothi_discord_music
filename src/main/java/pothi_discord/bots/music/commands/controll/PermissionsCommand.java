@@ -33,7 +33,7 @@ public class PermissionsCommand extends GuildCommand {
         StringBuilder sb = new StringBuilder("Das sind deine internen Rollen: \n\n");
 
         for(RoleEntity pr : roleEntities) {
-            sb.append(pr.getName() + "\n");
+            sb.append("**" + pr.getName() + "**\n");
             for(String cmd : pr.getCommandNames()) {
                 sb.append("\t" + cmd + "\n");
             }
