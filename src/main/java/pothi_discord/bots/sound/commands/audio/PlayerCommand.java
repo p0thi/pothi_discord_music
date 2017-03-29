@@ -15,6 +15,7 @@ import pothi_discord.bots.BotShard;
 import pothi_discord.Main;
 import pothi_discord.bots.sound.listeners.SoundTrackScheduler;
 import pothi_discord.commands.GuildCommand;
+import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.permissions.PermissionManager;
 
@@ -44,11 +45,20 @@ public class PlayerCommand extends GuildCommand {
 
         VoiceChannel userVc = guild.getMember(user).getVoiceState().getChannel();
 
-        if (args.length > 1
-                && PermissionManager.checkUserPermission(guild, user, "send-sound-bot-to-user")) {
+        if (args.length > 1){
+
             Member tmpMember = guild.getMemberById(args[1]);
             if (tmpMember != null) {
-                userVc = tmpMember.getVoiceState().getChannel();
+                if (PermissionManager.checkUserPermission(guild, user, "send-sound-bot-to-user")) {
+                    userVc = tmpMember.getVoiceState().getChannel();
+                }
+            }
+            else if (args[1].toLowerCase().equals("remove") || args[1].toLowerCase().equals("delete")) {
+                if (PermissionManager.checkUserPermission(guild, user, "remove-sound-command")) {
+                    event.getChannel().sendMessage("Das ist noch nicht möglich. Bitte wende dich an einen Admin.")
+                            .queue(new MessageDeleter());
+                    return;
+                }
             }
         }
 
