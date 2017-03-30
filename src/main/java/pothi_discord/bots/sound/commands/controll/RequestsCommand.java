@@ -57,9 +57,10 @@ public class RequestsCommand extends GuildCommand {
                     hugeMessageSender.append("**" + (i+1) + "**.  " +
                             Param.PREFIX() + tmp.getCommand() + " - " + tmp.getDescription() + "\n");
                 }
-                hugeMessageSender.append("\nBefehle testen mit **%1$srequests test <Nummer>**\n" +
+                hugeMessageSender.append(String.format("\nBefehle testen mit **%1$srequests test <Nummer>**\n" +
                         "Befehle akzeptieren mit **%1$srequests accept <Nummer>**\n" +
-                        "Befehle löschen mit **%1$srequests delete <Nummer>** oder **%1$srequests clear**");
+                        "Befehle löschen mit **%1$srequests delete <Nummer>** oder **%1$srequests clear**",
+                        Param.PREFIX()));
 
                 hugeMessageSender.send(event.getChannel());
 
@@ -98,7 +99,7 @@ public class RequestsCommand extends GuildCommand {
 
                 guildData.saveInstance();
 
-                event.getChannel().sendMessage(String.format("Der Befehl **%S** ist nun " +
+                event.getChannel().sendMessage(String.format("Der Befehl **%s** ist nun " +
                                 "für alle auf diesem Server verfügbar.",
                         Param.PREFIX() + myCommand.getCommand())).queue(new MessageDeleter());
 

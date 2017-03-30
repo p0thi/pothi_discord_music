@@ -90,7 +90,7 @@ public class AddFileCommand extends GuildCommand{
                     mongoAudioCommand.setDescription(commandDescription);
 
                     // Checks weather user can add directly to list without admin request
-                    if (PermissionManager.checkUserPermission(guild, user, "addfile-without-adminrequest") && false) {
+                    if (PermissionManager.checkUserPermission(guild, user, "addfile-without-adminrequest")) {
                         String fileId = saveFileToDatabse(fileInputStream, attachment.getFileName());
                         mongoAudioCommand.setFileId(fileId);
 
