@@ -45,7 +45,7 @@ public abstract class GuildCommand implements Command {
         if (!result) {
             event.getChannel().sendMessage(getAccessDeniedMessage(user)).queue(new MessageDeleter(5000));
             event.getChannel().sendMessage(String.format("Benötigte Berechtigung: %s \n\n" +
-                    "Du kannst Dir deine Berechtigungsgruppen mit %spermissions anzeigen lassen",
+                    "Du kannst Dir deine Berechtigungsgruppen mit **%spermissions** anzeigen lassen.",
                     permission,
                     Param.PREFIX()))
                     .queue(new MessageDeleter(15000));
