@@ -23,6 +23,10 @@ public class Userdata extends DataClass<String> {
 
     @Reference(lazy = true)
     private List<Gametime> gametime = new ArrayList<>();
+
+    @Reference(lazy = true)
+    private List<UserPlaylist> playlists = new ArrayList<>();
+
     private Long lastGameUpdate = System.currentTimeMillis();
     private String currentGame = null;
 
@@ -131,5 +135,13 @@ public class Userdata extends DataClass<String> {
 
     public void setCurrentGame(String currentGame) {
         this.currentGame = currentGame;
+    }
+
+    public List<UserPlaylist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<UserPlaylist> playlists) {
+        this.playlists = playlists;
     }
 }

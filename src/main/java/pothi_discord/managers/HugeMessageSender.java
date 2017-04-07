@@ -1,4 +1,4 @@
-package pothi_discord.utils;
+package pothi_discord.managers;
 
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.MessageChannel;

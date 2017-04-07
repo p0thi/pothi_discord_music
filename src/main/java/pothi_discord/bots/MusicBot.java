@@ -105,6 +105,8 @@ public class MusicBot extends Bot{
 
 
 
+            gcm.addCommand("playlist", new PlaylistCommand());
+            gcm.addAlias("playlists", "playlist");
             gcm.addCommand("play", new PlayCommand());
             gcm.addAlias(">", "play");
             gcm.addCommand("repeat", new RepeatCommand());

@@ -2,15 +2,13 @@ package pothi_discord.bots.music.commands.fun;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
-import pothi_discord.permissions.Permission;
 import pothi_discord.permissions.PermissionManager;
-import pothi_discord.utils.HugeMessageSender;
+import pothi_discord.managers.HugeMessageSender;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.userdata.Gametime;
 import pothi_discord.utils.database.morphia.userdata.TimePair;
@@ -86,13 +84,13 @@ public class StatisticsCommand extends GuildCommand{
                 hugeMessageSender.append(gametime.getGameName() + " "
                         + "    ................................."
                         .substring(0, Math.max(0, 38 - gametime.getGameName().length()))
-                        + ".... " + TextUtils.getMillisFormatted(sum) + "\n");
+                        + ".... " + TextUtils.getMillisFormattedHM(sum) + "\n");
 
             }
 
         }
 
-        hugeMessageSender.append("\nGesamtspielzeit: " + TextUtils.getMillisFormatted(totalSum) + "\n");
+        hugeMessageSender.append("\nGesamtspielzeit: " + TextUtils.getMillisFormattedHM(totalSum) + "\n");
         hugeMessageSender.append("Alle Angaben ohne Gewähr." + " ;)");
 
         hugeMessageSender.send(event.getChannel());

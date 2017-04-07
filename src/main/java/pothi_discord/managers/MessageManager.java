@@ -9,16 +9,16 @@ public class MessageManager {
     private static final int MAX_MESSAGE_SIZE = 2000;
 
     private ArrayList<String> allMessages;
-    private String buffer;
+    private StringBuilder buffer;
 
     public MessageManager() {
         this.allMessages = new ArrayList<>();
-        this.buffer = "";
+        this.buffer = new StringBuilder();
     }
 
     public void append(String part) {
         if(buffer.length() + part.length() < MAX_MESSAGE_SIZE) {
-            buffer += part;
+            buffer.append(part);
         }
         else {
             allMessages.add(new String(buffer));
@@ -29,12 +29,12 @@ public class MessageManager {
                 tmpBuffer = tmpBuffer.substring(MAX_MESSAGE_SIZE);
             }
 
-            buffer = tmpBuffer;
+            buffer = new StringBuilder(tmpBuffer);
         }
     }
 
     public ArrayList<String> complete() {
-        allMessages.add(buffer);
+        allMessages.add(buffer.toString());
         return allMessages;
     }
 }

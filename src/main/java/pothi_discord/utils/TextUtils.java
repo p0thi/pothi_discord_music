@@ -364,12 +364,20 @@ public class TextUtils {
         return System.currentTimeMillis()-x*1000;
     }
 
-    public static String getMillisFormatted(long millis){
+    public static String getMillisFormattedHM(long millis){
         int h = (int) ((millis / 1000) / 3600);
         int m = (int) (((millis / 1000) / 60) % 60);
         int s = (int) ((millis / 1000) % 60);
 
         return h + " Std, " + m + " Min";
+    }
+
+    public static String getMillisFormattedMS(long millis){
+        int h = (int) ((millis / 1000) / 3600);
+        int m = (int) (((millis / 1000) / 60) % 60);
+        int s = (int) ((millis / 1000) % 60);
+
+        return m + " Min, " + s + " Sec";
     }
 
     public static long daysBetwenDates(String inputString1, String inputString2, String infix) {

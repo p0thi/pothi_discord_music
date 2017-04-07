@@ -69,7 +69,7 @@ public class NowPlayingCommand extends GuildCommand {
 
             if (embed != null) {
                 embed.addField("Aktuelle Autoplaylist", musicManager.playlist.getName(), true)
-                .addField("Volume", musicManager.player.getVolume() + "", false);
+                .addField("Volume", musicManager.player.getVolume() + "", true);
                 channel.sendMessage(embed.build()).queue(new MessageDeleter());
             }
             else {
@@ -214,7 +214,7 @@ public class NowPlayingCommand extends GuildCommand {
 
         EmbedBuilder eb = new EmbedBuilder()
                 .setTitle(at.getInfo().title, "https://www.youtube.com/watch?v=" + at.getIdentifier())
-                .addField("Zeit", timeField, true);
+                .addField("Zeit", timeField, false);
 
         if(desc != null && !desc.equals("")) {
             eb.addField("Beschreibung", desc, false);
