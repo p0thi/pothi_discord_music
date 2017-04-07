@@ -108,6 +108,7 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
     }
 
     public AudioTrack getNextTrack(){
+        //TODO user playlists
         AudioTrack track = null;
 
         int loopCounter = 0;
@@ -115,6 +116,7 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
             loopCounter++;
             track = queue.poll();
             if (track == null && !(musicManager.playlist == null || musicManager.playlist.size() == 0)) {
+                //the key is the identifier
                 String key = musicManager.playlist.getRandomElement();
                 log.info("Next Track from: " + key);
                 MyAudioLoadResultHandler handler = new MyAudioLoadResultHandler();

@@ -28,9 +28,13 @@ import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
+import pothi_discord.utils.database.morphia.userdata.UserAudioTrack;
+import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
+import pothi_discord.utils.database.morphia.userdata.Userdata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Holder for both the player and a track scheduler for one guild.
@@ -66,6 +70,32 @@ public class GuildMusicManager implements GuildAudioManager{
         this.guild = guild;
         player.addListener(scheduler);
         loadDefaultPlaylist();
+    }
+
+    public String getNextIdentifier() {
+        Random rand = new Random();
+        if (rand.nextBoolean()) {
+            log.info("Using user playlist");
+            VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
+
+            ArrayList<UserAudioTrack> activePlaylists = new ArrayList<>();
+
+            for (Member member : vc.getMembers()) {
+                Userdata userdata = Userdata.getUserdata(member.getUser().getId());
+                UserPlaylist activePlaylist = userdata.getActivePlaylist();
+
+                if (activePlaylist != null && activePlaylist.getTracks().size() > 0) {
+                    activePlaylists.addAll(activePlaylist.getTracks());
+                }
+            }
+
+            if (activePlaylists.size() > 0) {
+                return activePlaylists.get(rand.nextInt(activePlaylists.size())).getIdentifier();
+            }
+
+        }
+        log.info("Not using user playlist");
+        return playlist.getRandomElement();
     }
 
     @Override

@@ -48,6 +48,15 @@ public class Userdata extends DataClass<String> {
         return result;
     }
 
+    public UserPlaylist getActivePlaylist() {
+        for (UserPlaylist playlist : playlists) {
+            if (playlist.getActive()) {
+                return playlist;
+            }
+        }
+        return null;
+    }
+
     public void storeGame(Game game) {
         storeGame(game, false);
     }

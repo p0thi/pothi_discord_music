@@ -5,8 +5,6 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
-import me.xdrop.fuzzywuzzy.model.ExtractedResult;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -16,7 +14,6 @@ import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.managers.MessageManager;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
-import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.userdata.UserAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
@@ -59,7 +56,7 @@ public class PlaylistCommand extends GuildCommand {
 
                 for (int i = 0; i < userPlaylists.size(); i++) {
                     UserPlaylist tmp = userPlaylists.get(i);
-                    mm.append(String.format("%d. **%s** (%d Einträge)\n",
+                    mm.append(String.format("%d.  **%s**   (%d Einträge)\n",
                             i + 1,
                             tmp.getName(),
                             tmp.getTracks().size()));
@@ -92,7 +89,7 @@ public class PlaylistCommand extends GuildCommand {
             String identifier = String.join(" ", Arrays.copyOfRange(args, 2, args.length)).trim();
 
             if (identifier.length() > MAX_PLAYLIST_NAME_LENGTH) {
-                channel.sendMessage(String.format("Der Name der PLaylist ist zu lang. Maximal %d Zeichen",
+                channel.sendMessage(String.format("Der Name der Playlist ist zu lang. Maximal %d Zeichen",
                         MAX_PLAYLIST_NAME_LENGTH))
                         .queue(new MessageDeleter());
                 return;
@@ -112,8 +109,6 @@ public class PlaylistCommand extends GuildCommand {
         else if (args[1].matches("\\d+")){
 
             int playlistIndex = Integer.parseInt(args[1]) - 1;
-
-            System.out.println(playlistIndex);
 
             if (playlistIndex < 0
                     || userdata.getPlaylists().size() - 1 < playlistIndex) {
@@ -150,10 +145,8 @@ public class PlaylistCommand extends GuildCommand {
                 return;
             }
 
-            System.out.println("Test 1");
             switch (args[2].toLowerCase().trim()) {
                 case "add": {
-                    System.out.println("Test 2");
                     if (hasIdentifier) {
                         AudioLoader loader = new AudioLoader();
                         try {
@@ -197,7 +190,11 @@ public class PlaylistCommand extends GuildCommand {
                         }
                     }
                     else {
-                        //TODO explain add command
+                        channel.sendMessage(String.format("Mit **%splaylist <Nummer> add <Link>** kannst du einen " +
+                                "Eintrag zu der Playlist mit der Nummer <Nummer> hinzufügen. " +
+                                "<Link> ist z.B. ein YouTube Link.",
+                                Param.PREFIX()))
+                                .queue(new MessageDeleter());
                     }
                     break;
                 }
@@ -222,7 +219,7 @@ public class PlaylistCommand extends GuildCommand {
                         for (String title : tmpResults) {
                             int index = userPlaylist.getIndexOfExactTitle(title);
                             UserAudioTrack track = userPlaylist.getTracks().get(index);
-                            mm.append(String.format("%d. **%s**\n\tLink: <%s>\n\n",
+                            mm.append(String.format("%d.  **%s**\n\t\tLink: <%s>\n\n",
                                     (index + 1),
                                     title,
                                     track.getUri()));
@@ -233,7 +230,11 @@ public class PlaylistCommand extends GuildCommand {
                         }
                     }
                     else {
-                        //TODO explain search command
+                        channel.sendMessage(String.format("Mit **%splaylist <Nummer> search <Begriff>** kannst du " +
+                                "Einträge in der Playlist mit der Nummer <Nummer> anzeigen lassen, die zu dem " +
+                                "Suchbegriff <Begriff> passen.",
+                                Param.PREFIX()))
+                                .queue();
                     }
 
                     break;
@@ -260,18 +261,29 @@ public class PlaylistCommand extends GuildCommand {
                                     .queue(new MessageDeleter());
                         }
                         else {
-                            //TODO wrong argument for removing (not a number)
+                            channel.sendMessage(String.format("Mit **%splaylist <Nummer1> remove <Nummer2>** " +
+                                    "kannst du den Eintrag mit der Nummer <Nummer2> aus der Playlist mit der Nummer " +
+                                    "<Nummer1> entfernen.",
+                                    Param.PREFIX()))
+                                    .queue(new MessageDeleter());
                         }
                     }
                     else {
-                        //TODO explain remove command
+                        channel.sendMessage(String.format("Mit **%splaylist <Nummer1> remove <Nummer2>** " +
+                                "kannst du den Eintrag mit der Nummer <Nummer2> aus der Playlist mit der Nummer " +
+                                "<Nummer1> entfernen.",
+                                Param.PREFIX()))
+                                .queue(new MessageDeleter());
                     }
+                    break;
+                }
+                case "delete": {
                     break;
                 }
             }
         }
         else {
-            //TODO wrong second argument
+            channel.sendMessage("Ungültiges zweites Argument").queue(new MessageDeleter());
         }
 
     }
