@@ -28,19 +28,21 @@ import java.util.concurrent.ExecutionException;
  */
 public class PlaylistCommand extends GuildCommand {
 
-    private static final int MAX_PLAYLIST_LENGTH = 150;
+    private static final int MAX_PLAYLIST_LENGTH = 50;
     private static final int MAX_PLAYLIST_AMOUNT = 5;
     private static final int MAX_PLAYLIST_NAME_LENGTH = 20;
 
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard botShard) {
+        TextChannel channel = event.getChannel();
+
+        channel.sendTyping();
 
         if (!checkPermission(event)) {
             return;
         }
 
-        TextChannel channel = event.getChannel();
         User user = event.getAuthor();
         Userdata userdata = Userdata.getUserdata(user.getId());
 
@@ -54,12 +56,19 @@ public class PlaylistCommand extends GuildCommand {
 
                 List<UserPlaylist> userPlaylists = userdata.getPlaylists();
 
+                UserPlaylist activePlaylist = userdata.getActivePlaylist();
+
                 for (int i = 0; i < userPlaylists.size(); i++) {
                     UserPlaylist tmp = userPlaylists.get(i);
-                    mm.append(String.format("%d.  **%s**   (%d Einträge)\n",
+
+                    boolean isActive = activePlaylist != null && activePlaylist.getId().toHexString()
+                            .equals(tmp.getId().toHexString());
+
+                    mm.append(String.format("%d.  **%s**   (%d Einträge) %s\n",
                             i + 1,
                             tmp.getName(),
-                            tmp.getTracks().size()));
+                            tmp.getTracks().size(),
+                            isActive ? ":white_check_mark: *Active*" : ""));
                 }
 
                 for (String messageString : mm.complete()) {
@@ -105,6 +114,12 @@ public class PlaylistCommand extends GuildCommand {
             channel.sendMessage(String.format("Playlist **%s** erfolgreich erstellt.",
                     identifier))
                     .queue(new MessageDeleter());
+        }
+        else if (args[1].toLowerCase().equals("deactivate")) {
+            userdata.setActivePlaylist(null);
+            userdata.saveInstance();
+
+            channel.sendMessage("Alle Playlists sind jetzt deaktiviert.").queue(new MessageDeleter());
         }
         else if (args[1].matches("\\d+")){
 
@@ -280,6 +295,29 @@ public class PlaylistCommand extends GuildCommand {
                 case "delete": {
                     break;
                 }
+                case "activate": {
+                    UserPlaylist old = userdata.getActivePlaylist();
+                    userdata.setActivePlaylist(userPlaylist);
+                    userdata.saveInstance();
+                    if (old != null) {
+                        channel.sendMessage(String.format("Die Playlist **%s** ist jetzt dekativiert.",
+                                old.getName()))
+                                .queue(new MessageDeleter());
+                    }
+                    channel.sendMessage(String.format("Die Playlist **%s** ist jetzt aktiviert.",
+                            userPlaylist.getName()))
+                            .queue(new MessageDeleter());
+                    break;
+                }
+                case "deactivate": {
+                    userdata.setActivePlaylist(null);
+                    userdata.saveInstance();
+
+                    channel.sendMessage("Alle Playlists sind jetzt deaktiviert.").queue(new MessageDeleter());
+                    break;
+                }
+                //TODO clear
+                //TODO rename
             }
         }
         else {

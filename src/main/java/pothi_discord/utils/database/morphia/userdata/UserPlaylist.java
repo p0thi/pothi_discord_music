@@ -17,7 +17,6 @@ public class UserPlaylist extends DataClass<ObjectId> {
     private String name;
     @Embedded
     private List<UserAudioTrack> tracks = new ArrayList<>();
-    private Boolean active = false;
 
 
     public int getIndexOfExactTitle(String title) {
@@ -27,14 +26,6 @@ public class UserPlaylist extends DataClass<ObjectId> {
             }
         }
         return -1;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public String getName() {

@@ -117,7 +117,7 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
             track = queue.poll();
             if (track == null && !(musicManager.playlist == null || musicManager.playlist.size() == 0)) {
                 //the key is the identifier
-                String key = musicManager.playlist.getRandomElement();
+                String key = musicManager.getNextIdentifier();
                 log.info("Next Track from: " + key);
                 MyAudioLoadResultHandler handler = new MyAudioLoadResultHandler();
 

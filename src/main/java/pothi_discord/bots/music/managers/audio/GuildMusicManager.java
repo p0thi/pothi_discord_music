@@ -24,6 +24,7 @@ import pothi_discord.handlers.AudioPlayerSendHandler;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.managers.GuildAudioManager;
+import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
@@ -76,7 +77,15 @@ public class GuildMusicManager implements GuildAudioManager{
         Random rand = new Random();
         if (rand.nextBoolean()) {
             log.info("Using user playlist");
+
+            GuildData guildData = GuildData.getGuildDataById(guild.getId());
+
             VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
+
+            if (vc == null) {
+                return playlist.getRandomElement();
+            }
+
 
             ArrayList<UserAudioTrack> activePlaylists = new ArrayList<>();
 
@@ -85,14 +94,20 @@ public class GuildMusicManager implements GuildAudioManager{
                 UserPlaylist activePlaylist = userdata.getActivePlaylist();
 
                 if (activePlaylist != null && activePlaylist.getTracks().size() > 0) {
-                    activePlaylists.addAll(activePlaylist.getTracks());
+                    long maxTrackLength = guildData.getPermissions()
+                            .getMaxSongLengthOfUser(guild, member.getUser().getId());
+                    for (UserAudioTrack track : activePlaylist.getTracks()) {
+                        if (track.getLength() <= maxTrackLength) {
+                            activePlaylists.add(track);
+                        }
+                    }
                 }
             }
 
             if (activePlaylists.size() > 0) {
+                System.out.println(activePlaylists.size());
                 return activePlaylists.get(rand.nextInt(activePlaylists.size())).getIdentifier();
             }
-
         }
         log.info("Not using user playlist");
         return playlist.getRandomElement();

@@ -27,6 +27,9 @@ public class Userdata extends DataClass<String> {
     @Reference(lazy = true)
     private List<UserPlaylist> playlists = new ArrayList<>();
 
+    @Reference(lazy = true)
+    private UserPlaylist activePlaylist = null;
+
     private Long lastGameUpdate = System.currentTimeMillis();
     private String currentGame = null;
 
@@ -49,12 +52,11 @@ public class Userdata extends DataClass<String> {
     }
 
     public UserPlaylist getActivePlaylist() {
-        for (UserPlaylist playlist : playlists) {
-            if (playlist.getActive()) {
-                return playlist;
-            }
-        }
-        return null;
+        return activePlaylist;
+    }
+
+    public void setActivePlaylist(UserPlaylist activePlaylist) {
+        this.activePlaylist = activePlaylist;
     }
 
     public void storeGame(Game game) {

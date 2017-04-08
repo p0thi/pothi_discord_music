@@ -32,6 +32,7 @@ public class SkipCommand extends GuildCommand {
         VoiceChannel voiceChannel = guild.getAudioManager().getConnectedChannel();
 
         if(membersVoiceChannel == null ||
+                voiceChannel == null ||
                 !voiceChannel.getId().equals(membersVoiceChannel.getId())) {
             channel.sendMessage("Du musst dich im selben Channel wie der Bot befinden.").queue(new MessageDeleter());
             return;
