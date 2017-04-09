@@ -20,6 +20,7 @@ import pothi_discord.utils.database.morphia.userdata.Userdata;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -261,30 +262,39 @@ public class PlaylistCommand extends GuildCommand {
                 }
                 case "remove": {
                     if (hasIdentifier) {
-                        if (identifier.trim().matches("\\d+")) {
-                            int trackIndex = Integer.parseInt(identifier.trim()) - 1;
+                        String[] numbers = identifier.trim().split(" ");
 
-                            if (trackIndex < 0 || trackIndex >= userPlaylist.getTracks().size()) {
-                                channel.sendMessage(String.format("Es existiert kein Eintrag an der Stelle %s.",
-                                        identifier))
-                                        .queue(new MessageDeleter());
-                                return;
+
+                        ArrayList<String> successNumbers = new ArrayList<>();
+                        ArrayList<UserAudioTrack> toRemove = new ArrayList<>();
+
+
+                        for (String number : numbers) {
+                            if (!number.trim().matches("\\d+")) {
+                                continue;
                             }
+                            int trackIndex = Integer.parseInt(number) - 1;
+                            System.out.println(trackIndex + "");
 
-                            UserAudioTrack trackToRemove = userPlaylist.getTracks().get(trackIndex);
-                            userPlaylist.getTracks().remove(trackIndex);
+                            if (trackIndex + 1 > userPlaylist.getTracks().size()) {
+                                continue;
+                            }
+                            toRemove.add(userPlaylist.getTracks().get(trackIndex));
 
-                            userPlaylist.saveInstance();
 
-                            channel.sendMessage(String.format("Der Eintrag **%s** wurde erfolgreich gelöscht.",
-                                    trackToRemove.getTitle()))
-                                    .queue(new MessageDeleter());
+                            successNumbers.add((trackIndex + 1) + "");
+
                         }
-                        else {
-                            channel.sendMessage(String.format("Mit **%splaylist <Nummer1> remove <Nummer2>** " +
-                                    "kannst du den Eintrag mit der Nummer <Nummer2> aus der Playlist mit der Nummer " +
-                                    "<Nummer1> entfernen.",
-                                    Param.PREFIX()))
+
+                        userPlaylist.getTracks().removeAll(toRemove);
+                        userPlaylist.saveInstance();
+
+                        if (successNumbers.size() <= 0) {
+                            channel.sendMessage("Es wurde nichts gelöscht.").queue(new MessageDeleter());
+                        }
+                        else if (successNumbers.size() >= 1) {
+                            channel.sendMessage("Der/die Eintrag/Einträge "
+                                    + String.join(", ", successNumbers) + " wurden gelöscht.")
                                     .queue(new MessageDeleter());
                         }
                     }
@@ -300,6 +310,7 @@ public class PlaylistCommand extends GuildCommand {
                 case "delete": {
                     break;
                 }
+                case "active":
                 case "activate": {
                     UserPlaylist old = userdata.getActivePlaylist();
                     userdata.setActivePlaylist(userPlaylist);
@@ -314,6 +325,7 @@ public class PlaylistCommand extends GuildCommand {
                             .queue(new MessageDeleter());
                     break;
                 }
+                case "deactive":
                 case "deactivate": {
                     userdata.setActivePlaylist(null);
                     userdata.saveInstance();
