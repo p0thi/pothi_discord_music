@@ -104,13 +104,13 @@ public class GuildMusicManager implements GuildAudioManager{
                 }
             }
         }
-        int userListSize = activePlaylists.size();
+        int userListSize = Math.min(activePlaylists.size(), 100);
 
         if (userListSize <= 0) {
             return autoPlaylistElement;
         }
 
-        int autoListSize = playlist.size();
+        int autoListSize = Math.min(playlist.size(), 100);
 
         int combined = userListSize + autoListSize;
         int randInt = rand.nextInt(combined + 1);
