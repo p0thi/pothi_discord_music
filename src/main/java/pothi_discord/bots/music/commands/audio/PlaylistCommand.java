@@ -228,6 +228,11 @@ public class PlaylistCommand extends GuildCommand {
                             }
                         }
 
+                        if (tmpResults.size() <= 0) {
+                            channel.sendMessage("Zu Deiner Suchanfrage wurde nichts gefunden")
+                                    .queue(new MessageDeleter());
+                        }
+
                         MessageManager mm = new MessageManager();
                         mm.append("Alle Einträge, die zu deiner Suchanfrage gefunden wurden:\n\n");
 

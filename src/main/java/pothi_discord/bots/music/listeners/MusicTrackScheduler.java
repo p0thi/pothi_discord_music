@@ -10,6 +10,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import net.dv8tion.jda.core.entities.Guild;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
+import oshi.jna.platform.unix.solaris.LibKstat;
 import pothi_discord.Main;
 import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 import net.dv8tion.jda.core.entities.VoiceChannel;
@@ -32,6 +33,9 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
     public final GuildMusicManager musicManager;
 
     private int skipRequestsCounter = 0;
+
+    private String lastPlaylistOwnerId = null;
+    private String lastPlaylistName = null;
 
 
 
@@ -117,7 +121,10 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
             track = queue.poll();
             if (track == null && !(musicManager.playlist == null || musicManager.playlist.size() == 0)) {
                 //the key is the identifier
-                String key = musicManager.getNextIdentifier();
+                String[] tuple = musicManager.getNextIdentifier();
+                lastPlaylistOwnerId = tuple[0];
+                lastPlaylistName = tuple[1];
+                String key = tuple[2];
                 log.info("Next Track from: " + key);
                 MyAudioLoadResultHandler handler = new MyAudioLoadResultHandler();
 
@@ -195,5 +202,13 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
         public AudioTrack getTrack() {
             return this.track;
         }
+    }
+
+    public String getLastPlaylistOwnerId() {
+        return lastPlaylistOwnerId;
+    }
+
+    public String getLastPlaylistName() {
+        return lastPlaylistName;
     }
 }

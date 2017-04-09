@@ -70,6 +70,20 @@ public class NowPlayingCommand extends GuildCommand {
             if (embed != null) {
                 embed.addField("Aktuelle Autoplaylist", musicManager.playlist.getName(), true)
                 .addField("Volume", musicManager.player.getVolume() + "", true);
+
+                String lastPlaylistOwnerId = musicManager.scheduler.getLastPlaylistOwnerId();
+                if (lastPlaylistOwnerId != null
+                        && !lastPlaylistOwnerId.equals(shard.getJDA().getSelfUser().getId())
+                        && !lastPlaylistOwnerId.trim().isEmpty()) {
+                    Member playlistOwner = event.getGuild().getMemberById(lastPlaylistOwnerId);
+                    String playlistName = musicManager.scheduler.getLastPlaylistName();
+
+                    if (playlistOwner != null) {
+                        embed.addField("Lied aus Benutzerplaylist",
+                                "**" + playlistName + "** von " + playlistOwner.getEffectiveName(), true);
+                    }
+                }
+
                 channel.sendMessage(embed.build()).queue(new MessageDeleter());
             }
             else {

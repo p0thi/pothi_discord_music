@@ -3,6 +3,7 @@ package pothi_discord.bots.music.listeners;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ReconnectedEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
@@ -234,5 +235,10 @@ public class MusicBotMessageListener extends AbstractEventListener {
             log.error(e.getLocalizedMessage());
             return;
         }
+    }
+
+    @Override
+    public void onGenericEvent(Event event) {
+        log.debug("Event received: " + event.getClass().getSimpleName());
     }
 }

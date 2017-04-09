@@ -73,44 +73,54 @@ public class GuildMusicManager implements GuildAudioManager{
         loadDefaultPlaylist();
     }
 
-    public String getNextIdentifier() {
+    public String[] getNextIdentifier() {
+        String[] autoPlaylistElement = new String[] {guild.getJDA().getSelfUser().getId(), null, playlist.getRandomElement()};
         Random rand = new Random();
-        if (rand.nextBoolean()) {
-            log.info("Using user playlist");
+        VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
 
-            GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        GuildData guildData = GuildData.getGuildDataById(guild.getId());
 
-            VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
+        if (vc == null) {
+            return autoPlaylistElement;
+        }
 
-            if (vc == null) {
-                return playlist.getRandomElement();
-            }
+        ArrayList<String[]> activePlaylists = new ArrayList<>();
 
+        for (Member member : vc.getMembers()) {
+            Userdata userdata = Userdata.getUserdata(member.getUser().getId());
+            UserPlaylist activePlaylist = userdata.getActivePlaylist();
 
-            ArrayList<UserAudioTrack> activePlaylists = new ArrayList<>();
-
-            for (Member member : vc.getMembers()) {
-                Userdata userdata = Userdata.getUserdata(member.getUser().getId());
-                UserPlaylist activePlaylist = userdata.getActivePlaylist();
-
-                if (activePlaylist != null && activePlaylist.getTracks().size() > 0) {
-                    long maxTrackLength = guildData.getPermissions()
-                            .getMaxSongLengthOfUser(guild, member.getUser().getId());
-                    for (UserAudioTrack track : activePlaylist.getTracks()) {
-                        if (track.getLength() <= maxTrackLength) {
-                            activePlaylists.add(track);
-                        }
+            if (activePlaylist != null && activePlaylist.getTracks().size() > 0) {
+                long maxTrackLength = guildData.getPermissions()
+                        .getMaxSongLengthOfUser(guild, member.getUser().getId());
+                for (UserAudioTrack track : activePlaylist.getTracks()) {
+                    if (track.getLength() <= maxTrackLength) {
+                        String[] tuple = new String[3];
+                        tuple[0] = member.getUser().getId();
+                        tuple[1] = activePlaylist.getName();
+                        tuple[2] = track.getIdentifier();
+                        activePlaylists.add(tuple);
                     }
                 }
             }
-
-            if (activePlaylists.size() > 0) {
-                System.out.println(activePlaylists.size());
-                return activePlaylists.get(rand.nextInt(activePlaylists.size())).getIdentifier();
-            }
         }
-        log.info("Not using user playlist");
-        return playlist.getRandomElement();
+        int userListSize = activePlaylists.size();
+
+        if (userListSize <= 0) {
+            return autoPlaylistElement;
+        }
+
+        int autoListSize = playlist.size();
+
+        int combined = userListSize + autoListSize;
+        int randInt = rand.nextInt(combined + 1);
+
+        if (randInt <= autoListSize) {
+            return autoPlaylistElement;
+        }
+        else {
+            return activePlaylists.get(rand.nextInt(activePlaylists.size()));
+        }
     }
 
     @Override
