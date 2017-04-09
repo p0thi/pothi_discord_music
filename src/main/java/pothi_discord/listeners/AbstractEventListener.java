@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public abstract class AbstractEventListener extends ListenerAdapter{
 
-    protected static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_&])+");
+    protected static final Pattern PATTERN = Pattern.compile("([\\p{L}\\p{Digit}_&<>|])+");
     public static final AtomicLong TOTAL_MESSAGES = new AtomicLong();
     public static final AtomicLong TOTAL_COMMANDS = new AtomicLong();
 
