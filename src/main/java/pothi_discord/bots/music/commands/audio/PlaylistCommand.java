@@ -5,8 +5,10 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
@@ -29,9 +31,9 @@ import java.util.concurrent.ExecutionException;
  */
 public class PlaylistCommand extends GuildCommand {
 
-    private static final int MAX_PLAYLIST_LENGTH = 50;
+    private static final int MAX_PLAYLIST_LENGTH = 75;
     private static final int MAX_PLAYLIST_AMOUNT = 5;
-    private static final int MAX_PLAYLIST_NAME_LENGTH = 20;
+    private static final int MAX_PLAYLIST_NAME_LENGTH = 25;
 
 
     @Override
@@ -48,12 +50,12 @@ public class PlaylistCommand extends GuildCommand {
         Userdata userdata = Userdata.getUserdata(user.getId());
 
         if (args.length <= 1) {
+            MessageManager mm = new MessageManager();
             if (userdata.getPlaylists().size() <= 0){
-                channel.sendMessage("Keine Playlists vorhanden").queue(new MessageDeleter());
+                mm.append("Du hast keine eigenen Playlists.");
             }
             else {
-                MessageManager mm = new MessageManager();
-                mm.append("Hier sind alle Deine Playlists:\n\n");
+                mm.append("__**" + "Hier sind alle Deine Playlists:" + "**__" + "\n\n");
 
                 List<UserPlaylist> userPlaylists = userdata.getPlaylists();
 
@@ -69,14 +71,37 @@ public class PlaylistCommand extends GuildCommand {
                             i + 1,
                             tmp.getName(),
                             tmp.getTracks().size(),
-                            isActive ? ":white_check_mark: *Active*" : ""));
-                }
-
-                for (String messageString : mm.complete()) {
-                    channel.sendMessage(messageString).queue(new MessageDeleter());
+                            isActive ? "   :white_check_mark: *Active*" : ""));
                 }
             }
 
+
+            VoiceChannel botVoiceChannel = event.getGuild().getAudioManager().getConnectedChannel();
+
+            if (botVoiceChannel != null) {
+                mm.append("\n\n" + "__**" + "Momentan aktive Playlists in diesem Channel:" + "**__" + "\n\n");
+                for (Member member : botVoiceChannel.getMembers()) {
+                    User myUser = member.getUser();
+                    if (myUser.equals(botShard.getJDA().getSelfUser().getId())) {
+                        continue;
+                    }
+
+                    Userdata memberdata = Userdata.getUserdata(myUser.getId());
+                    UserPlaylist myUserPlaylist = memberdata.getActivePlaylist();
+
+                    if (myUserPlaylist == null) {
+                        continue;
+                    }
+                    mm.append(String.format("**%s** von %s (%d Einträge).",
+                            myUserPlaylist.getName(),
+                            member.getEffectiveName(),
+                            myUserPlaylist.getTracks().size()) + "\n");
+                }
+            }
+
+            for (String messageString : mm.complete()) {
+                channel.sendMessage(messageString).queue(new MessageDeleter());
+            }
 
             return;
         }
