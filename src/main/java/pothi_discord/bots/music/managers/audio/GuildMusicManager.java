@@ -24,12 +24,11 @@ import pothi_discord.handlers.AudioPlayerSendHandler;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.managers.GuildAudioManager;
-import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
-import pothi_discord.utils.database.morphia.userdata.UserAudioTrack;
+import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
@@ -74,7 +73,7 @@ public class GuildMusicManager implements GuildAudioManager{
     }
 
     public String[] getNextIdentifier() {
-        String[] autoPlaylistElement = new String[] {guild.getJDA().getSelfUser().getId(), null, playlist.getRandomElement()};
+        String[] autoPlaylistElement = new String[] {guild.getJDA().getSelfUser().getId(), null, playlist.getRandomElement().getIdentifier()};
         Random rand = new Random();
         VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
 
@@ -93,7 +92,7 @@ public class GuildMusicManager implements GuildAudioManager{
             if (activePlaylist != null && activePlaylist.getTracks().size() > 0) {
                 long maxTrackLength = guildData.getPermissions()
                         .getMaxSongLengthOfUser(guild, member.getUser().getId());
-                for (UserAudioTrack track : activePlaylist.getTracks()) {
+                for (MongoAudioTrack track : activePlaylist.getTracks()) {
                     if (track.getLength() <= maxTrackLength) {
                         String[] tuple = new String[3];
                         tuple[0] = member.getUser().getId();

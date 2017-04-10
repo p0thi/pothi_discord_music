@@ -1,6 +1,8 @@
 package pothi_discord.bots.music.managers.audio;
 
 import pothi_discord.utils.audio.YoutubeMusicGenre;
+import pothi_discord.utils.database.morphia.MongoAudioTrack;
+import pothi_discord.utils.database.morphia.guilddatas.MongoAutoplaylist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Random;
  * Created by Pascal Pothmann on 24.02.2017.
  */
 public class AutoPlaylist {
-    private List<String> content;
+    private List<MongoAudioTrack> content;
     private String source;
     private String name;
 
@@ -21,11 +23,11 @@ public class AutoPlaylist {
 
     }
 
-    public AutoPlaylist(List<String> content) {
+    public AutoPlaylist(List<MongoAudioTrack> content) {
         this(content, null);
     }
 
-    public AutoPlaylist(List<String> content, String source) {
+    public AutoPlaylist(List<MongoAudioTrack> content, String source) {
         this.content = content;
         if (content == null) {
             this.content = new ArrayList<>();
@@ -34,15 +36,16 @@ public class AutoPlaylist {
         this.name = "Standard Playlist";
     }
 
+
     public int size() {
         return content.size();
     }
 
-    public String getRandomElement() {
+    public MongoAudioTrack getRandomElement() {
         return this.content.get(new Random().nextInt(size()));
     }
 
-    public String get(int i) {
+    public MongoAudioTrack get(int i) {
         if(i >= size() || i < 0) {
             throw new IndexOutOfBoundsException("Index " + i + " not in scope.");
         }

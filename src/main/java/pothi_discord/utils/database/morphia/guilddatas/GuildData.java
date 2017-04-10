@@ -1,5 +1,6 @@
 package pothi_discord.utils.database.morphia.guilddatas;
 
+import javafx.scene.media.AudioTrack;
 import net.dv8tion.jda.core.entities.Message;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
@@ -9,8 +10,8 @@ import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
 import pothi_discord.bots.music.managers.audio.AutoPlaylist;
 import pothi_discord.utils.audio.AudioUtils;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
-import pothi_discord.utils.database.autoplaylists.MongoAutoplaylist;
 import pothi_discord.utils.database.morphia.DataClass;
+import pothi_discord.utils.database.morphia.MongoAudioTrack;
 
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class GuildData extends DataClass<String> {
 
     @Embedded private Permissions permissions = new Permissions();
 
-    private List<String> autoplaylist = new ArrayList<>();
+    @Embedded private ArrayList<MongoAudioTrack> autoplaylist = new ArrayList<>();
     private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
     @Embedded private List<SoundCommand> soundCommands = new ArrayList<>();
@@ -65,7 +66,7 @@ public class GuildData extends DataClass<String> {
             defaultAutoplaylist = new AutoPlaylist(autoplaylist);
         }
         else {
-            MongoAutoplaylist obj = MongoAutoplaylist.getObjectById("14f2af318304a83d5385df23450657d5");
+            MongoAutoplaylist obj = MongoAutoplaylist.getObjectById("58eb51a31cff3028dc240b20");
 
             this.defaultAutoplaylist = new AutoPlaylist(obj.getContent(), null); //TODO pass in a valid source
 
@@ -129,11 +130,11 @@ public class GuildData extends DataClass<String> {
         this.permissions = permissions;
     }
 
-    public List<String> getAutoplaylist() {
+    public ArrayList<MongoAudioTrack> getAutoplaylist() {
         return autoplaylist;
     }
 
-    public void setAutoplaylist(List<String> autoplaylist) {
+    public void setAutoplaylist(ArrayList<MongoAudioTrack> autoplaylist) {
         this.autoplaylist = autoplaylist;
     }
 

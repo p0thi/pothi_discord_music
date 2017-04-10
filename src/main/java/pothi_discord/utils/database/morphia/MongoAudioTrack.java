@@ -1,4 +1,4 @@
-package pothi_discord.utils.database.morphia.userdata;
+package pothi_discord.utils.database.morphia;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
@@ -8,7 +8,7 @@ import org.mongodb.morphia.annotations.Embedded;
  * Created by Pascal Pothmann on 06.04.2017.
  */
 @Embedded
-public class UserAudioTrack {
+public class MongoAudioTrack {
 
     private String title;
     private String author;
@@ -16,14 +16,14 @@ public class UserAudioTrack {
     private String identifier;
     private String uri;
 
-    public static UserAudioTrack convertAudioTrack(AudioTrack audioTrack) {
+    public static MongoAudioTrack convertAudioTrack(AudioTrack audioTrack) {
         AudioTrackInfo info = audioTrack.getInfo();
 
         if (info.isStream) {
             throw new RuntimeException("Cant handle Strams");
         }
 
-        UserAudioTrack result = new UserAudioTrack();
+        MongoAudioTrack result = new MongoAudioTrack();
 
         result.setTitle(info.title);
         result.setAuthor(info.author);

@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import pothi_discord.utils.database.morphia.DataClass;
+import pothi_discord.utils.database.morphia.MongoAudioTrack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserPlaylist extends DataClass<ObjectId> {
 
     private String name;
     @Embedded
-    private List<UserAudioTrack> tracks = new ArrayList<>();
+    private List<MongoAudioTrack> tracks = new ArrayList<>();
 
 
     public int getIndexOfExactTitle(String title) {
@@ -36,11 +37,11 @@ public class UserPlaylist extends DataClass<ObjectId> {
         this.name = name;
     }
 
-    public List<UserAudioTrack> getTracks() {
+    public List<MongoAudioTrack> getTracks() {
         return tracks;
     }
 
-    public void setTracks(List<UserAudioTrack> tracks) {
+    public void setTracks(List<MongoAudioTrack> tracks) {
         this.tracks = tracks;
     }
 }

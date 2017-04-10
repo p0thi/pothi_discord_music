@@ -16,13 +16,12 @@ import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.managers.MessageManager;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
-import pothi_discord.utils.database.morphia.userdata.UserAudioTrack;
+import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -173,7 +172,7 @@ public class PlaylistCommand extends GuildCommand {
                 MessageManager mm = new MessageManager();
                 mm.append(String.format("Hier die Playlist **%s**:\n", userPlaylist.getName()));
 
-                List<UserAudioTrack> allPlaylistTracks = userPlaylist.getTracks();
+                List<MongoAudioTrack> allPlaylistTracks = userPlaylist.getTracks();
 
                 for (int i = 0; i < allPlaylistTracks.size(); i++) {
                     mm.append((i + 1) + ". **" + allPlaylistTracks.get(i).getTitle() + "** (" +
@@ -202,7 +201,7 @@ public class PlaylistCommand extends GuildCommand {
 
                             if (userPlaylist.getTracks().size() + results.size() <= MAX_PLAYLIST_LENGTH) {
                                 for (AudioTrack audioTrack : results) {
-                                    userPlaylist.getTracks().add(UserAudioTrack.convertAudioTrack(audioTrack));
+                                    userPlaylist.getTracks().add(MongoAudioTrack.convertAudioTrack(audioTrack));
                                 }
                                 userPlaylist.saveInstance();
 
@@ -242,8 +241,8 @@ public class PlaylistCommand extends GuildCommand {
                 case "search": {
                     if (hasIdentifier) {
                         ArrayList<String> titles = new ArrayList<>();
-                        for (UserAudioTrack userAudioTrack : userPlaylist.getTracks()) {
-                            titles.add(userAudioTrack.getTitle());
+                        for (MongoAudioTrack mongoAudioTrack : userPlaylist.getTracks()) {
+                            titles.add(mongoAudioTrack.getTitle());
                         }
 
                         List<String> tmpResults = new ArrayList<>();
@@ -264,7 +263,7 @@ public class PlaylistCommand extends GuildCommand {
 
                         for (String title : tmpResults) {
                             int index = userPlaylist.getIndexOfExactTitle(title);
-                            UserAudioTrack track = userPlaylist.getTracks().get(index);
+                            MongoAudioTrack track = userPlaylist.getTracks().get(index);
                             mm.append(String.format("%d.  **%s**\n\t\tLink: <%s>\n\n",
                                     (index + 1),
                                     title,
@@ -291,7 +290,7 @@ public class PlaylistCommand extends GuildCommand {
 
 
                         ArrayList<String> successNumbers = new ArrayList<>();
-                        ArrayList<UserAudioTrack> toRemove = new ArrayList<>();
+                        ArrayList<MongoAudioTrack> toRemove = new ArrayList<>();
 
 
                         for (String number : numbers) {

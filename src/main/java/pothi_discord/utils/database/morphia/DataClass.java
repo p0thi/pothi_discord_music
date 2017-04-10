@@ -1,5 +1,6 @@
 package pothi_discord.utils.database.morphia;
 
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Version;
 import org.slf4j.Logger;
@@ -34,13 +35,13 @@ public abstract class DataClass<T> {
         this.v = v;
     }
 
-    public void saveInstance() {
+    public Key saveInstance() {
         try {
-            Main.datastore.save(this);
-            log.info("Saving Userdata of " + getId().toString());
+            return Main.datastore.save(this);
         } catch (ConcurrentModificationException e) {
             log.error("Could not store instance " + this.getClass().getSimpleName() + " " + getId().toString()
                 + " | " + e.getMessage());
         }
+        return null;
     }
 }
