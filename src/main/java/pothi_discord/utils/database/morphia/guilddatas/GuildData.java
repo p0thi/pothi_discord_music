@@ -1,6 +1,5 @@
 package pothi_discord.utils.database.morphia.guilddatas;
 
-import javafx.scene.media.AudioTrack;
 import net.dv8tion.jda.core.entities.Message;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
