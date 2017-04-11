@@ -35,7 +35,7 @@ public class GuildData extends DataClass<ObjectId> {
     private Permissions permissions = new Permissions();
 
     // TODO !!!!!!!!!!!!!!!! lazy was not possible
-    @Reference(lazy = true)
+    @Reference
     private MongoAutoPlaylist autoplaylist = new MongoAutoPlaylist();
     private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
