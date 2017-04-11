@@ -4,7 +4,6 @@ import net.dv8tion.jda.core.entities.Message;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Reference;
 import pothi_discord.Main;
 import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
 import pothi_discord.utils.audio.AudioUtils;
@@ -36,8 +35,7 @@ public class GuildData extends DataClass<ObjectId> {
     private Permissions permissions = new Permissions();
 
     // TODO !!!!!!!!!!!!!!!! lazy was not possible
-    @Reference
-    private AutoPlaylist autoplaylist;
+    private ObjectId autoplaylistId;
 
     private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
@@ -154,11 +152,11 @@ public class GuildData extends DataClass<ObjectId> {
     }
 
     public AutoPlaylist getAutoplaylist() {
-        return autoplaylist;
+        return Main.datastore.get(AutoPlaylist.class, autoplaylistId);
     }
 
     public void setAutoplaylist(AutoPlaylist autoplaylist) {
-        this.autoplaylist = autoplaylist;
+        this.autoplaylistId = autoplaylist.getId();
     }
 
     public List<String> getBannedAudioCommandUsers() {
@@ -185,6 +183,13 @@ public class GuildData extends DataClass<ObjectId> {
         this.tmpSoundCommands = tmpSoundCommands;
     }
 
+    public ObjectId getAutoplaylistId() {
+        return autoplaylistId;
+    }
+
+    public void setAutoplaylistId(ObjectId autoplaylistId) {
+        this.autoplaylistId = autoplaylistId;
+    }
 
     // Not versioned
 

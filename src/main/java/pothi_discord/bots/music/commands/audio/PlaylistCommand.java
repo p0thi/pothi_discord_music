@@ -205,8 +205,9 @@ public class PlaylistCommand extends GuildCommand {
                                 }
                                 userPlaylist.saveInstance();
 
-                                channel.sendMessage(String.format("Erfolgreich %d Einträge hinzugefügt.",
-                                        results.size()))
+                                channel.sendMessage(String.format("Erfolgreich %d Einträge hinzugefügt.%s",
+                                        results.size(),
+                                        results.size() == 1 ? "\n**" + results.get(0).getInfo().title + "**." : ""))
                                         .queue(new MessageDeleter());
                             }
                             else {
