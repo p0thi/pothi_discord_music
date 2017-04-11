@@ -29,7 +29,7 @@ public class CommandsCommand extends GuildCommand {
         hugeMessageSender.setHeader("Alle Audio-Commands" + "$MULTIPAGE$:");
         hugeMessageSender.setMpInfix(". Seite $CURRENTPAGE$/$TOTALPAGES$");
 
-        List<SoundCommand> allCommands = GuildData.getGuildDataById(guild.getId()).getSoundCommands();
+        List<SoundCommand> allCommands = GuildData.getGuildDataByGuildId(guild.getId()).getSoundCommands();
 
         for(SoundCommand soundCommand : allCommands){
             // 15 is the length of the spaces

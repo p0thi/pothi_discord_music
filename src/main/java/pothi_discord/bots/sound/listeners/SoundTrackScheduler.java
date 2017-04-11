@@ -17,7 +17,6 @@ import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 
 import java.io.File;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -45,7 +44,7 @@ public class SoundTrackScheduler extends AudioEventAdapter implements TrackSched
             @Override
             public void trackLoaded(AudioTrack track) {
                 new Thread(() -> {
-                    GuildData guildData = GuildData.getGuildDataById(soundManager.guild.getId());
+                    GuildData guildData = GuildData.getGuildDataByGuildId(soundManager.guild.getId());
                     player.setVolume(guildData.getAudioCommandsStartVolume());
                 }).start();
                 player.playTrack(track);

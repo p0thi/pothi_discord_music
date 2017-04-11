@@ -107,7 +107,7 @@ public class SoundBot extends Bot{
         if(musicManager == null) {
             musicManager = new GuildSoundManager(guild, getDiscordBotByJDA(guild.getJDA()).getPlayerManager(), this);
             allAudioManagers.put(guildId, musicManager);
-            GuildData mongoGuilddata = GuildData.getGuildDataById(guildId);
+            GuildData mongoGuilddata = GuildData.getGuildDataByGuildId(guildId);
             musicManager.getPlayer().setVolume(mongoGuilddata.getPlayerStartVolume());
         }
 

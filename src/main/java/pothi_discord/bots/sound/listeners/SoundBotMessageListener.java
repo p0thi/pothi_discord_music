@@ -14,9 +14,7 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
-import pothi_discord.bots.Bot;
 import pothi_discord.bots.BotShard;
-import pothi_discord.bots.SoundBot;
 import pothi_discord.bots.sound.DiscordSoundBotShard;
 import pothi_discord.bots.sound.commands.audio.PlayerCommand;
 import pothi_discord.handlers.MessageDeleter;
@@ -26,9 +24,7 @@ import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
 
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -81,7 +77,7 @@ public class SoundBotMessageListener extends AbstractEventListener {
                         e.printStackTrace();
                     }
                 } else {
-                    GuildData guildData = GuildData.getGuildDataById(event.getGuild().getId());
+                    GuildData guildData = GuildData.getGuildDataByGuildId(event.getGuild().getId());
                     boolean isAudioCommand = false;
                     String fileId = null;
 

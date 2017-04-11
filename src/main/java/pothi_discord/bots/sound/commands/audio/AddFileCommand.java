@@ -59,7 +59,7 @@ public class AddFileCommand extends GuildCommand{
                 String commandName = args[1].toLowerCase();
                 String commandDescription = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
 
-                GuildData mongoGuild = GuildData.getGuildDataById(guild.getId());
+                GuildData mongoGuild = GuildData.getGuildDataByGuildId(guild.getId());
 
                 boolean commandAlreadyExists = false;
 

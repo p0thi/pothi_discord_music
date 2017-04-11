@@ -35,7 +35,7 @@ public abstract class GuildCommand implements Command {
         User user = event.getAuthor();
         boolean result = Param.isDeveloper(user.getId());
 
-        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
         Permissions permissions = guildData.getPermissions();
 
         String permission = getName();

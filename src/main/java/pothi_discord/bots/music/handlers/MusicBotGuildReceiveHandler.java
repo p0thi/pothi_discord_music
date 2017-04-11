@@ -35,7 +35,7 @@ public class MusicBotGuildReceiveHandler extends AbstractReceiveHandler {
 
     @Override
     public void handleCombinedAudio(CombinedAudio combinedAudio) {
-        GuildData.getGuildDataById(GUILD.getId()).getAudioUtils().addBytes(combinedAudio.getAudioData(1.0));
+        GuildData.getGuildDataByGuildId(GUILD.getId()).getAudioUtils().addBytes(combinedAudio.getAudioData(1.0));
         //log.info(Arrays.toString(combinedAudio.getAudioData(1.0)));
     }
 

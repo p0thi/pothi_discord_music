@@ -36,7 +36,7 @@ public class SelectCommand extends GuildCommand {
     public static void select(Guild guild, TextChannel channel, User user, String[] args, BotShard shard) {
         GuildAudioManager manager = shard.getMyBot().getGuildAudioPlayer(guild);
 
-        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
         Permissions gpo = guildData.getPermissions();
 
         AudioPlayer player = manager.getPlayer();

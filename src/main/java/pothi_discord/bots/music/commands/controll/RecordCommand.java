@@ -42,7 +42,7 @@ public class RecordCommand extends GuildCommand {
         guild = event.getGuild();
         channel = event.getChannel();
 
-        guildData = GuildData.getGuildDataById(guild.getId());
+        guildData = GuildData.getGuildDataByGuildId(guild.getId());
 
         if(guildData.getAudioUtils() == null) {
             guildData.setAudioUtils(new AudioUtils());

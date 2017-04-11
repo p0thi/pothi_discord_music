@@ -1,18 +1,17 @@
 package pothi_discord.utils.database.morphia.guilddatas;
 
 import net.dv8tion.jda.core.entities.Message;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.annotations.Reference;
 import pothi_discord.Main;
 import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
-import pothi_discord.bots.music.managers.audio.AutoPlaylist;
 import pothi_discord.utils.audio.AudioUtils;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.DataClass;
-import pothi_discord.utils.database.morphia.MongoAudioTrack;
 
-
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,10 @@ import java.util.List;
  * Created by Pascal Pothmann on 24.03.2017.
  */
 @Entity(value = "guilddatas", noClassnameStored = true)
-public class GuildData extends DataClass<String> {
+public class GuildData extends DataClass<ObjectId> {
+
+    private String guildId;
+
     private Boolean useCustomAutoplaylist = false;
     private Boolean recording = false;
     private Boolean autoJoin = false;
@@ -29,25 +31,29 @@ public class GuildData extends DataClass<String> {
     private Integer audioCommandsStartVolume = 60;
     private Integer songSkipPercent = 30;
 
-    @Embedded private Permissions permissions = new Permissions();
+    @Embedded
+    private Permissions permissions = new Permissions();
 
-    @Embedded private ArrayList<MongoAudioTrack> autoplaylist = new ArrayList<>();
+    // TODO !!!!!!!!!!!!!!!! lazy was not possible
+    @Reference(lazy = true)
+    private MongoAutoPlaylist autoplaylist = new MongoAutoPlaylist();
     private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
-    @Embedded private List<SoundCommand> soundCommands = new ArrayList<>();
-    @Embedded private List<SoundCommand> tmpSoundCommands = new ArrayList<>();
-
+    @Embedded
+    private List<SoundCommand> soundCommands = new ArrayList<>();
+    @Embedded
+    private List<SoundCommand> tmpSoundCommands = new ArrayList<>();
 
     private transient ArrayList<YoutubeMusicGenre> lastGenreSearch;
     private transient MusicBotGuildReceiveHandler musicBotGuildReceiveHandler;
     private transient AudioUtils audioUtils;
     private transient Message statusMessage;
-    private transient AutoPlaylist defaultAutoplaylist;
+    private transient MongoAutoPlaylist defaultAutoplaylist;
 
 
-    public static GuildData getGuildDataById(String guildId) {
-        Query<GuildData> query = Main.datastore.createQuery(GuildData.class);
-        GuildData result = query.field("_id").equal(guildId).get();
+    public static GuildData getGuildDataByGuildId(String guildId) {
+
+        GuildData result = Main.datastore.find(GuildData.class).field("guildId").equal(guildId).get();
 
         if (result == null) {
             result = new GuildData();
@@ -62,16 +68,23 @@ public class GuildData extends DataClass<String> {
 
     private void loadDefaultAutoplaylist() {
         if(getUseCustomAutoplaylist()) {
-            defaultAutoplaylist = new AutoPlaylist(autoplaylist);
+            defaultAutoplaylist = getAutoplaylist();
         }
         else {
-            MongoAutoplaylist obj = MongoAutoplaylist.getObjectById("58eb51a31cff3028dc240b20");
+            MongoAutoPlaylist obj = MongoAutoPlaylist.getObjectById("58eb51a31cff3028dc240b20");
 
-            this.defaultAutoplaylist = new AutoPlaylist(obj.getContent(), null); //TODO pass in a valid source
+            this.defaultAutoplaylist = obj; //TODO pass in a valid source
 
         }
     }
 
+    public String getGuildId() {
+        return guildId;
+    }
+
+    public void setGuildId(String guildId) {
+        this.guildId = guildId;
+    }
 
     public Boolean getUseCustomAutoplaylist() {
         return useCustomAutoplaylist;
@@ -129,11 +142,11 @@ public class GuildData extends DataClass<String> {
         this.permissions = permissions;
     }
 
-    public ArrayList<MongoAudioTrack> getAutoplaylist() {
+    public MongoAutoPlaylist getAutoplaylist() {
         return autoplaylist;
     }
 
-    public void setAutoplaylist(ArrayList<MongoAudioTrack> autoplaylist) {
+    public void setAutoplaylist(MongoAutoPlaylist autoplaylist) {
         this.autoplaylist = autoplaylist;
     }
 
@@ -164,43 +177,53 @@ public class GuildData extends DataClass<String> {
 
     // Not versioned
 
+    @Transient
     public ArrayList<YoutubeMusicGenre> getLastGenreSearch() {
         return lastGenreSearch;
     }
 
+    @Transient
     public void setLastGenreSearch(ArrayList<YoutubeMusicGenre> lastGenreSearch) {
         this.lastGenreSearch = lastGenreSearch;
     }
 
+    @Transient
     public MusicBotGuildReceiveHandler getMusicBotGuildReceiveHandler() {
         return musicBotGuildReceiveHandler;
     }
 
+    @Transient
     public void setMusicBotGuildReceiveHandler(MusicBotGuildReceiveHandler musicBotGuildReceiveHandler) {
         this.musicBotGuildReceiveHandler = musicBotGuildReceiveHandler;
     }
 
+    @Transient
     public AudioUtils getAudioUtils() {
         return audioUtils;
     }
 
+    @Transient
     public void setAudioUtils(AudioUtils audioUtils) {
         this.audioUtils = audioUtils;
     }
 
+    @Transient
     public Message getStatusMessage() {
         return statusMessage;
     }
 
+    @Transient
     public void setStatusMessage(Message statusMessage) {
         this.statusMessage = statusMessage;
     }
 
-    public AutoPlaylist getDefaultAutoplaylist() {
+    @Transient
+    public MongoAutoPlaylist getDefaultAutoplaylist() {
         return defaultAutoplaylist;
     }
 
-    public void setDefaultAutoplaylist(AutoPlaylist defaultAutoplaylist) {
+    @Transient
+    public void setDefaultAutoplaylist(MongoAutoPlaylist defaultAutoplaylist) {
         this.defaultAutoplaylist = defaultAutoplaylist;
     }
 }

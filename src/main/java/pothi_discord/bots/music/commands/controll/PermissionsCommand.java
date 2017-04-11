@@ -27,7 +27,7 @@ public class PermissionsCommand extends GuildCommand {
         Guild guild = event.getGuild();
 
         TextChannel channel = event.getChannel();
-        Permissions gpo = GuildData.getGuildDataById(guild.getId()).getPermissions();
+        Permissions gpo = GuildData.getGuildDataByGuildId(guild.getId()).getPermissions();
         List<RoleEntity> roleEntities = gpo.getRolesOfUser(guild, user.getId());
 
         StringBuilder sb = new StringBuilder("Das sind deine internen Rollen: \n\n");

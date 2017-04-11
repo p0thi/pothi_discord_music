@@ -1,9 +1,7 @@
 package pothi_discord.bots;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
@@ -29,7 +27,6 @@ import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -139,7 +136,7 @@ public class MusicBot extends Bot{
                 for(Guild guild : allGuilds) {
 
                     //TODO should also happen on GuildJoin event!!!!
-                    GuildData guildData = GuildData.getGuildDataById(guild.getId());
+                    GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
 
                     MusicBotGuildReceiveHandler grh = new MusicBotGuildReceiveHandler(guild);
                     guildData.setMusicBotGuildReceiveHandler(grh);
@@ -205,7 +202,7 @@ public class MusicBot extends Bot{
         if(musicManager == null) {
             musicManager = new GuildMusicManager(guild, getDiscordBotByJDA(guild.getJDA()).getPlayerManager(), this);
             allAudioManagers.put(guildId, musicManager);
-            GuildData mongoGuilddata = GuildData.getGuildDataById(guildId);
+            GuildData mongoGuilddata = GuildData.getGuildDataByGuildId(guildId);
             musicManager.getPlayer().setVolume(mongoGuilddata.getPlayerStartVolume());
         }
 

@@ -20,12 +20,12 @@ import java.util.Set;
 public class PermissionManager {
 
     public static boolean checkUserPermission(Guild guild, User user, String permission) {
-        GuildData mongoGuilddata = GuildData.getGuildDataById(guild.getId());
+        GuildData mongoGuilddata = GuildData.getGuildDataByGuildId(guild.getId());
         boolean result = Param.isDeveloper(user.getId());
 
         result = result || mongoGuilddata.getPermissions().getOwner().equals(user.getId());
 
-        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
 
         Permissions permissions = guildData.getPermissions();
 
@@ -35,7 +35,7 @@ public class PermissionManager {
     }
 
     public static List<Member> getMembersWithPermission(Guild guild, String permission) {
-        GuildData mongoGuilddata = GuildData.getGuildDataById(guild.getId());
+        GuildData mongoGuilddata = GuildData.getGuildDataByGuildId(guild.getId());
 
         Set<Member> result = new HashSet<>();
         result.add(guild.getMemberById(mongoGuilddata.getPermissions().getOwner()));

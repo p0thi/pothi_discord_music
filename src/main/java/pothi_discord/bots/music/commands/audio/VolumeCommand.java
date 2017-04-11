@@ -1,6 +1,5 @@
 package pothi_discord.bots.music.commands.audio;
 
-import net.dv8tion.jda.core.entities.User;
 import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
@@ -37,7 +36,7 @@ public class VolumeCommand extends GuildCommand {
         valid = valid && (words.length == 2);
 
         GuildMusicManager musicManager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
-        GuildData mongoGuilddata = GuildData.getGuildDataById(guild.getId());
+        GuildData mongoGuilddata = GuildData.getGuildDataByGuildId(guild.getId());
 
         if(!valid) {
             if(words.length == 1) {

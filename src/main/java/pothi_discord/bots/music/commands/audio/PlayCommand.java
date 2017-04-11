@@ -74,7 +74,7 @@ public class PlayCommand extends GuildCommand {
             switch (args[1].toLowerCase()) {
                 case "genre":
                 case  "genres":
-                    GuildData guildData = GuildData.getGuildDataById(guild.getId());
+                    GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
 
                     if (StringUtils.isNumeric(args[2])) {
                         int index = Integer.parseInt(args[2]);

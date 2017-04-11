@@ -35,7 +35,7 @@ public class RequestsCommand extends GuildCommand {
                     "Befehle in der Adminabfrage anzeigen lassen.", Param.PREFIX())).queue(new MessageDeleter());
             return;
         }
-        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
         List<SoundCommand> allTmpCommands = guildData.getTmpSoundCommands();
 
         if (allTmpCommands.size() <= 0) {

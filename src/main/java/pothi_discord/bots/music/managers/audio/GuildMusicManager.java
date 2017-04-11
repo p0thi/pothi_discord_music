@@ -27,6 +27,7 @@ import pothi_discord.managers.GuildAudioManager;
 import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord.utils.database.morphia.guilddatas.MongoAutoPlaylist;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
@@ -50,7 +51,7 @@ public class GuildMusicManager implements GuildAudioManager{
      * Track scheduler for the player.
      */
     public final MusicTrackScheduler scheduler;
-    public AutoPlaylist playlist;
+    public MongoAutoPlaylist playlist;
     public Bot bot;
 
     public final Guild guild;
@@ -77,7 +78,7 @@ public class GuildMusicManager implements GuildAudioManager{
         Random rand = new Random();
         VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
 
-        GuildData guildData = GuildData.getGuildDataById(guild.getId());
+        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
 
         if (vc == null) {
             return autoPlaylistElement;
@@ -141,7 +142,7 @@ public class GuildMusicManager implements GuildAudioManager{
 
 
     public void playRequestByKey(Guild guild, String userId, String value, TextChannel channel, boolean skipMessages) {
-        Permissions gpo = GuildData.getGuildDataById(guild.getId()).getPermissions();
+        Permissions gpo = GuildData.getGuildDataByGuildId(guild.getId()).getPermissions();
         bot.getDiscordBotByJDA(channel.getJDA())
                 .getPlayerManager().loadItemOrdered(this, value, new AudioLoadResultHandler() {
             @Override
@@ -264,11 +265,11 @@ public class GuildMusicManager implements GuildAudioManager{
     }
 
     public void setGenrePlaylist(YoutubeMusicGenre genre) {
-        this.playlist = new AutoPlaylist(genre);
+        this.playlist = MongoAutoPlaylist.getGenreByName(genre.name());
     }
 
     public void loadDefaultPlaylist(){
-        this.playlist = GuildData.getGuildDataById(guild.getId()).getDefaultAutoplaylist();
+        this.playlist = GuildData.getGuildDataByGuildId(guild.getId()).getDefaultAutoplaylist();
     }
 
     public TextChannel getActiveTextChannel() {

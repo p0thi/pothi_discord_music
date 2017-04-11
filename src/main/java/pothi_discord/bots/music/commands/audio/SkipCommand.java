@@ -82,7 +82,7 @@ public class SkipCommand extends GuildCommand {
 
         ((MusicTrackScheduler)scheduler).increaseSkipRequestCounter();
 
-        int skipPercent = GuildData.getGuildDataById(guild.getId()).getSongSkipPercent();
+        int skipPercent = GuildData.getGuildDataByGuildId(guild.getId()).getSongSkipPercent();
         int skipCount = ((MusicTrackScheduler)scheduler).getSkipRequestsCounter();
         double memberCount = (double)channel.getMembers().size() - 1;
         if(skipCount >= memberCount * ((double)skipPercent / 100.0)) {
