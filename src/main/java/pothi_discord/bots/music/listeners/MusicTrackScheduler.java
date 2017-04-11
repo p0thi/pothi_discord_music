@@ -120,7 +120,7 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
             loopCounter++;
             track = queue.poll();
 
-            if (track == null && !(musicManager.playlist == null || musicManager.playlist.size() == 0)) {
+            if (track == null && !(musicManager.playlist == null || musicManager.playlist.getContent().size() == 0)) {
                 //the key is the identifier
                 String[] tuple = musicManager.getNextIdentifier();
                 lastPlaylistOwnerId = tuple[0];

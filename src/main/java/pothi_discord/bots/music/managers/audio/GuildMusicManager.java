@@ -27,7 +27,7 @@ import pothi_discord.managers.GuildAudioManager;
 import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
-import pothi_discord.utils.database.morphia.guilddatas.MongoAutoPlaylist;
+import pothi_discord.utils.database.morphia.autoplaylists.AutoPlaylist;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
@@ -51,7 +51,7 @@ public class GuildMusicManager implements GuildAudioManager{
      * Track scheduler for the player.
      */
     public final MusicTrackScheduler scheduler;
-    public MongoAutoPlaylist playlist;
+    public AutoPlaylist playlist;
     public Bot bot;
 
     public final Guild guild;
@@ -110,7 +110,7 @@ public class GuildMusicManager implements GuildAudioManager{
             return autoPlaylistElement;
         }
 
-        int autoListSize = Math.min(playlist.size(), 100);
+        int autoListSize = Math.min(playlist.getContent().size(), 100);
 
         int combined = userListSize + autoListSize;
         int randInt = rand.nextInt(combined + 1);
@@ -265,7 +265,7 @@ public class GuildMusicManager implements GuildAudioManager{
     }
 
     public void setGenrePlaylist(YoutubeMusicGenre genre) {
-        this.playlist = MongoAutoPlaylist.getGenreByName(genre.name());
+        this.playlist = AutoPlaylist.getAutoPlaylistByName(genre.name());
     }
 
     public void loadDefaultPlaylist(){

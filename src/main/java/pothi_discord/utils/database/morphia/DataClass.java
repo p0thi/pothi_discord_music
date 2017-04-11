@@ -1,5 +1,6 @@
 package pothi_discord.utils.database.morphia;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Version;
@@ -12,6 +13,7 @@ import java.util.ConcurrentModificationException;
 /**
  * Created by Pascal Pothmann on 24.03.2017.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class DataClass<T> {
     private transient final Logger log = LoggerFactory.getLogger(this.getClass());
     @Id

@@ -70,7 +70,7 @@ public class NowPlayingCommand extends GuildCommand {
             if (embed != null) {
                 embed.addField(
                         "Aktuelle Autoplaylist",
-                        musicManager.playlist.getTitle() + " (" + musicManager.playlist.size() + " Einträge)",
+                        musicManager.playlist.getTitle() + " (" + musicManager.playlist.getContent().size() + " Einträge)",
                         true
                 )
                 .addField("Volume", musicManager.player.getVolume() + "", true);

@@ -10,6 +10,7 @@ import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
 import pothi_discord.utils.audio.AudioUtils;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.DataClass;
+import pothi_discord.utils.database.morphia.autoplaylists.AutoPlaylist;
 
 import java.beans.Transient;
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class GuildData extends DataClass<ObjectId> {
 
     // TODO !!!!!!!!!!!!!!!! lazy was not possible
     @Reference
-    private MongoAutoPlaylist autoplaylist = new MongoAutoPlaylist();
+    private AutoPlaylist autoplaylist;
+
     private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
     @Embedded
@@ -48,7 +50,7 @@ public class GuildData extends DataClass<ObjectId> {
     private transient MusicBotGuildReceiveHandler musicBotGuildReceiveHandler;
     private transient AudioUtils audioUtils;
     private transient Message statusMessage;
-    private transient MongoAutoPlaylist defaultAutoplaylist;
+    private transient AutoPlaylist defaultAutoplaylist;
 
 
     public static GuildData getGuildDataByGuildId(String guildId) {
@@ -57,6 +59,7 @@ public class GuildData extends DataClass<ObjectId> {
 
         if (result == null) {
             result = new GuildData();
+            result.setGuildId(guildId);
             result.saveInstance();
         }
 
@@ -66,12 +69,20 @@ public class GuildData extends DataClass<ObjectId> {
         return result;
     }
 
+    public static GuildData getGuildDataByObjectId(String id){
+        return getGuildDataByObjectId(new ObjectId(id));
+    }
+
+    public static GuildData getGuildDataByObjectId(ObjectId id) {
+        return Main.datastore.get(GuildData.class, id);
+    }
+
     private void loadDefaultAutoplaylist() {
         if(getUseCustomAutoplaylist()) {
             defaultAutoplaylist = getAutoplaylist();
         }
         else {
-            MongoAutoPlaylist obj = MongoAutoPlaylist.getObjectById("58eb51a31cff3028dc240b20");
+            AutoPlaylist obj = AutoPlaylist.getAutoPlaylistById("58eb51a31cff3028dc240b20");
 
             this.defaultAutoplaylist = obj; //TODO pass in a valid source
 
@@ -142,11 +153,11 @@ public class GuildData extends DataClass<ObjectId> {
         this.permissions = permissions;
     }
 
-    public MongoAutoPlaylist getAutoplaylist() {
+    public AutoPlaylist getAutoplaylist() {
         return autoplaylist;
     }
 
-    public void setAutoplaylist(MongoAutoPlaylist autoplaylist) {
+    public void setAutoplaylist(AutoPlaylist autoplaylist) {
         this.autoplaylist = autoplaylist;
     }
 
@@ -218,12 +229,12 @@ public class GuildData extends DataClass<ObjectId> {
     }
 
     @Transient
-    public MongoAutoPlaylist getDefaultAutoplaylist() {
+    public AutoPlaylist getDefaultAutoplaylist() {
         return defaultAutoplaylist;
     }
 
     @Transient
-    public void setDefaultAutoplaylist(MongoAutoPlaylist defaultAutoplaylist) {
+    public void setDefaultAutoplaylist(AutoPlaylist defaultAutoplaylist) {
         this.defaultAutoplaylist = defaultAutoplaylist;
     }
 }

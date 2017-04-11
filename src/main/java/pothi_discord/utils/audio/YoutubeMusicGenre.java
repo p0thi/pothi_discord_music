@@ -5,7 +5,7 @@ import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.utils.TextUtils;
-import pothi_discord.utils.database.morphia.guilddatas.MongoAutoPlaylist;
+import pothi_discord.utils.database.morphia.autoplaylists.AutoPlaylist;
 import pothi_discord.utils.youtube.YoutubeAPI;
 import pothi_discord.utils.youtube.YoutubePlaylist;
 import pothi_discord.utils.youtube.YoutubeVideo;
@@ -166,8 +166,8 @@ public enum YoutubeMusicGenre {
         return result;
     }
 
-    public MongoAutoPlaylist getMongoPlaylist(){
-        MongoAutoPlaylist result = MongoAutoPlaylist.getGenreByName(this.name());
+    public AutoPlaylist getMongoPlaylist(){
+        AutoPlaylist result = AutoPlaylist.getAutoPlaylistByName(this.name());
         return result;
     }
 
