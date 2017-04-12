@@ -129,26 +129,84 @@ public class SettingsCommand extends GuildCommand{
                 break;
             }
             case "remove": {
-                if (args.length <= 3) {
+                if (!hasIdentifier) {
                     //TODO description message
                     return;
                 }
 
-                if (args[3].matches("\\d+")) {
-                    int index = Integer.parseInt(args[3]) -1;
+                ArrayList<String> parts = new ArrayList<>(Arrays
+                        .asList(identifier.split(" ")));
 
-                    MongoAudioTrack old = autoPlaylist.getContent().get(index);
-                    autoPlaylist.getContent().remove(index);
+                ArrayList<MongoAudioTrack> indexes = new ArrayList<>();
 
-                    autoPlaylist.saveInstance();
+                for (int i = 0; i < parts.size(); i++) {
+                    try {
 
-                    channel.sendMessage(String.format("Erfolgreich **%s** aus der Autoplaylist entfernt.",
-                            old.getTitle()))
-                            .queue(new MessageDeleter());
+                        if (parts.get(i).equals("to")) {
+                            String last = parts.get(i-1);
+                            String next = parts.get(i + 1);
+
+                            int lastInt = Integer.parseInt(last);
+                            int nextInt = Integer.parseInt(next);
+
+                            if (lastInt >= nextInt) {
+                                throw new Exception("The first number has to be smaller then the second.");
+                            }
+
+                            for (int x = lastInt; x <= nextInt; x++) {
+                                if (!indexes.contains(x)){
+                                    indexes.add(autoPlaylist.getContent().get(x));
+                                }
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        // Silent
+                    }
                 }
-                else {
-                    //TODO wrong second argument
+
+                for (int i = 0; i < parts.size(); i++) {
+                    int indexBefore = Math.max(0, i);
+                    int indexAfter = Math.min(i, parts.size() - 1);
+
+                    if (!(parts.get(indexBefore).equals("to") || parts.get(indexAfter).equals("to"))) {
+                        try {
+                            int index = Integer.parseInt(parts.get(i)) - 1;
+                            if (!indexes.contains(index)) {
+                                indexes.add(autoPlaylist.getContent().get(index));
+                            }
+                        } catch (Exception e) {
+                            // Silent
+                        }
+                    }
                 }
+
+                ArrayList<MongoAudioTrack> removed = new ArrayList<>();
+                for (int i = 0; i < indexes.size(); i++){
+
+                    MongoAudioTrack old = autoPlaylist.getContent().get(i);
+                    autoPlaylist.getContent().remove(old);
+                    if (!removed.contains(old))
+                        removed.add(old);
+                    System.out.println("removes " + old.getTitle());
+                }
+
+                if (removed.size() == 0) {
+                    channel.sendMessage("Es wurden keine Einträge gelöscht").queue(new MessageDeleter());
+                }
+
+                MessageManager mm = new MessageManager();
+                mm.append(String.format("Erfolgreich **%d** Einträge aus der Autoplaylist entfernt.", removed.size()));
+
+                if (removed.size() == 1) {
+                    mm.append("\n**" + removed.get(0).getTitle() + "**");
+                }
+
+                for (String message : mm.complete()) {
+                    channel.sendMessage(message).queue(new MessageDeleter());
+                }
+
+                autoPlaylist.saveInstance();
 
                 break;
             }

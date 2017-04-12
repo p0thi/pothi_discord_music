@@ -122,10 +122,10 @@ public class MusicTrackScheduler extends AudioEventAdapter implements TrackSched
 
             if (track == null && !(musicManager.playlist == null || musicManager.playlist.getContent().size() == 0)) {
                 //the key is the identifier
-                String[] tuple = musicManager.getNextIdentifier();
-                lastPlaylistOwnerId = tuple[0];
-                lastPlaylistName = tuple[1];
-                String key = tuple[2];
+                String[] triple = musicManager.getNextIdentifier();
+                lastPlaylistOwnerId = triple[0];
+                lastPlaylistName = triple[1];
+                String key = triple[2];
                 log.info("Next Track from: " + key);
                 MyAudioLoadResultHandler handler = new MyAudioLoadResultHandler();
 

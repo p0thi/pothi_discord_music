@@ -299,41 +299,82 @@ public class PlaylistCommand extends GuildCommand {
                 }
                 case "remove": {
                     if (hasIdentifier) {
-                        String[] numbers = identifier.trim().split(" ");
+                        ArrayList<String> parts = new ArrayList<>(Arrays
+                                .asList(identifier.split(" ")));
 
-
-                        ArrayList<String> successNumbers = new ArrayList<>();
                         ArrayList<MongoAudioTrack> toRemove = new ArrayList<>();
 
+                        for (int i = 0; i < parts.size(); i++) {
+                            try {
 
-                        for (String number : numbers) {
-                            if (!number.trim().matches("\\d+")) {
-                                continue;
+                                if (parts.get(i).equals("to")) {
+                                    String last = parts.get(i-1);
+                                    String next = parts.get(i + 1);
+
+                                    int lastInt = Integer.parseInt(last);
+                                    int nextInt = Integer.parseInt(next);
+
+                                    if (lastInt >= nextInt) {
+                                        throw new Exception("The first number has to be smaller then the second.");
+                                    }
+
+                                    for (int x = lastInt; x <= nextInt; x++) {
+                                        System.out.println(x + "");
+                                        if (!toRemove.contains(x)){
+                                            toRemove.add(userPlaylist.getTracks().get(x));
+                                        }
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                                // Silent
                             }
-                            int trackIndex = Integer.parseInt(number) - 1;
-                            System.out.println(trackIndex + "");
+                        }
 
-                            if (trackIndex + 1 > userPlaylist.getTracks().size()) {
-                                continue;
+                        for (int i = 0; i < parts.size(); i++) {
+                            int indexBefore = Math.max(0, i);
+                            int indexAfter = Math.min(i, parts.size() - 1);
+
+                            if (!(parts.get(indexBefore).equals("to") || parts.get(indexAfter).equals("to"))) {
+                                try {
+                                    int index = Integer.parseInt(parts.get(i)) - 1;
+                                    if (!toRemove.contains(index)) {
+                                        toRemove.add(userPlaylist.getTracks().get(index));
+                                    }
+                                } catch (Exception e) {
+                                    // Silent
+                                }
                             }
-                            toRemove.add(userPlaylist.getTracks().get(trackIndex));
+                        }
 
+                        ArrayList<MongoAudioTrack> removed = new ArrayList<>();
 
-                            successNumbers.add((trackIndex + 1) + "");
+                        for (int i = 0; i < toRemove.size(); i++){
+
+                            MongoAudioTrack old = toRemove.get(i);
+                            userPlaylist.getTracks().remove(old);
+                            if (!removed.contains(old))
+                                removed.add(old);
+                            System.out.println("removes " + old.getTitle());
 
                         }
 
-                        userPlaylist.getTracks().removeAll(toRemove);
+                        if (removed.size() == 0) {
+                            channel.sendMessage("Es wurden keine Einträge gelöscht").queue(new MessageDeleter());
+                        }
+
+                        MessageManager mm = new MessageManager();
+                        mm.append(String.format("Erfolgreich **%d** Einträge aus der Autoplaylist entfernt.", removed.size()));
+
+                        if (removed.size() == 1) {
+                            mm.append("\n**" + removed.get(0).getTitle() + "**");
+                        }
+
+                        for (String message : mm.complete()) {
+                            channel.sendMessage(message).queue(new MessageDeleter());
+                        }
+
                         userPlaylist.saveInstance();
-
-                        if (successNumbers.size() <= 0) {
-                            channel.sendMessage("Es wurde nichts gelöscht.").queue(new MessageDeleter());
-                        }
-                        else if (successNumbers.size() >= 1) {
-                            channel.sendMessage("Der/die Eintrag/Einträge "
-                                    + String.join(", ", successNumbers) + " wurden gelöscht.")
-                                    .queue(new MessageDeleter());
-                        }
                     }
                     else {
                         channel.sendMessage(String.format("Mit **%splaylist <Nummer1> remove <Nummer2>** " +
