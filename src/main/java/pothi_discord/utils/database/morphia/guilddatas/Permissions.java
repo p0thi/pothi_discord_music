@@ -2,6 +2,7 @@ package pothi_discord.utils.database.morphia.guilddatas;
 
 import net.dv8tion.jda.core.entities.Guild;
 import org.mongodb.morphia.annotations.Embedded;
+import oshi.jna.platform.unix.solaris.LibKstat;
 import pothi_discord.utils.Param;
 
 import java.util.ArrayList;
@@ -12,13 +13,15 @@ import java.util.List;
  */
 @Embedded
 public class Permissions {
-    private String owner = "";
+    private static final String DEFAULT_ROLE_NAME = "Default";
+
+    private String owner = "Unknown";
     @Embedded private RoleEntity defaultRole = createDefaultRole();
     @Embedded private List<RoleEntity> roles = new ArrayList<>();
 
     private static RoleEntity createDefaultRole() {
         RoleEntity defaultRoleEntity = new RoleEntity();
-        defaultRoleEntity.setName("Default");
+        defaultRoleEntity.setName(DEFAULT_ROLE_NAME);
         defaultRoleEntity.setDefaultRole(true);
 
         return defaultRoleEntity;
@@ -32,10 +35,23 @@ public class Permissions {
             result = true;
         }
         else {
-            for (RoleEntity pr : roles) {
-                if (pr.hasUserAccess(guild, userId) && pr.hasRolePermissionForCommand(commandName)) {
+            roleIteration:
+            for (RoleEntity role : roles) {
+                if (role.hasUserAccess(guild, userId) && role.hasRolePermissionForCommand(commandName)) {
                     result = true;
-                    break;
+                    break roleIteration;
+                }
+                subroleIteration:
+                for (String roleName : role.getSubroles()) {
+                    RoleEntity tmpRole = getRoleByName(roleName);
+                    if (tmpRole == null) {
+                        continue subroleIteration;
+                    }
+
+                    if (tmpRole.hasUserAccess(guild, userId) && role.hasRolePermissionForCommand(commandName)) {
+                        result = true;
+                        break roleIteration;
+                    }
                 }
             }
         }
@@ -43,13 +59,55 @@ public class Permissions {
         return result;
     }
 
-    public ArrayList<RoleEntity> getRolesOfUser(Guild guild, String userID) {
+    public List<String> getAllCommandStringsOfUser(Guild guild, String userID) {
+        List<String> result = new ArrayList<>();
+
+        for (RoleEntity role : getRolesOfUser(guild, userID)) {
+            for (String permName : role.getCommandNames()) {
+                if (!result.contains(permName)) {
+                    result.add(permName);
+                }
+            }
+        }
+        return result;
+    }
+
+    public RoleEntity getRoleByName(String rolename) {
+        if (rolename == null ||rolename.isEmpty()) {
+            return null;
+        }
+
+        if (rolename.equals(DEFAULT_ROLE_NAME)) {
+            return defaultRole;
+        }
+
+        for (RoleEntity role : roles) {
+            if (role.getName().equals(rolename)) {
+                return role;
+            }
+        }
+        return null;
+    }
+
+    public List<RoleEntity> getRolesOfUser(Guild guild, String userID) {
         ArrayList<RoleEntity> result = new ArrayList<>();
         result.add(defaultRole);
 
         for(RoleEntity pr : roles) {
             if (pr.hasUserAccess(guild, userID)) {
                 result.add(pr);
+
+                for (String name : pr.getSubroles()) {
+                    RoleEntity subrole = getRoleByName(name);
+
+                    if (subrole == null || !subrole.hasUserAccess(guild, userID)) {
+                        continue;
+                    }
+
+                    if (!result.contains(subrole)) {
+                        result.add(subrole);
+                    }
+                }
             }
         }
 
@@ -60,7 +118,17 @@ public class Permissions {
         int result = defaultRole.getMaxPlaylistSize();
 
         for (RoleEntity pr : roles) {
-            result = Math.max(result, pr.getMaxPlaylistSizeOfUser(guild, userId));
+            result = Math.max(result, pr.getMaxPlaylistSize(guild, userId));
+
+            for (String name : pr.getSubroles()) {
+                RoleEntity subrole = getRoleByName(name);
+
+                if (subrole == null) {
+                    continue;
+                }
+
+                result = Math.max(result, subrole.getMaxPlaylistSize(guild, userId));
+            }
         }
 
         return result;
@@ -70,7 +138,17 @@ public class Permissions {
         long result = defaultRole.getMaxSongLengthMillis();
 
         for (RoleEntity pr : roles) {
-            result = Math.max(result, pr.getMaxSongLengthOfUser(guild, userId));
+            result = Math.max(result, pr.getMaxSongLength(guild, userId));
+
+            for (String name : pr.getSubroles()) {
+                RoleEntity subrole = getRoleByName(name);
+
+                if (subrole == null) {
+                    continue;
+                }
+
+                result = Math.max(result, subrole.getMaxSongLength(guild, userId));
+            }
         }
 
         return result;

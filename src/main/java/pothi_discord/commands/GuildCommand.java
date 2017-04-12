@@ -33,14 +33,13 @@ public abstract class GuildCommand implements Command {
     public boolean checkPermission(GuildMessageReceivedEvent event) {
         Guild guild = event.getGuild();
         User user = event.getAuthor();
-        boolean result = Param.isDeveloper(user.getId());
 
         GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
         Permissions permissions = guildData.getPermissions();
 
         String permission = getName();
 
-        result = result || permissions.hasUserPermissionForCommand(guild, user.getId(), permission);
+        boolean result = permissions.hasUserPermissionForCommand(guild, user.getId(), permission);
 
         if (!result) {
             event.getChannel().sendMessage(getAccessDeniedMessage(user)).queue(new MessageDeleter(5000));

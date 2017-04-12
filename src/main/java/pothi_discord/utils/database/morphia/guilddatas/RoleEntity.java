@@ -19,6 +19,7 @@ public class RoleEntity {
     private List<String> roleIds = new ArrayList<>();
     private List<String> userIds = new ArrayList<>();
     private List<String> commandNames = new ArrayList<>();
+    private List<String> subroles = new ArrayList<>();
 
 
     public boolean hasUserAccess(Guild guild, String userId) {
@@ -43,7 +44,7 @@ public class RoleEntity {
         return this.commandNames.contains(commandName);
     }
 
-    public int getMaxPlaylistSizeOfUser(Guild guild, String userId) {
+    public int getMaxPlaylistSize(Guild guild, String userId) {
         if (hasUserAccess(guild, userId)) {
             return this.maxPlaylistSize;
         }
@@ -52,7 +53,7 @@ public class RoleEntity {
         }
     }
 
-    public long getMaxSongLengthOfUser(Guild guild, String userId) {
+    public long getMaxSongLength(Guild guild, String userId) {
         if (hasUserAccess(guild, userId)) {
             return this.maxSongLengthMillis;
         }
@@ -116,5 +117,13 @@ public class RoleEntity {
 
     public void setCommandNames(List<String> commandNames) {
         this.commandNames = commandNames;
+    }
+
+    public List<String> getSubroles() {
+        return subroles;
+    }
+
+    public void setSubroles(List<String> subroles) {
+        this.subroles = subroles;
     }
 }

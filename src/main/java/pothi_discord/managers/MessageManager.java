@@ -1,6 +1,7 @@
 package pothi_discord.managers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Pascal Pothmann on 02.02.2017.
@@ -14,6 +15,14 @@ public class MessageManager {
     public MessageManager() {
         this.allMessages = new ArrayList<>();
         this.buffer = new StringBuilder();
+    }
+
+
+    public void append(Collection<String> collection, String delimiter) {
+        String myDelimiter = delimiter == null ? "" : delimiter;
+        for (String string : collection) {
+            append(string + myDelimiter);
+        }
     }
 
     public void append(String part) {

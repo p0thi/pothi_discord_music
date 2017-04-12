@@ -7,6 +7,8 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
+import pothi_discord.managers.MessageManager;
+import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord.utils.database.morphia.guilddatas.RoleEntity;
@@ -28,19 +30,35 @@ public class PermissionsCommand extends GuildCommand {
 
         TextChannel channel = event.getChannel();
         Permissions gpo = GuildData.getGuildDataByGuildId(guild.getId()).getPermissions();
-        List<RoleEntity> roleEntities = gpo.getRolesOfUser(guild, user.getId());
 
-        StringBuilder sb = new StringBuilder("Das sind deine internen Rollen: \n\n");
+        MessageManager mm = new MessageManager();
 
-        for(RoleEntity pr : roleEntities) {
-            sb.append("**" + pr.getName() + "**\n");
-            for(String cmd : pr.getCommandNames()) {
-                sb.append("\t" + cmd + "\n");
-            }
-            sb.append("\n");
+        mm.append("**Das sind Deine internen Berechtigungen:**\n\n");
+
+        List<String> allCommandNames = gpo.getAllCommandStringsOfUser(guild, user.getId());
+
+        for (String commandName : allCommandNames) {
+            mm.append("\t**-** " + commandName + "\n");
         }
 
-        channel.sendMessage(sb.toString()).queue(new MessageDeleter());
+        mm.append("\n");
+        mm.append(String.format("Maximale Playlistlänge: **%d**",
+                gpo.getMaxPlaylistSizeOfUser(guild, user.getId())) + "\n");
+        mm.append(String.format("Maximale Liedlänge: **%s**",
+                TextUtils.getMillisFormattedMS(gpo.getMaxSongLengthOfUser(guild, user.getId()))) + "\n");
+
+        List<RoleEntity> allUserRoles = gpo.getRolesOfUser(guild, user.getId());
+
+        mm.append("\n**Deine Gruppen:**\n\n");
+
+        for (RoleEntity role : allUserRoles) {
+            mm.append("\t**-** _" + role.getName() + "_\n");
+        }
+
+        for (String message : mm.complete()) {
+            channel.sendMessage(message).queue(new MessageDeleter());
+        }
+
     }
 
     @Override
