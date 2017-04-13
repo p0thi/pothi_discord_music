@@ -34,7 +34,14 @@ public class MongoAudioTrack {
         return result;
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null
+                || ! (obj instanceof MongoAudioTrack)) {
+            return false;
+        }
+        return this.getIdentifier().equals(((MongoAudioTrack) obj).getIdentifier());
+    }
 
     public String getTitle() {
         return title;

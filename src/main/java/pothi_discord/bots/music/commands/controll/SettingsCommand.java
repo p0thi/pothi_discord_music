@@ -25,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Pascal Pothmann on 09.04.2017.
  */
-public class SettingsCommand extends GuildCommand{
+public class SettingsCommand extends GuildCommand {
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard botShard) {
 
@@ -33,7 +33,7 @@ public class SettingsCommand extends GuildCommand{
             return;
         }
 
-        if (args.length <= 1){
+        if (args.length <= 1) {
             //TODO help?
             return;
         }
@@ -116,8 +116,7 @@ public class SettingsCommand extends GuildCommand{
                                 autoPlaylist.getTitle(),
                                 loader.tracks.size() == 1 ? "\n_(" + loader.tracks.get(0).getInfo().title + ")_" : ""))
                                 .queue(new MessageDeleter());
-                    }
-                    else {
+                    } else {
                         channel.sendMessage("Das kann nicht hinzugefügt werden.").queue(new MessageDeleter());
                     }
                 } catch (InterruptedException e) {
@@ -141,9 +140,8 @@ public class SettingsCommand extends GuildCommand{
 
                 for (int i = 0; i < parts.size(); i++) {
                     try {
-
                         if (parts.get(i).equals("to")) {
-                            String last = parts.get(i-1);
+                            String last = parts.get(i - 1);
                             String next = parts.get(i + 1);
 
                             int lastInt = Integer.parseInt(last);
@@ -154,7 +152,7 @@ public class SettingsCommand extends GuildCommand{
                             }
 
                             for (int x = lastInt; x <= nextInt; x++) {
-                                if (!indexes.contains(x)){
+                                if (!indexes.contains(x)) {
                                     indexes.add(autoPlaylist.getContent().get(x));
                                 }
                             }
@@ -182,9 +180,9 @@ public class SettingsCommand extends GuildCommand{
                 }
 
                 ArrayList<MongoAudioTrack> removed = new ArrayList<>();
-                for (int i = 0; i < indexes.size(); i++){
+                for (int i = 0; i < indexes.size(); i++) {
 
-                    MongoAudioTrack old = autoPlaylist.getContent().get(i);
+                    MongoAudioTrack old = indexes.get(i);
                     autoPlaylist.getContent().remove(old);
                     if (!removed.contains(old))
                         removed.add(old);
@@ -212,46 +210,49 @@ public class SettingsCommand extends GuildCommand{
             }
             case "search": {
 
-                if (hasIdentifier) {
+                if (!hasIdentifier) {
+                    //TODO send explaination
+                    return;
+                }
 
-                    ArrayList<String> titles = new ArrayList<>();
-                    for (MongoAudioTrack mongoAudioTrack : autoPlaylist.getContent()) {
-                        titles.add(mongoAudioTrack.getTitle());
-                    }
+                ArrayList<String> titles = new ArrayList<>();
+                for (MongoAudioTrack mongoAudioTrack : autoPlaylist.getContent()) {
+                    titles.add(mongoAudioTrack.getTitle());
+                }
 
-                    List<String> tmpResults = new ArrayList<>();
+                List<String> tmpResults = new ArrayList<>();
 
-                    for (String title : titles) {
-                        if (FuzzySearch.partialRatio(identifier, title) >= 70) {
-                            System.out.println(title);
-                            tmpResults.add(title);
-                        }
-                    }
-
-                    if (tmpResults.size() <= 0) {
-                        channel.sendMessage("Zu Deiner Suchanfrage wurde nichts gefunden.")
-                                .queue(new MessageDeleter());
-                        return;
-                    }
-
-                    MessageManager mm = new MessageManager();
-                    mm.append("Alle Einträge, die zu deiner Suchanfrage gefunden wurden:\n\n");
-
-                    for (String title : tmpResults) {
-                        int index = autoPlaylist.getIndexOfExactTitle(title);
-                        MongoAudioTrack track = autoPlaylist.getContent().get(index);
-                        mm.append(String.format("%d.  **%s**\n\t\tLink: <%s>\n",
-                                (index + 1),
-                                title,
-                                track.getUri()));
-                    }
-
-                    for (String message : mm.complete()) {
-                        channel.sendMessage(message).queue(new MessageDeleter());
+                for (String title : titles) {
+                    if (FuzzySearch.partialRatio(identifier, title) >= 70) {
+                        System.out.println(title);
+                        tmpResults.add(title);
                     }
                 }
-                break;
+
+                if (tmpResults.size() <= 0) {
+                    channel.sendMessage("Zu Deiner Suchanfrage wurde nichts gefunden.")
+                            .queue(new MessageDeleter());
+                    return;
+                }
+
+                MessageManager mm = new MessageManager();
+                mm.append("Alle Einträge, die zu deiner Suchanfrage gefunden wurden:\n\n");
+
+                for (String title : tmpResults) {
+                    int index = autoPlaylist.getIndexOfExactTitle(title);
+                    MongoAudioTrack track = autoPlaylist.getContent().get(index);
+                    mm.append(String.format("%d.  **%s**\n\t\tLink: <%s>\n",
+                            (index + 1),
+                            title,
+                            track.getUri()));
+                }
+
+                for (String message : mm.complete()) {
+                    channel.sendMessage(message).queue(new MessageDeleter());
+                }
+                //TODO send explaination
             }
+            break;
         }
 
     }

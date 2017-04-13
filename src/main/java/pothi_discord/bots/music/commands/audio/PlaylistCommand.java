@@ -306,9 +306,8 @@ public class PlaylistCommand extends GuildCommand {
 
                         for (int i = 0; i < parts.size(); i++) {
                             try {
-
                                 if (parts.get(i).equals("to")) {
-                                    String last = parts.get(i-1);
+                                    String last = parts.get(i - 1);
                                     String next = parts.get(i + 1);
 
                                     int lastInt = Integer.parseInt(last);
@@ -319,7 +318,6 @@ public class PlaylistCommand extends GuildCommand {
                                     }
 
                                     for (int x = lastInt; x <= nextInt; x++) {
-                                        System.out.println(x + "");
                                         if (!toRemove.contains(x)){
                                             toRemove.add(userPlaylist.getTracks().get(x));
                                         }
@@ -356,7 +354,6 @@ public class PlaylistCommand extends GuildCommand {
                             if (!removed.contains(old))
                                 removed.add(old);
                             System.out.println("removes " + old.getTitle());
-
                         }
 
                         if (removed.size() == 0) {

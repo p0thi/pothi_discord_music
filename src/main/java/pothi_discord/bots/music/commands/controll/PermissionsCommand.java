@@ -13,6 +13,7 @@ import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
 import pothi_discord.utils.database.morphia.guilddatas.RoleEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public class PermissionsCommand extends GuildCommand {
         mm.append("**Das sind Deine internen Berechtigungen:**\n\n");
 
         List<String> allCommandNames = gpo.getAllCommandStringsOfUser(guild, user.getId());
+        Collections.sort(allCommandNames);
 
         for (String commandName : allCommandNames) {
             mm.append("\t**-** " + commandName + "\n");
