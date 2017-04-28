@@ -11,10 +11,7 @@ import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.music.DiscordMusicBotShard;
 import pothi_discord.bots.music.commands.audio.*;
 import pothi_discord.bots.music.commands.controll.*;
-import pothi_discord.bots.music.commands.fun.GifCommand;
-import pothi_discord.bots.music.commands.fun.JokeCommand;
-import pothi_discord.bots.music.commands.fun.RollCommand;
-import pothi_discord.bots.music.commands.fun.StatisticsCommand;
+import pothi_discord.bots.music.commands.fun.*;
 import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
 import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 import pothi_discord.commands.*;
@@ -102,6 +99,8 @@ public class MusicBot extends Bot{
 
 
 
+            gcm.addCommand("react", new ReactCommand());
+            gcm.addAlias("reaction", "react");
             gcm.addCommand("playlist", new PlaylistCommand());
             gcm.addAlias("playlists", "playlist");
             gcm.addCommand("setting", new SettingsCommand());
