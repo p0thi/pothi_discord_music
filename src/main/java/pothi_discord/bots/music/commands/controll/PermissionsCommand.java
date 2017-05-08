@@ -8,6 +8,7 @@ import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.managers.MessageManager;
+import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.Permissions;
@@ -30,6 +31,19 @@ public class PermissionsCommand extends GuildCommand {
         Guild guild = event.getGuild();
 
         TextChannel channel = event.getChannel();
+
+        if (args.length > 1) {
+
+            boolean check = PermissionManager.checkUserPermission(guild, user, args[1]);
+
+            if (check) {
+                channel.sendMessage("Du hast die Rechte für diesen Befehl.").queue(new MessageDeleter());
+            }
+            else {
+                channel.sendMessage("Du hast **NICHT** die Rechte für diesen Befehl.").queue(new MessageDeleter());
+            }
+            return;
+        }
         Permissions gpo = GuildData.getGuildDataByGuildId(guild.getId()).getPermissions();
 
         MessageManager mm = new MessageManager();
