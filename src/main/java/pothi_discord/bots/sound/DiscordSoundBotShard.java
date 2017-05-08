@@ -42,7 +42,7 @@ public class DiscordSoundBotShard implements BotShard {
         try {
             while (!success) {
                 JDABuilder builder = new JDABuilder(AccountType.BOT)
-                        .addListener(soundBotMessageListener)
+                        .addEventListener(soundBotMessageListener)
                         .setToken(mySoundBotBot.getToken())
                         .setBulkDeleteSplittingEnabled(true)
                         .setEnableShutdownHook(false);

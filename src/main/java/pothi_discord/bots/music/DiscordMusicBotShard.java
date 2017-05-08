@@ -45,7 +45,7 @@ public class DiscordMusicBotShard implements BotShard{
         try {
             while (!success) {
                 JDABuilder builder = new JDABuilder(AccountType.BOT)
-                        .addListener(musicBotMessageListener)
+                        .addEventListener(musicBotMessageListener)
                         .setToken(myMusicBot.getToken())
                         .setBulkDeleteSplittingEnabled(true)
                         .setEnableShutdownHook(false);
