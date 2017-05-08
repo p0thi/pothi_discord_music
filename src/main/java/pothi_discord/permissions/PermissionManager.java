@@ -20,12 +20,10 @@ import java.util.Set;
 public class PermissionManager {
 
     public static boolean checkUserPermission(Guild guild, User user, String permission) {
-        GuildData mongoGuilddata = GuildData.getGuildDataByGuildId(guild.getId());
+        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
         boolean result = Param.isDeveloper(user.getId());
 
-        result = result || mongoGuilddata.getPermissions().getOwner().equals(user.getId());
-
-        GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
+        result = result || guildData.getPermissions().getOwner().equals(user.getId());
 
         Permissions permissions = guildData.getPermissions();
 

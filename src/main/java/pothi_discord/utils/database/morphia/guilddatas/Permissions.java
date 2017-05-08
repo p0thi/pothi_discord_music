@@ -48,7 +48,7 @@ public class Permissions {
                         continue subroleIteration;
                     }
 
-                    if (tmpRole.hasUserAccess(guild, userId) && role.hasRolePermissionForCommand(commandName)) {
+                    if (tmpRole.hasUserAccess(guild, userId) && tmpRole.hasRolePermissionForCommand(commandName)) {
                         result = true;
                         break roleIteration;
                     }
