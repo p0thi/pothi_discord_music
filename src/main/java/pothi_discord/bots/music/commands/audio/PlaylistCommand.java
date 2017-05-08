@@ -109,6 +109,13 @@ public class PlaylistCommand extends GuildCommand {
 
             return;
         }
+        boolean hasIdentifier = false;
+        String identifier = null;
+
+        if (args.length > 3) {
+            hasIdentifier = true;
+            identifier = String.join(" ", Arrays.copyOfRange(args, 3, args.length));
+        }
 
         if (args[1].toLowerCase().equals("create")) {
             if (userdata.getPlaylists().size() >= MAX_PLAYLIST_AMOUNT) {
@@ -125,10 +132,7 @@ public class PlaylistCommand extends GuildCommand {
                 return;
             }
 
-            String identifier = String.join(" ", Arrays.copyOfRange(args, 2, args.length)).trim();
-
             Matcher matcher = PLAYLIST_NAME_PATTERN.matcher(identifier);
-
             if (matcher.find()) {
                 channel.sendMessage(String.format("Der Name der Playlist ist zu lang. Zwischen %d und %d Zeichen.",
                         MIN_PLAYLIST_NAME_LENGTH,
@@ -167,13 +171,7 @@ public class PlaylistCommand extends GuildCommand {
 
             UserPlaylist userPlaylist = userdata.getPlaylists().get(playlistIndex);
 
-            boolean hasIdentifier = false;
-            String identifier = null;
 
-            if (args.length > 3) {
-                hasIdentifier = true;
-                identifier = String.join(" ", Arrays.copyOfRange(args, 3, args.length));
-            }
 
             if (args.length <= 2) {
                 //show selected playlist

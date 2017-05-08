@@ -32,8 +32,8 @@ jar {
 
 dependencies {
     compile group: 'junit', name: 'junit', version: '4.11'
-    compile 'net.dv8tion:JDA:3.0.0_166'
-    compile 'com.sedmelluq:lavaplayer:1.2.34'
+    compile 'net.dv8tion:JDA:3.0.0_191'
+    compile 'com.sedmelluq:lavaplayer:1.2.36'
     compile 'me.xdrop:fuzzywuzzy:1.1.7'
 
 
