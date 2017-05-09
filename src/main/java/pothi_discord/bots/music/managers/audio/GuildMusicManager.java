@@ -24,6 +24,7 @@ import pothi_discord.handlers.AudioPlayerSendHandler;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.managers.GuildAudioManager;
+import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
@@ -147,9 +148,16 @@ public class GuildMusicManager implements GuildAudioManager{
                 .getPlayerManager().loadItemOrdered(this, value, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-                if(queueTrack(track)) {
-                    sendMessage("Zur Warteschlange hinzugefügt: **" + track.getInfo().title
-                            + "**", channel, skipMessages);
+                if (gpo.getMaxSongLengthOfUser(guild, userId) >= track.getDuration()) {
+                    if (queueTrack(track)) {
+                        sendMessage("Zur Warteschlange hinzugefügt: **" + track.getInfo().title
+                                + "**", channel, skipMessages);
+                    }
+                }
+                else {
+                    sendMessage(String.format("Das Lied ist zu lnag. " +
+                            "Du darft Nur Tracks mit maximal **%d Minuten** hinzufügen",
+                            (gpo.getMaxSongLengthOfUser(guild, userId) / 60000)), channel, skipMessages);
                 }
             }
 

@@ -1,5 +1,9 @@
 package pothi_discord.bots.music.commands.audio;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
@@ -21,6 +25,7 @@ import pothi_discord.utils.audio.VideoSelection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -212,6 +217,35 @@ public class PlayCommand extends GuildCommand {
             manager.setCurrentTC(channel);
 
             manager.selections.put(user.getId(), new VideoSelection(vids, outMsg));
+        }
+    }
+
+    private class MyAudioLoadResultHandler implements AudioLoadResultHandler {
+        private AudioTrack track;
+        MyAudioLoadResultHandler() {
+            this.track = null;
+        }
+
+        @Override
+        public void trackLoaded(AudioTrack track) {
+            this.track = track;
+        }
+
+        @Override
+        public void playlistLoaded(AudioPlaylist playlist) {
+            this.track = playlist.getTracks().get(new Random().nextInt(playlist.getTracks().size()));
+        }
+
+        @Override
+        public void noMatches() {}
+
+        @Override
+        public void loadFailed(FriendlyException exception) {
+            log.error("FriendlyException while loading. ", exception);
+        }
+
+        public AudioTrack getTrack() {
+            return this.track;
         }
     }
 }
