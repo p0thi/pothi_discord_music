@@ -1,6 +1,7 @@
 package pothi_discord.utils.database.morphia;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mongodb.WriteResult;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Version;
@@ -42,6 +43,16 @@ public abstract class DataClass<T> {
             return Main.datastore.save(this);
         } catch (ConcurrentModificationException e) {
             log.error("Could not store instance " + this.getClass().getSimpleName() + " " + getId().toString()
+                + " | " + e.getMessage());
+        }
+        return null;
+    }
+
+    public WriteResult deleteInstance() {
+        try {
+            return Main.datastore.delete(this);
+        } catch (ConcurrentModificationException e) {
+            log.error("Could not delete instance " + this.getClass().getSimpleName() + " " + getId().toString()
                 + " | " + e.getMessage());
         }
         return null;

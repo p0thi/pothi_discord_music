@@ -155,8 +155,8 @@ public class GuildMusicManager implements GuildAudioManager{
                     }
                 }
                 else {
-                    sendMessage(String.format("Das Lied ist zu lnag. " +
-                            "Du darft Nur Tracks mit maximal **%d Minuten** hinzufügen",
+                    sendMessage(String.format("Das Lied ist zu lang. " +
+                            "Du darft nur Tracks mit maximal **%d Minuten** hinzufügen",
                             (gpo.getMaxSongLengthOfUser(guild, userId) / 60000)), channel, skipMessages);
                 }
             }

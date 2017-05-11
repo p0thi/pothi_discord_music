@@ -1,5 +1,6 @@
 package pothi_discord.bots.music.commands.audio;
 
+import com.mongodb.WriteResult;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
@@ -14,11 +15,13 @@ import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.managers.MessageManager;
+import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,9 +115,9 @@ public class PlaylistCommand extends GuildCommand {
         boolean hasIdentifier = false;
         String identifier = null;
 
-        if (args.length > 3) {
+        if (args.length > 2) {
             hasIdentifier = true;
-            identifier = String.join(" ", Arrays.copyOfRange(args, 3, args.length));
+            identifier = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
         }
 
         if (args[1].toLowerCase().equals("create")) {
@@ -133,7 +136,7 @@ public class PlaylistCommand extends GuildCommand {
             }
 
             Matcher matcher = PLAYLIST_NAME_PATTERN.matcher(identifier);
-            if (matcher.find()) {
+            if (!matcher.find()) {
                 channel.sendMessage(String.format("Der Name der Playlist ist zu lang. Zwischen %d und %d Zeichen.",
                         MIN_PLAYLIST_NAME_LENGTH,
                         MAX_PLAYLIST_NAME_LENGTH))
@@ -189,6 +192,11 @@ public class PlaylistCommand extends GuildCommand {
                     channel.sendMessage(messageString).queue(new MessageDeleter());
                 }
                 return;
+            }
+
+            if (args.length > 3) {
+                hasIdentifier = true;
+                identifier = String.join(" ", Arrays.copyOfRange(args, 3, args.length));
             }
 
             switch (args[2].toLowerCase().trim()) {
@@ -381,6 +389,23 @@ public class PlaylistCommand extends GuildCommand {
                     break;
                 }
                 case "delete": {
+                    if (PermissionManager.checkUserPermission(event.getGuild(), user, "delete-own-playlist")) {
+                        userdata.getPlaylists().remove(userPlaylist);
+                        userdata.saveInstance();
+
+                        WriteResult result = userPlaylist.deleteInstance();
+
+                        channel.sendMessage("Die Playlist wurde erfolgreich gelöscht.").queue(new MessageDeleter());
+
+                        if (!result.wasAcknowledged()) {
+                            log.warning("A Playlist could not be deleted:\n\t" + userPlaylist.getName() + " of "
+                            + user.getName() + " (" + user.getId() + ")");
+                        }
+                    }
+                    else {
+                        channel.sendMessage("Du kannst keine Playlists löschen. " +
+                                "Du kannst sie jedoch umbenennen und alle Einträge löschen").queue(new MessageDeleter());
+                    }
                     break;
                 }
                 case "active":
