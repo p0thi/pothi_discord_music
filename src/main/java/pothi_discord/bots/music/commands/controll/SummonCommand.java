@@ -31,6 +31,11 @@ public class SummonCommand extends GuildCommand {
                 shard.getMyBot().connectToVoiceChannel(guild.getAudioManager());
                 return;
             }
+            else {
+                VoiceChannel vc = guild.getVoiceChannelById(args[1]);
+                guild.getAudioManager().openAudioConnection(vc);
+                return;
+            }
         }
 
         if (memberVoiceChannel == null) {
