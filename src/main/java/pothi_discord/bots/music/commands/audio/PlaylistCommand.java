@@ -395,7 +395,9 @@ public class PlaylistCommand extends GuildCommand {
 
                         WriteResult result = userPlaylist.deleteInstance();
 
-                        channel.sendMessage("Die Playlist wurde erfolgreich gelöscht.").queue(new MessageDeleter());
+                        channel.sendMessage(String.format("Die Playlist **%s** wurde erfolgreich gelöscht.",
+                                userPlaylist.getName()
+                        )).queue(new MessageDeleter());
 
                         if (!result.wasAcknowledged()) {
                             log.warning("A Playlist could not be deleted:\n\t" + userPlaylist.getName() + " of "

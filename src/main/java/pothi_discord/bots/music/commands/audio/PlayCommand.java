@@ -219,33 +219,4 @@ public class PlayCommand extends GuildCommand {
             manager.selections.put(user.getId(), new VideoSelection(vids, outMsg));
         }
     }
-
-    private class MyAudioLoadResultHandler implements AudioLoadResultHandler {
-        private AudioTrack track;
-        MyAudioLoadResultHandler() {
-            this.track = null;
-        }
-
-        @Override
-        public void trackLoaded(AudioTrack track) {
-            this.track = track;
-        }
-
-        @Override
-        public void playlistLoaded(AudioPlaylist playlist) {
-            this.track = playlist.getTracks().get(new Random().nextInt(playlist.getTracks().size()));
-        }
-
-        @Override
-        public void noMatches() {}
-
-        @Override
-        public void loadFailed(FriendlyException exception) {
-            log.error("FriendlyException while loading. ", exception);
-        }
-
-        public AudioTrack getTrack() {
-            return this.track;
-        }
-    }
 }

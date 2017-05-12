@@ -96,6 +96,7 @@ public class MusicBot extends Bot{
             gcm.addCommand("id", new IdCommand());
             gcm.addCommand("echo", new EchoCommand());
             gcm.addCommand("statistics", new StatisticsCommand());
+            gcm.addCommand("clear", new ClearCommand());
 
 
 
