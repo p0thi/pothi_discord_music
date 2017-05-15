@@ -7,7 +7,6 @@ import pothi_discord.commands.GuildCommand;
 import pothi_discord.managers.HugeMessageSender;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
-import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.util.List;
