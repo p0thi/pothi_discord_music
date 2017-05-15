@@ -8,6 +8,7 @@ import pothi_discord.managers.HugeMessageSender;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.util.List;
 
@@ -29,9 +30,9 @@ public class CommandsCommand extends GuildCommand {
         hugeMessageSender.setHeader("Alle Audio-Commands" + "$MULTIPAGE$:");
         hugeMessageSender.setMpInfix(". Seite $CURRENTPAGE$/$TOTALPAGES$");
 
-        List<SoundCommand> allCommands = GuildData.getGuildDataByGuildId(guild.getId()).getSoundCommands();
+        List<SoundCommandEntry> allCommands = GuildData.getGuildDataByGuildId(guild.getId()).getSoundCommands().getSoundCommandEntries();
 
-        for(SoundCommand soundCommand : allCommands){
+        for(SoundCommandEntry soundCommand : allCommands){
             // 15 is the length of the spaces
             String description = "               ".substring(Math.min(15, soundCommand.getCommand().length()));
 

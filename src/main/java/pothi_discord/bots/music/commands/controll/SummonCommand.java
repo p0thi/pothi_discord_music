@@ -6,6 +6,7 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
+import pothi_discord.permissions.PermissionManager;
 
 /**
  * Created by Pascal Pothmann on 03.02.2017.
@@ -31,7 +32,12 @@ public class SummonCommand extends GuildCommand {
                 shard.getMyBot().connectToVoiceChannel(guild.getAudioManager());
                 return;
             }
-            else {
+            else if (args[1].matches("\\d*")){
+
+                if (!PermissionManager.checkUserPermission(guild, user, "summon-to-other-channel")) {
+                    channel.sendMessage("Du kannst den Bot nicht in einen anderen Channel schicken.")
+                            .queue(new MessageDeleter());
+                }
                 VoiceChannel vc = guild.getVoiceChannelById(args[1]);
                 guild.getAudioManager().openAudioConnection(vc);
                 return;

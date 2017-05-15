@@ -6,7 +6,7 @@ import pothi_discord.bots.BotShard;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
-import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.util.List;
 
@@ -29,15 +29,15 @@ public class DeleteCommand extends GuildCommand {
         }
 
         GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
-        List<SoundCommand> allSoundCommands = guildData.getSoundCommands();
+        List<SoundCommandEntry> allSoundCommands = guildData.getSoundCommands().getSoundCommandEntries();
         StringBuilder builder = new StringBuilder("Folgende Befehle wurden gelöscht:" + "\n\n");
 
         for (int i = 1; i < args.length; i++) {
             inner:
-            for (SoundCommand command : allSoundCommands) {
+            for (SoundCommandEntry command : allSoundCommands) {
                 if (command.getCommand().equals(args[i].toLowerCase())) {
                     builder.append(command.getCommand() + ", ");
-                    guildData.getSoundCommands().remove(command);
+                    guildData.getSoundCommands().getSoundCommandEntries().remove(command);
                     guildData.saveInstance();
                     break inner;
                 }

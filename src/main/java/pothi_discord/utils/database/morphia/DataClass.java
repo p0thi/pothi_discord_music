@@ -42,7 +42,7 @@ public abstract class DataClass<T> {
         try {
             return Main.datastore.save(this);
         } catch (ConcurrentModificationException e) {
-            log.error("Could not store instance " + this.getClass().getSimpleName() + " " + getId().toString()
+            log.error("Could not save instance " + this.getClass().getSimpleName() + " " + getId().toString()
                 + " | " + e.getMessage());
         }
         return null;

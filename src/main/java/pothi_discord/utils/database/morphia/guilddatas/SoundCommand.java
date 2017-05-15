@@ -1,37 +1,45 @@
 package pothi_discord.utils.database.morphia.guilddatas;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import pothi_discord.utils.database.morphia.DataClass;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Pascal Pothmann on 24.03.2017.
  */
-@Embedded
-public class SoundCommand {
-    private String command;
-    private String description;
-    private String fileId;
+@Entity(value = "soundcommands", noClassnameStored = true)
+public class SoundCommand extends DataClass<String>{
+    @Embedded
+    private List<SoundCommandEntry> soundCommandEntries = new ArrayList<>();
+    @Embedded
+    private List<SoundCommandEntry> tmpSoundCommandEntries = new ArrayList<>();
+    private List<String> bannedAudioCommandUsers = new ArrayList<>();
 
-    public String getCommand() {
-        return command;
+    public List<SoundCommandEntry> getSoundCommandEntries() {
+        return soundCommandEntries;
     }
 
-    public void setCommand(String command) {
-        this.command = command;
+    public void setSoundCommandEntries(List<SoundCommandEntry> soundCommandEntries) {
+        this.soundCommandEntries = soundCommandEntries;
     }
 
-    public String getDescription() {
-        return description;
+    public List<SoundCommandEntry> getTmpSoundCommandEntries() {
+        return tmpSoundCommandEntries;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTmpSoundCommandEntries(List<SoundCommandEntry> tmpSoundCommandEntries) {
+        this.tmpSoundCommandEntries = tmpSoundCommandEntries;
     }
 
-    public String getFileId() {
-        return fileId;
+    public List<String> getBannedAudioCommandUsers() {
+        return bannedAudioCommandUsers;
     }
 
-    public void setFileId(String fileId) {
-        this.fileId = fileId;
+    public void setBannedAudioCommandUsers(List<String> bannedAudioCommandUsers) {
+        this.bannedAudioCommandUsers = bannedAudioCommandUsers;
     }
 }

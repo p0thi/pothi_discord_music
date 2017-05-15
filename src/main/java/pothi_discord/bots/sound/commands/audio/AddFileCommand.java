@@ -16,6 +16,7 @@ import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,7 +64,7 @@ public class AddFileCommand extends GuildCommand{
 
                 boolean commandAlreadyExists = false;
 
-                for(SoundCommand command : mongoGuild.getSoundCommands()) {
+                for(SoundCommandEntry command : mongoGuild.getSoundCommands().getSoundCommandEntries()) {
                     if (command.getCommand().equals(commandName)) {
                         commandAlreadyExists = true;
                         break;
@@ -84,7 +85,7 @@ public class AddFileCommand extends GuildCommand{
                         e.printStackTrace();
                         return;
                     }
-                    SoundCommand mongoAudioCommand = new SoundCommand();
+                    SoundCommandEntry mongoAudioCommand = new SoundCommandEntry();
 
                     mongoAudioCommand.setCommand(commandName);
                     mongoAudioCommand.setDescription(commandDescription);
@@ -94,7 +95,7 @@ public class AddFileCommand extends GuildCommand{
                         String fileId = saveFileToDatabse(fileInputStream, attachment.getFileName());
                         mongoAudioCommand.setFileId(fileId);
 
-                        mongoGuild.getSoundCommands().add(mongoAudioCommand);
+                        mongoGuild.getSoundCommands().getSoundCommandEntries().add(mongoAudioCommand);
                         mongoGuild.saveInstance();
 
                         channel.sendMessage(String.format("Erfolgreich. Der Befehl %s spielt jetzt die Datei " +
@@ -103,7 +104,7 @@ public class AddFileCommand extends GuildCommand{
 
                     } else {
 
-                        if (mongoGuild.getTmpSoundCommands().size() >= 100) { // TODO this variable could be made configurable
+                        if (mongoGuild.getSoundCommands().getTmpSoundCommandEntries().size() >= 100) { // TODO this variable could be made configurable
                             channel.sendMessage("Die Warteschlange für Adminabfragen ist zu lang.")
                                     .queue(new MessageDeleter());
                             return;
@@ -111,7 +112,7 @@ public class AddFileCommand extends GuildCommand{
                         String fileId = saveFileToDatabse(fileInputStream, attachment.getFileName());
                         mongoAudioCommand.setFileId(fileId);
 
-                        mongoGuild.getTmpSoundCommands().add(mongoAudioCommand);
+                        mongoGuild.getSoundCommands().getTmpSoundCommandEntries().add(mongoAudioCommand);
                         mongoGuild.saveInstance();
 
                         StringBuilder b = new StringBuilder();

@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.entities.Message;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 import pothi_discord.Main;
 import pothi_discord.bots.music.handlers.MusicBotGuildReceiveHandler;
 import pothi_discord.utils.audio.AudioUtils;
@@ -37,12 +38,8 @@ public class GuildData extends DataClass<ObjectId> {
     // TODO !!!!!!!!!!!!!!!! lazy was not possible
     private ObjectId autoplaylistId;
 
-    private List<String> bannedAudioCommandUsers = new ArrayList<>();
-
-    @Embedded
-    private List<SoundCommand> soundCommands = new ArrayList<>();
-    @Embedded
-    private List<SoundCommand> tmpSoundCommands = new ArrayList<>();
+    @Reference
+    private SoundCommand soundCommands;
 
     private transient ArrayList<YoutubeMusicGenre> lastGenreSearch;
     private transient MusicBotGuildReceiveHandler musicBotGuildReceiveHandler;
@@ -159,28 +156,12 @@ public class GuildData extends DataClass<ObjectId> {
         this.autoplaylistId = autoplaylist.getId();
     }
 
-    public List<String> getBannedAudioCommandUsers() {
-        return bannedAudioCommandUsers;
-    }
-
-    public void setBannedAudioCommandUsers(List<String> bannedAudioCommandUsers) {
-        this.bannedAudioCommandUsers = bannedAudioCommandUsers;
-    }
-
-    public List<SoundCommand> getSoundCommands() {
+    public SoundCommand getSoundCommands() {
         return soundCommands;
     }
 
-    public void setSoundCommands(List<SoundCommand> soundCommands) {
+    public void setSoundCommands(SoundCommand soundCommands) {
         this.soundCommands = soundCommands;
-    }
-
-    public List<SoundCommand> getTmpSoundCommands() {
-        return tmpSoundCommands;
-    }
-
-    public void setTmpSoundCommands(List<SoundCommand> tmpSoundCommands) {
-        this.tmpSoundCommands = tmpSoundCommands;
     }
 
     public ObjectId getAutoplaylistId() {

@@ -6,14 +6,13 @@ import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.bots.BotShard;
 import pothi_discord.bots.sound.commands.audio.PlayerCommand;
-
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.managers.HugeMessageSender;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.guilddata.audio_commands.MongoAudioCommand;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
-import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class RequestsCommand extends GuildCommand {
             return;
         }
         GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
-        List<SoundCommand> allTmpCommands = guildData.getTmpSoundCommands();
+        List<SoundCommandEntry> allTmpCommands = guildData.getSoundCommands().getTmpSoundCommandEntries();
 
         if (allTmpCommands.size() <= 0) {
             event.getChannel().sendMessage("Die Liste ist leer. :rolling_eyes:").queue(new MessageDeleter());
@@ -52,7 +51,7 @@ public class RequestsCommand extends GuildCommand {
                 hugeMessageSender.setSendAsCodeblock(false);
 
                 for (int i = 0; i < allTmpCommands.size(); i++) {
-                    SoundCommand tmp = allTmpCommands.get(i);
+                    SoundCommandEntry tmp = allTmpCommands.get(i);
                     hugeMessageSender.append("**" + (i+1) + "**.  " +
                             Param.PREFIX() + tmp.getCommand() + " - " + tmp.getDescription() + "\n");
                 }
@@ -71,7 +70,7 @@ public class RequestsCommand extends GuildCommand {
                     return;
                 }
 
-                SoundCommand myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
+                SoundCommandEntry myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
                 VoiceChannel vc = guild.getMember(user).getVoiceState().getChannel();
                 new PlayerCommand(myCommand.getFileId()).play(guild, vc, shard);
                 break;
@@ -83,9 +82,9 @@ public class RequestsCommand extends GuildCommand {
                     return;
                 }
 
-                SoundCommand myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
+                SoundCommandEntry myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
 
-                for (SoundCommand command : guildData.getSoundCommands()) {
+                for (SoundCommandEntry command : guildData.getSoundCommands().getSoundCommandEntries()) {
                     if(command.getCommand().toLowerCase().equals(myCommand.getCommand().toLowerCase())) {
                         event.getChannel().sendMessage("Der Befehl kann nicht aktiviert werden, " +
                                 "da der Befehls-String bereits verwendet wird." + ":see_no_evil: ")
@@ -93,8 +92,8 @@ public class RequestsCommand extends GuildCommand {
                         return;
                     }
                 }
-                guildData.getTmpSoundCommands().remove(myCommand);
-                guildData.getSoundCommands().add(myCommand);
+                guildData.getSoundCommands().getTmpSoundCommandEntries().remove(myCommand);
+                guildData.getSoundCommands().getSoundCommandEntries().add(myCommand);
 
                 guildData.saveInstance();
 
@@ -111,12 +110,12 @@ public class RequestsCommand extends GuildCommand {
                     return;
                 }
 
-                SoundCommand myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
+                SoundCommandEntry myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
                 String command = new String(myCommand.getCommand());
 
                 MongoAudioCommand.removeAudioFileFromDatabase(myCommand.getFileId());
 
-                guildData.getTmpSoundCommands().remove(myCommand);
+                guildData.getSoundCommands().getTmpSoundCommandEntries().remove(myCommand);
                 guildData.saveInstance();
 
                 event.getChannel()
@@ -127,10 +126,10 @@ public class RequestsCommand extends GuildCommand {
                 break;
             }
             case "clear":
-                for (SoundCommand command : guildData.getTmpSoundCommands()) {
+                for (SoundCommandEntry command : guildData.getSoundCommands().getTmpSoundCommandEntries()) {
                     MongoAudioCommand.removeAudioFileFromDatabase(command.getFileId());
                 }
-                guildData.getTmpSoundCommands().clear();
+                guildData.getSoundCommands().getTmpSoundCommandEntries().clear();
                 guildData.saveInstance();
 
                 event.getChannel().sendMessage("Alle Einträge aus der Adminabfrage gelöscht."
@@ -139,7 +138,7 @@ public class RequestsCommand extends GuildCommand {
         }
     }
 
-    private boolean checkThirdArgument(String[] args, List<SoundCommand> allTmpCommands) {
+    private boolean checkThirdArgument(String[] args, List<SoundCommandEntry> allTmpCommands) {
         return args.length < 3
                 || !args[2].matches("\\d+")
                 || Integer.parseInt(args[2]) > allTmpCommands.size()

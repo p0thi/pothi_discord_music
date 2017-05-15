@@ -22,7 +22,7 @@ import pothi_discord.listeners.AbstractEventListener;
 import pothi_discord.managers.GuildAudioManager;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
-import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.util.regex.Matcher;
 
@@ -81,7 +81,7 @@ public class SoundBotMessageListener extends AbstractEventListener {
                     boolean isAudioCommand = false;
                     String fileId = null;
 
-                    for(SoundCommand soundCommand : guildData.getSoundCommands()) {
+                    for(SoundCommandEntry soundCommand : guildData.getSoundCommands().getSoundCommandEntries()) {
                         if(soundCommand.getCommand().toLowerCase().equals(command.toLowerCase())) {
                             isAudioCommand = true;
                             fileId = soundCommand.getFileId();
