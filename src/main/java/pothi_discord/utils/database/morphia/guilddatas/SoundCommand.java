@@ -2,7 +2,6 @@ package pothi_discord.utils.database.morphia.guilddatas;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Property;
 import pothi_discord.utils.database.morphia.DataClass;
 
 import java.util.ArrayList;

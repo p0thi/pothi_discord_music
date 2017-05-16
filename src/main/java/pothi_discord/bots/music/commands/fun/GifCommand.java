@@ -20,9 +20,9 @@ import java.util.*;
  * Created by Pascal Pothmann on 27.02.2017.
  */
 public class GifCommand extends GuildCommand {
+    static Timer timer = new Timer();
     ArrayList<User> cooldown = new ArrayList<>();
     ArrayList<String> categories = new ArrayList<>();
-    static Timer timer = new Timer();
 
     @Override
     public void action(GuildMessageReceivedEvent event, String[] args, BotShard shard) {

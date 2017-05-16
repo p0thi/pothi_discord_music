@@ -21,7 +21,6 @@ import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;

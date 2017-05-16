@@ -23,12 +23,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Pascal Pothmann on 22.03.2017.
  */
 public class PlayerCommand extends GuildCommand {
     private String fileId;
+
+    static Timer timer = new Timer();
+    static HashMap<Guild, HashSet<User>> cooldown = new HashMap<>();
 
     public PlayerCommand(String fileId) {
         this.fileId = fileId;
@@ -43,6 +48,17 @@ public class PlayerCommand extends GuildCommand {
 
         Guild guild = event.getGuild();
         User user = event.getAuthor();
+
+        if (!cooldown.containsKey(guild)) {
+            cooldown.put(guild, new HashSet<>());
+        }
+
+        if (cooldown.get(guild).contains(user)) {
+            event.getChannel().sendMessage(user.getAsMention() + " Timeout... Bitte warten. :stuck_out_tongue:")
+                    .queue(new MessageDeleter(4000));
+            return;
+        }
+
 
         VoiceChannel userVc = guild.getMember(user).getVoiceState().getChannel();
 
@@ -64,6 +80,14 @@ public class PlayerCommand extends GuildCommand {
         }
 
         play(guild, userVc, shard);
+
+        cooldown.get(guild).add(user);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                cooldown.get(guild).remove(user);
+            }
+        }, 3000);
     }
 
     public void play(Guild guild, VoiceChannel vc, BotShard shard) {
