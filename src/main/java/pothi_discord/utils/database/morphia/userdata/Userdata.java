@@ -9,10 +9,7 @@ import pothi_discord.Main;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.morphia.DataClass;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Pascal Pothmann on 27.03.2017.
@@ -33,6 +30,11 @@ public class Userdata extends DataClass<String> {
     private Long lastGameUpdate = System.currentTimeMillis();
     private String currentGame = null;
 
+    private String access_token = null;
+    private String refresh_token = null;
+    private Date token_exp = null;
+
+
 
 
     public static Userdata getUserdata(String id) {
@@ -47,6 +49,9 @@ public class Userdata extends DataClass<String> {
         if (!allUserdatas.containsKey(id)) {
             allUserdatas.put(id, result);
         }
+
+        System.out.println("#################################################");
+        System.out.println(result.getToken_exp());
 
         return result;
     }
@@ -154,5 +159,29 @@ public class Userdata extends DataClass<String> {
 
     public void setPlaylists(List<UserPlaylist> playlists) {
         this.playlists = playlists;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
+    }
+
+    public void setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
+    }
+
+    public Date getToken_exp() {
+        return token_exp;
+    }
+
+    public void setToken_exp(Date token_exp) {
+        this.token_exp = token_exp;
     }
 }
