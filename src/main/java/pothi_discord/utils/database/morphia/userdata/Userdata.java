@@ -50,9 +50,6 @@ public class Userdata extends DataClass<String> {
             allUserdatas.put(id, result);
         }
 
-        System.out.println("#################################################");
-        System.out.println(result.getToken_exp());
-
         return result;
     }
 
