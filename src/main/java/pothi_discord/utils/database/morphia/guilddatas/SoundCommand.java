@@ -1,5 +1,6 @@
 package pothi_discord.utils.database.morphia.guilddatas;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import pothi_discord.utils.database.morphia.DataClass;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Pascal Pothmann on 24.03.2017.
  */
 @Entity(value = "soundcommands", noClassnameStored = true)
-public class SoundCommand extends DataClass<String>{
+public class SoundCommand extends DataClass<ObjectId>{
 
     @Embedded
     private List<SoundCommandEntry> soundCommands = new ArrayList<>();
