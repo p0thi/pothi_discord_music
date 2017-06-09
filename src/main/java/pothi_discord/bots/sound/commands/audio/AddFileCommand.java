@@ -15,6 +15,7 @@ import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommand;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.io.IOException;
@@ -94,8 +95,9 @@ public class AddFileCommand extends GuildCommand{
                         String fileId = saveFileToDatabse(fileInputStream, attachment.getFileName());
                         mongoAudioCommand.setFileId(fileId);
 
-                        mongoGuild.getSoundCommands().getSoundCommandEntries().add(mongoAudioCommand);
-                        mongoGuild.saveInstance();
+                        SoundCommand mongoSoundCommand = mongoGuild.getSoundCommands();
+                        mongoSoundCommand.getSoundCommandEntries().add(mongoAudioCommand);
+                        mongoSoundCommand.saveInstance();
 
                         channel.sendMessage(String.format("Erfolgreich. Der Befehl %s spielt jetzt die Datei " +
                                 "%s ab.", Param.PREFIX() + commandName, attachment.getFileName()))
@@ -111,8 +113,9 @@ public class AddFileCommand extends GuildCommand{
                         String fileId = saveFileToDatabse(fileInputStream, attachment.getFileName());
                         mongoAudioCommand.setFileId(fileId);
 
-                        mongoGuild.getSoundCommands().getTmpSoundCommandEntries().add(mongoAudioCommand);
-                        mongoGuild.saveInstance();
+                        SoundCommand mongoSoundCommand = mongoGuild.getSoundCommands();
+                        mongoSoundCommand.getTmpSoundCommandEntries().add(mongoAudioCommand);
+                        mongoSoundCommand.saveInstance();
 
                         StringBuilder b = new StringBuilder();
                         b.append(String.format("Erfolgreich. Der Befehl %s wurde zur Adminabfrage hinzugefügt." +
