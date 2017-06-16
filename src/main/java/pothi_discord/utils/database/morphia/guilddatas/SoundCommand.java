@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Entity(value = "soundcommands", noClassnameStored = true)
 public class SoundCommand extends DataClass<ObjectId>{
+    private String guildId;
 
     @Embedded
     private List<SoundCommandEntry> soundCommands = new ArrayList<>();
@@ -20,6 +21,15 @@ public class SoundCommand extends DataClass<ObjectId>{
     @Embedded
     private List<SoundCommandEntry> tmpSoundCommands = new ArrayList<>();
     private List<String> bannedAudioCommandUsers = new ArrayList<>();
+
+
+    public String getGuildId() {
+        return guildId;
+    }
+
+    public void setGuildId(String guildId) {
+        this.guildId = guildId;
+    }
 
     public List<SoundCommandEntry> getSoundCommandEntries() {
         return soundCommands;
