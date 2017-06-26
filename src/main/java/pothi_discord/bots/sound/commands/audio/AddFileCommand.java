@@ -71,6 +71,17 @@ public class AddFileCommand extends GuildCommand{
                     }
                 }
 
+                switch (commandName) {
+                    case "random":
+                    case "addfile":
+                    case "request":
+                    case "requests":
+                    case "commands":
+                    case "delete":
+                    case "ping":
+                        commandAlreadyExists = true;
+                }
+
                 // Checks if command already exists
                 if (!commandAlreadyExists) {
 

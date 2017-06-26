@@ -3,9 +3,7 @@ package pothi_discord.managers;
 import net.dv8tion.jda.core.entities.Guild;
 import pothi_discord.commands.Command;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Pascal Pothmann on 09.03.2017.

@@ -24,6 +24,9 @@ import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 
 /**
@@ -81,11 +84,18 @@ public class SoundBotMessageListener extends AbstractEventListener {
                     boolean isAudioCommand = false;
                     String fileId = null;
 
-                    for(SoundCommandEntry soundCommand : guildData.getSoundCommands().getSoundCommandEntries()) {
-                        if(soundCommand.getCommand().toLowerCase().equals(command.toLowerCase())) {
-                            isAudioCommand = true;
-                            fileId = soundCommand.getFileId();
-                            break;
+                    if (command.toLowerCase().equals("random")) {
+                        isAudioCommand = true;
+                        List<SoundCommandEntry> allCommands = guildData.getSoundCommands().getSoundCommandEntries();
+                        fileId = allCommands.get(new Random().nextInt(allCommands.size())).getFileId();
+                    }
+                    else {
+                        for (SoundCommandEntry soundCommand : guildData.getSoundCommands().getSoundCommandEntries()) {
+                            if (soundCommand.getCommand().toLowerCase().equals(command.toLowerCase())) {
+                                isAudioCommand = true;
+                                fileId = soundCommand.getFileId();
+                                break;
+                            }
                         }
                     }
 
