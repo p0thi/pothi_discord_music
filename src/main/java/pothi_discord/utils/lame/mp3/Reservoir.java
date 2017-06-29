@@ -288,7 +288,7 @@ public class Reservoir {
       gfc.ResvSize -= 8 * mdb_bytes;
       l3_side.main_data_begin -= mdb_bytes;
     }
-		/* drain the rest into this frames ancillary data */
+		/* drain the pothi_discord.rest into this frames ancillary data */
     l3_side.resvDrain_post += stuffingBits;
     gfc.ResvSize -= stuffingBits;
   }

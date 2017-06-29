@@ -844,7 +844,7 @@ public class Lame {
    * We first have some complex code to determine bitrate, output samplerate
    * and mode. It is complicated by the fact that we allow the user to set
    * some or all of these parameters, and need to determine best possible
-   * values for the rest of them:
+   * values for the pothi_discord.rest of them:
    * <p/>
    * 1. set some CPU related flags 2. check if we are mono.mono, stereo.mono
    * or stereo.stereo 3. compute bitrate and output samplerate: user may have

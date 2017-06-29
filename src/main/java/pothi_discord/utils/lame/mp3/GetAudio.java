@@ -1005,7 +1005,7 @@ public class GetAudio {
       if (parse.silent < 10) {
         System.out.printf("Album ID found.  length=%d \n", aid_header);
       }
-			/* skip rest of AID, except for 6 bytes we have already read */
+			/* skip pothi_discord.rest of AID, except for 6 bytes we have already read */
       try {
         fd.skipBytes(aid_header - 6);
       } catch (IOException e) {

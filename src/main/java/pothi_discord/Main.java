@@ -5,6 +5,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
+import org.springframework.boot.SpringApplication;
 import pothi_discord.bots.MusicBot;
 import pothi_discord.bots.SoundBot;
 import pothi_discord.handlers.StaticSchedulePool;
@@ -12,6 +13,7 @@ import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.MongoDB;
 import pothi_discord.utils.log.SimpleLogToSLF4JAdapter;
+import pothi_discord.rest.WebApi;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -76,13 +78,8 @@ public class Main {
         //This is the listener...TODO
         // jda.getGuildById("273812217445744640").getAudioManager().setReceivingHandler(new MusicBotGuildReceiveHandler());
 
-    }
-
-    private static void startMusicBot(){
+        SpringApplication.run(WebApi.class, args);
 
     }
-
-
-
 
 }

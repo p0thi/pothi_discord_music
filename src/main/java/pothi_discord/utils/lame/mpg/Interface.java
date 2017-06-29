@@ -361,7 +361,7 @@ public class Interface {
 				/* FIXME: correct ??? */
         mp.sync_bitstream = true;
 
-				/* skip some bytes, buffer the rest */
+				/* skip some bytes, buffer the pothi_discord.rest */
         size = mp.wordpointerPos - 512;
 
         if (size > MPG123.MAXFRAMESIZE) {
@@ -410,7 +410,7 @@ public class Interface {
       mp.wordpointerPos = 512;
       mp.bitindex = 0;
 
-			/* for very first header, never parse rest of data */
+			/* for very first header, never parse pothi_discord.rest of data */
       if (mp.fsizeold == -1) {
         return MPGLib.MP3_NEED_MORE;
       }

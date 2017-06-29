@@ -679,7 +679,7 @@ public class PsyModel {
         thmm = w_next * thr[b];
       }
     }
-		/* zero initialize the rest */
+		/* zero initialize the pothi_discord.rest */
     for (; sb < Encoder.SBMAX_s; ++sb) {
       gfc.en[chn].s[sb][sblock] = 0;
       gfc.thm[chn].s[sb][sblock] = 0;
@@ -727,7 +727,7 @@ public class PsyModel {
         thmm = w_next * thr[b];
       }
     }
-		/* zero initialize the rest */
+		/* zero initialize the pothi_discord.rest */
     for (; sb < Encoder.SBMAX_l; ++sb) {
       gfc.en[chn].l[sb] = 0;
       gfc.thm[chn].l[sb] = 0;
@@ -839,7 +839,7 @@ public class PsyModel {
     if (r <= 0.0)
       return y;
     if (y > 0.0) {
-			/* rest of the time */
+			/* pothi_discord.rest of the time */
       return (float) (Math.pow(x / y, r) * y);
     }
 		/* never happens */
