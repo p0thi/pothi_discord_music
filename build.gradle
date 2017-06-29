@@ -33,6 +33,10 @@ sourceSets {
     test.java.srcDir "src/test"
 }
 
+springBoot {
+    mainClass = "pothi_discord.Main"
+}
+
 jar {
     from {
         configurations.compile.collect {
