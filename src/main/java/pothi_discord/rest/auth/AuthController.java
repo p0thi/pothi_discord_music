@@ -95,8 +95,6 @@ public class AuthController {
 
         System.out.println(meObject.toString(2));
 
-        String userId = meObject.getString("id");
-
         Date now = new Date();
         long expiresIn = 604800000; // 604800000 = 1 week
         Date expirationDate = new Date(now.getTime() + expiresIn);
