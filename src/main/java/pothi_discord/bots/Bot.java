@@ -2,6 +2,7 @@ package pothi_discord.bots;
 
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
@@ -36,6 +37,8 @@ public abstract class Bot {
     public abstract String getToken();
     public abstract void onInit(ReadyEvent event);
 
+
+
     public Map<String, MusicTrackScheduler> getTrackSchedulers() {
         return trackSchedulers;
     }
@@ -68,7 +71,18 @@ public abstract class Bot {
         }
     }
 
-
+    public Member getMemberOfActiveVoiceChannel(String userId) {
+        for (Guild guild : getAllGuilds()) {
+            Member member = guild.getMemberById(userId);
+            if (member == null) {
+                continue;
+            }
+            if (member.getVoiceState().inVoiceChannel()) {
+                return member;
+            }
+        }
+        return null;
+    }
 
 
     public BotShard getDiscordBotByJDA(JDA jda) {

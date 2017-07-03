@@ -1,8 +1,10 @@
 package pothi_discord.utils;
 
+import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +47,12 @@ public class Param {
     public static String MONGO_ROOT() {
         return config.getString("mongo_root");
     }
+    public static String CLIENT_SECRET() {
+        return config.getString("client_secret");
+    }
+    private static final Key KEY = MacProvider.generateKey();
+    //public static Key SECRET_KEY() {return KEY;}
+    public static String SECRET_KEY() {return "baum";}
 
 
 

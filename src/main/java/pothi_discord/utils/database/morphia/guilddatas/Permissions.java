@@ -2,7 +2,6 @@ package pothi_discord.utils.database.morphia.guilddatas;
 
 import net.dv8tion.jda.core.entities.Guild;
 import org.mongodb.morphia.annotations.Embedded;
-import oshi.jna.platform.unix.solaris.LibKstat;
 import pothi_discord.utils.Param;
 
 import java.util.ArrayList;

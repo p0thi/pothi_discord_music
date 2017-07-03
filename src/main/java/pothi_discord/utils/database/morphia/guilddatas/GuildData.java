@@ -25,7 +25,6 @@ public class GuildData extends DataClass<ObjectId> {
     private String guildId;
 
     private Boolean useCustomAutoplaylist = false;
-    private Boolean recording = false;
     private Boolean autoJoin = false;
 
     private Integer playerStartVolume = 20;
@@ -98,14 +97,6 @@ public class GuildData extends DataClass<ObjectId> {
 
     public void setUseCustomAutoplaylist(Boolean useCustomAutoplaylist) {
         this.useCustomAutoplaylist = useCustomAutoplaylist;
-    }
-
-    public Boolean getRecording() {
-        return recording;
-    }
-
-    public void setRecording(Boolean recording) {
-        this.recording = recording;
     }
 
     public Boolean getAutoJoin() {

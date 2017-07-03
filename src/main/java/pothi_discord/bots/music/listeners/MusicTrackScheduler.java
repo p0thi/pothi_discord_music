@@ -10,7 +10,6 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import net.dv8tion.jda.core.entities.Guild;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
-import oshi.jna.platform.unix.solaris.LibKstat;
 import pothi_discord.Main;
 import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 import net.dv8tion.jda.core.entities.VoiceChannel;

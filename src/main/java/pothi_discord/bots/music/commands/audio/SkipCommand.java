@@ -50,21 +50,25 @@ public class SkipCommand extends GuildCommand {
 
         GuildAudioManager musicManager = shard.getMyBot().getGuildAudioPlayer(guild);
 
-        String content;
         AudioTrack oldTrack = musicManager.getPlayer().getPlayingTrack();
-        AudioTrack newTrack = ((MusicTrackScheduler)musicManager.getScheduler()).nextTrack();
-        if (musicManager.getPlayer().getPlayingTrack() != null) {
-            content = "Lied wird übersprungen: **" + oldTrack.getInfo().title + "**" +
+
+        String content = nextTrack(musicManager);
+
+        if (oldTrack != null) {
+            channel.sendMessage("Lied wird übersprungen: **" + oldTrack.getInfo().title + "**" +
                     "\n\n" +
-                    "Neues Lied: **" + newTrack.getInfo().title + "**";
+                    "Neues Lied: **" + content + "**").queue(new MessageDeleter());
         }
         else {
-            content = "Neues Lied wird gestartet.";
+            channel.sendMessage("Neues Lied wird gestartet.").queue(new MessageDeleter());
         }
 
-
         log.info(this.getClass().getSimpleName() + ": " + content);
-        channel.sendMessage(content).queue(new MessageDeleter());
+    }
+
+    public static String nextTrack(GuildAudioManager musicManager) {
+        AudioTrack newTrack = ((MusicTrackScheduler)musicManager.getScheduler()).nextTrack();
+        return newTrack.getInfo().title;
     }
 
     @Override
@@ -72,7 +76,7 @@ public class SkipCommand extends GuildCommand {
         return "Befehl zum Überspringen des Liedes, das aktuell gespielt wird.";
     }
 
-    private boolean checkSkipCount(GuildAudioManager manager, Guild guild, TextChannel textChannel) {
+    public static boolean checkSkipCount(GuildAudioManager manager, Guild guild, TextChannel textChannel) {
         TrackScheduler scheduler = manager.getScheduler();
         VoiceChannel channel = guild.getAudioManager().getConnectedChannel();
 
@@ -86,7 +90,6 @@ public class SkipCommand extends GuildCommand {
         int skipCount = ((MusicTrackScheduler)scheduler).getSkipRequestsCounter();
         double memberCount = (double)channel.getMembers().size() - 1;
         if(skipCount >= memberCount * ((double)skipPercent / 100.0)) {
-            log.info("Skipp accepted: " + skipCount + " >= " + memberCount * ((double)skipPercent / 100.0));
             return true;
         }
         else {

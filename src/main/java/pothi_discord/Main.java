@@ -1,5 +1,6 @@
 package pothi_discord;
 
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.utils.SimpleLog;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -18,6 +19,9 @@ import pothi_discord.rest.WebApi;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -80,6 +84,15 @@ public class Main {
 
         SpringApplication.run(WebApi.class, args);
 
+    }
+
+    public static List<Guild> getAllGuilds(){
+        HashSet<Guild> tmp = new HashSet<>();
+        tmp.addAll(musicBot.getAllGuilds());
+        tmp.addAll(soundBot.getAllGuilds());
+        ArrayList<Guild> result = new ArrayList<>();
+        result.addAll(tmp);
+        return result;
     }
 
 }

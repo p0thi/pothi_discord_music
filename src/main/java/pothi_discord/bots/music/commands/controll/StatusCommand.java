@@ -1,23 +1,22 @@
 package pothi_discord.bots.music.commands.controll;
 
-import net.dv8tion.jda.core.entities.Member;
+import com.sun.management.OperatingSystemMXBean;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import oshi.util.FormatUtil;
-import pothi_discord.bots.BotShard;
 import pothi_discord.Main;
+import pothi_discord.bots.BotShard;
+import pothi_discord.bots.music.listeners.MusicBotMessageListener;
 import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
-import pothi_discord.bots.music.listeners.MusicBotMessageListener;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 
 import java.awt.*;
 import java.lang.management.ManagementFactory;
-import com.sun.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 import java.lang.management.ThreadMXBean;
 import java.util.HashMap;
@@ -75,8 +74,8 @@ public class StatusCommand extends GuildCommand {
         long totalMemory = getTotalMemoryInBytes();
         long freeMemory = getFreeMemoryInBytes();
         eb.addField("Threads", getThreadCount() + "", true);
-        eb.addField("RAM", "[" + FormatUtil.formatBytes(totalMemory-freeMemory) + "/"
-                + FormatUtil.formatBytes(totalMemory) + "]", true);
+        eb.addField("RAM", "[" + TextUtils.humanReadableByteCount(totalMemory-freeMemory) + "/"
+                + TextUtils.humanReadableByteCount(totalMemory) + "]", true);
         eb.addField("Uptime", TextUtils.formatMillis(System.currentTimeMillis()-Main.START_TIME, true), true);
 
         channel.sendMessage(eb.build()).queue(new MessageDeleter());
