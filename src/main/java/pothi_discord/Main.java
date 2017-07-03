@@ -9,7 +9,9 @@ import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import org.springframework.boot.SpringApplication;
 import pothi_discord.bots.MusicBot;
 import pothi_discord.bots.SoundBot;
+import pothi_discord.handlers.ExceptionHandler;
 import pothi_discord.handlers.StaticSchedulePool;
+import pothi_discord.utils.ErrorLogger;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.MongoDB;
@@ -40,6 +42,13 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                ErrorLogger.log(e.getMessage());
+            }
+        });
+
         System.setProperty("file.encoding","UTF-8");
         Field charset;
         try {
