@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by Pascal Pothmann on 30.06.2017.
  */
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class UserController {
 
     @RequestMapping(value = "/userplaylist", method = RequestMethod.GET)

@@ -24,7 +24,7 @@ import java.util.*;
  * Created by Pascal Pothmann on 29.06.2017.
  */
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class AuthController {
 
     @RequestMapping(value = "/verify_token", method = RequestMethod.GET)

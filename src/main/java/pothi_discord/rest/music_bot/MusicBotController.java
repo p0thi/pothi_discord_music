@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by Pascal Pothmann on 03.07.2017.
  */
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping("/music")
 public class MusicBotController {
 
