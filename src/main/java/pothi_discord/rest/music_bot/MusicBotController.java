@@ -1,5 +1,7 @@
 package pothi_discord.rest.music_bot;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import io.jsonwebtoken.Jwts;
@@ -7,6 +9,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,8 @@ import pothi_discord.managers.GuildAudioManager;
 import pothi_discord.permissions.PermissionManager;
 import pothi_discord.rest.auth.AuthController;
 import pothi_discord.utils.Param;
+import pothi_discord.utils.audio.YoutubeMusicGenre;
+import pothi_discord.utils.database.morphia.autoplaylists.AutoPlaylist;
 
 import java.util.Map;
 
@@ -28,6 +33,61 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/music")
 public class MusicBotController {
+
+    @RequestMapping(value = "/genres", method = RequestMethod.GET)
+    public Object getAllGenres(@RequestParam Map<String, String> requestParams,
+                            @RequestHeader Map<String, String> headers) {
+        String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
+
+        if(exceptionString != null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+        }
+
+        JSONArray result = new JSONArray();
+
+        for(YoutubeMusicGenre youtubeMusicGenre : YoutubeMusicGenre.values()) {
+            JSONObject tmp = new JSONObject()
+                    .put("name", youtubeMusicGenre.name())
+                    .put("url", youtubeMusicGenre.getLink())
+                    .put("readable_name", youtubeMusicGenre.getReadableName())
+                    .put("ordinal", youtubeMusicGenre.ordinal());
+            result.put(tmp);
+        }
+        return ResponseEntity.ok(result.toString());
+    }
+
+    @RequestMapping(value = "/genre/{genreId}", method = RequestMethod.GET)
+    public Object getSingleGenre(@RequestParam Map<String, String> requestParams,
+                                 @RequestHeader Map<String, String> headers,
+                                 @PathVariable("genreId") String genreId) {
+        String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
+
+        if(exceptionString != null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+        }
+
+        YoutubeMusicGenre youtubeMusicGenre = YoutubeMusicGenre.getGenreById(genreId);
+
+        if (youtubeMusicGenre == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid id");
+        }
+
+        AutoPlaylist autoPlaylist = youtubeMusicGenre.getMongoPlaylist();
+        ObjectMapper mapper = new ObjectMapper();
+        JSONArray tmp;
+        try {
+            tmp = new JSONArray(mapper.writeValueAsString(autoPlaylist.getContent()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("could not parse data");
+        }
+        JSONObject result = new JSONObject()
+                .put("content", tmp)
+                .put("name", youtubeMusicGenre.name())
+                .put("url", youtubeMusicGenre.getLink())
+                .put("readable_name", youtubeMusicGenre.getReadableName())
+                .put("ordinal", youtubeMusicGenre.ordinal());
+        return ResponseEntity.ok(result.toString());
+    }
 
     @RequestMapping(value = "/pause", method = RequestMethod.POST)
     public Object pause(@RequestParam Map<String, String> requestParams,

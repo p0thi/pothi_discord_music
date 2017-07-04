@@ -50,7 +50,7 @@ public class AuthController {
                        @RequestHeader Map<String, String> headers) throws IOException {
         String tokenUrl = "https://discordapp.com/api/oauth2/token";
 
-        String[] needesScopes = new String[]{"email"}; //    <--------------------------------
+        String[] needesScopes = new String[]{"email", "identify"}; //    <--------------------------------
 
         ArrayList<String> scopes = (ArrayList) body.get("scope");
 
@@ -75,25 +75,25 @@ public class AuthController {
         params.add(new BasicNameValuePair("redirect_uri", body.get("redirectUri").toString()));
         params.add(new BasicNameValuePair("code", body.get("code").toString()));
 
-        System.out.println(new JSONObject(body).toString(2));
-        System.out.println("Baum");
+        // System.out.println(new JSONObject(body).toString(2));
+        // System.out.println("Baum");
 
         post.setEntity(new UrlEncodedFormEntity(params));
         HttpResponse response= httpClient.execute(post);
         String requestResponse = EntityUtils.toString(response.getEntity());
 
         JSONObject tokenObject = new JSONObject(requestResponse);
-        System.out.println(tokenObject.toString(2));
+        // System.out.println(tokenObject.toString(2));
 
         HttpGet get = new HttpGet("https://discordapp.com/api/users/@me");
-        //post.setHeader("Content-Type", "application/x-www-form-urlencoded");
-        get.setHeader("Authorization", "Bearer " + tokenObject.getString("access_token"));
+        get.setHeader("Authorization", tokenObject.getString("token_type")
+                + " " + tokenObject.getString("access_token"));
         response = httpClient.execute(get);
         requestResponse = EntityUtils.toString(response.getEntity());
 
         JSONObject meObject = new JSONObject(requestResponse);
 
-        System.out.println(meObject.toString(2));
+        // System.out.println(meObject.toString(2));
 
         Date now = new Date();
         long expiresIn = 604800000; // 604800000 = 1 week
@@ -139,7 +139,7 @@ public class AuthController {
                 return "Token has expired";
             }
 
-            System.out.println(claims.getBody().getSubject());
+            // System.out.println(claims.getBody().getSubject());
         } catch (MissingClaimException | IncorrectClaimException |SignatureException e) {
             return "Not a valid token";
         } catch (MalformedJwtException e){

@@ -194,6 +194,15 @@ public enum YoutubeMusicGenre {
         */
     }
 
+    public static YoutubeMusicGenre getGenreById(String id) {
+        for(YoutubeMusicGenre genre : YoutubeMusicGenre.values()) {
+            if (genre.name().toLowerCase().equals(id.toLowerCase())) {
+                return genre;
+            }
+        }
+        return null;
+    }
+
     public static void saveVideosForAllGenres() {
         long startTime = System.currentTimeMillis();
         int count = 1;
