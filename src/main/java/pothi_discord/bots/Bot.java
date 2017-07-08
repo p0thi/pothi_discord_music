@@ -72,7 +72,11 @@ public abstract class Bot {
     }
 
     public Member getMemberOfActiveVoiceChannel(String userId) {
+
+        System.out.println("\nAll guild:");
+        System.out.println("\t\tUserId: " + userId);
         for (Guild guild : getAllGuilds()) {
+            System.out.println("\t" + guild.getName());
             Member member = guild.getMemberById(userId);
             if (member == null) {
                 continue;

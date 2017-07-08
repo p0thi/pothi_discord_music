@@ -192,13 +192,15 @@ public class MusicBotController {
     public static String getVoiceStatusErrorString(Member member) {
         String error = "You have to be in a voice channel with the bot";
         if (member == null) {
+            System.out.println("Member = null");
             return error;
         }
 
         VoiceChannel voiceChannel = member.getVoiceState().getChannel();
         Guild guild = member.getGuild();
 
-        if (!voiceChannel.equals(guild.getMember(guild.getJDA().getSelfUser()).getVoiceState().getChannel())) {
+        if (!voiceChannel.getId().equals(guild.getMember(guild.getJDA().getSelfUser()).getVoiceState().getChannel().getId())) {
+            System.out.println("Cannel is not matching");
             return error;
         }
 
