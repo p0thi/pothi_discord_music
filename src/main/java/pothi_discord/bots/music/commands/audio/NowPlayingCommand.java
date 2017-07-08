@@ -14,6 +14,7 @@ import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 import pothi_discord.utils.TextUtils;
+import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.youtube.YoutubeAPI;
 import pothi_discord.utils.youtube.YoutubeVideo;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -68,9 +69,11 @@ public class NowPlayingCommand extends GuildCommand {
             }
 
             if (embed != null) {
+                YoutubeMusicGenre genre = YoutubeMusicGenre.getGenreById(musicManager.playlist.getTitle());
                 embed.addField(
                         "Aktuelle Autoplaylist",
-                        musicManager.playlist.getTitle() + " (" + musicManager.playlist.getContent().size() + " Einträge)",
+                        genre == null ? musicManager.playlist.getTitle() : genre.getReadableName()
+                                + " (" + musicManager.playlist.getContent().size() + " Einträge)",
                         true
                 )
                 .addField("Volume", musicManager.player.getVolume() + "", true);

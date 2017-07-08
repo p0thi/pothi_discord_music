@@ -124,6 +124,8 @@ public class MusicBotController {
         return ResponseEntity.ok(new JSONObject().put("message", player.isPaused() ? "paused" : "unpaused").toString());
     }
 
+
+
     @RequestMapping(value = "/skip", method = RequestMethod.POST)
     public Object skip(@RequestParam Map<String, String> requestParams,
                         @RequestHeader Map<String, String> headers) {
@@ -187,8 +189,8 @@ public class MusicBotController {
                 .put("new_track", newTitle);
     }
 
-    private String getVoiceStatusErrorString(Member member) {
-        String error = new JSONObject().put("message", "You have to be in a voice channel with the bot").toString();
+    public static String getVoiceStatusErrorString(Member member) {
+        String error = "You have to be in a voice channel with the bot";
         if (member == null) {
             return error;
         }

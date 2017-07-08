@@ -134,16 +134,12 @@ public class AuthController {
 
         try {
             Jws<Claims> claims = tokenParser.parseClaimsJws(token);
-
-            if(new Date().compareTo(claims.getBody().getExpiration()) > 0){
-                return "Token has expired";
-            }
-
-            // System.out.println(claims.getBody().getSubject());
         } catch (MissingClaimException | IncorrectClaimException |SignatureException e) {
             return "Not a valid token";
         } catch (MalformedJwtException e){
             return "Malformed token";
+        } catch (ExpiredJwtException e) {
+            return "Token has expired";
         }
 
         return null;
