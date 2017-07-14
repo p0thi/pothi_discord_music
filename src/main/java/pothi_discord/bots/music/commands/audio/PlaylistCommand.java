@@ -36,9 +36,9 @@ public class PlaylistCommand extends GuildCommand {
 
     private static final int MAX_PLAYLIST_LENGTH = 75;
     private static final int MAX_PLAYLIST_AMOUNT = 5;
-    private static final int MAX_PLAYLIST_NAME_LENGTH = 25;
-    private static final int MIN_PLAYLIST_NAME_LENGTH = 4;
-    private static final Pattern PLAYLIST_NAME_PATTERN = Pattern.compile("^.{" + MIN_PLAYLIST_NAME_LENGTH
+    public static final int MAX_PLAYLIST_NAME_LENGTH = 25;
+    public static final int MIN_PLAYLIST_NAME_LENGTH = 4;
+    public static final Pattern PLAYLIST_NAME_PATTERN = Pattern.compile("^.{" + MIN_PLAYLIST_NAME_LENGTH
             + "," + MAX_PLAYLIST_NAME_LENGTH + "}$");
 
 
