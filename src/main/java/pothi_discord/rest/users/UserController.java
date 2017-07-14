@@ -120,4 +120,49 @@ public class UserController {
             return ResponseEntity.ok(new JSONObject().put("message", "New Entry was saved").toString());
         }
     }
+
+    @RequestMapping(value = "/userplaylist/delete", method = RequestMethod.DELETE)
+    public Object deleteUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
+                                        @RequestParam(value = "identifier") String identifier,
+                                        @RequestParam Map<String, String> requestParams,
+                                        @RequestHeader Map<String, String> headers) {
+        String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
+
+        if (exceptionString != null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new JSONObject().put("message", exceptionString).toString());
+        }
+
+        String token = AuthController.getToken(headers, requestParams);
+        String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+
+        Userdata userdata = Userdata.getUserdata(userId);
+        if (userdata == null) {
+            return ResponseEntity.ok("[]");
+        }
+
+        List<UserPlaylist> userPlaylists = userdata.getPlaylists();
+        UserPlaylist myPlaylist = null;
+        for (UserPlaylist userPlaylist : userPlaylists) {
+            if (userPlaylist.getId().toHexString().equals(playlistId)) {
+                myPlaylist = userPlaylist;
+                break;
+            }
+        }
+        if (myPlaylist == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
+        }
+
+        if (!myPlaylist.containsIdentifier(identifier)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Identifier not in this playlist");
+        }
+
+        myPlaylist.removeTrackByIdentifier(identifier);
+        if(myPlaylist.saveInstance() == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
+        }
+        else {
+            return ResponseEntity.ok(new JSONObject().put("message", "All matching entries removed").toString());
+        }
+    }
 }
