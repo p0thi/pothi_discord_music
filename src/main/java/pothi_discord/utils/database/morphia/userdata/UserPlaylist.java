@@ -29,6 +29,15 @@ public class UserPlaylist extends DataClass<ObjectId> {
         return -1;
     }
 
+    public boolean containsIdentifier(String identifier) {
+        for (MongoAudioTrack track : tracks) {
+            if (track.getIdentifier().equals(identifier)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }
@@ -44,4 +53,5 @@ public class UserPlaylist extends DataClass<ObjectId> {
     public void setTracks(List<MongoAudioTrack> tracks) {
         this.tracks = tracks;
     }
+
 }
