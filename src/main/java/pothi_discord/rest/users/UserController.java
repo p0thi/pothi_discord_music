@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.omg.CORBA.BAD_PARAM;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pothi_discord.rest.auth.AuthController;
 import pothi_discord.utils.Param;
+import pothi_discord.utils.database.morphia.MongoAudioTrack;
 import pothi_discord.utils.database.morphia.userdata.UserPlaylist;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
@@ -25,7 +27,7 @@ import java.util.Map;
 public class UserController {
 
     @RequestMapping(value = "/userplaylist", method = RequestMethod.GET)
-    public Object userplaylists(@RequestParam(value = "id") String id,
+    public Object getUserplaylists(@RequestParam(value = "id") String id,
                                 @RequestParam Map<String, String> requestParams,
                                 @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
@@ -38,13 +40,15 @@ public class UserController {
         String token = AuthController.getToken(headers, requestParams);
         String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
 
-        if(!userId.equals(id)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new JSONObject().put("message", "Not allowed").toString());
+        Userdata userdata = Userdata.getUserdata(userId);
+        if (userdata == null) {
+            return ResponseEntity.ok("[]");
         }
 
-        Userdata userdata = Userdata.getUserdata(userId);
         List<UserPlaylist> userPlaylists = userdata.getPlaylists();
+        if (userPlaylists == null || userPlaylists.size() == 0) {
+            return ResponseEntity.ok("[]");
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         JSONArray result = new JSONArray();
@@ -64,6 +68,56 @@ public class UserController {
         }
 
         return ResponseEntity.ok(result.toString());
+    }
 
+    @RequestMapping(value = "/userplaylist/add", method = RequestMethod.PUT)
+    public Object addUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
+                                        @RequestParam(value = "identifier") String identifier,
+                                @RequestParam Map<String, String> requestParams,
+                                @RequestHeader Map<String, String> headers) {
+        String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
+
+        if (exceptionString != null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new JSONObject().put("message", exceptionString).toString());
+        }
+
+        String token = AuthController.getToken(headers, requestParams);
+        String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+
+        Userdata userdata = Userdata.getUserdata(userId);
+        if (userdata == null) {
+            return ResponseEntity.ok("[]");
+        }
+
+        List<UserPlaylist> userPlaylists = userdata.getPlaylists();
+        UserPlaylist myPlaylist = null;
+        for (UserPlaylist userPlaylist : userPlaylists) {
+            if (userPlaylist.getId().toHexString().equals(playlistId)) {
+                myPlaylist = userPlaylist;
+                break;
+            }
+        }
+        if (myPlaylist == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
+        }
+
+        if (myPlaylist.containsIdentifier(identifier)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Identifier already in this list");
+        }
+
+        MongoAudioTrack mongoAudioTrack = MongoAudioTrack.getTrackFromIdentifier(identifier);
+
+        if (mongoAudioTrack == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not handle this identifier");
+        }
+
+        myPlaylist.getTracks().add(mongoAudioTrack);
+        if(myPlaylist.saveInstance() == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
+        }
+        else {
+            return ResponseEntity.ok(new JSONObject().put("message", "New Entry was saved").toString());
+        }
     }
 }
