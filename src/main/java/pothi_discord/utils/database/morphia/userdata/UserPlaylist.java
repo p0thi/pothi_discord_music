@@ -38,6 +38,13 @@ public class UserPlaylist extends DataClass<ObjectId> {
         return false;
     }
 
+    public void removeTrackByIdentifier(String identifier) {
+        MongoAudioTrack pseudo = new MongoAudioTrack();
+        pseudo.setIdentifier(identifier);
+
+        while(tracks.remove(pseudo));
+    }
+
     public String getName() {
         return name;
     }
