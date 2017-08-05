@@ -123,7 +123,7 @@ public class RecordCommand extends GuildCommand {
 
         File result = audioUtils.saveToFile();
 
-        PrivateChannel privateChannel = audioUtils.user.getPrivateChannel();
+        PrivateChannel privateChannel = audioUtils.user.openPrivateChannel().complete();
 
         audioUtils.clear();
 
@@ -139,9 +139,6 @@ public class RecordCommand extends GuildCommand {
             privateChannel.sendFile(result, mb.build()).complete();
 
             result.delete();
-        } catch (IOException ignore) {
-            channel.sendMessage("Ich konnte die Datei leider nicht verschicken...")
-                    .queue(new MessageDeleter());
         } catch (IllegalArgumentException e) {
             channel.sendMessage("Ich konnte die Datei leider nicht verschicken. " +
                     "Sie bleibt jedoch auf dem Server gespeichert.")

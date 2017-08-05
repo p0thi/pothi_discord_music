@@ -70,7 +70,7 @@ public class UserController {
         return ResponseEntity.ok(result.toString());
     }
 
-    @RequestMapping(value = "/userplaylist/add", method = RequestMethod.PUT)
+    @RequestMapping(value = "/userplaylist/track/add", method = RequestMethod.PUT)
     public Object addUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
                                         @RequestParam(value = "identifier") String identifier,
                                 @RequestParam Map<String, String> requestParams,
@@ -121,7 +121,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/userplaylist/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/userplaylist/track/delete", method = RequestMethod.DELETE)
     public Object deleteUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
                                         @RequestParam(value = "identifier") String identifier,
                                         @RequestParam Map<String, String> requestParams,

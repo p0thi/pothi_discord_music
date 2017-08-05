@@ -52,7 +52,7 @@ jar {
 
 dependencies {
     compile group: 'junit', name: 'junit', version: '4.11'
-    compile 'net.dv8tion:JDA:3.1.1_217'
+    compile 'net.dv8tion:JDA:3.2.0_241'
     compile 'com.sedmelluq:lavaplayer:1.2.42'
     compile 'me.xdrop:fuzzywuzzy:1.1.7'
 
@@ -82,6 +82,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.8'
+
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
 
     //NEW

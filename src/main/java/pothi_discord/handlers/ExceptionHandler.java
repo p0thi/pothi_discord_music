@@ -56,7 +56,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
         for (StackTraceElement elem : e.getStackTrace()) {
             builder.append("\n" + elem.toString());
         }
-        owner.getPrivateChannel().sendMessage(builder.build()).queue();
+        owner.openPrivateChannel().complete().sendMessage(builder.build()).queue();
         e = null;
     }
 
