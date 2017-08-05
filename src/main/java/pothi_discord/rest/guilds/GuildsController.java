@@ -169,6 +169,10 @@ public class GuildsController {
 
         VoiceChannel voiceChannel = guild.getMember(user).getVoiceState().getChannel();
 
+        if (voiceChannel == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You have to be in a channel.");
+        }
+
         if (!PlayerCommand.cooldownAllowed(guild, user)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You have to wait before you can trigger more commands.");
         }
