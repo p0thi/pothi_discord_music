@@ -129,5 +129,16 @@ public abstract class Bot {
         return new ArrayList<>(guilds.values());
     }
 
+    public Guild getGuildById(String id) {
+        for (BotShard bot : shards) {
+            for (Guild guild : bot.getJDA().getGuilds()) {
+                if (guild.getId().equals(id)) {
+                    return guild;
+                }
+            }
+        }
+        return null;
+    }
+
     public abstract GuildAudioManager getGuildAudioPlayer(Guild guild);
 }
