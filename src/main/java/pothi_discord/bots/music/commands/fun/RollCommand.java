@@ -29,6 +29,9 @@ public class RollCommand extends GuildCommand {
         if(args.length > 1) {
             try {
                 sides = Integer.parseInt(args[1]);
+                if (sides <= 0) {
+                    throw new NumberFormatException();
+                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
                 successor = "\n*(" + args[1] + " ist keine gültiige Eingabe für einen Bereich)*";
