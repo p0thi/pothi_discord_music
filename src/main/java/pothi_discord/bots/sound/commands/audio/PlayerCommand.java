@@ -18,25 +18,32 @@ import pothi_discord.commands.GuildCommand;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.permissions.PermissionManager;
+import pothi_discord.utils.database.morphia.guilddatas.GuildData;
+import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Pascal Pothmann on 22.03.2017.
  */
 public class PlayerCommand extends GuildCommand {
     private String fileId;
+    private String command;
+    private boolean verified = true;
 
     static Timer timer = new Timer();
     static HashMap<Guild, HashSet<User>> cooldown = new HashMap<>();
 
     public PlayerCommand(String fileId) {
         this.fileId = fileId;
+    }
+    public PlayerCommand(String commannd, boolean verified) {
+        this.command = commannd;
+        this.verified = verified;
     }
 
     @Override
@@ -47,23 +54,23 @@ public class PlayerCommand extends GuildCommand {
         }
 
         Guild guild = event.getGuild();
-        User user = event.getAuthor();
 
-        if (!cooldown.containsKey(guild)) {
-            cooldown.put(guild, new HashSet<>());
+        if (!trackVerified(guild)) {
+            return;
         }
 
-        if (cooldown.get(guild).contains(user)) {
+        User user = event.getAuthor();
+
+        boolean allowwedCooldown = cooldownAllowed(guild, user);
+        if (!allowwedCooldown) {
             event.getChannel().sendMessage(user.getAsMention() + " Timeout... Bitte warten. :stuck_out_tongue:")
                     .queue(new MessageDeleter(4000));
             return;
         }
 
-
         VoiceChannel userVc = guild.getMember(user).getVoiceState().getChannel();
 
         if (args.length > 1){
-
             Member tmpMember = guild.getMemberById(args[1]);
             if (tmpMember != null) {
                 if (PermissionManager.checkUserPermission(guild, user, "send-sound-bot-to-user")) {
@@ -72,6 +79,7 @@ public class PlayerCommand extends GuildCommand {
             }
             else if (args[1].toLowerCase().equals("remove") || args[1].toLowerCase().equals("delete")) {
                 if (PermissionManager.checkUserPermission(guild, user, "remove-sound-command")) {
+                    //TODO delete functionallity
                     event.getChannel().sendMessage("Das ist noch nicht möglich. Bitte wende dich an einen Admin.")
                             .queue(new MessageDeleter());
                     return;
@@ -79,7 +87,40 @@ public class PlayerCommand extends GuildCommand {
             }
         }
 
-        play(guild, userVc, shard);
+        play(guild, userVc, shard.getMyBot().getGuildAudioPlayer(guild).getScheduler());
+    }
+
+    public void action(Guild guild, User user, VoiceChannel voiceChannel, TrackScheduler scheduler) {
+        if (!trackVerified(guild)) {
+            return;
+        }
+
+        play(guild, voiceChannel, scheduler);
+    }
+
+    private boolean trackVerified(Guild guild){
+        if (!this.verified) {
+
+            GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
+            for (SoundCommandEntry soundCommand : guildData.getSoundCommands().getSoundCommandEntries()) {
+                if (soundCommand.getCommand().toLowerCase().equals(command.toLowerCase())) {
+                    this.fileId = soundCommand.getFileId();
+                    this.verified = true;
+                    break;
+                }
+            }
+        }
+        return this.verified;
+    }
+
+    public static boolean cooldownAllowed(Guild guild, User user) {
+        if (!cooldown.containsKey(guild)) {
+            cooldown.put(guild, new HashSet<>());
+        }
+
+        if (cooldown.get(guild).contains(user)) {
+            return false;
+        }
 
         cooldown.get(guild).add(user);
         timer.schedule(new TimerTask() {
@@ -88,11 +129,12 @@ public class PlayerCommand extends GuildCommand {
                 cooldown.get(guild).remove(user);
             }
         }, 3000);
+        return true;
     }
 
-    public void play(Guild guild, VoiceChannel vc, BotShard shard) {
+    public void play(Guild guild, VoiceChannel vc, TrackScheduler scheduler) {
         guild.getAudioManager().openAudioConnection(vc);
-        SoundTrackScheduler sheduler = (SoundTrackScheduler) shard.getMyBot().getGuildAudioPlayer(guild).getScheduler();
+        SoundTrackScheduler sheduler = (SoundTrackScheduler) scheduler;
         sheduler.vc = vc;
 
         MongoDatabase db = Main.mongoDB.getMongoDatabase("pothibot");
