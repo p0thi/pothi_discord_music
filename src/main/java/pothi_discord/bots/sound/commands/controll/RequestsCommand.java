@@ -72,7 +72,7 @@ public class RequestsCommand extends GuildCommand {
 
                 SoundCommandEntry myCommand = allTmpCommands.get(Integer.parseInt(args[2]) - 1);
                 VoiceChannel vc = guild.getMember(user).getVoiceState().getChannel();
-                new PlayerCommand(myCommand.getFileId()).play(guild, vc, shard);
+                new PlayerCommand(myCommand.getFileId()).play(guild, vc, shard.getMyBot().getGuildAudioPlayer(guild).getScheduler());
                 break;
             }
             case "accept": {
