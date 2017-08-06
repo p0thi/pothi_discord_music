@@ -17,6 +17,7 @@ import pothi_discord.utils.database.morphia.userdata.Userdata;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 
 /**
@@ -27,13 +28,13 @@ import java.util.regex.Matcher;
 public class UserController {
 
     @RequestMapping(value = "/userplaylist", method = RequestMethod.GET)
-    public Object getUserplaylists(@RequestParam(value = "id") String id,
-                                @RequestParam Map<String, String> requestParams,
-                                @RequestHeader Map<String, String> headers) {
+    public Callable<ResponseEntity> getUserplaylists(@RequestParam(value = "id") String id,
+                                     @RequestParam Map<String, String> requestParams,
+                                     @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if(exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new JSONObject().put("message", exceptionString).toString());
         }
 
@@ -42,12 +43,12 @@ public class UserController {
 
         Userdata userdata = Userdata.getUserdata(userId);
         if (userdata == null) {
-            return ResponseEntity.ok("[]");
+            return () -> ResponseEntity.ok("[]");
         }
 
         List<UserPlaylist> userPlaylists = userdata.getPlaylists();
         if (userPlaylists == null || userPlaylists.size() == 0) {
-            return ResponseEntity.ok("[]");
+            return () -> ResponseEntity.ok("[]");
         }
 
         ObjectMapper mapper = new ObjectMapper();
@@ -64,21 +65,21 @@ public class UserController {
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal error");
         }
 
-        return ResponseEntity.ok(result.toString());
+        return () -> ResponseEntity.ok(result.toString());
     }
 
     @RequestMapping(value = "/userplaylist/track/add", method = RequestMethod.PUT)
-    public Object addUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
+    public Callable<ResponseEntity> addUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
                                         @RequestParam(value = "identifier") String identifier,
                                 @RequestParam Map<String, String> requestParams,
                                 @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if (exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new JSONObject().put("message", exceptionString).toString());
         }
 
@@ -87,7 +88,7 @@ public class UserController {
 
         Userdata userdata = Userdata.getUserdata(userId);
         if (userdata == null) {
-            return ResponseEntity.ok("[]");
+            return () -> ResponseEntity.ok("[]");
         }
 
         List<UserPlaylist> userPlaylists = userdata.getPlaylists();
@@ -99,37 +100,37 @@ public class UserController {
             }
         }
         if (myPlaylist == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
         }
 
         if (myPlaylist.containsIdentifier(identifier)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Identifier already in this list");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Identifier already in this list");
         }
 
         MongoAudioTrack mongoAudioTrack = MongoAudioTrack.getTrackFromIdentifier(identifier);
 
         if (mongoAudioTrack == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not handle this identifier");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not handle this identifier");
         }
 
         myPlaylist.getTracks().add(mongoAudioTrack);
         if(myPlaylist.saveInstance() == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
+            return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
         }
         else {
-            return ResponseEntity.ok(new JSONObject().put("message", "New Entry was saved").toString());
+            return () -> ResponseEntity.ok(new JSONObject().put("message", "New Entry was saved").toString());
         }
     }
 
     @RequestMapping(value = "/userplaylist/track/delete", method = RequestMethod.DELETE)
-    public Object deleteUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
+    public Callable<ResponseEntity> deleteUserplaylistsEntry(@RequestParam(value = "id") String playlistId,
                                         @RequestParam(value = "identifier") String identifier,
                                         @RequestParam Map<String, String> requestParams,
                                         @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if (exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new JSONObject().put("message", exceptionString).toString());
         }
 
@@ -138,7 +139,7 @@ public class UserController {
 
         Userdata userdata = Userdata.getUserdata(userId);
         if (userdata == null) {
-            return ResponseEntity.ok("[]");
+            return () -> ResponseEntity.ok("[]");
         }
 
         List<UserPlaylist> userPlaylists = userdata.getPlaylists();
@@ -150,37 +151,37 @@ public class UserController {
             }
         }
         if (myPlaylist == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
         }
 
         if (!myPlaylist.containsIdentifier(identifier)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Identifier not in this playlist");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Identifier not in this playlist");
         }
 
         myPlaylist.removeTrackByIdentifier(identifier);
         if(myPlaylist.saveInstance() == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
+            return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
         }
         else {
-            return ResponseEntity.ok(new JSONObject().put("message", "All matching entries removed").toString());
+            return () -> ResponseEntity.ok(new JSONObject().put("message", "All matching entries removed").toString());
         }
     }
 
     @RequestMapping(value = "/userplaylist/rename", method = RequestMethod.PATCH)
-    public Object renameUserplaylists(@RequestParam(value = "id") String playlistId,
+    public Callable<ResponseEntity> renameUserplaylists(@RequestParam(value = "id") String playlistId,
                                            @RequestParam(value = "name") String name,
                                            @RequestParam Map<String, String> requestParams,
                                            @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if (exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new JSONObject().put("message", exceptionString).toString());
         }
 
         Matcher matcher = PlaylistCommand.PLAYLIST_NAME_PATTERN.matcher(name);
         if (!matcher.find()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(String.format("Invalid name. It has to be between %d and %d letters",
                             PlaylistCommand.MIN_PLAYLIST_NAME_LENGTH,
                             PlaylistCommand.MAX_PLAYLIST_NAME_LENGTH));
@@ -191,7 +192,7 @@ public class UserController {
 
         Userdata userdata = Userdata.getUserdata(userId);
         if (userdata == null) {
-            return ResponseEntity.ok("[]");
+            return () -> ResponseEntity.ok("[]");
         }
 
         List<UserPlaylist> userPlaylists = userdata.getPlaylists();
@@ -205,22 +206,23 @@ public class UserController {
             }
         }
         if (myPlaylist == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No playlist with this id");
         }
 
         if (nameALreadyTaken) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Name already taken");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Name already taken");
         }
 
         String oldName = myPlaylist.getName();
         myPlaylist.setName(name);
 
         if(myPlaylist.saveInstance() == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
+            return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error. Please try again");
         }
         else {
-            return ResponseEntity.ok(new JSONObject()
-                    .put("message", String.format("Playlist %s renamed to %s", oldName, myPlaylist.getName()))
+            final String playlistName = myPlaylist.getName();
+            return () -> ResponseEntity.ok(new JSONObject()
+                    .put("message", String.format("Playlist %s renamed to %s", oldName, playlistName))
                     .toString());
         }
     }

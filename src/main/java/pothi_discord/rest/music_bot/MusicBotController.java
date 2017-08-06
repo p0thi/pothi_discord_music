@@ -25,6 +25,7 @@ import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.autoplaylists.AutoPlaylist;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Pascal Pothmann on 03.07.2017.
@@ -35,12 +36,12 @@ import java.util.Map;
 public class MusicBotController {
 
     @RequestMapping(value = "/genres", method = RequestMethod.GET)
-    public Object getAllGenres(@RequestParam Map<String, String> requestParams,
-                            @RequestHeader Map<String, String> headers) {
+    public Callable<ResponseEntity> getAllGenres(@RequestParam Map<String, String> requestParams,
+                                 @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if(exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
         }
 
         JSONArray result = new JSONArray();
@@ -53,23 +54,23 @@ public class MusicBotController {
                     .put("ordinal", youtubeMusicGenre.ordinal());
             result.put(tmp);
         }
-        return ResponseEntity.ok(result.toString());
+        return () -> ResponseEntity.ok(result.toString());
     }
 
     @RequestMapping(value = "/genre/{genreId}", method = RequestMethod.GET)
-    public Object getSingleGenre(@RequestParam Map<String, String> requestParams,
+    public Callable<ResponseEntity> getSingleGenre(@RequestParam Map<String, String> requestParams,
                                  @RequestHeader Map<String, String> headers,
                                  @PathVariable("genreId") String genreId) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if(exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
         }
 
         YoutubeMusicGenre youtubeMusicGenre = YoutubeMusicGenre.getGenreById(genreId);
 
         if (youtubeMusicGenre == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid id");
+            return () -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid id");
         }
 
         AutoPlaylist autoPlaylist = youtubeMusicGenre.getMongoPlaylist();
@@ -78,7 +79,7 @@ public class MusicBotController {
         try {
             tmp = new JSONArray(mapper.writeValueAsString(autoPlaylist.getContent()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("could not parse data");
+            return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("could not parse data");
         }
         JSONObject result = new JSONObject()
                 .put("content", tmp)
@@ -86,16 +87,16 @@ public class MusicBotController {
                 .put("url", youtubeMusicGenre.getLink())
                 .put("readable_name", youtubeMusicGenre.getReadableName())
                 .put("ordinal", youtubeMusicGenre.ordinal());
-        return ResponseEntity.ok(result.toString());
+        return () -> ResponseEntity.ok(result.toString());
     }
 
     @RequestMapping(value = "/pause", method = RequestMethod.POST)
-    public Object pause(@RequestParam Map<String, String> requestParams,
+    public Callable<ResponseEntity> pause(@RequestParam Map<String, String> requestParams,
                         @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if(exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
         }
 
         String token = AuthController.getToken(headers, requestParams);
@@ -106,7 +107,7 @@ public class MusicBotController {
         String voiceStatusError = getVoiceStatusErrorString(member);
 
         if(voiceStatusError != null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(voiceStatusError);
+            return () -> ResponseEntity.status(HttpStatus.FORBIDDEN).body(voiceStatusError);
         }
 
         Guild guild = member.getGuild();
@@ -115,24 +116,24 @@ public class MusicBotController {
         boolean hasCommandPermission = PermissionManager.checkUserPermission(guild, member.getUser(), permissionName);
 
         if(!hasCommandPermission) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            return () -> ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body(String.format("You don't have the %s permission.", permissionName));
         }
         AudioPlayer player = Main.musicBot.getGuildAudioPlayer(guild).getPlayer();
         player.setPaused(!player.isPaused());
 
-        return ResponseEntity.ok(new JSONObject().put("message", player.isPaused() ? "paused" : "unpaused").toString());
+        return () -> ResponseEntity.ok(new JSONObject().put("message", player.isPaused() ? "paused" : "unpaused").toString());
     }
 
 
 
     @RequestMapping(value = "/skip", method = RequestMethod.POST)
-    public Object skip(@RequestParam Map<String, String> requestParams,
+    public Callable<ResponseEntity> skip(@RequestParam Map<String, String> requestParams,
                         @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if(exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
         }
 
         String token = AuthController.getToken(headers, requestParams);
@@ -142,7 +143,7 @@ public class MusicBotController {
 
         String voiceStatusError = getVoiceStatusErrorString(member);
         if (voiceStatusError != null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(voiceStatusError);
+            return () -> ResponseEntity.status(HttpStatus.FORBIDDEN).body(voiceStatusError);
         }
 
         Guild guild = member.getGuild();
@@ -153,17 +154,17 @@ public class MusicBotController {
         if (canInstaSkip) {
 
             JSONObject response = getSkipResponseObject(musicManager);
-            return ResponseEntity.ok(response.toString());
+            return () -> ResponseEntity.ok(response.toString());
         }
 
         TextChannel textChannel = guild.getPublicChannel();
         boolean skipCountReached = SkipCommand.checkSkipCount(musicManager, guild, textChannel);
         if (skipCountReached) {
             JSONObject response = getSkipResponseObject(musicManager);
-            return ResponseEntity.ok(response.toString());
+            return () -> ResponseEntity.ok(response.toString());
         }
         else {
-            return ResponseEntity.ok(new JSONObject().put("message", "skip request queued"). toString());
+            return () -> ResponseEntity.ok(new JSONObject().put("message", "skip request queued"). toString());
         }
     }
 

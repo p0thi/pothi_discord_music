@@ -26,6 +26,7 @@ import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Pascal Pothmann on 30.06.2017.
@@ -35,12 +36,12 @@ import java.util.Map;
 public class GuildsController {
 
     @RequestMapping(value = "/guilds", method = RequestMethod.GET)
-    public Object guilds(@RequestParam Map<String, String> requestParams,
-                         @RequestHeader Map<String, String> headers) {
+    public Callable<ResponseEntity> guilds(@RequestParam Map<String, String> requestParams,
+                           @RequestHeader Map<String, String> headers) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if(exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
         }
 
         String token = AuthController.getToken(headers, requestParams);
@@ -57,7 +58,7 @@ public class GuildsController {
                 }
             }
 
-            return new JSONArray(guildIds).toString();
+            return () -> ResponseEntity.ok(new JSONArray(guildIds).toString());
         }
         else {
             JSONObject guildData = new JSONObject();
@@ -77,27 +78,28 @@ public class GuildsController {
                         guildData.remove("v");
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+                        return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal error.");
                     }
                     break;
                 }
             }
-            return ResponseEntity.ok(guildData.toString());
+            final String response = guildData.toString();
+            return () -> ResponseEntity.ok(response);
         }
     }
 
     @RequestMapping(value = "/guilds/soundcommands", method = RequestMethod.GET)
-    public Object getSoundoundcommands(@RequestParam Map<String, String> requestParams,
+    public Callable<ResponseEntity> getSoundoundcommands(@RequestParam Map<String, String> requestParams,
                                        @RequestHeader Map<String, String> headers) {
 
         String error = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if (error != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
 
         if(!requestParams.containsKey("guildId")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing id query string");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing id query string");
         }
 
         String token = AuthController.getToken(headers, requestParams);
@@ -108,19 +110,19 @@ public class GuildsController {
         Guild guild = Main.soundBot.getGuildById(guildId);
 
         if (guild == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not find this guild");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not find this guild");
         }
 
         User user = guild.getMemberById(userId).getUser();
 
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST). body("You have to be in this guild.");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST). body("You have to be in this guild.");
         }
 
         boolean canUserShowCommands = PermissionManager.checkUserPermission(guild, user, new CommandsCommand().getName());
 
         if (!canUserShowCommands) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You don't have the permissions to see the commands");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You don't have the permissions to see the commands");
         }
 
         GuildData guildData = GuildData.getGuildDataByGuildId(guildId);
@@ -132,22 +134,22 @@ public class GuildsController {
             jsonArray.getJSONObject(i).remove("fileId");
         }
 
-        return ResponseEntity.ok(jsonArray.toString(2));
+        return () -> ResponseEntity.ok(jsonArray.toString(2));
     }
 
     @RequestMapping(value = "/guilds/soundcommands/play/{soundcommand}", method = RequestMethod.POST)
-    public Object playSoundcommand(@RequestParam Map<String, String> requestParams,
+    public Callable<ResponseEntity> playSoundcommand(@RequestParam Map<String, String> requestParams,
                                         @RequestHeader Map<String, String> headers,
                                         @PathVariable("soundcommand") String soundcommand) {
 
         String error = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if (error != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
 
         if (!requestParams.containsKey("guildId")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing id query string");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing id query string");
         }
 
         String token = AuthController.getToken(headers, requestParams);
@@ -158,30 +160,30 @@ public class GuildsController {
         Guild guild = Main.soundBot.getGuildById(guildId);
 
         if (guild == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not find this guild");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not find this guild.");
         }
 
         User user = guild.getMemberById(userId).getUser();
 
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST). body("You have to be in this guild.");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST). body("You have to be in this guild.");
         }
 
         VoiceChannel voiceChannel = guild.getMember(user).getVoiceState().getChannel();
 
         if (voiceChannel == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You have to be in a channel.");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You have to be in a channel.");
         }
 
         if (!PlayerCommand.cooldownAllowed(guild, user)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You have to wait before you can trigger more commands.");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You have to wait before you can trigger more commands.");
         }
 
         TrackScheduler scheduler = Main.soundBot.getGuildAudioPlayer(guild).getScheduler();
         PlayerCommand playerCommand = new PlayerCommand(soundcommand, false);
         playerCommand.action(guild, user, voiceChannel, scheduler);
 
-        return ResponseEntity.ok(new JSONObject().put("message", "playing...").toString());
+        return () -> ResponseEntity.ok(new JSONObject().put("message", "playing...").toString());
     }
 
     public static boolean isUserInGuild(String guildId, String userId) {

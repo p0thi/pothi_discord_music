@@ -19,6 +19,7 @@ import pothi_discord.utils.Param;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Pascal Pothmann on 29.06.2017.
@@ -28,24 +29,24 @@ import java.util.*;
 public class AuthController {
 
     @RequestMapping(value = "/verify_token", method = RequestMethod.GET)
-    public Object checkToken(@RequestHeader Map<String, String> headers,
-                             @RequestParam Map<String, String> params) {
+    public Callable<ResponseEntity> checkToken(@RequestHeader Map<String, String> headers,
+                               @RequestParam Map<String, String> params) {
         String authenticationError = getAuthorizationErrorString(headers, params);
 
         System.out.println(authenticationError);
 
         if (authenticationError == null) {
-            return new JSONObject()
+            return () -> ResponseEntity.ok(new JSONObject()
                     .put("status", "ok")
-                    .toString();
+                    .toString());
         }
         else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authenticationError);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authenticationError);
         }
     }
 
     @RequestMapping(value = "/auth", method = {RequestMethod.POST}, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public Object auth(@RequestParam Map<String, String> requestParams,
+    public Callable<ResponseEntity> auth(@RequestParam Map<String, String> requestParams,
                        @RequestBody Map<String, Object> body,
                        @RequestHeader Map<String, String> headers) throws IOException {
         String tokenUrl = "https://discordapp.com/api/oauth2/token";
@@ -60,7 +61,7 @@ public class AuthController {
         }
 
         if(!scopesMatch) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("The scopes " + Arrays.toString(needesScopes) + " are required");
         }
 
@@ -99,12 +100,13 @@ public class AuthController {
         long expiresIn = 604800000; // 604800000 = 1 week
         Date expirationDate = new Date(now.getTime() + expiresIn);
 
-        return new JSONObject().put("token", Jwts.builder()
+        return () -> ResponseEntity.ok(
+                new JSONObject().put("token", Jwts.builder()
                 .setSubject(meObject.getString("id"))
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, Param.SECRET_KEY())
-                .compact()).toString();
+                .compact()).toString());
 
     }
 

@@ -16,6 +16,7 @@ import pothi_discord.utils.Param;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Pascal Pothmann on 08.07.2017.
@@ -26,13 +27,13 @@ import java.util.Map;
 public class PlayController {
 
     @RequestMapping(value = "/genre/{genreId}", method = RequestMethod.POST)
-    public Object getAllGenres(@RequestParam Map<String, String> requestParams,
-                               @RequestHeader Map<String, String> headers,
-                               @PathVariable("genreId") String genreId) {
+    public Callable<ResponseEntity> getAllGenres(@RequestParam Map<String, String> requestParams,
+                                 @RequestHeader Map<String, String> headers,
+                                 @PathVariable("genreId") String genreId) {
         String exceptionString = AuthController.getAuthorizationErrorString(headers, requestParams);
 
         if (exceptionString != null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
+            return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionString);
         }
 
         String token = AuthController.getToken(headers, requestParams);
@@ -42,19 +43,19 @@ public class PlayController {
 
         String voiceStatusErrorString = MusicBotController.getVoiceStatusErrorString(member);
         if(voiceStatusErrorString != null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(voiceStatusErrorString);
+            return () -> ResponseEntity.status(HttpStatus.FORBIDDEN).body(voiceStatusErrorString);
         }
 
         boolean permission = PermissionManager.checkUserPermission(member.getGuild(), member.getUser(), new PlayCommand().getName());
         if(!permission) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have the permission to play stuff on that server.");
+            return () -> ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have the permission to play stuff on that server.");
         }
 
         GuildMusicManager manager = (GuildMusicManager) Main.musicBot.getGuildAudioPlayer(member.getGuild());
         YoutubeMusicGenre genre = YoutubeMusicGenre.getGenreById(genreId);
 
         if (genre == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not a valid genre id");
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not a valid genre id");
         }
         manager.setGenrePlaylist(genre);
 
@@ -62,7 +63,7 @@ public class PlayController {
                 member.getAsMention() + " Das genre **%s** wird jetzt gespielt.\n" +
                 "Die standart Playlist kann mit **%splay default** wieder aktiviert werden.",
                 genre.getReadableName(), Param.PREFIX())).queue(new MessageDeleter());
-        return ResponseEntity.ok(new JSONObject()
+        return () -> ResponseEntity.ok(new JSONObject()
                 .put("message", String.format("Genre no %s (%d) is now selected",
                         genre.getReadableName(),
                         genre.ordinal() + 1)).toString());
