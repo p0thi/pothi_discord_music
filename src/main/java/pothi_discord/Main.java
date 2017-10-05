@@ -82,9 +82,6 @@ public class Main {
         //Attach log adapter
         SimpleLog.addListener(new SimpleLogToSLF4JAdapter());
 
-        //Make jda not print to console, we have Logback for that
-        SimpleLog.LEVEL = SimpleLog.Level.OFF;
-
         musicBot = new MusicBot(Param.MUSIC_BOT_TOKEN());
         soundBot = new SoundBot(Param.SOUND_BOT_TOKEN());
 
