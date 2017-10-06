@@ -102,7 +102,9 @@ public class SoundTrackScheduler extends AudioEventAdapter implements TrackSched
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (endReason.mayStartNext) {
-            soundManager.guild.getAudioManager().closeAudioConnection();
+            new Thread(() -> {
+                soundManager.guild.getAudioManager().closeAudioConnection();
+            }).start();
             vc = null;
         }
         try {
