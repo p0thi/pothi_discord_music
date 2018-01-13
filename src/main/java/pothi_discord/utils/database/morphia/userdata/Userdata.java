@@ -30,6 +30,8 @@ public class Userdata extends DataClass<String> {
     private Long lastGameUpdate = System.currentTimeMillis();
     private String currentGame = null;
 
+    private String joinCommand = null;
+
     private String access_token = null;
     private String refresh_token = null;
     private Date token_exp = null;
@@ -180,5 +182,13 @@ public class Userdata extends DataClass<String> {
 
     public void setToken_exp(Date token_exp) {
         this.token_exp = token_exp;
+    }
+
+    public String getJoinCommand() {
+        return joinCommand;
+    }
+
+    public void setJoinCommand(String joinCommand) {
+        this.joinCommand = joinCommand;
     }
 }
