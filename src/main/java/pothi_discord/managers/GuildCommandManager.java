@@ -75,11 +75,11 @@ public class GuildCommandManager {
         commands.remove(command);
     }
 
-    class NoSuchCommandException extends IllegalArgumentException {
+    public class NoSuchCommandException extends IllegalArgumentException {
 
     }
 
-    class NoValidAliasException extends IllegalArgumentException {
+    public class NoValidAliasException extends IllegalArgumentException {
 
     }
 }

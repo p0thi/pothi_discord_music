@@ -6,17 +6,14 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import org.apache.http.client.config.RequestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pothi_discord.bots.Bot;
 import pothi_discord.bots.BotShard;
-import pothi_discord.bots.sound.listeners.SoundBotMessageListener;
+import pothi_discord.bots.sound.listeners.SoundBotEventListener;
 
 import javax.security.auth.login.LoginException;
-import java.util.HashMap;
 
 /**
  * Created by Pascal Pothmann on 28.01.2017.
@@ -28,12 +25,12 @@ public class DiscordSoundBotShard implements BotShard {
     AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
     JDA jda;
     private int shardId;
-    private SoundBotMessageListener soundBotMessageListener;
+    private SoundBotEventListener soundBotMessageListener;
     private int numShards;
     private Bot mySoundBotBot;
 
     public DiscordSoundBotShard(int shardId, int numShards, Bot soundBot) {
-        this.soundBotMessageListener = new SoundBotMessageListener(this);
+        this.soundBotMessageListener = new SoundBotEventListener(this);
         this.shardId = shardId;
         this.numShards = numShards;
         this.mySoundBotBot = soundBot;
