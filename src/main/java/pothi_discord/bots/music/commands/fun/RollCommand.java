@@ -33,7 +33,7 @@ public class RollCommand extends GuildCommand {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                sides = 6;
                 successor = "\n*(" + args[1] + " ist keine gültiige Eingabe für einen Bereich)*";
             }
         }
