@@ -113,7 +113,7 @@ public class SoundBotMessageListener extends AbstractEventListener {
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
         Guild guild = event.getGuild();
-        log.info("Joined Guidl: " + guild.getName());
+        log.info("Joined Guild: " + guild.getName());
 
         shard.getMyBot().getGuildAudioPlayer(guild);
     }

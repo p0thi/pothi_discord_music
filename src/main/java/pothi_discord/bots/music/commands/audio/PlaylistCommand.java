@@ -390,6 +390,11 @@ public class PlaylistCommand extends GuildCommand {
                 case "delete": {
                     if (PermissionManager.checkUserPermission(event.getGuild(), user, "delete-own-playlist")) {
                         userdata.getPlaylists().remove(userPlaylist);
+
+                        if (userPlaylist.getId().equals(userdata.getActivePlaylist().getId())) {
+                            userdata.setActivePlaylist(null);
+                        }
+
                         userdata.saveInstance();
 
                         WriteResult result = userPlaylist.deleteInstance();
