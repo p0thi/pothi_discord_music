@@ -40,7 +40,7 @@ public class MessageDeleter implements Consumer<Message>, Schedule {
     public void accept(Message message) {
         this.message = message;
         log.info("Message successfully queued, in "
-                + message.getGuild().getName() + ". (" + message.getId() + ")" + " (\"" + message.getContent() + "\")");
+                + message.getGuild().getName() + ". (" + message.getId() + ")" + " (\"" + message.getContentDisplay() + "\")");
 
         if (millis >= 0) {
             timer.schedule(new TimerTask() {
@@ -60,7 +60,7 @@ public class MessageDeleter implements Consumer<Message>, Schedule {
 
     public void delete() {
         try {
-            String content = this.message.getContent();
+            String content = this.message.getContentDisplay();
             String id = this.message.getId();
             Guild guild = this.message.getGuild();
 
@@ -70,7 +70,7 @@ public class MessageDeleter implements Consumer<Message>, Schedule {
                     + guild.getName() + ". (" + id + ")" + " (\"" + content + "\")");
         } catch (NullPointerException ignore) {
         } catch (Exception e) {
-            log.warning("Could not delete Message! Already deleted?! (\"" + message.getContent() + "\")");
+            log.warning("Could not delete Message! Already deleted?! (\"" + message.getContentDisplay() + "\")");
         }
     }
 

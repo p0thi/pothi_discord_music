@@ -42,7 +42,7 @@ public class GifCommand extends GuildCommand {
         else {
             String tag;
             if(args.length > 1) {
-                tag = event.getMessage().getContent().substring(args[0].length() + 1);
+                tag = event.getMessage().getContentDisplay().substring(args[0].length() + 1);
             }
             else {
                 tag = categories.get(new Random().nextInt(categories.size()));

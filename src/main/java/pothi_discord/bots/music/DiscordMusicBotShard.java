@@ -15,6 +15,7 @@ import pothi_discord.bots.Bot;
 import pothi_discord.bots.BotShard;
 import pothi_discord.bots.music.listeners.MusicBotMessageListener;
 
+import javax.security.auth.login.LoginException;
 import java.util.HashMap;
 
 /**
@@ -58,7 +59,7 @@ public class DiscordMusicBotShard implements BotShard{
                 try {
                     jda = builder.buildAsync();
                     success = true;
-                } catch (RateLimitedException e) {
+                } catch (IllegalArgumentException | LoginException e) {
                     e.printStackTrace();
                     continue;
                 }

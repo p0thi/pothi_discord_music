@@ -168,7 +168,7 @@ public class PlayCommand extends GuildCommand {
     }
 
     private void searchForVideos(Guild guild, TextChannel channel, User user, Message message, BotShard shard) throws RateLimitedException {
-        Matcher m = Pattern.compile("\\S+\\s+(.*)").matcher(message.getRawContent());
+        Matcher m = Pattern.compile("\\S+\\s+(.*)").matcher(message.getContentRaw());
         m.find();
         String query = m.group(1);
 
@@ -212,7 +212,7 @@ public class PlayCommand extends GuildCommand {
                 i++;
             }
 
-            outMsg.editMessage(builder.build().getRawContent()).queue(new MessageDeleter());
+            outMsg.editMessage(builder.build().getContentRaw()).queue(new MessageDeleter());
 
             manager.setCurrentTC(channel);
 

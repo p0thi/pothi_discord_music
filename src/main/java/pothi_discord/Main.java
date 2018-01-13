@@ -1,7 +1,6 @@
 package pothi_discord;
 
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.utils.SimpleLog;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.logging.Logger;
@@ -15,7 +14,6 @@ import pothi_discord.utils.ErrorLogger;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.MongoDB;
-import pothi_discord.utils.log.SimpleLogToSLF4JAdapter;
 import pothi_discord.rest.WebApi;
 
 import java.io.IOException;
@@ -42,11 +40,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, Throwable e) {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+
                 ErrorLogger.log(e.getMessage());
-            }
         });
 
         System.setProperty("file.encoding","UTF-8");
@@ -80,7 +76,7 @@ public class Main {
 
 
         //Attach log adapter
-        SimpleLog.addListener(new SimpleLogToSLF4JAdapter());
+        //SimpleLog.addListener(new SimpleLogToSLF4JAdapter());
 
         musicBot = new MusicBot(Param.MUSIC_BOT_TOKEN());
         soundBot = new SoundBot(Param.SOUND_BOT_TOKEN());

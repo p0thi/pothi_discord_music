@@ -23,7 +23,7 @@ public class EchoCommand extends GuildCommand {
         event.getMessage().delete().queue();
 
         for (Guild myGuild : botShard.getMyBot().getAllGuilds()) {
-            myGuild.getPublicChannel().sendMessage(String.join(" ", Arrays.copyOfRange(args, 1, args.length)))
+            myGuild.getDefaultChannel().sendMessage(String.join(" ", Arrays.copyOfRange(args, 1, args.length)))
                     .queue(new MessageDeleter());
         }
     }

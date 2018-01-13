@@ -285,7 +285,7 @@ public class GuildMusicManager implements GuildAudioManager{
             return currentTC;
         } else {
             log.warning("No currentTC in " + guild + "! Returning public channel...");
-            return guild.getPublicChannel();
+            return guild.getDefaultChannel();
         }
     }
 

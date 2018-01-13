@@ -43,13 +43,13 @@ public class MusicBotMessageListener extends AbstractEventListener {
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        String msg = event.getMessage().getContent();
+        String msg = event.getMessage().getContentDisplay();
 
         log.info("Message received. (" + msg + ")");
 
         // if (event.getAuthor().equals(event.getJDA().getSelfUser())) {
         if (event.getAuthor().isBot()) {
-            log.info(event.getGuild().getName() + " \t " + event.getAuthor().getName() + " \t " + event.getMessage().getRawContent());
+            log.info(event.getGuild().getName() + " \t " + event.getAuthor().getName() + " \t " + event.getMessage().getContentRaw());
             return;
         }
 
@@ -61,7 +61,7 @@ public class MusicBotMessageListener extends AbstractEventListener {
 
         if (msg.startsWith(Param.PREFIX())) {
             String[] words = msg.split("[ \r\n]");
-            String content = event.getMessage().getContent().replaceFirst(Param.PREFIX(), "");
+            String content = event.getMessage().getContentDisplay().replaceFirst(Param.PREFIX(), "");
 
 
             Matcher matcher = PATTERN.matcher(content);
@@ -171,7 +171,7 @@ public class MusicBotMessageListener extends AbstractEventListener {
     @Override
     public void onReady(ReadyEvent event) {
         super.onReady(event);
-        event.getJDA().getPresence().setGame(Game.of("[" +
+        event.getJDA().getPresence().setGame(Game.of(Game.GameType.DEFAULT, "[" +
                 shard.getMyBot().getInstance(event.getJDA()).getShardInfo().getShardId() + "] Say "
                 + Param.PREFIX() + "help"));
 
@@ -186,7 +186,7 @@ public class MusicBotMessageListener extends AbstractEventListener {
 
     @Override
     public void onReconnect(ReconnectedEvent event) {
-        event.getJDA().getPresence().setGame(Game.of("[" + shard.getMyBot().getInstance(event.getJDA())
+        event.getJDA().getPresence().setGame(Game.of(Game.GameType.DEFAULT, "[" + shard.getMyBot().getInstance(event.getJDA())
                 .getShardInfo().getShardId() + "] Say " + Param.PREFIX() + "help"));
     }
 

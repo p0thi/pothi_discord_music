@@ -59,7 +59,7 @@ public class PlayController {
         }
         manager.setGenrePlaylist(genre);
 
-        member.getGuild().getPublicChannel().sendMessage(String.format(
+        member.getGuild().getDefaultChannel().sendMessage(String.format(
                 member.getAsMention() + " Das genre **%s** wird jetzt gespielt.\n" +
                 "Die standart Playlist kann mit **%splay default** wieder aktiviert werden.",
                 genre.getReadableName(), Param.PREFIX())).queue(new MessageDeleter());

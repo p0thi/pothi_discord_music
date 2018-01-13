@@ -80,8 +80,8 @@ public class ReactCommand extends GuildCommand{
             Emote emote = emotes.get(0);
 
             for (MessageReaction reaction : reactions) {
-                if (reaction.getEmote().isEmote()
-                    && reaction.getEmote().getId().equals(emote.getId())) {
+                if (reaction.getReactionEmote().isEmote()
+                    && reaction.getReactionEmote().getId().equals(emote.getId())) {
 
                     foundReaction = reaction;
                     alreadyReacted = true;
@@ -107,8 +107,8 @@ public class ReactCommand extends GuildCommand{
             }
 
             for (MessageReaction reaction : reactions) {
-                if (!reaction.getEmote().isEmote()
-                    && reaction.getEmote().getName().equals(emote)) {
+                if (!reaction.getReactionEmote().isEmote()
+                    && reaction.getReactionEmote().getName().equals(emote)) {
 
                     foundReaction = reaction;
                     alreadyReacted = true;

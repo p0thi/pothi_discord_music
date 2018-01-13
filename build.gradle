@@ -52,8 +52,8 @@ jar {
 
 dependencies {
     compile group: 'junit', name: 'junit', version: '4.11'
-    compile 'net.dv8tion:JDA:3.3.1_286'
-    compile 'com.sedmelluq:lavaplayer:1.2.43'
+    compile 'net.dv8tion:JDA:3.5.0_327'
+    compile 'com.sedmelluq:lavaplayer:1.2.45'
     compile 'me.xdrop:fuzzywuzzy:1.1.7'
 
 
@@ -86,6 +86,15 @@ dependencies {
     compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+    // jersey
+    compile "javax.ws.rs:jsr311-api:1.1.1"
+
+    compile 'com.sun.jersey:jersey-server:1.13'
+    compile 'com.sun.jersey:jersey-core:1.13'
+    compile 'com.sun.jersey:jersey-servlet:1.13'
+
+    testCompile "junit:junit-dep:4.10"
 
 
     //NEW

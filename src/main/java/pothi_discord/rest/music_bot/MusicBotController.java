@@ -157,7 +157,7 @@ public class MusicBotController {
             return () -> ResponseEntity.ok(response.toString());
         }
 
-        TextChannel textChannel = guild.getPublicChannel();
+        TextChannel textChannel = guild.getDefaultChannel();
         boolean skipCountReached = SkipCommand.checkSkipCount(musicManager, guild, textChannel);
         if (skipCountReached) {
             JSONObject response = getSkipResponseObject(musicManager);

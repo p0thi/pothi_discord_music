@@ -23,7 +23,7 @@ public class VolumeCommand extends GuildCommand {
         Guild guild = event.getGuild();
 
         TextChannel channel = event.getChannel();
-        String[] words = event.getMessage().getContent().split("[ \n\r]");
+        String[] words = event.getMessage().getContentDisplay().split("[ \n\r]");
         boolean valid = true;
         int newVolume = 0;
 
