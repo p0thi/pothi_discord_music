@@ -141,10 +141,16 @@ public class SoundBotEventListener extends AbstractEventListener {
         GuildData guildData = GuildData.getGuildDataByGuildId(guild.getId());
 
         String fileId = null;
-        for (SoundCommandEntry soundCommand : guildData.getSoundCommands().getSoundCommandEntries()) {
-            if (soundCommand.getCommand().toLowerCase().equals(joinCommand.toLowerCase())) {
-                fileId = soundCommand.getFileId();
-                break;
+        if (joinCommand.equals("random")) {
+            List<SoundCommandEntry> allCommands = guildData.getSoundCommands().getSoundCommandEntries();
+            fileId = allCommands.get(new Random().nextInt(allCommands.size())).getFileId();
+        }
+        else {
+            for (SoundCommandEntry soundCommand : guildData.getSoundCommands().getSoundCommandEntries()) {
+                if (soundCommand.getCommand().toLowerCase().equals(joinCommand.toLowerCase())) {
+                    fileId = soundCommand.getFileId();
+                    break;
+                }
             }
         }
 
