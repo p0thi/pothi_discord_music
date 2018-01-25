@@ -56,6 +56,10 @@ dependencies {
     compile 'com.sedmelluq:lavaplayer:1.2.45'
     compile 'me.xdrop:fuzzywuzzy:1.1.7'
 
+    //jetty
+    // http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html
+    compile 'org.eclipse.jetty:jetty-maven-plugin:9.4.8.v20171121'
+
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     // compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'

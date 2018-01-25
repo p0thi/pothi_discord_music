@@ -232,10 +232,8 @@ public class GuildMusicManager implements GuildAudioManager{
         JDA jda = channel.getJDA();
         ArrayList<Member> membersWithoutBot = new ArrayList<>();
 
-        Member bot = null;
-
         for(Member member : channel.getMembers()) {
-            if(!member.getUser().getId().equals(jda.getSelfUser().getId())) {
+            if(!(member.getUser().isBot() || member.getUser().getId().equals(jda.getSelfUser().getId()))) {
                 membersWithoutBot.add(member);
             }
         }
@@ -245,9 +243,10 @@ public class GuildMusicManager implements GuildAudioManager{
         log.info("From: " + caller.getClass().getSimpleName() + " -> Checking for autopause in " + guild.getName() + ". (Members in Channel without bot: " + memberCount + ")");
         boolean wasPaused = player.isPaused();
 
-        boolean shouldPause = memberCount < 1;
+        boolean shouldPause = memberCount <= 0;
+        log.info("Pausing in " + guild.getName() + ": " + shouldPause);
 
-        GuildAudioManager manager = this.bot.getGuildAudioPlayer(channel.getGuild());
+//        GuildAudioManager manager = this.bot.getGuildAudioPlayer(channel.getGuild());
         if (shouldPause) {
             loadDefaultPlaylist();
         }

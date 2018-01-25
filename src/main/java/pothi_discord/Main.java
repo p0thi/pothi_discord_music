@@ -1,6 +1,10 @@
 package pothi_discord;
 
 import net.dv8tion.jda.core.entities.Guild;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.servlet.FilterHolder;
+import org.eclipse.jetty.servlet.ServletHandler;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.logging.Logger;
@@ -10,6 +14,8 @@ import pothi_discord.bots.MusicBot;
 import pothi_discord.bots.SoundBot;
 import pothi_discord.handlers.ExceptionHandler;
 import pothi_discord.handlers.StaticSchedulePool;
+import pothi_discord.rest.HelloWorldHandler;
+import pothi_discord.rest.auth.AuthController;
 import pothi_discord.utils.ErrorLogger;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
@@ -84,7 +90,22 @@ public class Main {
         //This is the listener...TODO
         // jda.getGuildById("273812217445744640").getAudioManager().setReceivingHandler(new MusicBotGuildReceiveHandler());
 
-        SpringApplication.run(WebApi.class, args);
+        Server server = new Server(3232);
+        HandlerCollection handlerCollection = new HandlerCollection();
+
+        ServletHandler servletHandler = new ServletHandler();
+        servletHandler.addServletWithMapping(AuthController.AuthHandler.class, AuthController.AuthHandler.PATH);
+        handlerCollection.addHandler(servletHandler);
+
+        server.setHandler(handlerCollection);
+        try {
+            server.start();
+            server.join();
+        } catch (Exception e) {
+            log.error("Could not start the server:  " + e.getMessage());
+        }
+
+//        SpringApplication.run(WebApi.class, args);
 
     }
 

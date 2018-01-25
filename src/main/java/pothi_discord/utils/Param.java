@@ -51,9 +51,8 @@ public class Param {
         return config.getString("client_secret");
     }
     private static final Key KEY = MacProvider.generateKey();
-    //public static Key SECRET_KEY() {return KEY;}
+    //public static Key SECRET_KEY() {return KEY;}//TODO uncomment this line to generate a random secret on every start
     public static String SECRET_KEY() {return "baum";}
-
 
 
     public static int SKIP_PERCENT = 20;
