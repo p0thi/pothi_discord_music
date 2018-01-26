@@ -4,7 +4,9 @@ import net.dv8tion.jda.core.entities.Guild;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.servlet.FilterHolder;
+import org.eclipse.jetty.servlet.FilterMapping;
 import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.logging.Logger;
@@ -16,16 +18,22 @@ import pothi_discord.handlers.ExceptionHandler;
 import pothi_discord.handlers.StaticSchedulePool;
 import pothi_discord.rest.HelloWorldHandler;
 import pothi_discord.rest.auth.AuthController;
+import pothi_discord.rest.guilds.GuildsController;
+import pothi_discord.rest.music_bot.MusicBotController;
+import pothi_discord.rest.music_bot.PlayController;
+import pothi_discord.rest.users.UserController;
 import pothi_discord.utils.ErrorLogger;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.MongoDB;
 import pothi_discord.rest.WebApi;
 
+import javax.servlet.DispatcherType;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 
@@ -94,7 +102,50 @@ public class Main {
         HandlerCollection handlerCollection = new HandlerCollection();
 
         ServletHandler servletHandler = new ServletHandler();
-        servletHandler.addServletWithMapping(AuthController.AuthHandler.class, AuthController.AuthHandler.PATH);
+
+        FilterHolder filterHolder = new FilterHolder();
+        filterHolder.setInitParameter("allowedOrigins", "*");
+        filterHolder.setInitParameter("allowedMethods", "POST,GET,OPTIONS,PUT,DELETE,HEAD");
+        filterHolder.setInitParameter("allowedHeaders", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        filterHolder.setInitParameter("preflightMaxAge", "728000");
+        filterHolder.setInitParameter("allowCredentials", "true");
+        CrossOriginFilter corsFilter = new CrossOriginFilter();
+        filterHolder.setFilter(corsFilter);
+
+
+        servletHandler.addServletWithMapping(AuthController.AuthHandler.class,
+                AuthController.AuthHandler.PATH);
+        servletHandler.addServletWithMapping(AuthController.VerifyTokenHandler.class,
+                AuthController.VerifyTokenHandler.PATH);
+        servletHandler.addServletWithMapping(GuildsController.GuildsHandler.class,
+                GuildsController.GuildsHandler.PATH);
+        servletHandler.addServletWithMapping(GuildsController.GuildsSoundCommandsHandler.class,
+                GuildsController.GuildsSoundCommandsHandler.PATH);
+        servletHandler.addServletWithMapping(GuildsController.GuildsSoundCommandsPlayHandler.class,
+                GuildsController.GuildsSoundCommandsPlayHandler.PATH);
+        servletHandler.addServletWithMapping(MusicBotController.GenresHandler.class,
+                "/music" + MusicBotController.GenresHandler.PATH);
+        servletHandler.addServletWithMapping(MusicBotController.GenreHandler.class,
+                "/music" + MusicBotController.GenreHandler.PATH);
+        servletHandler.addServletWithMapping(MusicBotController.PauseHandler.class,
+                "/music" + MusicBotController.PauseHandler.PATH);
+        servletHandler.addServletWithMapping(MusicBotController.SkipHandler.class,
+                "/music" + MusicBotController.SkipHandler.PATH);
+        servletHandler.addServletWithMapping(PlayController.GenreHandler.class,
+                "/play" + PlayController.GenreHandler.PATH);
+        servletHandler.addServletWithMapping(UserController.UserPlaylistHandler.class,
+                UserController.UserPlaylistHandler.PATH);
+        servletHandler.addServletWithMapping(UserController.UserPlaylistTrackAddHandler.class,
+                UserController.UserPlaylistTrackAddHandler.PATH);
+        servletHandler.addServletWithMapping(UserController.UserPlaylistTrackDeleteHandler.class,
+                UserController.UserPlaylistTrackDeleteHandler.PATH);
+        servletHandler.addServletWithMapping(UserController.UserPlaylistRenameHandler.class,
+                UserController.UserPlaylistRenameHandler.PATH);
+
+
+        servletHandler.addFilterWithMapping(filterHolder, "/*",
+                EnumSet.of(DispatcherType.ASYNC, DispatcherType.FORWARD, DispatcherType.ERROR, DispatcherType.REQUEST, DispatcherType.INCLUDE));
+
         handlerCollection.addHandler(servletHandler);
 
         server.setHandler(handlerCollection);

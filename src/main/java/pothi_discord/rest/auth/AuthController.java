@@ -10,11 +10,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pothi_discord.rest.RestUtils;
 import pothi_discord.utils.Param;
 
 import javax.servlet.ServletException;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 /**
  * Created by Pascal Pothmann on 29.06.2017.
@@ -73,9 +76,15 @@ public class AuthController {
         private static final String[] NEEDED_SCOPES = new String[]{"email", "identify"};
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String[] scopes = req.getParameterValues("scope");
+            JSONObject body = RestUtils.getResquestBody(req);
+            JSONArray scopesJsonArray = body.getJSONArray("scope");
+            ArrayList<String> scopes = new ArrayList<>();
+            for (int i = 0; i < scopesJsonArray.length(); i++) {
+                scopes.add(scopesJsonArray.getString(i));
+            }
             boolean scopesMatch = true;
-            for (String neededScope : NEEDED_SCOPES) {
+
+            for(String neededScope : NEEDED_SCOPES) {
                 scopesMatch = scopesMatch && Param.isInList(scopes, neededScope);
             }
 
@@ -89,11 +98,11 @@ public class AuthController {
             post.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("client_id", req.getParameterValues("clientId").toString()));
+            params.add(new BasicNameValuePair("client_id", body.getString("clientId")));
             params.add(new BasicNameValuePair("client_secret", Param.CLIENT_SECRET()));
             params.add(new BasicNameValuePair("grant_type", "authorization_code"));
-            params.add(new BasicNameValuePair("redirect_uri", req.getParameterValues("redirectUri").toString()));
-            params.add(new BasicNameValuePair("code", req.getParameterValues("code").toString()));
+            params.add(new BasicNameValuePair("redirect_uri", body.getString("redirectUri")));
+            params.add(new BasicNameValuePair("code", body.getString("code")));
 
             post.setEntity(new UrlEncodedFormEntity(params));
             HttpResponse response= httpClient.execute(post);

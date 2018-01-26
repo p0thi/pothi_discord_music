@@ -73,6 +73,11 @@ public class AutoPlaylist extends DataClass<ObjectId> implements Cloneable{
         return content;
     }
 
+    public List<MongoAudioTrack> getContent(int from, int to) {
+        //TODO check if out of bounds is possible
+        return content.subList(from, to);
+    }
+
     public void setContent(List<MongoAudioTrack> content) {
         this.content = content;
     }

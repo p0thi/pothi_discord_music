@@ -24,6 +24,11 @@ import pothi_discord.utils.Param;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.autoplaylists.AutoPlaylist;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -34,6 +39,35 @@ import java.util.concurrent.Callable;
 @CrossOrigin
 @RequestMapping("/music")
 public class MusicBotController {
+
+    public static class GenresHandler extends HttpServlet {
+        public static final String PATH = "/genres";
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String exceptionString = AuthController.getAuthorizationErrorString(req);
+
+            if(exceptionString != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print(exceptionString);
+                return;
+            }
+
+            JSONArray result = new JSONArray();
+
+            for(YoutubeMusicGenre youtubeMusicGenre : YoutubeMusicGenre.values()) {
+                JSONObject tmp = new JSONObject()
+                        .put("name", youtubeMusicGenre.name())
+                        .put("url", youtubeMusicGenre.getLink())
+                        .put("readable_name", youtubeMusicGenre.getReadableName())
+                        .put("ordinal", youtubeMusicGenre.ordinal());
+                result.put(tmp);
+            }
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().print(result.toString());
+            return;
+        }
+    }
+
 
     @RequestMapping(value = "/genres", method = RequestMethod.GET)
     public Callable<ResponseEntity> getAllGenres(@RequestParam Map<String, String> requestParams,
@@ -55,6 +89,54 @@ public class MusicBotController {
             result.put(tmp);
         }
         return () -> ResponseEntity.ok(result.toString());
+    }
+
+    public static class GenreHandler extends HttpServlet {
+        public static final String PATH = "/genre";
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String exceptionString = AuthController.getAuthorizationErrorString(req);
+
+            if(exceptionString != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print(exceptionString);
+                return;
+            }
+
+            if (req.getParameter("genreId") == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Missing genreId query string");
+                return;
+            }
+
+            YoutubeMusicGenre youtubeMusicGenre = YoutubeMusicGenre.getGenreById(req.getParameter("genreId"));
+
+            if (youtubeMusicGenre == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Invalid genre id.");
+                return;
+            }
+
+            AutoPlaylist autoPlaylist = youtubeMusicGenre.getMongoPlaylist();
+            ObjectMapper mapper = new ObjectMapper();
+            JSONArray tmp;
+            try {
+                tmp = new JSONArray(mapper.writeValueAsString(autoPlaylist.getContent()));
+            } catch (Exception e) {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                resp.getWriter().print("Could not parse data.");
+                return;
+            }
+            JSONObject result = new JSONObject()
+                    .put("content", tmp)
+                    .put("name", youtubeMusicGenre.name())
+                    .put("url", youtubeMusicGenre.getLink())
+                    .put("readable_name", youtubeMusicGenre.getReadableName())
+                    .put("ordinal", youtubeMusicGenre.ordinal());
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().print(result.toString());
+            return;
+        }
     }
 
     @RequestMapping(value = "/genre/{genreId}", method = RequestMethod.GET)
@@ -89,6 +171,51 @@ public class MusicBotController {
                 .put("ordinal", youtubeMusicGenre.ordinal());
         return () -> ResponseEntity.ok(result.toString());
     }
+
+    public static class PauseHandler extends HttpServlet {
+        public static final String PATH = "/pause";
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String exceptionString = AuthController.getAuthorizationErrorString(req);
+
+            if(exceptionString != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print(exceptionString);
+                return;
+            }
+
+            String token = AuthController.getToken(req);
+            String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+
+            Member member = Main.musicBot.getMemberOfActiveVoiceChannel(userId);
+
+            String voiceStatusError = getVoiceStatusErrorString(member);
+
+            if(voiceStatusError != null) {
+                resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                resp.getWriter().print(voiceStatusError);
+                return;
+            }
+
+            Guild guild = member.getGuild();
+
+            String permissionName = new PauseCommand().getName();
+            boolean hasCommandPermission = PermissionManager.checkUserPermission(guild, member.getUser(), permissionName);
+
+            if(!hasCommandPermission) {
+                resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                resp.getWriter().print(String.format("You don't have the %s permission.", permissionName));
+                return;
+            }
+            AudioPlayer player = Main.musicBot.getGuildAudioPlayer(guild).getPlayer();
+            player.setPaused(!player.isPaused());
+
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().print(new JSONObject().put("message", player.isPaused() ? "paused" : "unpaused").toString());
+            return;
+        }
+    }
+
 
     @RequestMapping(value = "/pause", method = RequestMethod.POST)
     public Callable<ResponseEntity> pause(@RequestParam Map<String, String> requestParams,
@@ -125,6 +252,58 @@ public class MusicBotController {
         return () -> ResponseEntity.ok(new JSONObject().put("message", player.isPaused() ? "paused" : "unpaused").toString());
     }
 
+    public static class SkipHandler extends HttpServlet {
+        public static final String PATH = "/skip";
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String exceptionString = AuthController.getAuthorizationErrorString(req);
+
+            if(exceptionString != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print(exceptionString);
+                return;
+            }
+
+            String token = AuthController.getToken(req);
+            String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+
+            Member member = Main.musicBot.getMemberOfActiveVoiceChannel(userId);
+
+            String voiceStatusError = getVoiceStatusErrorString(member);
+            if (voiceStatusError != null) {
+                resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                resp.getWriter().print(voiceStatusError);
+                return;
+            }
+
+            Guild guild = member.getGuild();
+
+            GuildAudioManager musicManager = Main.musicBot.getGuildAudioPlayer(guild);
+
+            boolean canInstaSkip = PermissionManager.checkUserPermission(guild, member.getUser(), "can-instant-skip");
+            if (canInstaSkip) {
+
+                JSONObject response = getSkipResponseObject(musicManager);
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().print(response.toString());
+                return;
+            }
+
+            TextChannel textChannel = guild.getDefaultChannel();
+            boolean skipCountReached = SkipCommand.checkSkipCount(musicManager, guild, textChannel);
+            if (skipCountReached) {
+                JSONObject response = getSkipResponseObject(musicManager);
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().print(response.toString());
+                return;
+            }
+            else {
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().print(new JSONObject().put("message", "skip request queued"). toString());
+                return;
+            }
+        }
+    }
 
 
     @RequestMapping(value = "/skip", method = RequestMethod.POST)
@@ -168,7 +347,7 @@ public class MusicBotController {
         }
     }
 
-    private JSONObject getSkipResponseObject(GuildAudioManager musicManager) {
+    private static JSONObject getSkipResponseObject(GuildAudioManager musicManager) {
         AudioTrack oldTrack = musicManager.getPlayer().getPlayingTrack();
 
         String newTitle = SkipCommand.nextTrack(musicManager);

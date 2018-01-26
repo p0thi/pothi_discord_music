@@ -18,11 +18,17 @@ import pothi_discord.bots.sound.commands.audio.PlayerCommand;
 import pothi_discord.bots.sound.commands.controll.CommandsCommand;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.permissions.PermissionManager;
+import pothi_discord.rest.RestUtils;
 import pothi_discord.rest.auth.AuthController;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 import pothi_discord.utils.database.morphia.guilddatas.SoundCommandEntry;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +40,68 @@ import java.util.concurrent.Callable;
 @RestController
 @CrossOrigin
 public class GuildsController {
+
+    public static class GuildsHandler extends HttpServlet {
+        public static final String PATH = "/guilds";
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String exceptionString = AuthController.getAuthorizationErrorString(req);
+
+            if (exceptionString != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print("{\"message\":\"" + exceptionString + "\"}");
+                return;
+            }
+
+            String token = AuthController.getToken(req);
+            String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+
+            ArrayList<String> guildIds = new ArrayList<>();
+            if (req.getParameter("id") == null) {
+                for(BotShard shard : Main.musicBot.shards) {
+                    User user = shard.getJDA().getUserById(userId);
+                    if(user != null) {
+                        for(Guild guild : shard.getJDA().getMutualGuilds(user)) {
+                            guildIds.add(guild.getId());
+                        }
+                    }
+                }
+
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().print(new JSONArray(guildIds).toString());
+                return;
+            }
+            else {
+                JSONObject guildData = new JSONObject();
+                for (BotShard shard : Main.musicBot.shards) {
+                    Guild guild = shard.getJDA().getGuildById(req.getParameter("id"));
+                    if(guild != null) {
+                        if (guild.getMemberById(userId) == null) {
+                            continue;
+                        }
+                        ObjectMapper mapper = new ObjectMapper();
+                        try {
+                            guildData = new JSONObject(mapper.writeValueAsString(GuildData.getGuildDataByGuildId(guild.getId())));
+                            guildData.remove("autoplaylistId");
+                            guildData.remove("soundCommands");
+                            guildData.remove("autoplaylist");
+                            guildData.remove("id");
+                            guildData.remove("v");
+                        } catch (JsonProcessingException e) {
+                            e.printStackTrace();
+                            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                            resp.getWriter().print("Internal error.");
+                        }
+                        break;
+                    }
+                }
+                final String response = guildData.toString();
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().print(response);
+                return;
+            }
+        }
+    }
 
     @RequestMapping(value = "/guilds", method = RequestMethod.GET)
     public Callable<ResponseEntity> guilds(@RequestParam Map<String, String> requestParams,
@@ -88,6 +156,66 @@ public class GuildsController {
         }
     }
 
+    public static class GuildsSoundCommandsHandler extends HttpServlet {
+        public static final String PATH = "/guilds/soundcommands";
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String error = AuthController.getAuthorizationErrorString(req);
+
+            if (error != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print(error);
+            }
+
+            if(req.getParameter("guildId") == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Missing id query string.");
+                return;
+            }
+
+            String token = AuthController.getToken(req);
+
+            String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+            String guildId = req.getParameter("guildId");
+
+            Guild guild = Main.soundBot.getGuildById(guildId);
+
+            if (guild == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Could not find this guild.");
+                return;
+            }
+            User user = guild.getMemberById(userId).getUser();
+
+            if (user == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("You have to be in this guild.");
+                return;
+            }
+
+            boolean canUserShowCommands = PermissionManager.checkUserPermission(guild, user, new CommandsCommand().getName());
+
+            if (!canUserShowCommands) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("You don't have the permissions to see the commands.");
+                return;
+            }
+
+            GuildData guildData = GuildData.getGuildDataByGuildId(guildId);
+            List<SoundCommandEntry> commands = guildData.getSoundCommands().getSoundCommandEntries();
+
+            JSONArray jsonArray = new JSONArray(commands);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jsonArray.getJSONObject(i).remove("fileId");
+            }
+
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().print(jsonArray.toString(2));
+            return;
+        }
+    }
+
     @RequestMapping(value = "/guilds/soundcommands", method = RequestMethod.GET)
     public Callable<ResponseEntity> getSoundoundcommands(@RequestParam Map<String, String> requestParams,
                                        @RequestHeader Map<String, String> headers) {
@@ -136,6 +264,81 @@ public class GuildsController {
 
         return () -> ResponseEntity.ok(jsonArray.toString(2));
     }
+
+    public static class GuildsSoundCommandsPlayHandler extends HttpServlet {
+        public static final String PATH = "/guilds/soundcommands/play";
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String error = AuthController.getAuthorizationErrorString(req);
+
+
+            if (error != null) {
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                resp.getWriter().print(error);
+                return;
+            }
+
+
+            if (req.getParameter("guildId") == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Missing guildId query string");
+                return;
+            }
+
+            if (req.getParameter("soundcommand") == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Missing soundcommand query string");
+                return;
+            }
+            JSONObject body = RestUtils.getResquestBody(req);
+
+            String token = AuthController.getToken(req);
+
+            String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
+            String guildId = req.getParameter("guildId");
+
+            Guild guild = Main.soundBot.getGuildById(guildId);
+
+            if (guild == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("Could not find this guild.");
+                return;
+            }
+
+            User user = guild.getMemberById(userId).getUser();
+
+            if (user == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("You have to be in this guild.");
+                return;
+            }
+
+            VoiceChannel voiceChannel = guild.getMember(user).getVoiceState().getChannel();
+
+            if (voiceChannel == null) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("You have to be in a channel.");
+                return;
+            }
+
+            if (!PlayerCommand.cooldownAllowed(guild, user)) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().print("You have to wait before you can trigger more commands.");
+                return;
+            }
+
+            String soundcommand = req.getParameter("soundcommand");
+
+            TrackScheduler scheduler = Main.soundBot.getGuildAudioPlayer(guild).getScheduler();
+            PlayerCommand playerCommand = new PlayerCommand(soundcommand, false);
+            playerCommand.action(guild, user, voiceChannel, scheduler);
+
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().print(new JSONObject().put("message", "playing...").toString());
+            return;
+        }
+    }
+
 
     @RequestMapping(value = "/guilds/soundcommands/play/{soundcommand}", method = RequestMethod.POST)
     public Callable<ResponseEntity> playSoundcommand(@RequestParam Map<String, String> requestParams,

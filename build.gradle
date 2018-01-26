@@ -59,6 +59,7 @@ dependencies {
     //jetty
     // http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html
     compile 'org.eclipse.jetty:jetty-maven-plugin:9.4.8.v20171121'
+    //compile 'org.eclipse.jetty:jetty-servlets:${jetty.version}'
 
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple

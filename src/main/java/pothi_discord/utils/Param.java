@@ -71,7 +71,13 @@ public class Param {
 
 
     public static <T extends Comparable> boolean isInList(T[] list, T t){
-        return isInList(new ArrayList<T>(Arrays.asList(list)), t);
+        if (list.length <= 0)
+            return false;
+        for (T a :list) {
+            if (a.compareTo(t) == 0)
+                return true;
+        }
+        return false;
     }
 
     public static <T extends Comparable> boolean isInList(List<T> list, T t){

@@ -123,6 +123,7 @@ public class PlayerCommand extends GuildCommand {
         }
 
         cooldown.get(guild).add(user);
+        //TODO set delay to a value that is stored in the database
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
