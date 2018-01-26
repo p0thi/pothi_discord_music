@@ -106,9 +106,7 @@ public class Main {
         FilterHolder filterHolder = new FilterHolder();
         filterHolder.setInitParameter("allowedOrigins", "*");
         filterHolder.setInitParameter("allowedMethods", "POST,GET,OPTIONS,PUT,DELETE,HEAD");
-        filterHolder.setInitParameter("allowedHeaders", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
-        filterHolder.setInitParameter("preflightMaxAge", "728000");
-        filterHolder.setInitParameter("allowCredentials", "true");
+//        filterHolder.setInitParameter("allowedHeaders", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
         CrossOriginFilter corsFilter = new CrossOriginFilter();
         filterHolder.setFilter(corsFilter);
 
@@ -141,11 +139,11 @@ public class Main {
                 UserController.UserPlaylistTrackDeleteHandler.PATH);
         servletHandler.addServletWithMapping(UserController.UserPlaylistRenameHandler.class,
                 UserController.UserPlaylistRenameHandler.PATH);
+        System.out.println("konsti stinkt");
 
 
-        servletHandler.addFilterWithMapping(filterHolder, "/*",
+        servletHandler.addFilterWithMapping(filterHolder, "*",
                 EnumSet.of(DispatcherType.ASYNC, DispatcherType.FORWARD, DispatcherType.ERROR, DispatcherType.REQUEST, DispatcherType.INCLUDE));
-
         handlerCollection.addHandler(servletHandler);
 
         server.setHandler(handlerCollection);
