@@ -89,7 +89,7 @@ public class AuthController {
             }
 
             if (!scopesMatch) {
-                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 resp.getWriter().print("{\"message\":\"The scopes " + Arrays.toString(NEEDED_SCOPES) + " are required\"}");
                 return;
             }
@@ -196,7 +196,6 @@ public class AuthController {
                 .compact()).toString());
 
     }
-
 
     public static String getAuthorizationErrorString(HttpServletRequest req) {
         boolean hasAtuhHeader = checkForAuthorizationHeader(req);

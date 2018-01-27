@@ -1,12 +1,6 @@
 package pothi_discord;
 
 import net.dv8tion.jda.core.entities.Guild;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.HandlerCollection;
-import org.eclipse.jetty.servlet.FilterHolder;
-import org.eclipse.jetty.servlet.FilterMapping;
-import org.eclipse.jetty.servlet.ServletHandler;
-import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.logging.Logger;
@@ -14,26 +8,17 @@ import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import org.springframework.boot.SpringApplication;
 import pothi_discord.bots.MusicBot;
 import pothi_discord.bots.SoundBot;
-import pothi_discord.handlers.ExceptionHandler;
 import pothi_discord.handlers.StaticSchedulePool;
-import pothi_discord.rest.HelloWorldHandler;
-import pothi_discord.rest.auth.AuthController;
-import pothi_discord.rest.guilds.GuildsController;
-import pothi_discord.rest.music_bot.MusicBotController;
-import pothi_discord.rest.music_bot.PlayController;
-import pothi_discord.rest.users.UserController;
+import pothi_discord.rest.WebApi;
 import pothi_discord.utils.ErrorLogger;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.TextUtils;
 import pothi_discord.utils.database.MongoDB;
-import pothi_discord.rest.WebApi;
 
-import javax.servlet.DispatcherType;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 
@@ -98,7 +83,7 @@ public class Main {
         //This is the listener...TODO
         // jda.getGuildById("273812217445744640").getAudioManager().setReceivingHandler(new MusicBotGuildReceiveHandler());
 
-        Server server = new Server(3232);
+        /*Server server = new Server(3232);
         HandlerCollection handlerCollection = new HandlerCollection();
 
         ServletHandler servletHandler = new ServletHandler();
@@ -106,7 +91,7 @@ public class Main {
         FilterHolder filterHolder = new FilterHolder();
         filterHolder.setInitParameter("allowedOrigins", "*");
         filterHolder.setInitParameter("allowedMethods", "POST,GET,OPTIONS,PUT,DELETE,HEAD");
-//        filterHolder.setInitParameter("allowedHeaders", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        filterHolder.setInitParameter("allowedHeaders", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, Cache-Control");
         CrossOriginFilter corsFilter = new CrossOriginFilter();
         filterHolder.setFilter(corsFilter);
 
@@ -142,19 +127,20 @@ public class Main {
         System.out.println("konsti stinkt");
 
 
-        servletHandler.addFilterWithMapping(filterHolder, "*",
+        servletHandler.addFilterWithMapping(filterHolder, "/*",
                 EnumSet.of(DispatcherType.ASYNC, DispatcherType.FORWARD, DispatcherType.ERROR, DispatcherType.REQUEST, DispatcherType.INCLUDE));
         handlerCollection.addHandler(servletHandler);
 
         server.setHandler(handlerCollection);
         try {
+            servletHandler.initialize();
             server.start();
             server.join();
         } catch (Exception e) {
             log.error("Could not start the server:  " + e.getMessage());
-        }
+        }*/
 
-//        SpringApplication.run(WebApi.class, args);
+        SpringApplication.run(WebApi.class, args);
 
     }
 
