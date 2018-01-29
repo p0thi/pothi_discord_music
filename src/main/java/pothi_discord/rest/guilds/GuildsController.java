@@ -116,17 +116,23 @@ public class GuildsController {
         String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
 
         ArrayList<String> guildIds = new ArrayList<>();
+        JSONArray guildObjects = new JSONArray();
         if (!requestParams.containsKey("id")) {
             for(BotShard shard : Main.musicBot.shards) {
                 User user = shard.getJDA().getUserById(userId);
                 if(user != null) {
                     for(Guild guild : shard.getJDA().getMutualGuilds(user)) {
-                        guildIds.add(guild.getId());
+//                        guildIds.add(guild.getId());
+                        JSONObject currentGuild = new JSONObject();
+                        currentGuild.put("id", guild.getId())
+                                .put("name", guild.getName())
+                                .put("iconUrl", guild.getIconUrl() == null ? "" : guild.getIconUrl());
+                        guildObjects.put(currentGuild);
                     }
                 }
             }
 
-            return () -> ResponseEntity.ok(new JSONArray(guildIds).toString());
+            return () -> ResponseEntity.ok(guildObjects.toString());
         }
         else {
             JSONObject guildData = new JSONObject();
@@ -144,7 +150,7 @@ public class GuildsController {
                         guildData.remove("autoplaylist");
                         guildData.remove("id");
                         guildData.remove("v");
-                    } catch (JsonProcessingException e) {
+                        } catch (JsonProcessingException e) {
                         e.printStackTrace();
                         return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal error.");
                     }
@@ -156,6 +162,7 @@ public class GuildsController {
         }
     }
 
+/*
     public static class GuildsSoundCommandsHandler extends HttpServlet {
         public static final String PATH = "/guilds/soundcommands";
         @Override
@@ -215,6 +222,7 @@ public class GuildsController {
             return;
         }
     }
+*/
 
     @RequestMapping(value = "/guilds/soundcommands", method = RequestMethod.GET)
     public Callable<ResponseEntity> getSoundoundcommands(@RequestParam Map<String, String> requestParams,
