@@ -127,6 +127,15 @@ public class GuildsController {
                         currentGuild.put("id", guild.getId())
                                 .put("name", guild.getName())
                                 .put("iconUrl", guild.getIconUrl() == null ? "" : guild.getIconUrl());
+                        soundBotChecker:
+                        for (BotShard soundShard : Main.soundBot.shards) {
+                            for (Guild tempSoundGuild : soundShard.getJDA().getSelfUser().getMutualGuilds()) {
+                                if (tempSoundGuild.getId().equals(guild.getId())) {
+                                    currentGuild.put("soundBot", true);
+                                    break soundBotChecker;
+                                }
+                            }
+                        }
                         guildObjects.put(currentGuild);
                     }
                 }
