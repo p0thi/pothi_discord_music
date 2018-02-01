@@ -357,10 +357,9 @@ public class GuildsController {
     }
 
 
-    @RequestMapping(value = "/guilds/soundcommands/play/{soundcommand}", method = RequestMethod.POST)
+    @RequestMapping(value = "/guilds/soundcommands/play", method = RequestMethod.POST)
     public Callable<ResponseEntity> playSoundcommand(@RequestParam Map<String, String> requestParams,
-                                        @RequestHeader Map<String, String> headers,
-                                        @PathVariable("soundcommand") String soundcommand) {
+                                        @RequestHeader Map<String, String> headers) {
 
         String error = AuthController.getAuthorizationErrorString(headers, requestParams);
 
@@ -371,6 +370,12 @@ public class GuildsController {
         if (!requestParams.containsKey("guildId")) {
             return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing id query string");
         }
+
+        if (!requestParams.containsKey("soundcommand")) {
+            return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing soundcommand query string");
+        }
+        String soundcommand = requestParams.get("soundcommand");
+
 
         String token = AuthController.getToken(headers, requestParams);
 
