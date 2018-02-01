@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -374,7 +376,15 @@ public class GuildsController {
         if (!requestParams.containsKey("soundcommand")) {
             return () -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing soundcommand query string");
         }
-        String soundcommand = requestParams.get("soundcommand");
+        String soundcommand = null;
+        try {
+            soundcommand = URLDecoder
+                    .decode(requestParams.get("soundcommand")
+                            .replace("+", "%2B"), "UTF-8")
+                    .replace("%2B", "+");
+        } catch (UnsupportedEncodingException e) {
+            return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
 
 
         String token = AuthController.getToken(headers, requestParams);
