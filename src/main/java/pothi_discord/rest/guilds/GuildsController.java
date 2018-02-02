@@ -386,7 +386,6 @@ public class GuildsController {
             return () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
         }
 
-
         String token = AuthController.getToken(headers, requestParams);
 
         String userId = Jwts.parser().setSigningKey(Param.SECRET_KEY()).parseClaimsJws(token).getBody().getSubject();
@@ -417,8 +416,8 @@ public class GuildsController {
         TrackScheduler scheduler = Main.soundBot.getGuildAudioPlayer(guild).getScheduler();
         PlayerCommand playerCommand = new PlayerCommand(soundcommand, false);
         playerCommand.action(guild, user, voiceChannel, scheduler);
-
-        return () -> ResponseEntity.ok(new JSONObject().put("message", "playing...").toString());
+        String result = new JSONObject().put("message", "playing " + soundcommand + "...").toString();
+        return () -> ResponseEntity.ok(result);
     }
 
     public static boolean isUserInGuild(String guildId, String userId) {
