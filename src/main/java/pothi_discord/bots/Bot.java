@@ -1,6 +1,7 @@
 package pothi_discord.bots;
 
 import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.VoiceChannel;
@@ -9,8 +10,10 @@ import net.dv8tion.jda.core.managers.AudioManager;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.music.listeners.MusicTrackScheduler;
+import pothi_discord.bots.music.managers.audio.GuildMusicManager;
 import pothi_discord.managers.GuildAudioManager;
 import pothi_discord.managers.GuildCommandManager;
+import pothi_discord.utils.database.morphia.guilddatas.GuildData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,20 +50,48 @@ public abstract class Bot {
         return guildCommandManagers;
     }
 
+    public VoiceChannel getBestVoiceChannel(Member member, List<VoiceChannel> voiceChannels) {
+        GuildData guildData = GuildData.getGuildDataByGuildId(member.getGuild().getId());
+
+        if (guildData.getAutoJoinBestChannel()) {
+            VoiceChannel bestChannel = voiceChannels.get(0);
+            int bestCount = 0;
+            // TODO default channel could be in the settings/database
+
+            for (VoiceChannel voiceChannel : voiceChannels) {
+
+                List<Permission> memberPermissions = member.getPermissions(voiceChannel);
+
+                if (!(memberPermissions.contains(Permission.VOICE_CONNECT)
+                        && memberPermissions.contains(Permission.VOICE_SPEAK))) {
+                    continue;
+                }
+                int currentCount = ((GuildMusicManager) getGuildAudioPlayer(member.getGuild()))
+                        .getMembersInChannelWithoutBots(voiceChannel).size();
+                if (currentCount > bestCount) {
+                    bestChannel = voiceChannel;
+                    bestCount = currentCount;
+                }
+            }
+            return bestChannel;
+        }
+        else {
+            return voiceChannels.get(0);
+        }
+
+    }
+
     public void connectToVoiceChannel(AudioManager audioManager) {
         if (audioManager.isConnected() || audioManager.isAttemptingToConnect()) {
             audioManager.closeAudioConnection();
         }
         Guild guild = audioManager.getGuild();
         List<VoiceChannel> voiceChannels = guild.getVoiceChannels();
-        VoiceChannel defaultVoice = null;
+        VoiceChannel bestVoiceChannel =
+                getBestVoiceChannel(guild.getMember(audioManager.getJDA().getSelfUser()), voiceChannels);
 
-        for(VoiceChannel vc : voiceChannels) {
-            //TODO: get specific VoiceChannel
-            break;
-        }
         try {
-            audioManager.openAudioConnection(defaultVoice);
+            audioManager.openAudioConnection(bestVoiceChannel);
         } catch (Exception e) {
             for (VoiceChannel voiceChannel : voiceChannels) {
                 try {

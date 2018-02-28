@@ -30,6 +30,7 @@ public class GuildData extends DataClass<ObjectId> {
     private Integer playerStartVolume = 20;
     private Integer audioCommandsStartVolume = 60;
     private Integer songSkipPercent = 30;
+    private Boolean autoJoinBestChannel = false;
 
     @Embedded
     private Permissions permissions = new Permissions();
@@ -161,6 +162,14 @@ public class GuildData extends DataClass<ObjectId> {
 
     public void setAutoplaylistId(ObjectId autoplaylistId) {
         this.autoplaylistId = autoplaylistId;
+    }
+
+    public Boolean getAutoJoinBestChannel() {
+        return autoJoinBestChannel;
+    }
+
+    public void setAutoJoinBestChannel(Boolean autoJoinBestChannel) {
+        this.autoJoinBestChannel = autoJoinBestChannel;
     }
 
     // Not versioned

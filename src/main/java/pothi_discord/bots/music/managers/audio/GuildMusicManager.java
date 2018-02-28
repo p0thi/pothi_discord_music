@@ -24,7 +24,6 @@ import pothi_discord.handlers.AudioPlayerSendHandler;
 import pothi_discord.handlers.MessageDeleter;
 import pothi_discord.listeners.TrackScheduler;
 import pothi_discord.managers.GuildAudioManager;
-import pothi_discord.permissions.PermissionManager;
 import pothi_discord.utils.audio.VideoSelection;
 import pothi_discord.utils.audio.YoutubeMusicGenre;
 import pothi_discord.utils.database.morphia.guilddatas.GuildData;
@@ -222,6 +221,26 @@ public class GuildMusicManager implements GuildAudioManager{
             channel.sendMessage(msg).queue(new MessageDeleter());
         }
     }
+    public ArrayList<Member> getMembersInChannelWithoutBots() {
+        return getMembersInChannelWithoutBots(guild.getMember(guild.getJDA().getSelfUser()).getVoiceState().getChannel());
+    }
+
+    public ArrayList<Member> getMembersInChannelWithoutBots(VoiceChannel voiceChannel) {
+        JDA jda = guild.getJDA();
+
+        ArrayList<Member> membersWithoutBot = new ArrayList<>();
+
+        if (voiceChannel == null) {
+            return membersWithoutBot;
+        }
+
+        for(Member member : voiceChannel.getMembers()) {
+            if(!(member.getUser().isBot() || member.getUser().getId().equals(jda.getSelfUser().getId()))) {
+                membersWithoutBot.add(member);
+            }
+        }
+        return membersWithoutBot;
+    }
 
     public void checkIfShouldPause(VoiceChannel channel, Object caller) {
         // FIXME: pauses when not expected
@@ -229,14 +248,7 @@ public class GuildMusicManager implements GuildAudioManager{
             return;
         }
 
-        JDA jda = channel.getJDA();
-        ArrayList<Member> membersWithoutBot = new ArrayList<>();
-
-        for(Member member : channel.getMembers()) {
-            if(!(member.getUser().isBot() || member.getUser().getId().equals(jda.getSelfUser().getId()))) {
-                membersWithoutBot.add(member);
-            }
-        }
+        ArrayList<Member> membersWithoutBot = getMembersInChannelWithoutBots();
 
         int memberCount = membersWithoutBot.size();
 

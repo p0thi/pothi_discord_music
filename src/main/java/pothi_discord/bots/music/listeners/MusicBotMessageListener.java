@@ -1,7 +1,7 @@
 package pothi_discord.bots.music.listeners;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.events.ReconnectedEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
+import net.dv8tion.jda.core.utils.PermissionUtil;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.bots.BotShard;
@@ -25,9 +26,9 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import pothi_discord.utils.Param;
 import pothi_discord.utils.database.morphia.userdata.Userdata;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Pascal Pothmann on 25.01.2017.
@@ -104,69 +105,73 @@ public class MusicBotMessageListener extends AbstractEventListener {
     @Override
     public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
         Guild guild = event.getGuild();
-        VoiceChannel botChannel = guild.getMember(event.getJDA().getSelfUser()).getVoiceState().getChannel();
-
-        if (botChannel == null) {
-            return;
-        }
-
         Member member = event.getMember();
+        VoiceChannel botChannel = guild.getMember(event.getJDA().getSelfUser()).getVoiceState().getChannel();
         VoiceChannel channel = event.getChannelJoined();
         GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
 
-        if (!member.getUser().getId().equals(event.getJDA().getSelfUser().getId())
-                && !channel.getId().equals(botChannel.getId())) {
-            return;
-        }
-
-        manager.checkIfShouldPause(botChannel, this);
+        handleVoiceMovementPausing(guild, manager, member, botChannel, channel);
+        joinBestChannel(botChannel, guild, manager, member);
     }
 
     @Override
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
         Guild guild = event.getGuild();
-        VoiceChannel botChannel = guild.getMember(event.getJDA().getSelfUser()).getVoiceState().getChannel();
-
-        if (botChannel == null) {
-            return;
-        }
-
         Member member = event.getMember();
+        VoiceChannel botChannel = guild.getMember(event.getJDA().getSelfUser()).getVoiceState().getChannel();
         VoiceChannel channel = event.getChannelLeft();
         GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
 
-        if (!member.getUser().getId().equals(event.getJDA().getSelfUser().getId())
-                && !channel.getId().equals(botChannel.getId())) {
-            return;
-        }
-
-        manager.checkIfShouldPause(botChannel, this);
+        handleVoiceMovementPausing(guild, manager, member, botChannel, channel);
+        joinBestChannel(botChannel, guild, manager, member);
     }
 
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent event) {
         Guild guild = event.getGuild();
+        Member member = event.getMember();
         VoiceChannel botChannel = guild.getMember(event.getJDA().getSelfUser()).getVoiceState().getChannel();
+        VoiceChannel channelLeft = event.getChannelLeft();
+        VoiceChannel channelJoined = event.getChannelJoined();
+        GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
 
+        handleVoiceMovementPausing(guild, manager, member, botChannel, channelJoined);
+        joinBestChannel(botChannel, guild, manager, member);
+    }
+
+    private void handleVoiceMovementPausing(Guild guild, GuildMusicManager manager, Member member, VoiceChannel botChannel, VoiceChannel userChannel) {
         if (botChannel == null) {
             return;
         }
 
-        VoiceChannel channelLeft = event.getChannelLeft();
-        VoiceChannel channelJoined = event.getChannelJoined();
-        Member member = event.getMember();
-        GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
-
-        if (!member.getUser().getId().equals(event.getJDA().getSelfUser().getId())
-                && !(channelJoined.getId().equals(botChannel.getId()) || channelLeft.getId()
-                .equals(botChannel.getId()))) {
+        if (!member.getUser().getId().equals(shard.getJDA().getSelfUser().getId())
+                && !userChannel.getId().equals(botChannel.getId())) {
             return;
         }
 
         manager.checkIfShouldPause(botChannel, this);
-
     }
 
+    private void joinBestChannel(VoiceChannel botChannel, Guild guild, GuildMusicManager manager, Member member) {
+        List<VoiceChannel> guildChannels =  guild.getVoiceChannels();
+        if (guildChannels == null || guildChannels.size() == 0) {
+            return;
+        }
+
+        if (member.getUser().isBot()) {
+            return;
+        }
+
+        if (manager.getMembersInChannelWithoutBots(botChannel).size() <= 0) {
+
+            Member selfMember = guild.getMember(guild.getJDA().getSelfUser());
+            VoiceChannel bestChannel = shard.getMyBot().getBestVoiceChannel(selfMember, guildChannels);
+
+            if (bestChannel.compareTo(botChannel) != 0) {
+                guild.getAudioManager().openAudioConnection(bestChannel);
+            }
+        }
+    }
 
     @Override
     public void onReady(ReadyEvent event) {
