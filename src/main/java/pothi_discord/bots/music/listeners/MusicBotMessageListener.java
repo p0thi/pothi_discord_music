@@ -110,8 +110,8 @@ public class MusicBotMessageListener extends AbstractEventListener {
         VoiceChannel channel = event.getChannelJoined();
         GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
 
-        handleVoiceMovementPausing(guild, manager, member, botChannel, channel);
         joinBestChannel(botChannel, guild, manager, member);
+        handleVoiceMovementPausing(guild, manager, member, botChannel, channel);
     }
 
     @Override
@@ -122,8 +122,8 @@ public class MusicBotMessageListener extends AbstractEventListener {
         VoiceChannel channel = event.getChannelLeft();
         GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
 
-        handleVoiceMovementPausing(guild, manager, member, botChannel, channel);
         joinBestChannel(botChannel, guild, manager, member);
+        handleVoiceMovementPausing(guild, manager, member, botChannel, channel);
     }
 
     @Override
@@ -135,8 +135,8 @@ public class MusicBotMessageListener extends AbstractEventListener {
         VoiceChannel channelJoined = event.getChannelJoined();
         GuildMusicManager manager = (GuildMusicManager) shard.getMyBot().getGuildAudioPlayer(guild);
 
-        handleVoiceMovementPausing(guild, manager, member, botChannel, channelJoined);
         joinBestChannel(botChannel, guild, manager, member);
+        handleVoiceMovementPausing(guild, manager, member, botChannel, channelJoined);
     }
 
     private void handleVoiceMovementPausing(Guild guild, GuildMusicManager manager, Member member, VoiceChannel botChannel, VoiceChannel userChannel) {
