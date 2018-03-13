@@ -60,6 +60,10 @@ public abstract class Bot {
 
             for (VoiceChannel voiceChannel : voiceChannels) {
 
+                if (voiceChannel.getGuild().getAfkChannel().compareTo(voiceChannel) == 0) {
+                    continue;
+                }
+
                 List<Permission> memberPermissions = member.getPermissions(voiceChannel);
 
                 if (!(memberPermissions.contains(Permission.VOICE_CONNECT)
