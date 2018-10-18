@@ -32,40 +32,6 @@ public class ShutdownCommand extends GuildCommand {
             return;
         }
 
-        ArrayList<String> checkedUsers = new ArrayList<>();
-        for (Guild tmpGuild : Main.musicBot.getAllGuilds()) {
-
-            for (Member member : tmpGuild.getMembers()) {
-                if (checkedUsers.contains(member.getUser().getId())
-                        || member.getUser().isBot()
-                        || member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                    continue;
-                }
-
-                try {
-                    Userdata userdata = Userdata.getUserdata(member.getUser().getId());
-
-                    Game newGame;
-                    try {
-                        newGame = member.getGame();
-                    } catch (Exception e) {
-                        log.error(e.getLocalizedMessage());
-                        return;
-                    }
-
-                    try {
-                        userdata.storeGame(newGame, true);
-                        checkedUsers.add(member.getUser().getId());
-                    } catch (Exception e) {
-                        log.error(e.getLocalizedMessage());
-                        return;
-                    }
-                } catch (Exception e) {
-                    log.error(e.getLocalizedMessage());
-                }
-            }
-        }
-
 
         execute(Main.soundBot);
         execute(Main.musicBot);

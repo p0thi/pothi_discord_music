@@ -8,7 +8,6 @@ import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ReconnectedEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
-import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import net.dv8tion.jda.core.utils.PermissionUtil;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
@@ -213,32 +212,6 @@ public class MusicBotMessageListener extends AbstractEventListener {
                 player.setPaused(true);
                 player.setPaused(false);
             }
-        }
-    }
-
-    @Override
-    public void onUserGameUpdate(UserGameUpdateEvent event) {
-        User user = event.getUser();
-        if (user.isBot()) {
-            return;
-        }
-        Userdata userdata = Userdata.getUserdata(user.getId());
-
-        Game newGame;
-        try {
-            newGame = event.getGuild().getMember(event.getUser()).getGame();
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error(e.getLocalizedMessage());
-            return;
-        }
-
-        try {
-            userdata.storeGame(newGame);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error(e.getLocalizedMessage());
-            return;
         }
     }
 

@@ -95,7 +95,6 @@ public class MusicBot extends Bot{
             gcm.addCommand("status", new StatusCommand());
             gcm.addCommand("id", new IdCommand());
             gcm.addCommand("echo", new EchoCommand());
-            gcm.addCommand("statistics", new StatisticsCommand());
             gcm.addCommand("clear", new ClearCommand());
 
 
@@ -129,7 +128,6 @@ public class MusicBot extends Bot{
 
         if(ready == numShards) {
 
-            startUserdataUpdateThread();
             log.info("All " + ready + " shards are ready.");
 
             for(BotShard bot : shards) {
@@ -155,44 +153,6 @@ public class MusicBot extends Bot{
             }
         }
 
-    }
-
-    private void startUserdataUpdateThread() {
-        new Thread(() -> {
-            while (true) {
-                ArrayList<String> checkedUsers = new ArrayList<>();
-                for (BotShard shard : shards) {
-                    for (User user : shard.getJDA().getUsers()) {
-
-                        if (checkedUsers.contains(user.getId())) {
-                            continue;
-                        }
-
-                        checkedUsers.add(user.getId());
-
-                        try {
-                            Member member = user.getMutualGuilds().get(0).getMember(user);
-                            if (user.isBot() || member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                continue;
-                            }
-
-                            Userdata userdata = Userdata.getUserdata(user.getId());
-
-                            userdata.storeGame(member.getGame(), true);
-
-                        } catch (Exception e) {
-                            log.error(e.getLocalizedMessage());
-                        }
-                    }
-
-                    try {
-                        Thread.sleep(600000); // 10 minutes
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
     }
 
 
