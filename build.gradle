@@ -15,7 +15,7 @@ plugins {
     id'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
-//mainClassName = 'com.example.jda.Bot'
+mainClassName = 'pothi_discord.Main'
 
 version '1.0'
 
