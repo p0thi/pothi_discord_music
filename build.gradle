@@ -1,6 +1,13 @@
 group 'eu.pothi.discord.audio'
 version '1.0-SNAPSHOT'
 
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'com.sedmelluq.jdaction' version '1.0.1'
+    id'com.github.johnrengelman.shadow' version '2.0.2'
+}
+
 //NEW
 buildscript {
     repositories {
