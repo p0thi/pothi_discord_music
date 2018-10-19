@@ -21,7 +21,7 @@ public class AudioPlayerSendHandler implements AudioSendHandler {
     }
 
     public byte[] provide20MsAudio() {
-        return frame.data;
+        return frame.getData();
     }
 
     public boolean isOpus() {
