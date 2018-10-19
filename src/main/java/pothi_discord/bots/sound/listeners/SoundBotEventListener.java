@@ -13,7 +13,6 @@ import net.dv8tion.jda.core.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import org.mongodb.morphia.logging.Logger;
 import org.mongodb.morphia.logging.MorphiaLoggerFactory;
 import pothi_discord.Main;
@@ -179,11 +178,6 @@ public class SoundBotEventListener extends AbstractEventListener {
                 log.error(e.getLocalizedMessage());
             }
         }
-    }
-
-    @Override
-    public void onUserGameUpdate(UserGameUpdateEvent event) {
-
     }
 
     @Override
