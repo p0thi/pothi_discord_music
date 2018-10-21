@@ -115,6 +115,10 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
+//NEW
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 compileJava.options.encoding = 'UTF-8'

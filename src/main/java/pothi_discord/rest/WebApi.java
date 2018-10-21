@@ -1,6 +1,7 @@
 package pothi_discord.rest;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
@@ -12,8 +13,9 @@ import java.util.Arrays;
 /**
  * Created by Pascal Pothmann on 29.06.2017.
  */
-@SpringBootApplication
-@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
+//@SpringBootApplication
+@SpringBootApplication(exclude={MongoAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class WebApi {
 
     @Bean
